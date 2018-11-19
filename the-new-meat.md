@@ -1,4 +1,4 @@
-# A big example project - 176,113 tech salaries visualized
+# 
 
 We’re going to build
 this:
@@ -540,7 +540,7 @@ underlying `request` API.
 PS: we’re using the shortened salary dataset to make page reloads faster
 while building our project.
 
-## Step 4: Tie the datasets together
+# 
 
 If you add a `console.log` to the `.then` callback above, you’ll see a
 bunch of data. Each argument - `us`, `countyNames`, `medianIncomes`,
@@ -603,7 +603,7 @@ screenshot](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-v
 If that didn’t work, try comparing your changes to this [diff on
 Github](https://github.com/Swizec/react-d3js-step-by-step/commit/9f113cdd3bc18535680cb5a4e87a3fd45743c9ae).
 
-# Render a choropleth map of the US
+# 
 
 With our data in hand, it’s time to draw some pictures. A choropleth map
 will show us the best places to be in tech.
@@ -1123,7 +1123,7 @@ dataset most counties are gray.
 If that didn’t work, consult [this diff on
 Github](https://github.com/Swizec/react-d3js-step-by-step/commit/f4c1535e9c9ca4982c8f3c74cff9f739eb08c0f7).
 
-# Render a Histogram of salaries
+# 
 
 Knowing median salaries is great and all, but it doesn’t tell you much
 about what you can expect. You need to know the distribution to see if
@@ -1229,7 +1229,7 @@ That’s it. `App` is ready to render our `Histogram`.
 
 You should now see an error about missing files. That’s normal.
 
-## Step 2: CSS changes
+# 
 
 As mentioned, opinions vary on the best approach to styling React apps.
 Some say stylesheets per component, some say styling inside JavaScript,
@@ -2366,7 +2366,7 @@ Crazy, huh? I think it is.
 If that didn’t work, consult the [diff on
 Github](https://github.com/Swizec/react-d3js-step-by-step/commit/1fd055e461184fb8dc8dd509edb3a6a683c995fe).
 
-# Add user controls for data slicing and dicing
+# 
 
 Now comes the fun part. All that extra effort we put into making our
 components aware of filtering, and it all comes down to this: User
