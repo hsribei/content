@@ -1,8 +1,4 @@
-{\#salary-visualization} \# A big example project - 176,113 tech
-salaries visualized \#
-
-We’re going to build
-this:
+# A big example project - 176,113 tech salaries visualized \# {\#salary-visualization}We’re going to build this:
 
 ![](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/full-dataviz.png)
 
