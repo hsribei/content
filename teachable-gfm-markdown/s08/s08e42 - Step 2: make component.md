@@ -1,4 +1,29 @@
 
+## Step 2: Preloader component
+
+Our `Preloader` is a small component that pretends it’s the `App` and
+renders a static title, description, and a screenshot of the end result.
+It goes in `src/components/Preloader.js`.
+
+We’ll put all of our components in `src/components/`.
+
+We start the component off with some imports, an export, and a
+functional stateless component that returns an empty div element.
+
+    // src/components/Preloader.js
+    
+    import React from "react";
+    
+    import PreloaderImg from "../assets/preloading.png";
+    
+    const Preloader = () => (
+        <div className="App container">
+    
+        </div>
+    );
+    
+    export default Preloader;
+
 We `import` React (which we need to make JSX syntax work) and the
 `PreloaderImg` for our image. We can import images because of the
 Webpack configuration that comes with `create-react-app`. The webpack
@@ -50,40 +75,3 @@ That’s because JSX is more than HTML; it’s JavaScript. Think of props as
 function arguments – any valid JavaScript fits.
 
 That will be a cornerstone of our project.
-
-## Step 3: Update App
-
-We use our new Preloader component in App – `src/App.js`. Let’s remove
-the `create-react-app` defaults and import our `Preloader` component.
-
-    // src/App.js
-    
-    import React from 'react';
-    // markua-start-delete
-    import logo from './logo.svg';
-    import './App.css';
-    // markua-end-delete
-    
-    // markua-start-insert
-    import Preloader from './components/Preloader';
-    // markua-end-insert
-    
-    class App extends React.Component {
-        // markua-start-delete
-      render() {
-        return (
-          <div className="App">
-            <div className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h2>Welcome to React</h2>
-            </div>
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-          </div>
-        );
-      }
-        // markua-end-delete
-    }
-    
-    export default App;
