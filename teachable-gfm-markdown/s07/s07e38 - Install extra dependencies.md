@@ -20,4 +20,5 @@ in the browser without errors. Keep `npm start` running as you follow
 the examples in this book.
 
 Some examples are going to need other libraries. When that happens, I’ll
-remind you to install them.
+remind you to install
+them.
