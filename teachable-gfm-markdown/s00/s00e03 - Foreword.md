@@ -53,8 +53,10 @@ Everything changes. Mind, blown.
 Look how this H1B salary visualization changes when the user picks a
 subset of the data to look at.
 
-![Default H1B histogram](images/full_default_h1b.png)
+![Default H1B
+histogram](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_default_h1b.png)
 
-![Changes after user picks a data subset](images/full_changed_h1b.png)
+![Changes after user picks a data
+subset](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_changed_h1b.png)
 
 React + D3: a powerful combination indeed.

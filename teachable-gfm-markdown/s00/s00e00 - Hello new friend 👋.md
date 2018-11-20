@@ -3,7 +3,8 @@
 
 Hello new friend\! 👋
 
-![This is me, Swizec](images/es6v2/6300d21408f5e9f0c8f5698d266fb258.jpg)
+![This is me,
+Swizec](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/6300d21408f5e9f0c8f5698d266fb258.jpg)
 
 Welcome to what I hope is the best and most fun React and D3 learning
 resource on the internet. No TODO apps here, just fun interactive stuff

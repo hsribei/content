@@ -1,0 +1,11 @@
+
+Congratz\! You know everything you need to build visualizations with
+React and D3. 👏
+
+This is the point in tech books where I run off and start building
+things on my own. Then I get frustrated, spend hours Googling for
+answers, and then remember, “Hey\! Maybe I should read the rest of the
+book\!”
+
+Reading the rest of the book helps. I’ll show you how all this fits
+together into a larger project.
