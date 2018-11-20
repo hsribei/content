@@ -1,4 +1,5 @@
-to know
+
+# What you need to know
 
 I’m going to assume you already know how to code and that you’re great
 with JavaScript. Many books have been written to teach the basics of

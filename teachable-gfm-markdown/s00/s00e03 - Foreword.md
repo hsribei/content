@@ -56,3 +56,5 @@ subset of the data to look at.
 ![Default H1B histogram](images/full_default_h1b.png)
 
 ![Changes after user picks a data subset](images/full_changed_h1b.png)
+
+React + D3: a powerful combination indeed.

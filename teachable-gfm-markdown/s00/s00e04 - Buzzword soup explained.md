@@ -1,4 +1,5 @@
-explained
+
+# Buzzword soup explained
 
 We’re going to use some buzzwords in this book. Hell, we’ve used some
 already. Most will get a thorough explanation further on, but let me
@@ -26,3 +27,4 @@ give you a quick rundown.
     functions that take props and return markup
   - **Webpack**, a module packager for JavaScript. Makes it more
     convenient to organize code into multiple files. Provides cool
+    plugins.

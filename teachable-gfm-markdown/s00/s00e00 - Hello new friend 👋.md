@@ -1,4 +1,6 @@
 
+# Introduction
+
 Hello new friend\! 👋
 
 ![This is me, Swizec](images/es6v2/6300d21408f5e9f0c8f5698d266fb258.jpg)
@@ -143,3 +145,4 @@ months before sitting down to update this stuff :)
 
 I recommend you go through the basic chapters at least. The little
 building blocks. You can do that in an afternoon or two. It’s worth it,
+I promise.

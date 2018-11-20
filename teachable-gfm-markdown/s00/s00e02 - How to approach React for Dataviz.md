@@ -1,4 +1,5 @@
-How to approach React for Data Visualization
+
+## How to approach React for Data Visualization
 
 I recommend starting with an idea, a problem. Something you want to
 build. A dataset you want to play with. A feature you want to add to
