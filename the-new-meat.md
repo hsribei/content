@@ -2600,13 +2600,17 @@ view.
 
 ![](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/interaction-dataviz.png)
 
-It’s going to be great. <!-- end-lecture -->
+It’s going to be great.
+
+<!-- end-lecture -->
 
 At this point, I assume you’ve used `create-react-app` to set up your
 environment. Check the [getting started](#getting-started) section if
 you haven’t. I’m also assuming you’ve read the [basics
 chapter](#the-meat-start). I’m still going to explain what we’re doing,
-but knowing the basics helps. <!-- end-section -->
+but knowing the basics helps.
+
+<!-- end-section -->
 
 I suggest you follow along, keep `npm start` running, and watch your
 visualization change in real time as you code. It’s rewarding as hell.
