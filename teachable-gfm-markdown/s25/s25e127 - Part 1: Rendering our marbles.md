@@ -345,35 +345,33 @@ All values painstakingly assembled by hand. You’re welcome. 😌
 The MobX store that loads our sprite into memory and helps us use it
 looks like this:
 
-{caption: “Sprite store”, line-numbers: false}
-
 ``` javascript
 // src/logic/Sprite.js
 
-import { observable, action, computed } from "mobx";
-import MarbleSprite from "../monster-marbles-sprite-sheets.jpg";
+import { observable, action, computed } from 'mobx';
+import MarbleSprite from '../monster-marbles-sprite-sheets.jpg';
 
 class Sprite {
-  @observable sprite = null;
+    @observable sprite = null;
 
-  @action loadSprite(callback = () => null) {
-    const sprite = new Image();
-    sprite.src = MarbleSprite;
+    @action loadSprite(callback = () => null) {
+        const sprite = new Image();
+        sprite.src = MarbleSprite;
 
-    sprite.onload = () => {
-      this.sprite = sprite;
+        sprite.onload = () => {
+            this.sprite = sprite;
 
-      callback();
-    };
-  }
+            callback();
+        };
+    }
 
-  @computed get marbleTypes() {
-    return Object.keys(MarbleDefinitions);
-  }
+    @computed get marbleTypes() {
+        return Object.keys(MarbleDefinitions);
+    }
 
-  @computed get marbleDefinitions() {
-    return MarbleDefinitions;
-  }
+    @computed get marbleDefinitions() {
+        return MarbleDefinitions;
+    }
 }
 
 export default new Sprite();
