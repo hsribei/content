@@ -27,6 +27,9 @@ inside the `Controls` component. Better places exist from a “low-down
 components shouldn’t play with global state” perspective, but that’s
 okay.
 
+{crop-start: 215, crop-end: 243, format: javascript, line-numbers:
+false, caption: “Add rudimentary routing”}
+
     // src/components/Controls/index.js
     
     class Controls extends React.Component {
@@ -47,7 +50,7 @@ okay.
                 this.updateJobTitleFilter(jobTitle);
             }
         }
-        
+    
         // ..
         reportUpdateUpTheChain() {
             window.location.hash = [

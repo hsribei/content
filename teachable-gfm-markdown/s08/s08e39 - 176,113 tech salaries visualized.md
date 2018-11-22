@@ -1,4 +1,6 @@
 
+{\#salary-visualization}
+
 # A big example project - 176,113 tech salaries visualized
 
 We’re going to build

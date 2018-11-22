@@ -4,6 +4,8 @@
 We use our new Preloader component in App – `src/App.js`. Let’s remove
 the `create-react-app` defaults and import our `Preloader` component.
 
+{format: javascript, line-numbers: false, caption: “Revamp App.js”}
+
     // src/App.js
     
     import React from 'react';
@@ -43,6 +45,9 @@ need that anymore.
 Let’s define a default `state` and a `render` method that uses our
 `Preloader` component when there’s no data.
 
+{format: javascript, line-numbers: false, caption: “Render our
+preloader”}
+
     // src/App.js
     
     class App extends React.Component {
@@ -53,7 +58,7 @@ Let’s define a default `state` and a `render` method that uses our
     
         render() {
             const { techSalaries } = this.state;
-            
+    
             if (techSalaries.length < 1) {
                 return (
                     <Preloader />

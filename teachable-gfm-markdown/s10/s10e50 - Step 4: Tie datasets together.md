@@ -1,4 +1,6 @@
 
+{\#tie-datasets-together}
+
 ## Step 4: Tie the datasets together
 
 If you add a `console.log` to the `.then` callback above, you’ll see a

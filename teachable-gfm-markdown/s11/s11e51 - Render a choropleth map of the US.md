@@ -1,4 +1,6 @@
 
+{\#choropleth-map}
+
 # Render a choropleth map of the US
 
 With our data in hand, it’s time to draw some pictures. A choropleth map

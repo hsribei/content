@@ -56,6 +56,9 @@ capitalized.
 The implementations of those `updateDataFilter` callbacks follow the
 same pattern as `updateYearFilter`.
 
+{format: javascript, line-numbers: false, caption: “new updateDataFilter
+callbacks”}
+
     // src/components/Controls/index.js
     
     class Controls extends React.Component {
@@ -101,7 +104,7 @@ same pattern as `updateYearFilter`.
                 () => this.reportUpdateUpTheChain()
             );
         };
-        
+    
         // ..
     }
     
@@ -116,6 +119,9 @@ code harder to read.
 
 Our last step is to add these new keys to the `reportUpdateUpTheChain`
 function.
+
+{format: javascript, line-numbers: false, caption: “Add new filters to
+main state update”}
 
     // src/components/Controls/index.js
     

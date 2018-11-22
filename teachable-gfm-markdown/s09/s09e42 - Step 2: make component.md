@@ -10,6 +10,8 @@ We’ll put all of our components in `src/components/`.
 We start the component off with some imports, an export, and a
 functional stateless component that returns an empty div element.
 
+{format: javascript, line-numbers: false, caption: “Preloader skeleton”}
+
     // src/components/Preloader.js
     
     import React from "react";
@@ -36,6 +38,8 @@ items. You’ll see that play out in the rest of this project.
 
 The `Preloader` function takes no props (because we don’t need any) and
 returns an empty `div`. Let’s fill it in.
+
+{format: javascript, line-numbers: false, caption: “Preloader content”}
 
     // src/components/Preloader.js
     

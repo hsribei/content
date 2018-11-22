@@ -7,6 +7,9 @@ soon data loading starts to work.
 Start by importing our data loading method - `loadAllData` - and both D3
 and Lodash. We’ll need them later.
 
+{format: javascript, line-numbers: false, caption: “Import D3, lodash,
+and our loading method”}
+
     // src/App.js
     import React from 'react';
     // markua-start-insert
@@ -24,6 +27,9 @@ import named exports. That lets us get multiple things from the same
 file. You’ll see the export side in Step 2.
 
 Don’t worry about the missing `DataHandling` file. It’s coming soon.
+
+{format: javascript, line-numbers: false, caption: “Initiate data
+loading in App.js”}
 
     // src/App.js
     class App extends React.Component {
@@ -63,10 +69,13 @@ expect.
 Let’s change the `render` method to show a message when our data
 finishes loading.
 
+{format: javascript, line-numbers: false, caption: “Show when data
+loads”}
+
     // src/App.js
         render() {
          const { techSalaries } = this.state;
-            
+    
          if (techSalaries.length < 1) {
              return (
                  <Preloader />

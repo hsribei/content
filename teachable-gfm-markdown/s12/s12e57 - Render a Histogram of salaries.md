@@ -1,4 +1,6 @@
 
+{\#histogram-of-salaries}
+
 # Render a Histogram of salaries
 
 Knowing median salaries is great and all, but it doesn’t tell you much
@@ -11,9 +13,9 @@ its distribution. We’re going to build one like this:
 ![Basic
 histogram](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/basic-histogram.png)
 
-In the shortened dataset, 35% of tech salaries fall between $60k and
-$80k, 26% between $80k and $100k etc. Throwing a weighed dice with this
-[random
+In the shortened dataset, 35% of tech salaries fall between $60k
+and$80k, 26% between $80k and$100k etc. Throwing a weighed dice with
+this [random
 distribution](https://en.wikipedia.org/wiki/Probability_distribution),
 you’re far more likely to get 60k-80k than 120k-140k. It’s a great way
 to gauge situations.

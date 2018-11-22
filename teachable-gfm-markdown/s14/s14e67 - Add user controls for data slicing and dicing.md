@@ -1,4 +1,6 @@
 
+{\#user-controls}
+
 # Add user controls for data slicing and dicing
 
 Now comes the fun part. All that extra effort we put into making our
@@ -21,7 +23,7 @@ it to update `this.state.filteredSalaries`, which triggers a re-render
 and updates our dataviz.
 
 ![Architecture
-sketch](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.jpg)
+sketch](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png)
 
 We’re building controls in 4 steps, top to bottom:
 
