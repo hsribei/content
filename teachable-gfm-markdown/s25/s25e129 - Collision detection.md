@@ -148,34 +148,33 @@ when the time comes to use it.
 
 Code looks like this:
 
-{caption: “Handling marble collisions”, line-numbers: false}
-
 ``` javascript
 if (candidate) {
-  // borrowing @air_hadoken's implementation from here:
-  // https://github.com/airhadoken/game_of_circles/blob/master/circles.js#L64
-  const cx = candidate.x,
-    cy = candidate.y,
-    normx = cx - x,
-    normy = cy - y,
-    dist = normx ** 2 + normy ** 2,
-    c = ((_vx * normx + _vy * normy) / dist) * 2.3;
 
-  _vx = (_vx - c * normx) / 2.3;
-  _vy = (_vy - c * normy) / 2.3;
+    // borrowing @air_hadoken's implementation from here:
+    // https://github.com/airhadoken/game_of_circles/blob/master/circles.js#L64
+    const cx = candidate.x,
+          cy = candidate.y,
+          normx = cx - x,
+          normy = cy - y,
+          dist = (normx ** 2 + normy ** 2),
+          c = (_vx * normx + _vy * normy) / dist * 2.3;
 
-  candidate.vx += -_vx;
-  candidate.vy += -_vy;
-  candidate.x += -_vx;
-  candidate.y += -_vy;
+    _vx = (_vx - c * normx)/2.3;
+    _vy = (_vy - c * normy)/2.3;
+
+    candidate.vx += -_vx;
+    candidate.vy += -_vy;
+    candidate.x += -_vx;
+    candidate.y += -_vy;
 }
 
 return {
-  x: x + _vx,
-  y: y + _vy,
-  vx: _vx,
-  vy: _vy
-};
+    x: x + _vx,
+    y: y + _vy,
+    vx: _vx,
+    vy: _vy
+}
 ```
 
 Ok, the `return` statement isn’t about handling collisions. It updates
