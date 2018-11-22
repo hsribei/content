@@ -32,8 +32,6 @@ You should go into your particle generator directory, install Konva and
 react-konva, and then make the changes below. Trying things out is
 better than just reading my code ;)
 
-{caption: “Install Konva”, line-numbers: false}
-
     $ npm install --save konva react-konva
 
 {aside} react-konva is a thin wrapper on Konva itself. There’s no need
