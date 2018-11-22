@@ -143,8 +143,6 @@ can see for yourself.
 
 #### componentDidUpdate
 
-{caption: “componentDidUpdate code”, line-numbers: false}
-
 ``` javascript
 // src/components/Particles.jsx
 
