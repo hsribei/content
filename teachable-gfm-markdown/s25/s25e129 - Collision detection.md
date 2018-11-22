@@ -98,12 +98,9 @@ read.
 **Handling collisions with walls** happens in two lines of code. One per
 axis.
 
-{caption: “Detecting wall collisions”, line-numbers:
-false}
-
 ``` javascript
-let _vx = (x + vx < MarbleR ? -vx : x + vx > width - MarbleR ? -vx : vx) * 0.99,
-  _vy = (y + vy < MarbleR ? -vy : y + vy > height - MarbleR ? -vy : vy) * 0.99;
+let _vx = ((x+vx < MarbleR) ? -vx : (x+vx > width-MarbleR) ? -vx : vx)*.99,
+    _vy = ((y+vy < MarbleR) ? -vy : (y+vy > height-MarbleR) ? -vy : vy)*.99;
 ```
 
 Nested ternary expressions are kinda messy, but good enough. If a marble
