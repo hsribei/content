@@ -118,16 +118,15 @@ without making too many position comparisons.
 Checking every marble with every other marble produces 81 comparisons.
 Versus 2 comparisons using a quadtree. {/aside}
 
-{caption: “Finding collision candidates”, line-numbers: false}
-
 ``` javascript
 // nearest marble is a collision candidate
-const subdividedSpace = quadtree()
-    .extent([[-1, -1], [this.width + 1, this.height + 1]])
-    .x(d => d.x)
-    .y(d => d.y)
-    .addAll(this.marbles.filter(m => id !== m.id)),
-  candidate = subdividedSpace.find(x, y, MarbleR * 2);
+const subdividedSpace = quadtree().extent([[-1, -1],
+                                           [this.width+1, this.height+1]])
+                                  .x(d => d.x)
+                                  .y(d => d.y)
+                                  .addAll(this.marbles
+                                              .filter(m => id !== m.id)),
+      candidate = subdividedSpace.find(x, y, MarbleR*2);
 ```
 
 We’re using [`d3-quadtree`](https://github.com/d3/d3-quadtree) for the
