@@ -316,23 +316,21 @@ The first is a `MarbleDefinitions` dictionary. We used it in `Marble`
 component’s render method. If you’re playing along, you should copy
 paste this. Too much typing :)
 
-{caption: “MarbleDefinitions dictionary”, line-numbers: false}
-
 ``` javascript
 // src/logic/Sprite.js
 
 const MarbleDefinitions = {
-  dino: { x: -222, y: -177, c: "#8664d5" },
-  redHeart: { x: -222, y: -299, c: "#e47178" },
-  sun: { x: -222, y: -420, c: "#5c96ac" },
+    dino: { x: -222, y: -177, c: '#8664d5' },
+    redHeart: { x: -222, y: -299, c: '#e47178' },
+    sun: { x: -222, y: -420, c: '#5c96ac' },
 
-  yellowHeart: { x: -400, y: -177, c: "#c8b405" },
-  mouse: { x: -400, y: -299, c: "#7d7e82" },
-  pumpkin: { x: -400, y: -420, c: "#fa9801" },
+    yellowHeart: { x: -400, y: -177, c: '#c8b405' },
+    mouse: { x: -400, y: -299, c: '#7d7e82' },
+    pumpkin: { x: -400, y: -420, c: '#fa9801' },
 
-  frog: { x: -576, y: -177, c: "#98b42b" },
-  moon: { x: -575, y: -299, c: "#b20717" },
-  bear: { x: -576, y: -421, c: "#a88534" }
+    frog: { x: -576, y: -177, c: '#98b42b' },
+    moon: { x: -575, y: -299, c: '#b20717' },
+    bear: { x: -576, y: -421, c: '#a88534' }
 };
 
 export { MarbleDefinitions };
