@@ -18,46 +18,46 @@ down.
 
 The new `Particles` component looks like this:
 
-{caption: “Sprite-based Particles component”, line-numbers: false}
-
 ``` javascript
 // src/components/Particles.jsx
 
-import React, { Component } from "react";
-import { FastLayer } from "react-konva";
+import React, { Component } from 'react';
+import { FastLayer } from 'react-konva';
 
 class Particles extends Component {
-  layerRef = React.createRef();
+    layerRef = React.createRef();
+    
+    componentDidMount() {
+        this.canvas = this.layerRef.current.canvas._canvas;
+        this.canvasContext = this.canvas.getContext('2d');
 
-  componentDidMount() {
-    this.canvas = this.layerRef.current.canvas._canvas;
-    this.canvasContext = this.canvas.getContext("2d");
-
-    this.sprite = new Image();
-    this.sprite.src = "http://i.imgur.com/m5l6lhr.png";
-  }
-
-  drawParticle(particle) {
-    let { x, y } = particle;
-
-    this.canvasContext.drawImage(this.sprite, 0, 0, 128, 128, x, y, 15, 15);
-  }
-
-  componentDidUpdate() {
-    let particles = this.props.particles;
-
-    console.time("drawing");
-    this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    for (let i = 0; i < particles.length; i++) {
-      this.drawParticle(particles[i]);
+        this.sprite = new Image();
+        this.sprite.src = 'http://i.imgur.com/m5l6lhr.png';
     }
-    console.timeEnd("drawing");
-  }
 
-  render() {
-    return <FastLayer ref={this.layerRef} listening="false" />;
-  }
+    drawParticle(particle) {
+        let { x, y } = particle;
+
+        this.canvasContext.drawImage(this.sprite, 0, 0, 128, 128, x, y, 15, 15);
+    }
+
+    componentDidUpdate() {
+        let particles = this.props.particles;
+
+        console.time('drawing');
+        this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for (let i = 0; i < particles.length; i++) {
+            this.drawParticle(particles[i]);
+        }
+        console.timeEnd('drawing');
+    }
+
+    render() {
+        return (
+            <FastLayer ref={this.layerRef} listening="false" />
+        );
+    }
 }
 
 export default Particles;
