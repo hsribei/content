@@ -34,8 +34,6 @@ Maybe it’s a case of [competing standards](https://xkcd.com/927/).
 
 We stub out the `CountyMap` component then fill it in with logic.
 
-{format: javascript, line-numbers: false, caption: “CountyMap stub”}
-
     // src/components/CountyMap/CountyMap.js
     class CountyMap extends Component {
         constructor(props) {
@@ -51,7 +49,7 @@ We stub out the `CountyMap` component then fill it in with logic.
     
         render() {
             const { usTopoJson } = this.props;
-    
+            
             if (!usTopoJson) {
                 return null;
             }else{
@@ -69,9 +67,6 @@ with `getDerivedStateFromProps`.
 
 We need three D3 objects to build a choropleth map: a geographical
 projection, a path generator, and a quantize scale for colors.
-
-{format: javascript, line-numbers: false, caption: “D3 objects for a
-map”}
 
     // src/components/CountyMap/CountyMap.js
     class CountyMap extends React.Component {
@@ -114,9 +109,6 @@ We’ll use it to pick colors from an array.
 Keeping our geo path and quantize scale up to date is simple, but we’ll
 make it harder by adding a zoom feature. It won’t work until we build
 the filtering, but hey, we’ll already have it by then\! :D
-
-{format: javascript, line-numbers: false, caption: “CountyMap
-getDerivedStateFromProps”}
 
 ``` 
         // src/components/CountyMap/CountyMap.js
@@ -199,8 +191,6 @@ principles.
 
 After all that hard work, the `render` method is a breeze. We prep our
 data then loop through it and render a `County` element for each entry.
-
-{format: javascript, line-numbers: false, caption: “CountyMap render”}
 
 ``` 
     render() {

@@ -6,8 +6,6 @@ ensures only one at a time is selected.
 
 We’ll start with a stub and go from there.
 
-{format: javascript, line-numbers: false, caption: “ControlRow stub”}
-
     // src/components/Controls/ControlRow.js
     import React from "react";
     
@@ -15,7 +13,7 @@ We’ll start with a stub and go from there.
     
     class ControlRow extends React.Component {
         makePick = (picked, newState) => {
-    
+     
         };
     
         _addToggle(name) {
@@ -35,8 +33,7 @@ Can you guess what they are?
   - `_addToggle` is a rendering helper method
   - `render` renders a row of buttons
 
-{format: javascript, line-numbers: false, caption: “makePick
-implementation”}
+<!-- end list -->
 
     // src/components/Controls/ControlRow.js
     
@@ -48,9 +45,6 @@ implementation”}
 
 `makePick` calls the data filter update and passes in the new value and
 whether we want to unselect. Pretty simple right?
-
-{format: javascript, line-numbers: false, caption: “Render a row of
-controls”}
 
     // src/components/Controls/ControlRow.js
     class ControlRow extends React.Component {

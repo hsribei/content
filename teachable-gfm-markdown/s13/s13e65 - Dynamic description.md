@@ -23,8 +23,6 @@ We use the same approach as before:
 All the interesting complexity goes into finding the richest city and
 county. That part looks like this:
 
-{caption: “Richest county calculation”, line-numbers: false}
-
 ``` javascript
 // src/components/Meta/Description.js
 get countyFragment() {
@@ -37,7 +35,7 @@ get countyFragment() {
          .filter(d => d.length/this.props.data.length > 0.01),
         items => d3mean(items,
                         d => d.base_salary) - medians[items[0].countyID][0].medianIncome);
-
+    
     let best = ordered[ordered.length-1],
         countyMedian = medians[best[0].countyID][0].medianIncome;
 
@@ -64,8 +62,6 @@ about combining sentence fragments based on props.
 
 You then render the Description like this:
 
-{caption: “Render Description component”, line-numbers: false}
-
 ``` javascript
 // src/components/App.js
 
@@ -74,11 +70,11 @@ import { Title, Description } from "./components/Meta";
 // ..
 
 <Description
-  data={filteredSalaries}
-  allData={techSalaries}
-  filteredBy={filteredBy}
-  medianIncomesByCounty={this.state.medianIncomesByCounty}
-/>;
+    data={filteredSalaries}
+    allData={techSalaries}
+    filteredBy={filteredBy}
+    medianIncomesByCounty={this.state.medianIncomesByCounty}
+/>
 ```
 
 ![Dataviz with Title and

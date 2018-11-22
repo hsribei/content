@@ -50,9 +50,6 @@ We’ll use it as a callback in `Controls`.
 
 The rest of filtering setup happens in the render method.
 
-{format: javascript, line-numbers: false, caption: “Filtering data and
-updating map zoom in App render”}
-
     // src/App.js
     class App extends React.Component {
         // ...

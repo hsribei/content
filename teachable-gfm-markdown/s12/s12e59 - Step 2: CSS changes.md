@@ -1,6 +1,4 @@
 
-{\#histogram-css}
-
 ## Step 2: CSS changes
 
 As mentioned, opinions vary on the best approach to styling React apps.
@@ -11,8 +9,6 @@ The truth is somewhere in between. Do what fits your project and your
 team. We’re using global stylesheets because it’s the simplest.
 
 Create a new file `src/style.css` and add these 29 lines:
-
-{format: css, line-numbers: false, caption: “style.css stylesheet”}
 
     .histogram .bar rect {
         fill: steelblue;

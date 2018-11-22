@@ -34,8 +34,6 @@ them in your console.
 
 It should be something like this:
 
-{caption: “Put code on github”, line-numbers: false}
-
     $ git init
     $ git commit -m "My entire dataviz"
     $ git remote add origin git://github ...
@@ -51,13 +49,9 @@ easiest way for us to use it is with the `gh-pages` npm module.
 
 Install it with this command:
 
-{caption: “Install gh-pages helper”, line-numbers: false}
-
     $ npm install --save-dev gh-pages
 
 Add two lines to package.json:
-
-{caption: “Update package.json”, line-numbers: false}
 
 ``` json
 // package.json

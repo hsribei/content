@@ -4,8 +4,6 @@
 Last piece of the puzzle – the Toggle component. A button that turns on
 and off.
 
-{format: javascript, line-numbers: false, caption: “Toggle component”}
-
     // src/components/Controls/Toggle.js
     import React from "react";
     

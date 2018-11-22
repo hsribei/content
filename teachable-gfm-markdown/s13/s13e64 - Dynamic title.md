@@ -6,8 +6,6 @@ We begin with the title because it shows up first.
 We start with an import in `App.js` and add it to the render method. You
 know the drill :smile:
 
-{format: javascript, caption: “Adding Title to main App component”}
-
     // src/App.js
     import CountyMap from './components/CountyMap';
     import Histogram from './components/Histogram';
@@ -66,8 +64,6 @@ showing meta data. Grouping them in a directory makes sense.
 
 We make a `components/Meta` directory and add an `index.js`. It makes
 importing easier.
-
-{format: javascript, line-numbers: false, caption: “Meta index.js”}
 
     // src/components/Meta/index.js
     export { default as Title } from './Title'
@@ -184,35 +180,33 @@ The `jobTitleFragment` getter is conceptually no harder than
 `yearsFragment` and `USstateFragment`, but it comes with a few more
 conditionals.
 
-{caption: “Title.jobTitleFragment”, line-numbers: false}
-
 ``` javascript
 // src/components/Meta/Title.js
 
 class Title extends Component {
-  // ...
-  get jobTitleFragment() {
-    const { jobTitle, year } = this.props.filteredBy;
-    let title = "";
+    // ...
+    get jobTitleFragment() {
+        const { jobTitle, year } = this.props.filteredBy;
+        let title = "";
 
-    if (jobTitle === "*") {
-      if (year === "*") {
-        title = "The average H1B in tech pays";
-      } else {
-        title = "The average tech H1B paid";
-      }
-    } else {
-      title = `Software ${jobTitle}s on an H1B`;
-      if (year === "*") {
-        title += " make";
-      } else {
-        title += " made";
-      }
+        if (jobTitle === "*") {
+            if (year === "*") {
+                title = "The average H1B in tech pays";
+            } else {
+                title = "The average tech H1B paid";
+            }
+        } else {
+            title = `Software ${jobTitle}s on an H1B`;
+            if (year === "*") {
+                title += " make";
+            } else {
+                title += " made";
+            }
+        }
+
+        return title;
     }
-
-    return title;
-  }
-  // ...
+    // ...
 }
 ```
 

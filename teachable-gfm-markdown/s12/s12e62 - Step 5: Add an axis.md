@@ -11,8 +11,6 @@ copy those concepts into the real project.
 We start with the D3blackbox higher order component. Same as before,
 except we put it in `src/components`.
 
-{format: javascript, line-numbers: false, caption: “D3blackbox HOC”}
-
     import React from "react";
     
     export default function D3blackbox(D3render) {
@@ -43,9 +41,6 @@ Take a `D3render` function, call it on `componentDidMount` and
 
 With `D3blackbox`, we can reduce the `Axis` component to a wrapped
 function. We’re implementing the `D3render` method.
-
-{format: javascript, line-numbers: false, caption: “Axis component using
-D3blackbox”}
 
     import * as d3 from "d3";
     import D3blackbox from "../D3blackbox";
@@ -82,8 +77,7 @@ two step process:
 1.  Import `Axis` component
 2.  Render it
 
-{format: javascript, line-numbers: false, caption: “Import and render
-Axis”}
+<!-- end list -->
 
     // src/components/Histogram/Histogram.js
     import React, { Component } from 'react';
@@ -99,7 +93,7 @@ Axis”}
         render() {
             const { histogram, yScale } = this.state,
                 { x, y, data, axisMargin } = this.props;
-    
+                
             const bars = histogram(data);
     
             return (

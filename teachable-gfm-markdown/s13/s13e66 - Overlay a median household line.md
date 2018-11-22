@@ -71,9 +71,6 @@ The `MedianLine` component looks similar to what you’ve seen so far.
 Some imports, a `constructor` that sets up D3 objects, an `updateD3`
 method that keeps them in sync, and a `render` method that outputs SVG.
 
-{ format: javascript, line-numbers: false, caption: “MedianLine
-component stub”}
-
     // src/components/MedianLine.js
     
     import React from "react";
@@ -89,7 +86,7 @@ component stub”}
         bottomMargin,
         median
     }) => {
-    
+        
     };
     
     export default MedianLine;
@@ -99,8 +96,6 @@ props, and an export. It should cause an error because it’s not
 returning anything.
 
 Everything we need to render the line, fits into this function.
-
-{format: javascript, line-numbers: false, caption: “MedianLine render”}
 
     // src/components/MedianLine.js
     
@@ -145,8 +140,6 @@ label, and a `<path>` for the line.
 Building the `d` attribute for the path, that’s interesting. We use a
 `line` generator from D3.
 
-{caption: “Line generator”, line-numbers: false}
-
 ``` javascript
 line = d3.line()([[0, 5], [width, 5]]);
 ```
@@ -163,18 +156,16 @@ element.
 Remember, we already styled `medianLine` when we built [histogram
 styles](#histogram-css) earlier.
 
-{caption: “Histogram css”, line-numbers: false}
-
 ``` css
 .mean text {
-  font: 11px sans-serif;
-  fill: grey;
+    font: 11px sans-serif;
+    fill: grey;
 }
 
 .mean path {
-  stroke-dasharray: 3;
-  stroke: grey;
-  stroke-width: 1px;
+    stroke-dasharray: 3;
+    stroke: grey;
+    stroke-width: 1px;
 }
 ```
 

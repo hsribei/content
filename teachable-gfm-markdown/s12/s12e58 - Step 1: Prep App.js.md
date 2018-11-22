@@ -4,8 +4,6 @@
 You know the drill, don’t you? Import some stuff, add it to the
 `render()` method in the `App` component.
 
-{format: javascript, line-numbers: false, caption: “Histogram imports”}
-
     // src/App.js
     import _ from 'lodash';
     

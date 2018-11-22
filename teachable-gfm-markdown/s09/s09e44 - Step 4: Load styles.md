@@ -12,9 +12,6 @@ our own styles detracts from this tutorial.
 
 We load stylesheets in `src/index.js`.
 
-{format: javascript, line-numbers: false, caption: “Add Bootstrap in
-index.js”}
-
     // src/index.js
     
     import React from 'react';

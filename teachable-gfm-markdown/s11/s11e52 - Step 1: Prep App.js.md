@@ -53,15 +53,14 @@ In the `render` method, we’ll:
   - remove the “data loaded” indicator
   - render the map
 
-{format: javascript, line-numbers: false, caption: "Render the CountyMap
-component}
+<!-- end list -->
 
     // src/App.js
     render() {
         // markua-start-insert
         const { countyNames, usTopoJson, techSalaries, } = this.state;
         // markua-end-insert
-    
+            
         if (techSalaries.length < 1) {
             return (
                 <Preloader />

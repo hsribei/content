@@ -18,9 +18,6 @@ main `Controls` component goes in your `index.js` file.
 
 ### Stub Controls
 
-{format: javascript, line-numbers: false, caption: “Controls stubbed for
-year filter”}
-
     // src/components/Controls/index.js
     import React from "react";
     
@@ -52,7 +49,7 @@ year filter”}
                 () => this.reportUpdateUpTheChain()
             );
         };
-    
+        
         render() {
             const { data } = this.props;
         }
@@ -71,9 +68,6 @@ component. It’s a simpler alternative to using React Context or a state
 management library.
 
 ### Filter logic
-
-{format: javascript, line-numbers: false, caption: “year filtering logic
-in Controls”}
 
     // src/components/Controls/index.js
     class Controls extends React.Component {
@@ -118,9 +112,6 @@ setState callback :)
 is a callback method on `App`. We defined it earlier – it needs a new
 filter method and a `filteredBy` dictionary.
 
-{language: javascript, line-numbers: false, caption:
-“reportUpdateUpTheChain method”}
-
     // src/components/Controls/index.js
     class Controls extends React.Component {
         // ...
@@ -153,9 +144,6 @@ sense.
 
 Great, we have the filter logic. Let’s render those rows of controls
 we’ve been talking about.
-
-{format: javascript, line-numbers: false, caption: “Render the year
-ControlRow”}
 
     // src/components/Controls/index.js
     class Controls extends React.Component {
