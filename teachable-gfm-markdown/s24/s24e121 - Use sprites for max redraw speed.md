@@ -186,8 +186,6 @@ timers running as you want as long as you give them different names.
 
 #### render
 
-{caption: “render code”, line-numbers: false}
-
 ``` javascript
 // src/components/Particles.jsx
 
