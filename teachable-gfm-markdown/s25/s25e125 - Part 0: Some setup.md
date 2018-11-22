@@ -21,8 +21,6 @@ enable decorators.
 
 We enable them in the `.env` file. Add this line:
 
-{caption: “Add to .env settings”, line-numbers: false}
-
     // billiards-game/.env
     // ...
     REACT_APP_DECORATORS=true
