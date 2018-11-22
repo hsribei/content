@@ -5,10 +5,8 @@ Because decorators aren’t in the JavaScript spec, we have to tweak how
 we start our project. We can still use `create-react-app`, but there’s
 an additional step.
 
-You should start a new project like this:
-
-{caption: “Create the billiards game project”, line-numbers:
-    false}
+You should start a new project like
+    this:
 
     $ create-react-app billiards-game --scripts-version custom-react-scripts
 
