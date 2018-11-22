@@ -18,25 +18,31 @@ The [whole Physics
 store](https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js)
 is some 120 lines of code. We’ll go slow. Here’s the skeleton:
 
-{caption: “Physics skeleton”, line-numbers: false}
-
 ``` javascript
 // src/logic/Physics.js
 
 class Physics {
-  @observable MarbleR = 25;
-  @observable width = 800;
-  @observable height = 600;
-  @observable marbles = [];
-  timer = null;
+    @observable MarbleR = 25;
+    @observable width = 800;
+    @observable height = 600;
+    @observable marbles = [];
+    timer = null;
 
-  @computed get initialPositions() {}
+    @computed get initialPositions() {
 
-  @action startGameLoop() {}
+    }
 
-  @action simulationStep() {}
+    @action startGameLoop() {
 
-  @action shoot({ x, y, vx, vy }, i) {}
+    }
+
+    @action simulationStep() {
+
+    }
+
+    @action shoot({ x, y, vx, vy }, i) {
+
+    }
 }
 ```
 
