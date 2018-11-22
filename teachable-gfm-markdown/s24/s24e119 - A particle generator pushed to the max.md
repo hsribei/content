@@ -1,6 +1,4 @@
 
-{\#canvas-react-redux}
-
 ## A particle generator pushed to 20,000 elements with Canvas
 
 Our [SVG-based particle generator](#animating-react-redux) caps out at a
