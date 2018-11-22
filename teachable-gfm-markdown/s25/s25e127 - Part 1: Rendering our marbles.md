@@ -160,54 +160,48 @@ cares about that final vector.
 
 The Marble component looks like this:
 
-{caption: “Marble component”, line-numbers: false}
-
 ``` javascript
 // src/components/Marble.js
 
-import React, { Component } from "react";
-import { Circle } from "react-konva";
-import { inject, observer } from "mobx-react";
+import React, { Component } from 'react';
+import { Circle } from 'react-konva';
+import { inject, observer } from 'mobx-react';
 
-@inject("physics", "sprite")
-@observer
+@inject('physics', 'sprite') @observer
 class Marble extends Component {
-  onDragStart = () => {
-    // set drag starting position
-  };
+    onDragStart = () => {
+        // set drag starting position
+    }
 
-  onDragMove = () => {
-    // update marble position
-  };
+    onDragMove = () => {
+        // update marble position
+    }
 
-  onDragEnd = () => {
-    // shoot the marble
-  };
+    onDragEnd = () => {
+        // shoot the marble
+    }
 
-  render() {
-    const { sprite, type, draggable, id, physics } = this.props;
-    const MarbleDefinitions = sprite.marbleDefinitions;
-    const { x, y, r } = physics.marbles[id];
+    render() {
+        const { sprite, type, draggable, id, physics } = this.props;
+        const MarbleDefinitions = sprite.marbleDefinitions;
+        const { x, y, r } = physics.marbles[id];
 
-    return (
-      <Circle
-        x={x}
-        y={y}
-        radius={r}
-        fillPatternImage={sprite.sprite}
-        fillPatternOffset={MarbleDefinitions[type]}
-        fillPatternScale={{ x: (r * 2) / 111, y: (r * 2) / 111 }}
-        shadowColor={MarbleDefinitions[type].c}
-        shadowBlur="15"
-        shadowOpacity="1"
-        draggable={draggable}
-        onDragStart={this.onDragStart}
-        onDragEnd={this.onDragEnd}
-        onDragMove={this.onDragMove}
-        ref="circle"
-      />
-    );
-  }
+        return (
+            <Circle x={x} y={y} radius={r}
+                    fillPatternImage={sprite.sprite}
+                    fillPatternOffset={MarbleDefinitions[type]}
+                    fillPatternScale={{ x: r*2/111, y: r*2/111 }}
+                    shadowColor={MarbleDefinitions[type].c}
+                    shadowBlur="15"
+                    shadowOpacity="1"
+                    draggable={draggable}
+                    onDragStart={this.onDragStart}
+                    onDragEnd={this.onDragEnd}
+                    onDragMove={this.onDragMove}
+                    ref="circle"
+                    />
+        );
+    }
 }
 
 export default Marble;
