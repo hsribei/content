@@ -29,10 +29,8 @@ No installation necessary. I think `custom-react-scripts` uses the
 `transform-decorators-legacy` Babel plugin behind the scenes. It’s
 pre-installed, and we enable it with that `.env` change.
 
-Before we begin, you should install some other dependencies as well:
-
-{caption: “Install libraries”, line-numbers:
-    false}
+Before we begin, you should install some other dependencies as
+    well:
 
     $ npm install --save konva react-konva mobx mobx-react d3-timer d3-scale d3-quadtree
 
