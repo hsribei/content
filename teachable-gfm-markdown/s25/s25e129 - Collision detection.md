@@ -70,17 +70,15 @@ You can think of `simulationStep` as a function and a loop. At the
 bottom, there is a `.forEach` that applies a `moveMarble` function to
 each marble.
 
-{caption: “Loop through marbles”, line-numbers: false}
-
 ``` javascript
-this.marbles.forEach((marble, i) => {
-  const { x, y, vx, vy } = moveMarble(marble);
+    this.marbles.forEach((marble, i) => {
+        const { x, y, vx, vy } = moveMarble(marble);
 
-  this.marbles[i].x = x;
-  this.marbles[i].y = y;
-  this.marbles[i].vx = vx;
-  this.marbles[i].vy = vy;
-});
+        this.marbles[i].x = x;
+        this.marbles[i].y = y;
+        this.marbles[i].vx = vx;
+        this.marbles[i].vy = vy;
+    });
 ```
 
 We iterate over the list of marbles, feed them into `moveMarble`, get
