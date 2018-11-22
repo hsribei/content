@@ -27,39 +27,37 @@ Let’s start with `App` and work our way down.
 Our `App` component doesn’t do much. It imports MobX stores, triggers
 sprite loading, and starts the game loop.
 
-{caption: “The App component”, line-numbers: false}
-
 ``` javascript
 // src/components/App.js
 
-import React, { Component } from "react";
-import { Provider as MobXProvider, observer } from "mobx-react";
+import React, { Component } from 'react';
+import { Provider as MobXProvider, observer } from 'mobx-react';
 
-import Physics from "../logic/Physics";
-import Sprite from "../logic/Sprite";
-import MarbleList from "./MarbleList";
+import Physics from '../logic/Physics';
+import Sprite from '../logic/Sprite';
+import MarbleList from './MarbleList';
 
 @observer
 class App extends Component {
-  componentDidMount() {
-    Sprite.loadSprite(() => Physics.startGameLoop());
-  }
+    componentDidMount() {
+        Sprite.loadSprite(() => Physics.startGameLoop());
+    }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Elastic collisions</h2>
-          <p>Rendered on canvas, built with React and Konva</p>
-        </div>
-        <div className="App-intro">
-          <MobXProvider physics={Physics} sprite={Sprite}>
-            <MarbleList />
-          </MobXProvider>
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <div className="App-header">
+                    <h2>Elastic collisions</h2>
+                    <p>Rendered on canvas, built with React and Konva</p>
+                </div>
+                <div className="App-intro">
+                    <MobXProvider physics={Physics} sprite={Sprite}>
+                        <MarbleList />
+                    </MobXProvider>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
