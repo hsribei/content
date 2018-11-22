@@ -1,4 +1,6 @@
 
+{\#billiards-simulation}
+
 ## Build a declarative billiards simulation with MobX, Canvas, and Konva
 
 ![Billiards

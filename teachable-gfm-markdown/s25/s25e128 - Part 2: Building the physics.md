@@ -18,31 +18,25 @@ The [whole Physics
 store](https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js)
 is some 120 lines of code. We’ll go slow. Here’s the skeleton:
 
+{caption: “Physics skeleton”, line-numbers: false}
+
 ``` javascript
 // src/logic/Physics.js
 
 class Physics {
-    @observable MarbleR = 25;
-    @observable width = 800;
-    @observable height = 600;
-    @observable marbles = [];
-    timer = null;
+  @observable MarbleR = 25;
+  @observable width = 800;
+  @observable height = 600;
+  @observable marbles = [];
+  timer = null;
 
-    @computed get initialPositions() {
+  @computed get initialPositions() {}
 
-    }
+  @action startGameLoop() {}
 
-    @action startGameLoop() {
+  @action simulationStep() {}
 
-    }
-
-    @action simulationStep() {
-
-    }
-
-    @action shoot({ x, y, vx, vy }, i) {
-
-    }
+  @action shoot({ x, y, vx, vy }, i) {}
 }
 ```
 
@@ -55,46 +49,50 @@ Let’s walk through.
 
 #### initialPositions
 
+{caption: “initialPositions function”, line-numbers: false}
+
 ``` javascript
 // src/logic/Physics.js
 class Physics {
-        // ..
-    @computed get initialPositions() {
-        const { width, height, MarbleR } = this,
-              center = width/2;
+  // ..
+  @computed get initialPositions() {
+    const { width, height, MarbleR } = this,
+      center = width / 2;
 
-        const lines = 4,
-              maxY = 200;
+    const lines = 4,
+      maxY = 200;
 
-        let marbles = range(lines, 0, -1).map(y => {
-            if (y === lines) return [{ x: center, y: maxY,
-                                       vx: 0, vy: 0, r: this.MarbleR}];
+    let marbles = range(lines, 0, -1)
+      .map(y => {
+        if (y === lines)
+          return [{ x: center, y: maxY, vx: 0, vy: 0, r: this.MarbleR }];
 
-            const left = center - y*(MarbleR+5),
-                  right = center + y*(MarbleR+5);
+        const left = center - y * (MarbleR + 5),
+          right = center + y * (MarbleR + 5);
 
-            return range(left, right, MarbleR*2+5).map(x => ({
-                x: x,
-                y: maxY-y*(MarbleR*2+5),
-                vx: 0,
-                vy: 0,
-                r: this.MarbleR
-            }));
-        }).reduce((acc, pos) => acc.concat(pos), []);
+        return range(left, right, MarbleR * 2 + 5).map(x => ({
+          x: x,
+          y: maxY - y * (MarbleR * 2 + 5),
+          vx: 0,
+          vy: 0,
+          r: this.MarbleR
+        }));
+      })
+      .reduce((acc, pos) => acc.concat(pos), []);
 
-        marbles = [].concat(marbles, {
-            x: width/2,
-            y: height-150,
-            vx: 0,
-            vy: 0,
-            r: this.MarbleR
-        });
+    marbles = [].concat(marbles, {
+      x: width / 2,
+      y: height - 150,
+      vx: 0,
+      vy: 0,
+      r: this.MarbleR
+    });
 
-        marbles.forEach((m, i) => marbles[i].id = i);
+    marbles.forEach((m, i) => (marbles[i].id = i));
 
-        return marbles;
-    }
-    // ..
+    return marbles;
+  }
+  // ..
 }
 ```
 
@@ -126,27 +124,29 @@ our app. Positions in the array may change.
 
 #### shoot and startGameLoop
 
+{caption: “shoot and startGameLoop functions”, line-numbers: false}
+
 ``` javascript
 // src/logic/Physics.js
 class Physics {
-    // ...
+  // ...
 
-    @action startGameLoop() {
-        this.marbles = this.initialPositions;
+  @action startGameLoop() {
+    this.marbles = this.initialPositions;
 
-        this.timer = timer(() => this.simulationStep());
-    }
+    this.timer = timer(() => this.simulationStep());
+  }
 
-    // ...
+  // ...
 
-    @action shoot({ x, y, vx, vy }, i) {
-        const maxSpeed = 20;
+  @action shoot({ x, y, vx, vy }, i) {
+    const maxSpeed = 20;
 
-        this.marbles[i].x = x;
-        this.marbles[i].y = y;
-        this.marbles[i].vx = vx < maxSpeed ? vx : maxSpeed;
-        this.marbles[i].vy = vy < maxSpeed ? vy : maxSpeed;
-    }
+    this.marbles[i].x = x;
+    this.marbles[i].y = y;
+    this.marbles[i].vx = vx < maxSpeed ? vx : maxSpeed;
+    this.marbles[i].vy = vy < maxSpeed ? vy : maxSpeed;
+  }
 }
 ```
 

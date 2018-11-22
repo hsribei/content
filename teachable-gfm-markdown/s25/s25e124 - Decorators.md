@@ -15,11 +15,15 @@ spec, you’re not likely to have to change anything.
 You can think of decorators as function wrappers. Instead of code like
 this:
 
+{caption: “Decoratorless function wrapping”, line-numbers: false}
+
 ``` javascript
-inject('store', ({ store }) => <div>A thing with {store.value}</div>);
+inject("store", ({ store }) => <div>A thing with {store.value}</div>);
 ```
 
 You can write the same code like this:
+
+{caption: “Function wrapping with decorators”, line-numbers: false}
 
 ``` javascript
 @inject('store')

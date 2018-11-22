@@ -7,6 +7,8 @@ There’s also a video explaining how this works 👉 [Watch it on
 YouTube](https://www.youtube.com/watch?v=H84fmXjTElM). With hand-drawn
 sketches that explain the math, and I think that’s neat.
 
+{caption: “Full simulationStep function”, line-numbers: false}
+
 ``` javascript
 
 @action simulationStep() {
@@ -70,15 +72,17 @@ You can think of `simulationStep` as a function and a loop. At the
 bottom, there is a `.forEach` that applies a `moveMarble` function to
 each marble.
 
-``` javascript
-    this.marbles.forEach((marble, i) => {
-        const { x, y, vx, vy } = moveMarble(marble);
+{caption: “Loop through marbles”, line-numbers: false}
 
-        this.marbles[i].x = x;
-        this.marbles[i].y = y;
-        this.marbles[i].vx = vx;
-        this.marbles[i].vy = vy;
-    });
+``` javascript
+this.marbles.forEach((marble, i) => {
+  const { x, y, vx, vy } = moveMarble(marble);
+
+  this.marbles[i].x = x;
+  this.marbles[i].y = y;
+  this.marbles[i].vx = vx;
+  this.marbles[i].vy = vy;
+});
 ```
 
 We iterate over the list of marbles, feed them into `moveMarble`, get
@@ -98,9 +102,12 @@ read.
 **Handling collisions with walls** happens in two lines of code. One per
 axis.
 
+{caption: “Detecting wall collisions”, line-numbers:
+false}
+
 ``` javascript
-let _vx = ((x+vx < MarbleR) ? -vx : (x+vx > width-MarbleR) ? -vx : vx)*.99,
-    _vy = ((y+vy < MarbleR) ? -vy : (y+vy > height-MarbleR) ? -vy : vy)*.99;
+let _vx = (x + vx < MarbleR ? -vx : x + vx > width - MarbleR ? -vx : vx) * 0.99,
+  _vy = (y + vy < MarbleR ? -vy : y + vy > height - MarbleR ? -vy : vy) * 0.99;
 ```
 
 Nested ternary expressions are kinda messy, but good enough. If a marble
@@ -118,15 +125,16 @@ without making too many position comparisons.
 Checking every marble with every other marble produces 81 comparisons.
 Versus 2 comparisons using a quadtree. {/aside}
 
+{caption: “Finding collision candidates”, line-numbers: false}
+
 ``` javascript
 // nearest marble is a collision candidate
-const subdividedSpace = quadtree().extent([[-1, -1],
-                                           [this.width+1, this.height+1]])
-                                  .x(d => d.x)
-                                  .y(d => d.y)
-                                  .addAll(this.marbles
-                                              .filter(m => id !== m.id)),
-      candidate = subdividedSpace.find(x, y, MarbleR*2);
+const subdividedSpace = quadtree()
+    .extent([[-1, -1], [this.width + 1, this.height + 1]])
+    .x(d => d.x)
+    .y(d => d.y)
+    .addAll(this.marbles.filter(m => id !== m.id)),
+  candidate = subdividedSpace.find(x, y, MarbleR * 2);
 ```
 
 We’re using [`d3-quadtree`](https://github.com/d3/d3-quadtree) for the
@@ -148,33 +156,34 @@ when the time comes to use it.
 
 Code looks like this:
 
+{caption: “Handling marble collisions”, line-numbers: false}
+
 ``` javascript
 if (candidate) {
+  // borrowing @air_hadoken's implementation from here:
+  // https://github.com/airhadoken/game_of_circles/blob/master/circles.js#L64
+  const cx = candidate.x,
+    cy = candidate.y,
+    normx = cx - x,
+    normy = cy - y,
+    dist = normx ** 2 + normy ** 2,
+    c = ((_vx * normx + _vy * normy) / dist) * 2.3;
 
-    // borrowing @air_hadoken's implementation from here:
-    // https://github.com/airhadoken/game_of_circles/blob/master/circles.js#L64
-    const cx = candidate.x,
-          cy = candidate.y,
-          normx = cx - x,
-          normy = cy - y,
-          dist = (normx ** 2 + normy ** 2),
-          c = (_vx * normx + _vy * normy) / dist * 2.3;
+  _vx = (_vx - c * normx) / 2.3;
+  _vy = (_vy - c * normy) / 2.3;
 
-    _vx = (_vx - c * normx)/2.3;
-    _vy = (_vy - c * normy)/2.3;
-
-    candidate.vx += -_vx;
-    candidate.vy += -_vy;
-    candidate.x += -_vx;
-    candidate.y += -_vy;
+  candidate.vx += -_vx;
+  candidate.vy += -_vy;
+  candidate.x += -_vx;
+  candidate.y += -_vy;
 }
 
 return {
-    x: x + _vx,
-    y: y + _vy,
-    vx: _vx,
-    vy: _vy
-}
+  x: x + _vx,
+  y: y + _vy,
+  vx: _vx,
+  vy: _vy
+};
 ```
 
 Ok, the `return` statement isn’t about handling collisions. It updates

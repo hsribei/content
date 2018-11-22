@@ -9,6 +9,8 @@ helper methods attached. Some of them Konva uses internally; others are
 exposed as an API. Functions like exporting to an image file, detecting
 intersections, etc.
 
+{caption: “Import Konva and set the stage”, line-numbers: false}
+
 ``` javascript
 // src/components/index.jsx
 

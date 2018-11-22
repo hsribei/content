@@ -1,4 +1,6 @@
 
+{\#canvas-react-redux}
+
 ## A particle generator pushed to 20,000 elements with Canvas
 
 Our [SVG-based particle generator](#animating-react-redux) caps out at a
@@ -31,6 +33,8 @@ per tick.
 You should go into your particle generator directory, install Konva and
 react-konva, and then make the changes below. Trying things out is
 better than just reading my code ;)
+
+{caption: “Install Konva”, line-numbers: false}
 
     $ npm install --save konva react-konva
 

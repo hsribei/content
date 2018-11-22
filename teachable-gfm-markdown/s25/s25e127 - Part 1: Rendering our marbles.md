@@ -27,37 +27,39 @@ Let’s start with `App` and work our way down.
 Our `App` component doesn’t do much. It imports MobX stores, triggers
 sprite loading, and starts the game loop.
 
+{caption: “The App component”, line-numbers: false}
+
 ``` javascript
 // src/components/App.js
 
-import React, { Component } from 'react';
-import { Provider as MobXProvider, observer } from 'mobx-react';
+import React, { Component } from "react";
+import { Provider as MobXProvider, observer } from "mobx-react";
 
-import Physics from '../logic/Physics';
-import Sprite from '../logic/Sprite';
-import MarbleList from './MarbleList';
+import Physics from "../logic/Physics";
+import Sprite from "../logic/Sprite";
+import MarbleList from "./MarbleList";
 
 @observer
 class App extends Component {
-    componentDidMount() {
-        Sprite.loadSprite(() => Physics.startGameLoop());
-    }
+  componentDidMount() {
+    Sprite.loadSprite(() => Physics.startGameLoop());
+  }
 
-    render() {
-        return (
-            <div className="App">
-                <div className="App-header">
-                    <h2>Elastic collisions</h2>
-                    <p>Rendered on canvas, built with React and Konva</p>
-                </div>
-                <div className="App-intro">
-                    <MobXProvider physics={Physics} sprite={Sprite}>
-                        <MarbleList />
-                    </MobXProvider>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <h2>Elastic collisions</h2>
+          <p>Rendered on canvas, built with React and Konva</p>
+        </div>
+        <div className="App-intro">
+          <MobXProvider physics={Physics} sprite={Sprite}>
+            <MarbleList />
+          </MobXProvider>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
@@ -88,36 +90,42 @@ two stores.
 
 Like this:
 
+{caption: “MarbleList component”, line-numbers: false}
+
 ``` javascript
 // src/components/MarbleList.js
 
-import React from 'react';
-import { inject, observer } from 'mobx-react';
-import { Stage, Layer, Group } from 'react-konva';
+import React from "react";
+import { inject, observer } from "mobx-react";
+import { Stage, Layer, Group } from "react-konva";
 
-import Marble from './Marble';
+import Marble from "./Marble";
 
-const MarbleList = inject('physics', 'sprite')(observer(({ physics, sprite }) => {
+const MarbleList = inject("physics", "sprite")(
+  observer(({ physics, sprite }) => {
     const { width, height, marbles } = physics;
     const { marbleTypes } = sprite;
 
     return (
-        <Stage width={width} height={height}>
-            <Layer>
-                <Group>
-                    {marbles.map(({ x, y, id }, i) => (
-                        <Marble x={x}
-                                y={y}
-                                type={marbleTypes[i%marbleTypes.length]}
-                                draggable="true"
-                                id={id}
-                                key={`marble-${id}`} />
-                    ))}
-                </Group>
-            </Layer>
-        </Stage>
+      <Stage width={width} height={height}>
+        <Layer>
+          <Group>
+            {marbles.map(({ x, y, id }, i) => (
+              <Marble
+                x={x}
+                y={y}
+                type={marbleTypes[i % marbleTypes.length]}
+                draggable="true"
+                id={id}
+                key={`marble-${id}`}
+              />
+            ))}
+          </Group>
+        </Layer>
+      </Stage>
     );
-}));
+  })
+);
 
 export default MarbleList;
 ```
@@ -160,48 +168,54 @@ cares about that final vector.
 
 The Marble component looks like this:
 
+{caption: “Marble component”, line-numbers: false}
+
 ``` javascript
 // src/components/Marble.js
 
-import React, { Component } from 'react';
-import { Circle } from 'react-konva';
-import { inject, observer } from 'mobx-react';
+import React, { Component } from "react";
+import { Circle } from "react-konva";
+import { inject, observer } from "mobx-react";
 
-@inject('physics', 'sprite') @observer
+@inject("physics", "sprite")
+@observer
 class Marble extends Component {
-    onDragStart = () => {
-        // set drag starting position
-    }
+  onDragStart = () => {
+    // set drag starting position
+  };
 
-    onDragMove = () => {
-        // update marble position
-    }
+  onDragMove = () => {
+    // update marble position
+  };
 
-    onDragEnd = () => {
-        // shoot the marble
-    }
+  onDragEnd = () => {
+    // shoot the marble
+  };
 
-    render() {
-        const { sprite, type, draggable, id, physics } = this.props;
-        const MarbleDefinitions = sprite.marbleDefinitions;
-        const { x, y, r } = physics.marbles[id];
+  render() {
+    const { sprite, type, draggable, id, physics } = this.props;
+    const MarbleDefinitions = sprite.marbleDefinitions;
+    const { x, y, r } = physics.marbles[id];
 
-        return (
-            <Circle x={x} y={y} radius={r}
-                    fillPatternImage={sprite.sprite}
-                    fillPatternOffset={MarbleDefinitions[type]}
-                    fillPatternScale={{ x: r*2/111, y: r*2/111 }}
-                    shadowColor={MarbleDefinitions[type].c}
-                    shadowBlur="15"
-                    shadowOpacity="1"
-                    draggable={draggable}
-                    onDragStart={this.onDragStart}
-                    onDragEnd={this.onDragEnd}
-                    onDragMove={this.onDragMove}
-                    ref="circle"
-                    />
-        );
-    }
+    return (
+      <Circle
+        x={x}
+        y={y}
+        radius={r}
+        fillPatternImage={sprite.sprite}
+        fillPatternOffset={MarbleDefinitions[type]}
+        fillPatternScale={{ x: (r * 2) / 111, y: (r * 2) / 111 }}
+        shadowColor={MarbleDefinitions[type].c}
+        shadowBlur="15"
+        shadowOpacity="1"
+        draggable={draggable}
+        onDragStart={this.onDragStart}
+        onDragEnd={this.onDragEnd}
+        onDragMove={this.onDragMove}
+        ref="circle"
+      />
+    );
+  }
 }
 
 export default Marble;
@@ -232,48 +246,52 @@ re-renders.
 
 The code inside those callbacks is pretty mathsy.
 
+{caption: “Dragging callbacks”, line-numbers: false}
+
 ``` javascript
 // src/components/Marble.js
 
 class Marble extends Component {
-    onDragStart = () => {
-        const { physics, id } = this.props;
+  onDragStart = () => {
+    const { physics, id } = this.props;
 
-        this.setState({
-            origX: physics.marbles[id].x,
-            origY: physics.marbles[id].y,
-            startTime: new Date()
-        });
-    }
+    this.setState({
+      origX: physics.marbles[id].x,
+      origY: physics.marbles[id].y,
+      startTime: new Date()
+    });
+  };
 
-    onDragMove = () => {
-        const { physics, id } = this.props;
-        const { x, y } = this.refs.circle.attrs;
+  onDragMove = () => {
+    const { physics, id } = this.props;
+    const { x, y } = this.refs.circle.attrs;
 
-        physics.marbles[id].x = x;
-        physics.marbles[id].y = y;
-    }
+    physics.marbles[id].x = x;
+    physics.marbles[id].y = y;
+  };
 
-    onDragEnd = () => {
-        const { physics } = this.props,
-              circle = this.refs.circle,
-              { origX, origY } = this.state,
-              { x, y } = circle.attrs;
+  onDragEnd = () => {
+    const { physics } = this.props,
+      circle = this.refs.circle,
+      { origX, origY } = this.state,
+      { x, y } = circle.attrs;
 
+    const delta_t = new Date() - this.state.startTime,
+      dist = (x - origX) ** 2 + (y - origY) ** 2,
+      v = Math.sqrt(dist) / (delta_t / 16); // distance per frame (= 16ms)
 
-        const delta_t = new Date() - this.state.startTime,
-              dist = (x - origX) ** 2 + (y - origY) ** 2,
-              v = Math.sqrt(dist)/(delta_t/16); // distance per frame (= 16ms)
+    physics.shoot(
+      {
+        x: x,
+        y: y,
+        vx: (x - origX) / (v / 3), // /3 is a speedup factor
+        vy: (y - origY) / (v / 3)
+      },
+      this.props.id
+    );
+  };
 
-        physics.shoot({
-           x: x,
-           y: y,
-           vx: (x - origX)/(v/3), // /3 is a speedup factor
-           vy: (y - origY)/(v/3)
-           }, this.props.id);
-    }
-
-    // ...
+  // ...
 }
 ```
 
@@ -316,21 +334,23 @@ The first is a `MarbleDefinitions` dictionary. We used it in `Marble`
 component’s render method. If you’re playing along, you should copy
 paste this. Too much typing :)
 
+{caption: “MarbleDefinitions dictionary”, line-numbers: false}
+
 ``` javascript
 // src/logic/Sprite.js
 
 const MarbleDefinitions = {
-    dino: { x: -222, y: -177, c: '#8664d5' },
-    redHeart: { x: -222, y: -299, c: '#e47178' },
-    sun: { x: -222, y: -420, c: '#5c96ac' },
+  dino: { x: -222, y: -177, c: "#8664d5" },
+  redHeart: { x: -222, y: -299, c: "#e47178" },
+  sun: { x: -222, y: -420, c: "#5c96ac" },
 
-    yellowHeart: { x: -400, y: -177, c: '#c8b405' },
-    mouse: { x: -400, y: -299, c: '#7d7e82' },
-    pumpkin: { x: -400, y: -420, c: '#fa9801' },
+  yellowHeart: { x: -400, y: -177, c: "#c8b405" },
+  mouse: { x: -400, y: -299, c: "#7d7e82" },
+  pumpkin: { x: -400, y: -420, c: "#fa9801" },
 
-    frog: { x: -576, y: -177, c: '#98b42b' },
-    moon: { x: -575, y: -299, c: '#b20717' },
-    bear: { x: -576, y: -421, c: '#a88534' }
+  frog: { x: -576, y: -177, c: "#98b42b" },
+  moon: { x: -575, y: -299, c: "#b20717" },
+  bear: { x: -576, y: -421, c: "#a88534" }
 };
 
 export { MarbleDefinitions };
@@ -345,33 +365,35 @@ All values painstakingly assembled by hand. You’re welcome. 😌
 The MobX store that loads our sprite into memory and helps us use it
 looks like this:
 
+{caption: “Sprite store”, line-numbers: false}
+
 ``` javascript
 // src/logic/Sprite.js
 
-import { observable, action, computed } from 'mobx';
-import MarbleSprite from '../monster-marbles-sprite-sheets.jpg';
+import { observable, action, computed } from "mobx";
+import MarbleSprite from "../monster-marbles-sprite-sheets.jpg";
 
 class Sprite {
-    @observable sprite = null;
+  @observable sprite = null;
 
-    @action loadSprite(callback = () => null) {
-        const sprite = new Image();
-        sprite.src = MarbleSprite;
+  @action loadSprite(callback = () => null) {
+    const sprite = new Image();
+    sprite.src = MarbleSprite;
 
-        sprite.onload = () => {
-            this.sprite = sprite;
+    sprite.onload = () => {
+      this.sprite = sprite;
 
-            callback();
-        };
-    }
+      callback();
+    };
+  }
 
-    @computed get marbleTypes() {
-        return Object.keys(MarbleDefinitions);
-    }
+  @computed get marbleTypes() {
+    return Object.keys(MarbleDefinitions);
+  }
 
-    @computed get marbleDefinitions() {
-        return MarbleDefinitions;
-    }
+  @computed get marbleDefinitions() {
+    return MarbleDefinitions;
+  }
 }
 
 export default new Sprite();

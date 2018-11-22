@@ -18,46 +18,46 @@ down.
 
 The new `Particles` component looks like this:
 
+{caption: “Sprite-based Particles component”, line-numbers: false}
+
 ``` javascript
 // src/components/Particles.jsx
 
-import React, { Component } from 'react';
-import { FastLayer } from 'react-konva';
+import React, { Component } from "react";
+import { FastLayer } from "react-konva";
 
 class Particles extends Component {
-    layerRef = React.createRef();
-    
-    componentDidMount() {
-        this.canvas = this.layerRef.current.canvas._canvas;
-        this.canvasContext = this.canvas.getContext('2d');
+  layerRef = React.createRef();
 
-        this.sprite = new Image();
-        this.sprite.src = 'http://i.imgur.com/m5l6lhr.png';
+  componentDidMount() {
+    this.canvas = this.layerRef.current.canvas._canvas;
+    this.canvasContext = this.canvas.getContext("2d");
+
+    this.sprite = new Image();
+    this.sprite.src = "http://i.imgur.com/m5l6lhr.png";
+  }
+
+  drawParticle(particle) {
+    let { x, y } = particle;
+
+    this.canvasContext.drawImage(this.sprite, 0, 0, 128, 128, x, y, 15, 15);
+  }
+
+  componentDidUpdate() {
+    let particles = this.props.particles;
+
+    console.time("drawing");
+    this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (let i = 0; i < particles.length; i++) {
+      this.drawParticle(particles[i]);
     }
+    console.timeEnd("drawing");
+  }
 
-    drawParticle(particle) {
-        let { x, y } = particle;
-
-        this.canvasContext.drawImage(this.sprite, 0, 0, 128, 128, x, y, 15, 15);
-    }
-
-    componentDidUpdate() {
-        let particles = this.props.particles;
-
-        console.time('drawing');
-        this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        for (let i = 0; i < particles.length; i++) {
-            this.drawParticle(particles[i]);
-        }
-        console.timeEnd('drawing');
-    }
-
-    render() {
-        return (
-            <FastLayer ref={this.layerRef} listening="false" />
-        );
-    }
+  render() {
+    return <FastLayer ref={this.layerRef} listening="false" />;
+  }
 }
 
 export default Particles;
@@ -66,6 +66,8 @@ export default Particles;
 40 lines of code is a lot all at once. Let’s walk through step by step.
 
 #### componentDidMount
+
+{caption: “componentDidMount method”, line-numbers: false}
 
 ``` javascript
 // src/components/Particles.jsx
@@ -117,6 +119,8 @@ Should our component unmount and re-mount, React will call
 
 #### drawParticle
 
+{caption: “drawParticle code”, line-numbers: false}
+
 ``` javascript
 // src/components/Particles.jsx
 
@@ -142,6 +146,8 @@ benchmark](https://jsperf.com/canvas-drawimage-vs-putimagedata/3) so you
 can see for yourself.
 
 #### componentDidUpdate
+
+{caption: “componentDidUpdate code”, line-numbers: false}
 
 ``` javascript
 // src/components/Particles.jsx
@@ -185,6 +191,8 @@ code to get from `time` to `timeEnd`. You can have as many of these
 timers running as you want as long as you give them different names.
 
 #### render
+
+{caption: “render code”, line-numbers: false}
 
 ``` javascript
 // src/components/Particles.jsx

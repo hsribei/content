@@ -5,8 +5,10 @@ Because decorators aren’t in the JavaScript spec, we have to tweak how
 we start our project. We can still use `create-react-app`, but there’s
 an additional step.
 
-You should start a new project like
-    this:
+You should start a new project like this:
+
+{caption: “Create the billiards game project”, line-numbers:
+    false}
 
     $ create-react-app billiards-game --scripts-version custom-react-scripts
 
@@ -21,6 +23,8 @@ enable decorators.
 
 We enable them in the `.env` file. Add this line:
 
+{caption: “Add to .env settings”, line-numbers: false}
+
     // billiards-game/.env
     // ...
     REACT_APP_DECORATORS=true
@@ -29,8 +33,10 @@ No installation necessary. I think `custom-react-scripts` uses the
 `transform-decorators-legacy` Babel plugin behind the scenes. It’s
 pre-installed, and we enable it with that `.env` change.
 
-Before we begin, you should install some other dependencies as
-    well:
+Before we begin, you should install some other dependencies as well:
+
+{caption: “Install libraries”, line-numbers:
+    false}
 
     $ npm install --save konva react-konva mobx mobx-react d3-timer d3-scale d3-quadtree
 
