@@ -67,8 +67,6 @@ export default Particles;
 
 #### componentDidMount
 
-{caption: “componentDidMount method”, line-numbers: false}
-
 ``` javascript
 // src/components/Particles.jsx
 
