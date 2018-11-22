@@ -55,50 +55,46 @@ Let’s walk through.
 
 #### initialPositions
 
-{caption: “initialPositions function”, line-numbers: false}
-
 ``` javascript
 // src/logic/Physics.js
 class Physics {
-  // ..
-  @computed get initialPositions() {
-    const { width, height, MarbleR } = this,
-      center = width / 2;
+        // ..
+    @computed get initialPositions() {
+        const { width, height, MarbleR } = this,
+              center = width/2;
 
-    const lines = 4,
-      maxY = 200;
+        const lines = 4,
+              maxY = 200;
 
-    let marbles = range(lines, 0, -1)
-      .map(y => {
-        if (y === lines)
-          return [{ x: center, y: maxY, vx: 0, vy: 0, r: this.MarbleR }];
+        let marbles = range(lines, 0, -1).map(y => {
+            if (y === lines) return [{ x: center, y: maxY,
+                                       vx: 0, vy: 0, r: this.MarbleR}];
 
-        const left = center - y * (MarbleR + 5),
-          right = center + y * (MarbleR + 5);
+            const left = center - y*(MarbleR+5),
+                  right = center + y*(MarbleR+5);
 
-        return range(left, right, MarbleR * 2 + 5).map(x => ({
-          x: x,
-          y: maxY - y * (MarbleR * 2 + 5),
-          vx: 0,
-          vy: 0,
-          r: this.MarbleR
-        }));
-      })
-      .reduce((acc, pos) => acc.concat(pos), []);
+            return range(left, right, MarbleR*2+5).map(x => ({
+                x: x,
+                y: maxY-y*(MarbleR*2+5),
+                vx: 0,
+                vy: 0,
+                r: this.MarbleR
+            }));
+        }).reduce((acc, pos) => acc.concat(pos), []);
 
-    marbles = [].concat(marbles, {
-      x: width / 2,
-      y: height - 150,
-      vx: 0,
-      vy: 0,
-      r: this.MarbleR
-    });
+        marbles = [].concat(marbles, {
+            x: width/2,
+            y: height-150,
+            vx: 0,
+            vy: 0,
+            r: this.MarbleR
+        });
 
-    marbles.forEach((m, i) => (marbles[i].id = i));
+        marbles.forEach((m, i) => marbles[i].id = i);
 
-    return marbles;
-  }
-  // ..
+        return marbles;
+    }
+    // ..
 }
 ```
 
