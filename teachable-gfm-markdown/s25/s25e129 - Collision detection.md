@@ -7,8 +7,6 @@ There’s also a video explaining how this works 👉 [Watch it on
 YouTube](https://www.youtube.com/watch?v=H84fmXjTElM). With hand-drawn
 sketches that explain the math, and I think that’s neat.
 
-{caption: “Full simulationStep function”, line-numbers: false}
-
 ``` javascript
 
 @action simulationStep() {
