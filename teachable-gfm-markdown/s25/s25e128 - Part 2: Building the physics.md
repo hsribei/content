@@ -126,29 +126,27 @@ our app. Positions in the array may change.
 
 #### shoot and startGameLoop
 
-{caption: “shoot and startGameLoop functions”, line-numbers: false}
-
 ``` javascript
 // src/logic/Physics.js
 class Physics {
-  // ...
+    // ...
 
-  @action startGameLoop() {
-    this.marbles = this.initialPositions;
+    @action startGameLoop() {
+        this.marbles = this.initialPositions;
 
-    this.timer = timer(() => this.simulationStep());
-  }
+        this.timer = timer(() => this.simulationStep());
+    }
 
-  // ...
+    // ...
 
-  @action shoot({ x, y, vx, vy }, i) {
-    const maxSpeed = 20;
+    @action shoot({ x, y, vx, vy }, i) {
+        const maxSpeed = 20;
 
-    this.marbles[i].x = x;
-    this.marbles[i].y = y;
-    this.marbles[i].vx = vx < maxSpeed ? vx : maxSpeed;
-    this.marbles[i].vy = vy < maxSpeed ? vy : maxSpeed;
-  }
+        this.marbles[i].x = x;
+        this.marbles[i].y = y;
+        this.marbles[i].vx = vx < maxSpeed ? vx : maxSpeed;
+        this.marbles[i].vy = vy < maxSpeed ? vy : maxSpeed;
+    }
 }
 ```
 
