@@ -117,8 +117,6 @@ Should our component unmount and re-mount, React will call
 
 #### drawParticle
 
-{caption: “drawParticle code”, line-numbers: false}
-
 ``` javascript
 // src/components/Particles.jsx
 
