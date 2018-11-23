@@ -29,9 +29,9 @@ At the very least, you know where to look to find a solution. This book
 is yours forever.
 
 I hope you have enjoyed this book. Tweet
-[Swizec](https://twitter.com/Swizec) and tell me what you’re building.
+[@Swizec](https://twitter.com/Swizec) and tell me what you’re building.
 :smile:
 
-Questions? Poke me on twitter. I’m [Swizec](https://twitter.com/Swizec).
-Or send me an email to hi@swizec.com. I read every email and reply on a
-best effort basis.
+Questions? Poke me on twitter. I’m
+[@Swizec](https://twitter.com/Swizec). Or send me an email to
+hi@swizec.com. I read every email and reply on a best effort basis.
