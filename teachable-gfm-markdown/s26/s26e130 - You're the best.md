@@ -34,4 +34,4 @@ I hope you have enjoyed this book. Tweet
 
 Questions? Poke me on twitter. I’m
 [@Swizec](https://twitter.com/Swizec). Or send me an email to
-hi@swizec.com. I read every email and reply on a best effort basis.
+<hi@swizec.com>. I read every email and reply on a best effort basis.
