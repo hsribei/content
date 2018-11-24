@@ -27,37 +27,39 @@ inside the `Controls` component. Better places exist from a “low-down
 components shouldn’t play with global state” perspective, but that’s
 okay.
 
-    // src/components/Controls/index.js
-    
-    class Controls extends React.Component {
-        // ..
-    
-        componentDidMount() {
-            let [year, USstate, jobTitle] = window.location.hash
-                .replace("#", "")
-                .split("-");
-    
-            if (year !== "*" && year) {
-                this.updateYearFilter(Number(year));
-            }
-            if (USstate !== "*" && USstate) {
-                this.updateUSstateFilter(USstate);
-            }
-            if (jobTitle !== "*" && jobTitle) {
-                this.updateJobTitleFilter(jobTitle);
-            }
+``` javascript
+// src/components/Controls/index.js
+
+class Controls extends React.Component {
+    // ..
+
+    componentDidMount() {
+        let [year, USstate, jobTitle] = window.location.hash
+            .replace("#", "")
+            .split("-");
+
+        if (year !== "*" && year) {
+            this.updateYearFilter(Number(year));
         }
-        
-        // ..
-        reportUpdateUpTheChain() {
-            window.location.hash = [
-                this.state.year || "*",
-                this.state.USstate || "*",
-                this.state.jobTitle || "*"
-            ].join("-");
-    
-            // ..
+        if (USstate !== "*" && USstate) {
+            this.updateUSstateFilter(USstate);
         }
+        if (jobTitle !== "*" && jobTitle) {
+            this.updateJobTitleFilter(jobTitle);
+        }
+    }
+    
+    // ..
+    reportUpdateUpTheChain() {
+        window.location.hash = [
+            this.state.year || "*",
+            this.state.USstate || "*",
+            this.state.jobTitle || "*"
+        ].join("-");
+
+        // ..
+    }
+```
 
 We use the `componentDidMount` lifecycle hook to read the URL when
 `Controls` first render on our page. Presumably when the page loads, but

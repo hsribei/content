@@ -4,24 +4,26 @@
 Last piece of the puzzle – the Toggle component. A button that turns on
 and off.
 
-    // src/components/Controls/Toggle.js
-    import React from "react";
-    
-    const Toggle = ({ label, name, value, onClick }) => {
-        let className = "btn btn-default";
-    
-        if (value) {
-            className += " btn-primary";
-        }
-    
-        return (
-            <button className={className} onClick={() => onClick(name, !value)}>
-                {label}
-            </button>
-        );
-    };
-    
-    export default Toggle;
+``` javascript
+// src/components/Controls/Toggle.js
+import React from "react";
+
+const Toggle = ({ label, name, value, onClick }) => {
+    let className = "btn btn-default";
+
+    if (value) {
+        className += " btn-primary";
+    }
+
+    return (
+        <button className={className} onClick={() => onClick(name, !value)}>
+            {label}
+        </button>
+    );
+};
+
+export default Toggle;
+```
 
 Import React to enable JSX and make a functional `Toggle` component.
 It’s fully controlled and takes event handlers as callbacks in props.

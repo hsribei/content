@@ -7,17 +7,19 @@ soon data loading starts to work.
 Start by importing our data loading method - `loadAllData` - and both D3
 and Lodash. We’ll need them later.
 
-    // src/App.js
-    import React from 'react';
-    // markua-start-insert
-    import * as d3 from 'd3';
-    import _ from 'lodash';
-    // markua-end-insert
-    
-    import Preloader from './components/Preloader';
-    // markua-start-insert
-    import { loadAllData } from './DataHandling';
-    // markua-end-insert
+``` javascript
+// src/App.js
+import React from 'react';
+// markua-start-insert
+import * as d3 from 'd3';
+import _ from 'lodash';
+// markua-end-insert
+
+import Preloader from './components/Preloader';
+// markua-start-insert
+import { loadAllData } from './DataHandling';
+// markua-end-insert
+```
 
 You already know about default imports. Importing with `{}` is how we
 import named exports. That lets us get multiple things from the same
@@ -25,19 +27,21 @@ file. You’ll see the export side in Step 2.
 
 Don’t worry about the missing `DataHandling` file. It’s coming soon.
 
-    // src/App.js
-    class App extends React.Component {
-        state = {
-            techSalaries: [],
-            // markua-start-insert
-            medianIncomes: [],
-                    countyNames: [],
-        };
-    
-        componentDidMount() {
-            loadAllData(data => this.setState(data));
-        }
-        // markua-end-insert
+``` javascript
+// src/App.js
+class App extends React.Component {
+    state = {
+        techSalaries: [],
+        // markua-start-insert
+        medianIncomes: [],
+                countyNames: [],
+    };
+
+    componentDidMount() {
+        loadAllData(data => this.setState(data));
+    }
+    // markua-end-insert
+```
 
 We initiate data loading inside the `componentDidMount` lifecycle hook.
 It fires when React first mounts our component into the DOM.
@@ -63,27 +67,29 @@ expect.
 Let’s change the `render` method to show a message when our data
 finishes loading.
 
-    // src/App.js
-        render() {
-         const { techSalaries } = this.state;
-            
-         if (techSalaries.length < 1) {
-             return (
-                 <Preloader />
-             );
-          }
-    
-        return (
-            // markua-start-delete
-            <div className="App">
-            // markua-end-delete
-            // markua-start-insert
-            <div className="App container">
-                <h1>Loaded {techSalaries.length} salaries</h1>
-            // markua-end-insert
-            </div>
-        );
-    }
+``` javascript
+// src/App.js
+    render() {
+     const { techSalaries } = this.state;
+        
+     if (techSalaries.length < 1) {
+         return (
+             <Preloader />
+         );
+      }
+
+    return (
+        // markua-start-delete
+        <div className="App">
+        // markua-end-delete
+        // markua-start-insert
+        <div className="App container">
+            <h1>Loaded {techSalaries.length} salaries</h1>
+        // markua-end-insert
+        </div>
+    );
+}
+```
 
 We added a `container` class to the main `<div>` and an `<h1>` tag that
 shows how many datapoints there are. You can use any valid JavaScript in

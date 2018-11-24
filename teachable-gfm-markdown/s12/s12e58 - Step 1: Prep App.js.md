@@ -4,20 +4,22 @@
 You know the drill, don’t you? Import some stuff, add it to the
 `render()` method in the `App` component.
 
-    // src/App.js
-    import _ from 'lodash';
-    
-    // markua-start-insert
-    import './style.css';
-    // markua-end-insert
-    
-    import Preloader from './components/Preloader';
-    import { loadAllData } from './DataHandling';
-    
-    import CountyMap from './components/CountyMap';
-    // markua-start-insert
-    import Histogram from './components/Histogram';
-    // markua-end-insert
+``` javascript
+// src/App.js
+import _ from 'lodash';
+
+// markua-start-insert
+import './style.css';
+// markua-end-insert
+
+import Preloader from './components/Preloader';
+import { loadAllData } from './DataHandling';
+
+import CountyMap from './components/CountyMap';
+// markua-start-insert
+import Histogram from './components/Histogram';
+// markua-end-insert
+```
 
 We import `style.css` and the `Histogram` component. That’s what I love
 about Webpack - you can import CSS in JavaScript. We got the setup with
@@ -35,37 +37,39 @@ dependency.
 
 After the imports, we can render our `Histogram` in the `App` component.
 
-    // src/App.js
+``` javascript
+// src/App.js
+// ...
+render() {
     // ...
-    render() {
-        // ...
-        return (
-            <div className="App container">
-                <h1>Loaded {this.state.techSalaries.length} salaries</h1>
-                <svg width="1100" height="500">
-                    <CountyMap usTopoJson={this.state.usTopoJson}
-                               USstateNames={this.state.USstateNames}
-                               values={countyValues}
-                               x={0}
-                               y={0}
-                               width={500}
-                               height={500}
-                               zoom={zoom} />
-                    // markua-start-insert
-                    <Histogram bins={10}
-                               width={500}
-                               height={500}
-                               x="500"
-                               y="10"
-                               data={filteredSalaries}
-                               axisMargin={83}
-                               bottomMargin={5}
-                               value={d => d.base_salary} />
-                    // markua-end-insert
-                </svg>
-            </div>
-        );
-    }
+    return (
+        <div className="App container">
+            <h1>Loaded {this.state.techSalaries.length} salaries</h1>
+            <svg width="1100" height="500">
+                <CountyMap usTopoJson={this.state.usTopoJson}
+                           USstateNames={this.state.USstateNames}
+                           values={countyValues}
+                           x={0}
+                           y={0}
+                           width={500}
+                           height={500}
+                           zoom={zoom} />
+                // markua-start-insert
+                <Histogram bins={10}
+                           width={500}
+                           height={500}
+                           x="500"
+                           y="10"
+                           data={filteredSalaries}
+                           axisMargin={83}
+                           bottomMargin={5}
+                           value={d => d.base_salary} />
+                // markua-end-insert
+            </svg>
+        </div>
+    );
+}
+```
 
 We render the `Histogram` component with a bunch of props. They specify
 the dimensions we want, positioning, and pass data to the component.

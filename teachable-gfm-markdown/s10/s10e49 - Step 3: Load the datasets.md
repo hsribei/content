@@ -3,18 +3,20 @@
 
 Now we can use D3 to load our data with fetch requests.
 
-    // src/DataHandling.js
-    export const loadAllData = (callback = _.noop) => {
-        Promise.all([
-            d3.json("data/us.json"),
-            d3.csv("data/us-county-names-normalized.csv", cleanCounty),
-            d3.csv("data/county-median-incomes.csv", cleanIncome),
-            d3.csv("data/h1bs-2012-2016-shortened.csv", cleanSalary),
-            d3.tsv("data/us-state-names.tsv", cleanUSStateName)
-        ]).then(([us, countyNames, medianIncomes, techSalaries, USstateNames]) => {
-    
-        });
-    };
+``` javascript
+// src/DataHandling.js
+export const loadAllData = (callback = _.noop) => {
+    Promise.all([
+        d3.json("data/us.json"),
+        d3.csv("data/us-county-names-normalized.csv", cleanCounty),
+        d3.csv("data/county-median-incomes.csv", cleanIncome),
+        d3.csv("data/h1bs-2012-2016-shortened.csv", cleanSalary),
+        d3.tsv("data/us-state-names.tsv", cleanUSStateName)
+    ]).then(([us, countyNames, medianIncomes, techSalaries, USstateNames]) => {
+
+    });
+};
+```
 
 Here you can see another ES6 trick: default argument values. If
 `callback` is undefined, we set it to `_.noop` - a function that does

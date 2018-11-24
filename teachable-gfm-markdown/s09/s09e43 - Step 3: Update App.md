@@ -4,37 +4,39 @@
 We use our new Preloader component in App – `src/App.js`. Let’s remove
 the `create-react-app` defaults and import our `Preloader` component.
 
-    // src/App.js
-    
-    import React from 'react';
+``` javascript
+// src/App.js
+
+import React from 'react';
+// markua-start-delete
+import logo from './logo.svg';
+import './App.css';
+// markua-end-delete
+
+// markua-start-insert
+import Preloader from './components/Preloader';
+// markua-end-insert
+
+class App extends React.Component {
     // markua-start-delete
-    import logo from './logo.svg';
-    import './App.css';
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to React</h2>
+        </div>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+      </div>
+    );
+  }
     // markua-end-delete
-    
-    // markua-start-insert
-    import Preloader from './components/Preloader';
-    // markua-end-insert
-    
-    class App extends React.Component {
-        // markua-start-delete
-      render() {
-        return (
-          <div className="App">
-            <div className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h2>Welcome to React</h2>
-            </div>
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-          </div>
-        );
-      }
-        // markua-end-delete
-    }
-    
-    export default App;
+}
+
+export default App;
+```
 
 We removed the logo and style imports, added an import for `Preloader`,
 and gutted the `App` class. It’s great for a default app, but we don’t
@@ -43,31 +45,33 @@ need that anymore.
 Let’s define a default `state` and a `render` method that uses our
 `Preloader` component when there’s no data.
 
-    // src/App.js
-    
-    class App extends React.Component {
-        // markua-start-insert
-        state = {
-            techSalaries: []
-        }
-    
-        render() {
-            const { techSalaries } = this.state;
-            
-            if (techSalaries.length < 1) {
-                return (
-                    <Preloader />
-                );
-            }
-    
+``` javascript
+// src/App.js
+
+class App extends React.Component {
+    // markua-start-insert
+    state = {
+        techSalaries: []
+    }
+
+    render() {
+        const { techSalaries } = this.state;
+        
+        if (techSalaries.length < 1) {
             return (
-                <div className="App">
-    
-                </div>
+                <Preloader />
             );
         }
-        // markua-end-insert
+
+        return (
+            <div className="App">
+
+            </div>
+        );
     }
+    // markua-end-insert
+}
+```
 
 Nowadays we can define properties directly in the class body without a
 constructor method. It’s not part of the official JavaScript standard

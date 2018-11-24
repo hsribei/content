@@ -10,35 +10,37 @@ team. We’re using global stylesheets because it’s the simplest.
 
 Create a new file `src/style.css` and add these 29 lines:
 
-    .histogram .bar rect {
-        fill: steelblue;
-        shape-rendering: crispEdges;
-    }
-    
-    .histogram .bar text {
-        fill: #fff;
-        font: 12px sans-serif;
-    }
-    
-    button {
-        margin-right: .5em;
-        margin-bottom: .3em !important;
-    }
-    
-    .row {
-        margin-top: 1em;
-    }
-    
-    .mean text {
-        font: 11px sans-serif;
-        fill: grey;
-    }
-    
-    .mean path {
-        stroke-dasharray: 3;
-        stroke: grey;
-        stroke-width: 1px;
-    }
+``` css
+.histogram .bar rect {
+    fill: steelblue;
+    shape-rendering: crispEdges;
+}
+
+.histogram .bar text {
+    fill: #fff;
+    font: 12px sans-serif;
+}
+
+button {
+    margin-right: .5em;
+    margin-bottom: .3em !important;
+}
+
+.row {
+    margin-top: 1em;
+}
+
+.mean text {
+    font: 11px sans-serif;
+    fill: grey;
+}
+
+.mean path {
+    stroke-dasharray: 3;
+    stroke: grey;
+    stroke-width: 1px;
+}
+```
 
 We won’t go into details about the CSS here. Many better books have been
 written about it.

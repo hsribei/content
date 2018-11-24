@@ -6,43 +6,45 @@ We begin with the title because it shows up first.
 We start with an import in `App.js` and add it to the render method. You
 know the drill :smile:
 
-    // src/App.js
-    import CountyMap from './components/CountyMap';
-    import Histogram from './components/Histogram';
-    // markua-start-insert
-    import { Title } from './components/Meta';
-    // markua-end-insert
-    
-    class App extends Component {
-        state = {
-            techSalaries: [],
-            countyNames: [],
-            medianIncomes: [],
-            // markua-start-insert
-            filteredBy: {
-                USstate: '*',
-                year: '*',
-                jobTitle: '*'
-            }
-            // markua-end-insert
+``` javascript
+// src/App.js
+import CountyMap from './components/CountyMap';
+import Histogram from './components/Histogram';
+// markua-start-insert
+import { Title } from './components/Meta';
+// markua-end-insert
+
+class App extends Component {
+    state = {
+        techSalaries: [],
+        countyNames: [],
+        medianIncomes: [],
+        // markua-start-insert
+        filteredBy: {
+            USstate: '*',
+            year: '*',
+            jobTitle: '*'
         }
-    
-        // ...
-    
-        render() {
-                const { filteredBy } = this.state;
-            // ..
-            return (
-                <div className="App container">
-                    // markua-start-insert
-                    <Title data={filteredSalaries}
-                           filteredBy={filteredBy} />
-                    // markua-end-insert
-                    // ...
-                </div>
-            )
-        }
+        // markua-end-insert
     }
+
+    // ...
+
+    render() {
+            const { filteredBy } = this.state;
+        // ..
+        return (
+            <div className="App container">
+                // markua-start-insert
+                <Title data={filteredSalaries}
+                       filteredBy={filteredBy} />
+                // markua-end-insert
+                // ...
+            </div>
+        )
+    }
+}
+```
 
 Ok, I lied. We did a lot more than just imports and adding to render.
 
@@ -65,9 +67,11 @@ showing meta data. Grouping them in a directory makes sense.
 We make a `components/Meta` directory and add an `index.js`. It makes
 importing easier.
 
-    // src/components/Meta/index.js
-    export { default as Title } from './Title'
-    export { default as Description } from './Description';
+``` javascript
+// src/components/Meta/index.js
+export { default as Title } from './Title'
+export { default as Description } from './Description';
+```
 
 We have to name our `Title` and `Description` re-exports because you
 can’t have two default exports.
@@ -96,31 +100,33 @@ either/or.
 
 We start with imports, a stub, and a default export.
 
-    // src/components/Meta/Title.js
-    import React, { Component } from 'react';
-    import { scaleLinear } from 'd3-scale';
-    import { mean as d3mean, extent as d3extent } from 'd3-array';
-    
-    import USStatesMap from './USStatesMap';
-    
-    class Title extends Component {
-        get yearsFragment() {
-        }
-    
-        get USstateFragment() {
-        }
-    
-        get jobTitleFragment() {
-        }
-    
-        get format() {
-        }
-    
-        render() {
-        }
+``` javascript
+// src/components/Meta/Title.js
+import React, { Component } from 'react';
+import { scaleLinear } from 'd3-scale';
+import { mean as d3mean, extent as d3extent } from 'd3-array';
+
+import USStatesMap from './USStatesMap';
+
+class Title extends Component {
+    get yearsFragment() {
     }
-    
-    export default Title;
+
+    get USstateFragment() {
+    }
+
+    get jobTitleFragment() {
+    }
+
+    get format() {
+    }
+
+    render() {
+    }
+}
+
+export default Title;
+```
 
 We import only what we need from D3’s `d3-scale` and `d3-array`
 packages. I consider this best practice until you’re importing so much
@@ -140,27 +146,29 @@ without arguments, and you use it without `()`. It’s neat.
 We can implement `yearsFragment`, `USstateFragment`, and `format` in one
 code sample. They’re short.
 
-    // src/components/Meta/Title.js
-    class Title extends Component {
-        get yearsFragment() {
-            const year = this.props.filteredBy.year;
-    
-            return year === '*' ? "" : `in ${year}`;
-        }
-    
-        getteFragment() {
-            const USstate = this.props.filteredBy.USstate;
-    
-            return USstate === '*' ? "" : USStatesMap[USstate.toUpperCase()];
-        }
-    
-        // ...
-    
-        get format() {
-            return scaleLinear()
-                     .domain(d3extent(this.props.data, d => d.base_salary))
-                     .tickFormat();
-        }
+``` javascript
+// src/components/Meta/Title.js
+class Title extends Component {
+    get yearsFragment() {
+        const year = this.props.filteredBy.year;
+
+        return year === '*' ? "" : `in ${year}`;
+    }
+
+    getteFragment() {
+        const USstate = this.props.filteredBy.USstate;
+
+        return USstate === '*' ? "" : USStatesMap[USstate.toUpperCase()];
+    }
+
+    // ...
+
+    get format() {
+        return scaleLinear()
+                 .domain(d3extent(this.props.data, d => d.base_salary))
+                 .tickFormat();
+    }
+```
 
 In both `yearsFragment` and `USstateFragment`, we get the appropriate
 value from Title’s `filteredBy` prop, then return a string with the
@@ -209,6 +217,8 @@ class Title extends Component {
     // ...
 }
 ```
+
+{caption: “Title.jobTitleFragment”}
 
 ``` 
 
@@ -345,34 +355,36 @@ We put all this together in the `render` method. A conditional decides
 which of the two situations we’re in, and we return an `<h2>` tag with
 the right text.
 
-    // src/components/Meta/Title.js
-    class Title extends Component {
-        // ...
-        render() {
-            const mean = this.format(d3mean(this.props.data, d => d.base_salary));
-    
-            let title;
-    
-            if (this.yearsFragment && this.USstateFragment) {
-                title = (
-                    <h2>
-                        In {this.USstateFragment}, {this.jobTitleFragment}
-                        ${mean}/year {this.yearsFragment}
-                    </h2>
-                );
-            }else{
-                title = (
-                    <h2>
-                        {this.jobTitleFragment} ${mean}/year
-                        {this.USstateFragment ? `in ${this.stateFragment}` : ''}
-                        {this.yearsFragment}
-                    </h2>
-                );
-            }
-    
-            return title;
+``` javascript
+// src/components/Meta/Title.js
+class Title extends Component {
+    // ...
+    render() {
+        const mean = this.format(d3mean(this.props.data, d => d.base_salary));
+
+        let title;
+
+        if (this.yearsFragment && this.USstateFragment) {
+            title = (
+                <h2>
+                    In {this.USstateFragment}, {this.jobTitleFragment}
+                    ${mean}/year {this.yearsFragment}
+                </h2>
+            );
+        }else{
+            title = (
+                <h2>
+                    {this.jobTitleFragment} ${mean}/year
+                    {this.USstateFragment ? `in ${this.stateFragment}` : ''}
+                    {this.yearsFragment}
+                </h2>
+            );
         }
+
+        return title;
     }
+}
+```
 
 Calculate the mean value using `d3.mean` with a value accessor, turn it
 into a pretty number with `this.format`, then use one of two string

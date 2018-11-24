@@ -17,42 +17,44 @@ the render method.
 
 Let’s see if we can do it in a single code block :smile:
 
-    // src/App.js
-    import Histogram from './components/Histogram';
-    import { Title, Description, GraphDescription } from './components/Meta';
-    // markua-start-insert
-    import MedianLine from './components/MedianLine';
-    // markua-end-insert
-    
-    class App extends Component {
+``` javascript
+// src/App.js
+import Histogram from './components/Histogram';
+import { Title, Description, GraphDescription } from './components/Meta';
+// markua-start-insert
+import MedianLine from './components/MedianLine';
+// markua-end-insert
+
+class App extends Component {
+    // ...
+    render() {
         // ...
-        render() {
+        let zoom = null,
+            // markua-start-insert
+            medianHousehold = this.state.medianIncomesByUSState['US'][0]
+                                  .medianIncome;
+            // markua-end-insert
+
+        return (
             // ...
-            let zoom = null,
+            <svg width="1100" height="500">
+                <CountyMap // ... />
+                <Histogram // ... />
                 // markua-start-insert
-                medianHousehold = this.state.medianIncomesByUSState['US'][0]
-                                      .medianIncome;
+                <MedianLine data={filteredSalaries}
+                            x={500}
+                            y={10}
+                            width={600}
+                            height={500}
+                            bottomMargin={5}
+                            median={medianHousehold}
+                            value={d => d.base_salary} />
                 // markua-end-insert
-    
-            return (
-                // ...
-                <svg width="1100" height="500">
-                    <CountyMap // ... />
-                    <Histogram // ... />
-                    // markua-start-insert
-                    <MedianLine data={filteredSalaries}
-                                x={500}
-                                y={10}
-                                width={600}
-                                height={500}
-                                bottomMargin={5}
-                                median={medianHousehold}
-                                value={d => d.base_salary} />
-                    // markua-end-insert
-                </svg>
-            )
-        }
+            </svg>
+        )
     }
+}
+```
 
 You probably don’t remember `medianIncomesByUSState` anymore. We set it
 up way back when [tying datasets together](#tie-datasets-together). It
@@ -71,25 +73,27 @@ The `MedianLine` component looks similar to what you’ve seen so far.
 Some imports, a `constructor` that sets up D3 objects, an `updateD3`
 method that keeps them in sync, and a `render` method that outputs SVG.
 
-    // src/components/MedianLine.js
+``` javascript
+// src/components/MedianLine.js
+
+import React from "react";
+import * as d3 from "d3";
+
+const MedianLine = ({
+    data,
+    value,
+    width,
+    height,
+    x,
+    y,
+    bottomMargin,
+    median
+}) => {
     
-    import React from "react";
-    import * as d3 from "d3";
-    
-    const MedianLine = ({
-        data,
-        value,
-        width,
-        height,
-        x,
-        y,
-        bottomMargin,
-        median
-    }) => {
-        
-    };
-    
-    export default MedianLine;
+};
+
+export default MedianLine;
+```
 
 We have some imports, a functional `MedianLine` component that takes our
 props, and an export. It should cause an error because it’s not
@@ -97,36 +101,38 @@ returning anything.
 
 Everything we need to render the line, fits into this function.
 
-    // src/components/MedianLine.js
-    
-    const MedianLine = ({
-        // ...
-    }) => {
-        const yScale = d3
-                .scaleLinear()
-                .domain([0, d3.max(data, value)])
-                .range([height - y - bottomMargin, 0]),
-            line = d3.line()([[0, 5], [width, 5]]);
-    
-        const medianValue = median || d3.median(data, value);
-    
-        const translate = `translate(${x}, ${yScale(medianValue)})`,
-            medianLabel = `Median Household: $${yScale.tickFormat()(median)}`;
-    
-        return (
-            <g className="mean" transform={translate}>
-                <text
-                    x={width - 5}
-                    y="0"
-                    textAnchor="end"
-                    style={{ background: "purple" }}
-                >
-                    {medianLabel}
-                </text>
-                <path d={line} />
-            </g>
-        );
-    };
+``` javascript
+// src/components/MedianLine.js
+
+const MedianLine = ({
+    // ...
+}) => {
+    const yScale = d3
+            .scaleLinear()
+            .domain([0, d3.max(data, value)])
+            .range([height - y - bottomMargin, 0]),
+        line = d3.line()([[0, 5], [width, 5]]);
+
+    const medianValue = median || d3.median(data, value);
+
+    const translate = `translate(${x}, ${yScale(medianValue)})`,
+        medianLabel = `Median Household: $${yScale.tickFormat()(median)}`;
+
+    return (
+        <g className="mean" transform={translate}>
+            <text
+                x={width - 5}
+                y="0"
+                textAnchor="end"
+                style={{ background: "purple" }}
+            >
+                {medianLabel}
+            </text>
+            <path d={line} />
+        </g>
+    );
+};
+```
 
 We start with a scale for vertical positioning – `yScale`. It’s linear,
 takes values from `0` to `max`, and translates them to pixels less some

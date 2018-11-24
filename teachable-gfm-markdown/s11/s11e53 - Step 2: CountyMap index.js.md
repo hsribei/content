@@ -4,9 +4,11 @@
 We make `index.js` for just reason: to make imports and debugging
 easier. I learned this lesson the hard way so you don’t have to.
 
-    // src/components/CountyMap/index.js
-    
-    export { default } from './CountyMap';
+``` javascript
+// src/components/CountyMap/index.js
+
+export { default } from './CountyMap';
+```
 
 Re-export the default import from `./CountyMap.js`. That’s it.
 

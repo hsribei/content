@@ -8,42 +8,44 @@ have to add them to the `Controls` component.
 We’ll start with the `render` method, then handle the parts I said
 earlier would look repetitive.
 
-    // src/components/Controls/index.js
-    class Controls extends Component {
-        // ...
-        render() {
-            const { data } = this.props;
-    
-            const years = new Set(data.map(d => d.submit_date.getFullYear())),
-                  // markua-start-insert
-                  jobTitles = new Set(data.map(d => d.clean_job_title)),
-                  USstates = new Set(data.map(d => d.USstate));
-                  // markua-end-insert
-    
-            return (
-                <div>
-                    <ControlRow data={data}
-                                toggleNames={Array.from(years.values())}
-                                picked={this.state.year}
-                                updateDataFilter={this.updateYearFilter}
-                                />
-    
-                // markua-start-insert
-                    <ControlRow data={data}
-                                toggleNames={Array.from(jobTitles.values())}
-                                picked={this.state.jobTitle}
-                                updateDataFilter={this.updateJobTitleFilter} />
-    
-                    <ControlRow data={data}
-                                toggleNames={Array.from(USstates.values())}
-                                picked={this.state.USstate}
-                                updateDataFilter={this.updateUSstateFilter}
-                                capitalize="true" />
-                    // markua-end-insert
-                </div>
-            )
-        }
+``` javascript
+// src/components/Controls/index.js
+class Controls extends Component {
+    // ...
+    render() {
+        const { data } = this.props;
+
+        const years = new Set(data.map(d => d.submit_date.getFullYear())),
+              // markua-start-insert
+              jobTitles = new Set(data.map(d => d.clean_job_title)),
+              USstates = new Set(data.map(d => d.USstate));
+              // markua-end-insert
+
+        return (
+            <div>
+                <ControlRow data={data}
+                            toggleNames={Array.from(years.values())}
+                            picked={this.state.year}
+                            updateDataFilter={this.updateYearFilter}
+                            />
+
+            // markua-start-insert
+                <ControlRow data={data}
+                            toggleNames={Array.from(jobTitles.values())}
+                            picked={this.state.jobTitle}
+                            updateDataFilter={this.updateJobTitleFilter} />
+
+                <ControlRow data={data}
+                            toggleNames={Array.from(USstates.values())}
+                            picked={this.state.USstate}
+                            updateDataFilter={this.updateUSstateFilter}
+                            capitalize="true" />
+                // markua-end-insert
+            </div>
+        )
     }
+}
+```
 
 Ok, this part is plenty repetitive, too.
 
@@ -56,56 +58,58 @@ capitalized.
 The implementations of those `updateDataFilter` callbacks follow the
 same pattern as `updateYearFilter`.
 
-    // src/components/Controls/index.js
+``` javascript
+// src/components/Controls/index.js
+
+class Controls extends React.Component {
+    state = {
+        yearFilter: () => true,
+        jobTitleFilter: () => true,
+        USstateFilter: () => true,
+        year: "*",
+        USstate: "*",
+        jobTitle: "*"
+    };
+
+    updateJobTitleFilter = (title, reset) => {
+        let filter = d => d.clean_job_title === title;
+
+        if (reset || !title) {
+            filter = () => true;
+            title = "*";
+        }
+
+        this.setState(
+            {
+                jobTitleFilter: filter,
+                jobTitle: title
+            },
+            () => this.reportUpdateUpTheChain()
+        );
+    };
+
+    updateUSstateFilter = (USstate, reset) => {
+        let filter = d => d.USstate === USstate;
+
+        if (reset || !USstate) {
+            filter = () => true;
+            USstate = "*";
+        }
+
+        this.setState(
+            {
+                USstateFilter: filter,
+                USstate: USstate
+            },
+            () => this.reportUpdateUpTheChain()
+        );
+    };
     
-    class Controls extends React.Component {
-        state = {
-            yearFilter: () => true,
-            jobTitleFilter: () => true,
-            USstateFilter: () => true,
-            year: "*",
-            USstate: "*",
-            jobTitle: "*"
-        };
-    
-        updateJobTitleFilter = (title, reset) => {
-            let filter = d => d.clean_job_title === title;
-    
-            if (reset || !title) {
-                filter = () => true;
-                title = "*";
-            }
-    
-            this.setState(
-                {
-                    jobTitleFilter: filter,
-                    jobTitle: title
-                },
-                () => this.reportUpdateUpTheChain()
-            );
-        };
-    
-        updateUSstateFilter = (USstate, reset) => {
-            let filter = d => d.USstate === USstate;
-    
-            if (reset || !USstate) {
-                filter = () => true;
-                USstate = "*";
-            }
-    
-            this.setState(
-                {
-                    USstateFilter: filter,
-                    USstate: USstate
-                },
-                () => this.reportUpdateUpTheChain()
-            );
-        };
-        
-        // ..
-    }
-    
-    export default Controls;
+    // ..
+}
+
+export default Controls;
+```
 
 Yes, they’re basically the same as `updateYearFilter`. The only
 difference is a changed `filter` function and using different keys in
@@ -117,24 +121,26 @@ code harder to read.
 Our last step is to add these new keys to the `reportUpdateUpTheChain`
 function.
 
-    // src/components/Controls/index.js
-    
-    class Controls extends React.Component {
-        reportUpdateUpTheChain() {
-            this.props.updateDataFilter(
-                (filters => {
-                    return d =>
-                        filters.yearFilter(d) &&
-                        filters.jobTitleFilter(d) &&
-                        filters.USstateFilter(d);
-                })(this.state),
-                {
-                    USstate: this.state.USstate,
-                    year: this.state.year,
-                    jobTitle: this.state.jobTitle
-                }
-            );
-        }
+``` javascript
+// src/components/Controls/index.js
+
+class Controls extends React.Component {
+    reportUpdateUpTheChain() {
+        this.props.updateDataFilter(
+            (filters => {
+                return d =>
+                    filters.yearFilter(d) &&
+                    filters.jobTitleFilter(d) &&
+                    filters.USstateFilter(d);
+            })(this.state),
+            {
+                USstate: this.state.USstate,
+                year: this.state.year,
+                jobTitle: this.state.jobTitle
+            }
+        );
+    }
+```
 
 We add them to the filter condition with `&&` and expand the
 `filteredBy` argument.

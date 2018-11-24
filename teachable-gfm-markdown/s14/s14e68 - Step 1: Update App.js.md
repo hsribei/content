@@ -8,40 +8,42 @@ render. We have to import `Controls`, set up filtering, update the map’s
 The white rectangle makes it so the zoomed-in map doesn’t cover up the
 histogram. I’ll explain when we get there.
 
-    // src/App.js
-    import MedianLine from './components/MedianLine';
-    
-    // markua-start-insert
-    import Controls from './components/Controls';
-    // markua-end-insert
-    
-    class App extends React.Component {
-        state = {
-            // ...
-            medianIncomes: [],
-            // markua-start-insert
-            salariesFilter: () => true,
-            // markua-end-insert
-            filteredBy: {
-                // ...
-            }
-        }
-    
+``` javascript
+// src/App.js
+import MedianLine from './components/MedianLine';
+
+// markua-start-insert
+import Controls from './components/Controls';
+// markua-end-insert
+
+class App extends React.Component {
+    state = {
         // ...
-    
+        medianIncomes: [],
         // markua-start-insert
-        updateDataFilter = (filter, filteredBy) => {
-            this.setState({
-                salariesFilter: filter,
-                filteredBy: filteredBy
-            });
-        }
+        salariesFilter: () => true,
         // markua-end-insert
-    
-        render() {
+        filteredBy: {
             // ...
         }
     }
+
+    // ...
+
+    // markua-start-insert
+    updateDataFilter = (filter, filteredBy) => {
+        this.setState({
+            salariesFilter: filter,
+            filteredBy: filteredBy
+        });
+    }
+    // markua-end-insert
+
+    render() {
+        // ...
+    }
+}
+```
 
 We import the `Controls` component and add a default `salariesFilter`
 function to `this.state`. The `updateDataFilter` method passes the
@@ -50,35 +52,37 @@ We’ll use it as a callback in `Controls`.
 
 The rest of filtering setup happens in the render method.
 
-    // src/App.js
-    class App extends React.Component {
+``` javascript
+// src/App.js
+class App extends React.Component {
+    // ...
+
+    render() {
         // ...
-    
-        render() {
-            // ...
-            // markua-start-delete
-            const filteredSalaries = techSalaries
-            // markua-end-delete
-            // markua-start-insert
-            const filteredSalaries = techSalaries
-                                         .filter(this.state.salariesFilter)
-            // markua-end-insert
-    
-            // ...
-    
-            let zoom = null,
-                medianHousehold = // ...
-            // markua-start-insert
-            if (filteredBy.USstate !== '*') {
-                zoom = this.state.filteredBy.USstate;
-                medianHousehold = d3.mean(medianIncomesByUSState[zoom],
-                                          d => d.medianIncome);
-            }
-            // markua-end-insert
-    
-            // ...
+        // markua-start-delete
+        const filteredSalaries = techSalaries
+        // markua-end-delete
+        // markua-start-insert
+        const filteredSalaries = techSalaries
+                                     .filter(this.state.salariesFilter)
+        // markua-end-insert
+
+        // ...
+
+        let zoom = null,
+            medianHousehold = // ...
+        // markua-start-insert
+        if (filteredBy.USstate !== '*') {
+            zoom = this.state.filteredBy.USstate;
+            medianHousehold = d3.mean(medianIncomesByUSState[zoom],
+                                      d => d.medianIncome);
         }
+        // markua-end-insert
+
+        // ...
     }
+}
+```
 
 We add a `.filter` call to `filteredSalaries`, which uses our
 `salariesFilter` method to throw out anything that doesn’t fit. Then we
@@ -100,37 +104,39 @@ rectangle](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-ve
 See, it goes under the histogram. Let’s fix that and add the `Controls`
 render while we’re at it.
 
-    // src/App.js
-    class App extends React.Component {
+``` javascript
+// src/App.js
+class App extends React.Component {
+    // ...
+
+    render() {
         // ...
-    
-        render() {
-            // ...
-    
-            return (
-                <div //...>
-                    <svg //...>
-                        <CountyMap //... />
-    
-                        // markua-start-insert
-                        <rect x="500" y="0"
-                              width="600"
-                              height="500"
-                              style={{fill: 'white'}} />
-                        // markua-end-insert
-    
-                        <Histogram //... />
-                        <MedianLine //.. />
-                    </svg>
-    
+
+        return (
+            <div //...>
+                <svg //...>
+                    <CountyMap //... />
+
                     // markua-start-insert
-                    <Controls data={techSalaries}
-                              updateDataFilter={this.updateDataFilter} />
+                    <rect x="500" y="0"
+                          width="600"
+                          height="500"
+                          style={{fill: 'white'}} />
                     // markua-end-insert
-                </div>
-            )
-        }
+
+                    <Histogram //... />
+                    <MedianLine //.. />
+                </svg>
+
+                // markua-start-insert
+                <Controls data={techSalaries}
+                          updateDataFilter={this.updateDataFilter} />
+                // markua-end-insert
+            </div>
+        )
     }
+}
+```
 
 Rectangle, `500` to the right, `0` from top, `600` wide and `500` tall,
 with a white background. Gives the histogram an opaque background, so it

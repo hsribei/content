@@ -15,7 +15,9 @@ Let’s start with the basics: a `Histogram` directory and an `index.js`
 file. Keeps our code organized and imports easy. I like to use
 directories for components made of multiple files.
 
-    export { default } from "./Histogram";
+``` javascript
+export { default } from "./Histogram";
+```
 
 Import and re-export the histogram componenet from `./Histogram`. This
 way you can keep your histogram code in a file called Histogram and
@@ -27,40 +29,42 @@ directory’s internal structure.
 Now we need the `Histogram.js` file. Start with some imports, a default
 export, and a stubbed out `Histogram` class.
 
-    // src/components/Histogram/Histogram.js
-    import React from "react";
-    import * as d3 from "d3";
-    
-    class Histogram extends React.Component {
-        state = {
-            histogram: d3.histogram(),
-            widthScale: d3.scaleLinear(),
-            yScale: d3.scaleLinear()
+``` javascript
+// src/components/Histogram/Histogram.js
+import React from "react";
+import * as d3 from "d3";
+
+class Histogram extends React.Component {
+    state = {
+        histogram: d3.histogram(),
+        widthScale: d3.scaleLinear(),
+        yScale: d3.scaleLinear()
+    };
+
+    static getDerivedStateFromProps(props, state) {
+        let { histogram, widthScale, yScale } = state;
+
+        return {
+            ...state,
+            histogram,
+            widthScale,
+            yScale
         };
-    
-        static getDerivedStateFromProps(props, state) {
-            let { histogram, widthScale, yScale } = state;
-    
-            return {
-                ...state,
-                histogram,
-                widthScale,
-                yScale
-            };
-        }
-    
-        makeBar = bar => {
-            const { yScale, widthScale } = this.state;
-    
-        };
-    
-        render() {
-            const { histogram, yScale } = this.state,
-                { x, y, data, axisMargin } = this.props;
-                
-            return null;
-        }
     }
+
+    makeBar = bar => {
+        const { yScale, widthScale } = this.state;
+
+    };
+
+    render() {
+        const { histogram, yScale } = this.state,
+            { x, y, data, axisMargin } = this.props;
+            
+        return null;
+    }
+}
+```
 
 We import React and D3, and set up `Histogram`.
 
@@ -70,30 +74,32 @@ help us render each bar, and `render` returning null for now.
 
 ### getDerivedStateFromProps
 
-    // src/components/Histogram/Histogram.js
-        static getDerivedStateFromProps(props, state) {
-            let { histogram, widthScale, yScale } = state;
-    
-            histogram.thresholds(props.bins).value(props.value);
-    
-            const bars = histogram(props.data),
-                counts = bars.map(d => d.length);
-    
-            widthScale
-                .domain([d3.min(counts), d3.max(counts)])
-                .range([0, props.width - props.axisMargin]);
-    
+``` javascript
+// src/components/Histogram/Histogram.js
+    static getDerivedStateFromProps(props, state) {
+        let { histogram, widthScale, yScale } = state;
+
+        histogram.thresholds(props.bins).value(props.value);
+
+        const bars = histogram(props.data),
+            counts = bars.map(d => d.length);
+
+        widthScale
+            .domain([d3.min(counts), d3.max(counts)])
+            .range([0, props.width - props.axisMargin]);
+
+        yScale
+            .domain([0, d3.max(bars, d => d.x1)])
+            .range([props.height - props.y - props.bottomMargin, 0]);
+
+        return {
+            ...state,
+            histogram,
+            widthScale,
             yScale
-                .domain([0, d3.max(bars, d => d.x1)])
-                .range([props.height - props.y - props.bottomMargin, 0]);
-    
-            return {
-                ...state,
-                histogram,
-                widthScale,
-                yScale
-            };
-        }
+        };
+    }
+```
 
 First, we configure the `histogram` generator. `thresholds` specify how
 many bins we want and `value` specifies the value accessor function. We
@@ -128,24 +134,26 @@ Now let’s render this puppy.
 
 ### render
 
-    // src/components/Histogram/Histogram.js
-    class Histogram extends React.Component {
-        // ...
-        render() {
-            const { histogram, yScale } = this.state,
-                { x, y, data, axisMargin } = this.props;
-    
-            const bars = histogram(data);
-    
-            return (
-                <g className="histogram" transform={`translate(${x}, ${y})`}>
-                    <g className="bars">
-                        {bars.map(this.makeBar))}
-                    </g>
+``` javascript
+// src/components/Histogram/Histogram.js
+class Histogram extends React.Component {
+    // ...
+    render() {
+        const { histogram, yScale } = this.state,
+            { x, y, data, axisMargin } = this.props;
+
+        const bars = histogram(data);
+
+        return (
+            <g className="histogram" transform={`translate(${x}, ${y})`}>
+                <g className="bars">
+                    {bars.map(this.makeBar))}
                 </g>
-            );
-        }
+            </g>
+        );
     }
+}
+```
 
 We take everything we need out of `state` and `props` with
 destructuring, call `histogram()` on our data to get a list of bars, and
@@ -166,26 +174,28 @@ render, done.
 returns a `HistogramBar` component. We use it to make our declarative
 loop more readable.
 
-    // src/components/Histogram/Histogram.js
-    class Histogram extends React.Component {
-        // ...
-        makeBar = bar => {
-            const { yScale, widthScale } = this.state;
-    
-            let percent = (bar.length / this.props.data.length) * 100;
-    
-            let props = {
-                percent: percent,
-                x: this.props.axisMargin,
-                y: yScale(bar.x1),
-                width: widthScale(bar.length),
-                height: yScale(bar.x0) - yScale(bar.x1),
-                key: "histogram-bar-" + bar.x0
-            };
-    
-            return <HistogramBar {...props} />;
+``` javascript
+// src/components/Histogram/Histogram.js
+class Histogram extends React.Component {
+    // ...
+    makeBar = bar => {
+        const { yScale, widthScale } = this.state;
+
+        let percent = (bar.length / this.props.data.length) * 100;
+
+        let props = {
+            percent: percent,
+            x: this.props.axisMargin,
+            y: yScale(bar.x1),
+            width: widthScale(bar.length),
+            height: yScale(bar.x0) - yScale(bar.x1),
+            key: "histogram-bar-" + bar.x0
         };
-    }
+
+        return <HistogramBar {...props} />;
+    };
+}
+```
 
 See, we’re calculating `props` and feeding them into `HistogramBar`.
 Putting it in a separate function just makes the `.map` construct in

@@ -10,34 +10,36 @@ And they’re easy to set up. No excuse.
 We’re going to poke around `public/index.html` for the first time. Add
 titles, Twitter cards, Facebook Open Graph things, and so on.
 
-    <!-- public/index.html -->
-    <head>
-        <!-- //... -->
+``` html
+<!-- public/index.html -->
+<head>
+    <!-- //... -->
+    // markua-start-insert
+    <title>How much does an H1B in tech pay?</title>
+
+    <link rel="canonical"
+          href="https://swizec.github.io/react-d3js-step-by-step/" />
+    // markua-end-insert
+</head>
+<body>
+    <!-- //... -->
+    <div id="root">
         // markua-start-insert
-        <title>How much does an H1B in tech pay?</title>
-    
-        <link rel="canonical"
-              href="https://swizec.github.io/react-d3js-step-by-step/" />
+         <h2>The average H1B in tech pays $86,164/year</h2>
+
+     <p class="lead">
+             Since 2012 the US tech industry has sponsored 176,075
+             H1B work visas. Most of them paid <b>$60,660 to $111,668</b>
+             per year (1 standard deviation). <span>The best city for
+             an H1B is <b>Kirkland, WA</b> with an average individual
+             salary <b>$39,465 above local household median</b>.
+             Median household salary is a good proxy for cost of
+             living in an area.</span>
+         </p>
         // markua-end-insert
-    </head>
-    <body>
-        <!-- //... -->
-        <div id="root">
-            // markua-start-insert
-             <h2>The average H1B in tech pays $86,164/year</h2>
-    
-         <p class="lead">
-                 Since 2012 the US tech industry has sponsored 176,075
-                 H1B work visas. Most of them paid <b>$60,660 to $111,668</b>
-                 per year (1 standard deviation). <span>The best city for
-                 an H1B is <b>Kirkland, WA</b> with an average individual
-                 salary <b>$39,465 above local household median</b>.
-                 Median household salary is a good proxy for cost of
-                 living in an area.</span>
-             </p>
-            // markua-end-insert
-        </div>
-    </body>
+    </div>
+</body>
+```
 
 We add a `<title>` and a `canonical` URL. Titles configure what shows up
 in browser tabs, and the canonical URL is there to tell search engines
@@ -60,37 +62,39 @@ OpenGraph](https://developers.facebook.com/docs/sharing/webmasters) meta
 tags. I think most other websites just rely on these since most people
 use them. They go in the `<head>` of our HTML.
 
-    <!-- public/index.html -->
-    <head>
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title"
-              content="The average H1B in tech pays $86,164/year" />
-        <meta property="og:description"
-              content="Since 2012 the US tech industry has sponsored
-    176,075 H1B work visas. With an average individual salary
-    up to $39,465 above median household income." />
-        <meta property="og:url"
-              content="https://swizec.github.io/react-d3js-step-by-step" />
-        <meta property="og:site_name" content="A geek with a hat" />
-        <meta property="article:publisher"
-              content="https://facebook.com/swizecpage" />
-        <meta property="fb:admins" content="624156314" />
-        <meta property="og:image"
-              content="https://swizec.github.io/react-d3js-step-by-step/thumbnail.png" />
-    
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description"
-              content="Since 2012 the US tech industry has sponsored
-    176,075 H1B work visas. With an average individual salary
-    up to $39,465 above median household income." />
-        <meta name="twitter:title"
-              content="The average H1B in tech pays $86,164/year" />
-        <meta name="twitter:site" content="@swizec" />
-        <meta name="twitter:image"
-              content="https://swizec.github.io/react-d3js-step-by-step/thumbnail.png" />
-        <meta name="twitter:creator" content="@swizec" />
-    </head>
+``` javascript
+<!-- public/index.html -->
+<head>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title"
+          content="The average H1B in tech pays $86,164/year" />
+    <meta property="og:description"
+          content="Since 2012 the US tech industry has sponsored
+176,075 H1B work visas. With an average individual salary
+up to $39,465 above median household income." />
+    <meta property="og:url"
+          content="https://swizec.github.io/react-d3js-step-by-step" />
+    <meta property="og:site_name" content="A geek with a hat" />
+    <meta property="article:publisher"
+          content="https://facebook.com/swizecpage" />
+    <meta property="fb:admins" content="624156314" />
+    <meta property="og:image"
+          content="https://swizec.github.io/react-d3js-step-by-step/thumbnail.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description"
+          content="Since 2012 the US tech industry has sponsored
+176,075 H1B work visas. With an average individual salary
+up to $39,465 above median household income." />
+    <meta name="twitter:title"
+          content="The average H1B in tech pays $86,164/year" />
+    <meta name="twitter:site" content="@swizec" />
+    <meta name="twitter:image"
+          content="https://swizec.github.io/react-d3js-step-by-step/thumbnail.png" />
+    <meta name="twitter:creator" content="@swizec" />
+</head>
+```
 
 Much of this code is repetitive. Both Twitter and Facebook want the same
 info, but they’re stubborn and won’t read each other’s formats. You can

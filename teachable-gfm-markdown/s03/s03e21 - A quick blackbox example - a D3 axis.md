@@ -11,15 +11,17 @@ get *just right*.
 D3’s axis generator takes a scale and some configuration to render an
 axis for us. The code looks like this:
 
-    const scale = d3.scaleLinear()
-            .domain([0, 10])
-            .range([0, 200]);
-    const axis = d3.axisBottom(scale);
-    
-    d3.select('svg')
-      .append('g')
-      .attr('transform', 'translate(10, 30)')
-      .call(axis);
+``` javascript
+const scale = d3.scaleLinear()
+        .domain([0, 10])
+        .range([0, 200]);
+const axis = d3.axisBottom(scale);
+
+d3.select('svg')
+  .append('g')
+  .attr('transform', 'translate(10, 30)')
+  .call(axis);
+```
 
 You can [try it out on
 CodeSandbox](https://codesandbox.io/s/v6ovkow8q3).

@@ -18,44 +18,46 @@ main `Controls` component goes in your `index.js` file.
 
 ### Stub Controls
 
-    // src/components/Controls/index.js
-    import React from "react";
-    
-    import ControlRow from "./ControlRow";
-    
-    class Controls extends React.Component {
-        state = {
-            yearFilter: () => true,
-            year: "*"
-        };
-    
-        componentDidMount() {
-    
-        }
-    
-        updateYearFilter = (year, reset) => {
-            let filter = d => d.submit_date.getFullYear() === year;
-    
-            if (reset || !year) {
-                filter = () => true;
-                year = "*";
-            }
-    
-            this.setState(
-                {
-                    yearFilter: filter,
-                    year: year
-                },
-                () => this.reportUpdateUpTheChain()
-            );
-        };
-        
-        render() {
-            const { data } = this.props;
-        }
+``` javascript
+// src/components/Controls/index.js
+import React from "react";
+
+import ControlRow from "./ControlRow";
+
+class Controls extends React.Component {
+    state = {
+        yearFilter: () => true,
+        year: "*"
+    };
+
+    componentDidMount() {
+
     }
+
+    updateYearFilter = (year, reset) => {
+        let filter = d => d.submit_date.getFullYear() === year;
+
+        if (reset || !year) {
+            filter = () => true;
+            year = "*";
+        }
+
+        this.setState(
+            {
+                yearFilter: filter,
+                year: year
+            },
+            () => this.reportUpdateUpTheChain()
+        );
+    };
     
-    export default Controls;
+    render() {
+        const { data } = this.props;
+    }
+}
+
+export default Controls;
+```
 
 We start with some imports and a `Controls` class-based component.
 Inside, we define default `state` with an always-true `yearFilter` and
@@ -69,26 +71,28 @@ management library.
 
 ### Filter logic
 
-    // src/components/Controls/index.js
-    class Controls extends React.Component {
-        // ...
-        updateYearFilter = (year, reset) => {
-            let filter = d => d.submit_date.getFullYear() === year;
-    
-            if (reset || !year) {
-                filter = () => true;
-                year = "*";
-            }
-    
-            this.setState(
-                {
-                    yearFilter: filter,
-                    year: year
-                },
-                () => this.reportUpdateUpTheChain()
-            );
-        };
-    }
+``` javascript
+// src/components/Controls/index.js
+class Controls extends React.Component {
+    // ...
+    updateYearFilter = (year, reset) => {
+        let filter = d => d.submit_date.getFullYear() === year;
+
+        if (reset || !year) {
+            filter = () => true;
+            year = "*";
+        }
+
+        this.setState(
+            {
+                yearFilter: filter,
+                year: year
+            },
+            () => this.reportUpdateUpTheChain()
+        );
+    };
+}
+```
 
 `updateYearFilter` is a callback we pass into `ControlRow`. When a user
 picks a year, their action triggers this function.
@@ -145,26 +149,28 @@ sense.
 Great, we have the filter logic. Let’s render those rows of controls
 we’ve been talking about.
 
-    // src/components/Controls/index.js
-    class Controls extends React.Component {
-        // ...
-        render() {
-            const { data } = this.props;
-    
-            const years = new Set(data.map(d => d.submit_date.getFullYear()));
-    
-            return (
-                <div>
-                    <ControlRow
-                        data={data}
-                        toggleNames={Array.from(years.values())}
-                        picked={this.state.year}
-                        updateDataFilter={this.updateYearFilter}
-                    />
-                </div>
-            );
-        }
+``` javascript
+// src/components/Controls/index.js
+class Controls extends React.Component {
+    // ...
+    render() {
+        const { data } = this.props;
+
+        const years = new Set(data.map(d => d.submit_date.getFullYear()));
+
+        return (
+            <div>
+                <ControlRow
+                    data={data}
+                    toggleNames={Array.from(years.values())}
+                    picked={this.state.year}
+                    updateDataFilter={this.updateYearFilter}
+                />
+            </div>
+        );
     }
+}
+```
 
 Once more, this is generalized code used for a single example: the
 `year` filter.

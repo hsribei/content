@@ -34,18 +34,22 @@ principles that HTML uses.
 That makes React’s rendering engine particularly suited for SVG. Our
 100x200 rectangle from before looks like this as a React component:
 
-    const Rectangle = () => (
-        <rect width="100" height="200" x="50" y="20" />
-    );
+``` javascript
+const Rectangle = () => (
+    <rect width="100" height="200" x="50" y="20" />
+);
+```
 
 To use this rectangle component in a picture, you’d use a component like
 this:
 
-    const Picture = () => (
-        <svg width="800" height="600">
-            <Rectangle />
-        </svg>
-    );
+``` javascript
+const Picture = () => (
+    <svg width="800" height="600">
+        <Rectangle />
+    </svg>
+);
+```
 
 Sure looks like tons of work for a static rectangle. But look closely\!
 Even if you know nothing about React and JSX, you can look at that code
@@ -53,14 +57,16 @@ and see that it’s a `Picture` of a `Rectangle`.
 
 Compare that to a pure D3 approach:
 
-    d3.select("svg")
-      .attr("width", 800)
-      .attr("height", 600)
-      .append("rect")
-      .attr("width", 100)
-      .attr("height", 200)
-      .attr("x", 50)
-      .attr("y", 20);
+``` javascript
+d3.select("svg")
+  .attr("width", 800)
+  .attr("height", 600)
+  .append("rect")
+  .attr("width", 100)
+  .attr("height", 200)
+  .attr("x", 50)
+  .attr("y", 20);
+```
 
 It’s elegant, it’s declarative, and it looks like function call soup. It
 doesn’t scream *“Rectangle in an SVG”* to as much as the React version
@@ -73,9 +79,11 @@ attributes for `width`, `height`, `x`, and `y`.
 
 Those 8 lines of code create HTML that looks like this:
 
-    <svg width="800" height="600">
-        <rect width="100" height="200" x="50" y="20" />
-    </svg>
+``` javascript
+<svg width="800" height="600">
+    <rect width="100" height="200" x="50" y="20" />
+</svg>
+```
 
 Would’ve been easier to just write the HTML, right? Yes, for static
 images, you’re better off using Photoshop or Sketch then exporting to

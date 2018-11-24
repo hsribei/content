@@ -10,13 +10,15 @@ surprised how little code it takes.
 
 Start with the imports: React, D3, lodash, topojson, County component.
 
-    // src/components/CountyMap/CountyMap.js
-    import React, { Component } from 'react';
-    import * as d3 from 'd3';
-    import * as topojson from 'topojson';
-    import _ from 'lodash';
-    
-    import County from './County';
+``` javascript
+// src/components/CountyMap/CountyMap.js
+import React, { Component } from 'react';
+import * as d3 from 'd3';
+import * as topojson from 'topojson';
+import _ from 'lodash';
+
+import County from './County';
+```
 
 Out of these, we haven’t built `County` yet, and you haven’t seen
 `topojson` before.
@@ -34,33 +36,35 @@ Maybe it’s a case of [competing standards](https://xkcd.com/927/).
 
 We stub out the `CountyMap` component then fill it in with logic.
 
-    // src/components/CountyMap/CountyMap.js
-    class CountyMap extends Component {
-        constructor(props) {
-            super(props);
-    
-            this.state = {
-            }
-        }
-    
-        static getDerivedStateFromProps(props, state) {
-    
-        }
-    
-        render() {
-            const { usTopoJson } = this.props;
-            
-            if (!usTopoJson) {
-                return null;
-            }else{
-                return (
-    
-                );
-            }
+``` javascript
+// src/components/CountyMap/CountyMap.js
+class CountyMap extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
         }
     }
-    
-    export default CountyMap;
+
+    static getDerivedStateFromProps(props, state) {
+
+    }
+
+    render() {
+        const { usTopoJson } = this.props;
+        
+        if (!usTopoJson) {
+            return null;
+        }else{
+            return (
+
+            );
+        }
+    }
+}
+
+export default CountyMap;
+```
 
 We’ll set up default D3 state in `constructor` and keep it up to date
 with `getDerivedStateFromProps`.
@@ -68,19 +72,21 @@ with `getDerivedStateFromProps`.
 We need three D3 objects to build a choropleth map: a geographical
 projection, a path generator, and a quantize scale for colors.
 
-    // src/components/CountyMap/CountyMap.js
-    class CountyMap extends React.Component {
-        constructor(props) {
-            super(props);
-    
-            const projection = d3.geoAlbersUsa().scale(1280);
-    
-            this.state = {
-                geoPath: d3.geoPath().projection(projection),
-                quantize: d3.scaleQuantize().range(d3.range(9)),
-                projection
-            };
-        }
+``` javascript
+// src/components/CountyMap/CountyMap.js
+class CountyMap extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const projection = d3.geoAlbersUsa().scale(1280);
+
+        this.state = {
+            geoPath: d3.geoPath().projection(projection),
+            quantize: d3.scaleQuantize().range(d3.range(9)),
+            projection
+        };
+    }
+```
 
 You might remember geographical projections from high school. They map a
 sphere to a flat surface. We use `geoAlbersUsa` because it’s made
@@ -110,7 +116,7 @@ Keeping our geo path and quantize scale up to date is simple, but we’ll
 make it harder by adding a zoom feature. It won’t work until we build
 the filtering, but hey, we’ll already have it by then\! :D
 
-``` 
+``` javascript
         // src/components/CountyMap/CountyMap.js
     static getDerivedStateFromProps(props, state) {
         let { projection, quantize, geoPath } = state;
@@ -192,7 +198,7 @@ principles.
 After all that hard work, the `render` method is a breeze. We prep our
 data then loop through it and render a `County` element for each entry.
 
-``` 
+``` javascript
     render() {
         const { geoPath, quantize } = this.state,
             { usTopoJson, values, zoom } = this.props;

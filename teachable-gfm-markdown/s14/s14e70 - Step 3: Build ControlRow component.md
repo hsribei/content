@@ -6,25 +6,27 @@ ensures only one at a time is selected.
 
 We’ll start with a stub and go from there.
 
-    // src/components/Controls/ControlRow.js
-    import React from "react";
-    
-    import Toggle from "./Toggle";
-    
-    class ControlRow extends React.Component {
-        makePick = (picked, newState) => {
-     
-        };
-    
-        _addToggle(name) {
-        }
-    
-        render() {
-            const { toggleNames } = this.props;
-        }
+``` javascript
+// src/components/Controls/ControlRow.js
+import React from "react";
+
+import Toggle from "./Toggle";
+
+class ControlRow extends React.Component {
+    makePick = (picked, newState) => {
+ 
+    };
+
+    _addToggle(name) {
     }
-    
-    export default ControlRow;
+
+    render() {
+        const { toggleNames } = this.props;
+    }
+}
+
+export default ControlRow;
+```
 
 We start with imports, big surprise, then make a stub with 3 methods.
 Can you guess what they are?
@@ -35,52 +37,56 @@ Can you guess what they are?
 
 <!-- end list -->
 
-    // src/components/Controls/ControlRow.js
-    
-    class ControlRow extends React.Component {
-        makePick = (picked, newState) => {
-            // if newState is false, we want to reset
-            this.props.updateDataFilter(picked, !newState);
-        };
+``` javascript
+// src/components/Controls/ControlRow.js
+
+class ControlRow extends React.Component {
+    makePick = (picked, newState) => {
+        // if newState is false, we want to reset
+        this.props.updateDataFilter(picked, !newState);
+    };
+```
 
 `makePick` calls the data filter update and passes in the new value and
 whether we want to unselect. Pretty simple right?
 
-    // src/components/Controls/ControlRow.js
-    class ControlRow extends React.Component {
-        // ...
-    
-        _addToggle(name) {
-            let key = `toggle-${name}`,
-                label = name;
-    
-            if (this.props.capitalize) {
-                label = label.toUpperCase();
-            }
-    
-            return (
-                <Toggle
-                    label={label}
-                    name={name}
-                    key={key}
-                    value={this.props.picked === name}
-                    onClick={this.makePick}
-                />
-            );
+``` javascript
+// src/components/Controls/ControlRow.js
+class ControlRow extends React.Component {
+    // ...
+
+    _addToggle(name) {
+        let key = `toggle-${name}`,
+            label = name;
+
+        if (this.props.capitalize) {
+            label = label.toUpperCase();
         }
-    
-        render() {
-            const { toggleNames } = this.props;
-    
-            return (
-                <div className="row">
-                    <div className="col-md-12">
-                        {toggleNames.map(name => this._addToggle(name))}
-                    </div>
-                </div>
-            );
-        }
+
+        return (
+            <Toggle
+                label={label}
+                name={name}
+                key={key}
+                value={this.props.picked === name}
+                onClick={this.makePick}
+            />
+        );
     }
+
+    render() {
+        const { toggleNames } = this.props;
+
+        return (
+            <div className="row">
+                <div className="col-md-12">
+                    {toggleNames.map(name => this._addToggle(name))}
+                </div>
+            </div>
+        );
+    }
+}
+```
 
 Rendering comes in two functions: `_addToggle`, which is a helper, and
 `render`, which is the main render.

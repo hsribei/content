@@ -11,27 +11,29 @@ copy those concepts into the real project.
 We start with the D3blackbox higher order component. Same as before,
 except we put it in `src/components`.
 
-    import React from "react";
-    
-    export default function D3blackbox(D3render) {
-        return class Blackbox extends React.Component {
-            anchorRef = React.createRef();
-    
-            componentDidMount() {
-                D3render.call(this);
-            }
-            componentDidUpdate() {
-                D3render.call(this);
-            }
-    
-            render() {
-                const { x, y } = this.props;
-                return (
-                    <g transform={`translate(${x}, ${y})`} ref={this.anchorRef} />
-                );
-            }
-        };
-    }
+``` javascript
+import React from "react";
+
+export default function D3blackbox(D3render) {
+    return class Blackbox extends React.Component {
+        anchorRef = React.createRef();
+
+        componentDidMount() {
+            D3render.call(this);
+        }
+        componentDidUpdate() {
+            D3render.call(this);
+        }
+
+        render() {
+            const { x, y } = this.props;
+            return (
+                <g transform={`translate(${x}, ${y})`} ref={this.anchorRef} />
+            );
+        }
+    };
+}
+```
 
 Take a `D3render` function, call it on `componentDidMount` and
 `componentDidUpdate`, and render a positioned anchor element for
@@ -42,20 +44,22 @@ Take a `D3render` function, call it on `componentDidMount` and
 With `D3blackbox`, we can reduce the `Axis` component to a wrapped
 function. We’re implementing the `D3render` method.
 
-    import * as d3 from "d3";
-    import D3blackbox from "../D3blackbox";
-    
-    const Axis = D3blackbox(function() {
-        const axis = d3
-            .axisLeft()
-            .tickFormat(d => `${d3.format(".2s")(d)}`)
-            .scale(this.props.scale)
-            .ticks(this.props.data.length);
-    
-        d3.select(this.anchorRef.current).call(axis);
-    });
-    
-    export default Axis;
+``` javascript
+import * as d3 from "d3";
+import D3blackbox from "../D3blackbox";
+
+const Axis = D3blackbox(function() {
+    const axis = d3
+        .axisLeft()
+        .tickFormat(d => `${d3.format(".2s")(d)}`)
+        .scale(this.props.scale)
+        .ticks(this.props.data.length);
+
+    d3.select(this.anchorRef.current).call(axis);
+});
+
+export default Axis;
+```
 
 We use D3’s `axisLeft` generator, configure its `tickFormat`, pass in a
 `scale` from our props, and specify how many `ticks` we want. To render,
@@ -79,37 +83,39 @@ two step process:
 
 <!-- end list -->
 
-    // src/components/Histogram/Histogram.js
-    import React, { Component } from 'react';
-    import * as d3 from 'd3';
-    
-    // markua-start-insert
-    import Axis from './Axis';
-    // markua-end-insert
-    
+``` javascript
+// src/components/Histogram/Histogram.js
+import React, { Component } from 'react';
+import * as d3 from 'd3';
+
+// markua-start-insert
+import Axis from './Axis';
+// markua-end-insert
+
+// ...
+class Histogram extends Component {
     // ...
-    class Histogram extends Component {
-        // ...
-        render() {
-            const { histogram, yScale } = this.state,
-                { x, y, data, axisMargin } = this.props;
-                
-            const bars = histogram(data);
-    
-            return (
-                <g className="histogram" transform={translate}>
-                    <g className="bars">
-                        {bars.map(this.makeBar)}
-                    </g>
-                    // markua-start-insert
-                    <Axis x={axisMargin-3}
-                          y={0}
-                          data={bars}
-                          scale={yScale} />
-                    // markua-end-insert
+    render() {
+        const { histogram, yScale } = this.state,
+            { x, y, data, axisMargin } = this.props;
+            
+        const bars = histogram(data);
+
+        return (
+            <g className="histogram" transform={translate}>
+                <g className="bars">
+                    {bars.map(this.makeBar)}
                 </g>
-            );
-        }
+                // markua-start-insert
+                <Axis x={axisMargin-3}
+                      y={0}
+                      data={bars}
+                      scale={yScale} />
+                // markua-end-insert
+            </g>
+        );
+    }
+```
 
 We import our `Axis` and add it to the `render` method with some props.
 It takes an `x` and `y` coordinate, the `data`, and a `scale`.

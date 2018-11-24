@@ -5,26 +5,28 @@ Now let’s say we want to use that same axis code but as a React
 component. The simplest way is to use a blackbox component approach like
 this:
 
-    class Axis extends Component {
-        gRef = React.createRef();
-            
-        componentDidMount() { this.d3render() }
-        componentDidUpdate() { this.d3render() }
-    
-        d3render() {
-            const scale = d3.scaleLinear()
-                          .domain([0, 10])
-                          .range([0, 200]);
-            const axis = d3.axisBottom(scale);
-    
-            d3.select(this.gRef)
-              .call(axis);  
-        }
-    
-        render() {
-            return <g transform="translate(10, 30)" ref={this.gRef} />
-        }
+``` javascript
+class Axis extends Component {
+    gRef = React.createRef();
+        
+    componentDidMount() { this.d3render() }
+    componentDidUpdate() { this.d3render() }
+
+    d3render() {
+        const scale = d3.scaleLinear()
+                      .domain([0, 10])
+                      .range([0, 200]);
+        const axis = d3.axisBottom(scale);
+
+        d3.select(this.gRef)
+          .call(axis);  
     }
+
+    render() {
+        return <g transform="translate(10, 30)" ref={this.gRef} />
+    }
+}
+```
 
 So much code\! Worth it for the other benefits of using React in your
 dataviz. You’ll see :)

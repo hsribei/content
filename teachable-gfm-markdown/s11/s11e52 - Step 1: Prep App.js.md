@@ -4,13 +4,15 @@
 You might guess the pattern already: add an import, add a helper method
 or two, update `render`.
 
-    // src/App.js
-    import Preloader from './components/Preloader';
-    import { loadAllData } from './DataHandling';
-    
-    // markua-start-insert
-    import CountyMap from './components/CountyMap';
-    // markua-end-insert
+``` javascript
+// src/App.js
+import Preloader from './components/Preloader';
+import { loadAllData } from './DataHandling';
+
+// markua-start-insert
+import CountyMap from './components/CountyMap';
+// markua-end-insert
+```
 
 That imports the `CountyMap` component from `components/CountyMap/`.
 Your browser will show an error overlay about some file or another until
@@ -20,7 +22,7 @@ In the `App` class itself, we add a `countyValue` method. It takes a
 county entry and a map of tech salaries, and it returns the delta
 between median household income and a single tech salary.
 
-``` 
+``` javascript
     // src/App.js
     countyValue(county, techSalariesMap) {
         const medianHousehold = this.state.medianIncomes[county.id],
@@ -55,48 +57,50 @@ In the `render` method, we’ll:
 
 <!-- end list -->
 
-    // src/App.js
-    render() {
-        // markua-start-insert
-        const { countyNames, usTopoJson, techSalaries, } = this.state;
-        // markua-end-insert
-            
-        if (techSalaries.length < 1) {
-            return (
-                <Preloader />
-            );
-        }
-    
-        // markua-start-insert
-        const filteredSalaries = techSalaries,
-              filteredSalariesMap = _.groupBy(filteredSalaries, 'countyID'),
-              countyValues = countyNames.map(
-                  county => this.countyValue(county, filteredSalariesMap)
-              ).filter(d => !_.isNull(d));
-    
-        let zoom = null;
-        // markua-end-insert
-    
-            return (
-              <div className="App container">
-                // markua-start-delete
-                <h1>Loaded {techSalaries.length} salaries</h1>
-                // markua-end-delete
-                // markua-start-insert
-                <svg width="1100" height="500">
-                    <CountyMap usTopoJson={usTopoJson}
-                               USstateNames={USstateNames}
-                               values={countyValues}
-                               x={0}
-                               y={0}
-                               width={500}
-                               height={500}
-                               zoom={zoom} />
-                </svg>
-                // markua-end-insert
-              </div>
-            );
+``` javascript
+// src/App.js
+render() {
+    // markua-start-insert
+    const { countyNames, usTopoJson, techSalaries, } = this.state;
+    // markua-end-insert
+        
+    if (techSalaries.length < 1) {
+        return (
+            <Preloader />
+        );
     }
+
+    // markua-start-insert
+    const filteredSalaries = techSalaries,
+          filteredSalariesMap = _.groupBy(filteredSalaries, 'countyID'),
+          countyValues = countyNames.map(
+              county => this.countyValue(county, filteredSalariesMap)
+          ).filter(d => !_.isNull(d));
+
+    let zoom = null;
+    // markua-end-insert
+
+        return (
+          <div className="App container">
+            // markua-start-delete
+            <h1>Loaded {techSalaries.length} salaries</h1>
+            // markua-end-delete
+            // markua-start-insert
+            <svg width="1100" height="500">
+                <CountyMap usTopoJson={usTopoJson}
+                           USstateNames={USstateNames}
+                           values={countyValues}
+                           x={0}
+                           y={0}
+                           width={500}
+                           height={500}
+                           zoom={zoom} />
+            </svg>
+            // markua-end-insert
+          </div>
+        );
+}
+```
 
 We call our dataset `filteredTechSalaries` because we’re going to add
 filtering in the [subchapter about adding user

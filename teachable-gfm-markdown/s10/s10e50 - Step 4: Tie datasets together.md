@@ -10,30 +10,32 @@ To tie them together and prepare a dictionary for `setState` back in the
 `App` component, we need to add some logic. We’re building a dictionary
 of county household incomes and removing any empty salaries.
 
-    // src/DataHandling.js
-    ]).then(([us, countyNames, medianIncomes, techSalaries, USstateNames]) => {
-        let medianIncomesMap = {};
-    
-        medianIncomes.filter(d => _.find(countyNames,
-                                         {name: d['countyName']}))
-                     .forEach((d) => {
-                         d['countyID'] = _.find(countyNames,
-                                                {name: d['countyName']}).id;
-                         medianIncomesMap[d.countyID] = d;
-                     });
-    
-        techSalaries = techSalaries.filter(d => !_.isNull(d));
-    
-        callback({
-            usTopoJson: us,
-            countyNames: countyNames,
-            medianIncomes: medianIncomesMap,
-            medianIncomesByCounty: _.groupBy(medianIncomes, 'countyName'),
-            medianIncomesByUSState: _.groupBy(medianIncomes, 'USstate'),
-            techSalaries: techSalaries,
-            USstateNames: USstateNames
-        });
+``` javascript
+// src/DataHandling.js
+]).then(([us, countyNames, medianIncomes, techSalaries, USstateNames]) => {
+    let medianIncomesMap = {};
+
+    medianIncomes.filter(d => _.find(countyNames,
+                                     {name: d['countyName']}))
+                 .forEach((d) => {
+                     d['countyID'] = _.find(countyNames,
+                                            {name: d['countyName']}).id;
+                     medianIncomesMap[d.countyID] = d;
+                 });
+
+    techSalaries = techSalaries.filter(d => !_.isNull(d));
+
+    callback({
+        usTopoJson: us,
+        countyNames: countyNames,
+        medianIncomes: medianIncomesMap,
+        medianIncomesByCounty: _.groupBy(medianIncomes, 'countyName'),
+        medianIncomesByUSState: _.groupBy(medianIncomes, 'USstate'),
+        techSalaries: techSalaries,
+        USstateNames: USstateNames
     });
+});
+```
 
 Building the income map looks weird because of indentation, but it’s not
 that bad. We `filter` the `medianIncomes` array to discard any incomes
