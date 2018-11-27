@@ -3,8 +3,8 @@
 
 > React.js components for modular charting and data visualization
 
-[Victory.js
-logo](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/victoryjs.gif)\](http://formidable.com/open-source/victory/)
+[![Victory.js
+logo](https://raw.githubusercontent.com/hsribei/react-d3js-es6-ebook/teachable-only/manuscript/resources/images/2018/victoryjs.jpg)](http://formidable.com/open-source/victory/)
 
 Victory offers low level components for basic charting and reimplements
 a lot of D3’s API. Great when you need to create basic charts without a

@@ -3,8 +3,8 @@
 
 > A composable charting library built on React components
 
-[Recharts
-homepage](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/recharts.png)
+[![Recharts
+homepage](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/recharts.png)](http://recharts.org/)
 
 Recharts is like a more colorful Victory. A pile of charting components,
 some customization, loves animating everything by default.

@@ -4,8 +4,8 @@
 > nivo provides a rich set of dataviz components, built on top of the
 > awesome d3 and Reactjs libraries.
 
-[Nivo
-homepage](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/nivo.gif)
+[![Nivo
+homepage](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/nivo.gif)](https://nivo.rocks/)
 
 Nivo is another attempt to give you a set of basic charting components.
 Comes with great interactive documentation, support for Canvas and API
