@@ -19,7 +19,12 @@ let shapes = d3.scaleOrdinal()
     .range(['red', 'orange', ...)
 ```
 
-[Play with scales on CodeSandbox](https://codesandbox.io/s/r0rw72z75o)
+[Play with scales on
+CodeSandbox](https://codesandbox.io/s/r0rw72z75o)
+
+<iframe src="https://codesandbox.io/embed/r0rw72z75o?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 Once you have this scale, you can use it to translate from shapes to
 colors. `shapes('red triangle')` returns `'red'` for example.

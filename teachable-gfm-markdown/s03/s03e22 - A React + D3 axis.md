@@ -54,7 +54,12 @@ decides to render our component.
 
 That wasn’t so bad, was it?
 
-[Try it out on Codesandbox](https://codesandbox.io/s/3xy2jr1y5m).
+[Try it out on
+Codesandbox](https://codesandbox.io/s/3xy2jr1y5m).
+
+<iframe src="https://codesandbox.io/embed/3xy2jr1y5m?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 You can make the axis more useful by getting positioning, scale, and
 orientation from props. We’ll do that in our big project.
@@ -66,3 +71,7 @@ some carefully placed props.
 
 Here’s my solution, if you get stuck 👉
 <https://codesandbox.io/s/5ywlj6jn4l>
+
+<iframe src="https://codesandbox.io/embed/5ywlj6jn4l?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>

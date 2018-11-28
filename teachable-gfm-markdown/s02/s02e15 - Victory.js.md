@@ -11,7 +11,12 @@ a lot of D3’s API. Great when you need to create basic charts without a
 lot of customization. Supports React Native.
 
 Here’s what it takes to implement a Barchart using Victory.js. [You can
-try it on CodeSandbox](https://codesandbox.io/s/3v3q013x36)
+try it on
+CodeSandbox](https://codesandbox.io/s/3v3q013x36)
+
+<iframe src="https://codesandbox.io/embed/3v3q013x36?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 ``` javascript
 const data = [

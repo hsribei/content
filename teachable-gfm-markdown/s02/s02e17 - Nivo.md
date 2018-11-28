@@ -12,7 +12,12 @@ Comes with great interactive documentation, support for Canvas and API
 rendering. Plenty of basic customization.
 
 Here’s what it takes to implement a Barchart using Nivo. [You can try it
-on CodeSandbox](https://codesandbox.io/s/n1wwkvq24)
+on
+CodeSandbox](https://codesandbox.io/s/n1wwkvq24)
+
+<iframe src="https://codesandbox.io/embed/n1wwkvq24?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 ``` javascript
 const data = [

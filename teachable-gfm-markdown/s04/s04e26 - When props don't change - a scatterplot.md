@@ -19,7 +19,12 @@ done 👌
 ### An unchanging scatterplot
 
 We’re building a scatterplot of random data. You can see the [final
-solution on CodeSandbox](https://codesandbox.io/s/1zlp4jv494)
+solution on
+CodeSandbox](https://codesandbox.io/s/1zlp4jv494)
+
+<iframe src="https://codesandbox.io/embed/1zlp4jv494?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 Here’s the approach 👇
 
@@ -187,6 +192,10 @@ scales to define `cx` and `cy` attributes on a `<circle>` element.
 
 You can reuse axes from our earlier exercise. Or copy mine from [the
 CodeSandbox](https://codesandbox.io/s/1zlp4jv494)
+
+<iframe src="https://codesandbox.io/embed/1zlp4jv494?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 Mine take a scale and orientation as props, which makes them more
 flexible. Means we can use the same component for both the vertical and

@@ -15,7 +15,12 @@ When you hover on a bar, it changes color. Pretty neat.
 
 I recommend you follow along in a CodeSandbox. If you fork the
 [react-d3-axis-hoc CodeSandbox](https://codesandbox.io/s/5v21r0wo4x)
-that will be easiest.
+that will be
+easiest.
+
+<iframe src="https://codesandbox.io/embed/5v21r0wo4x?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 You should already have the `D3blackbox` HOC. If you don’t, make a new
 file and paste it in.

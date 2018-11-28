@@ -43,7 +43,12 @@ data.
 
 You can see [my final solution on
 CodeSandbox](https://codesandbox.io/s/ll9kp8or0l). I recommend you
-follow along updating your existing code.
+follow along updating your existing
+code.
+
+<iframe src="https://codesandbox.io/embed/ll9kp8or0l?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 #### Resize scatterplot on click
 

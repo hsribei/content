@@ -82,3 +82,7 @@ React component.
 
 Play with this example on [Codesandbox,
 here](https://codesandbox.io/s/5v21r0wo4x).
+
+<iframe src="https://codesandbox.io/embed/5v21r0wo4x?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>

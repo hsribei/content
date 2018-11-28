@@ -26,6 +26,10 @@ d3.select('svg')
 You can [try it out on
 CodeSandbox](https://codesandbox.io/s/v6ovkow8q3).
 
+<iframe src="https://codesandbox.io/embed/v6ovkow8q3?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
+
 If this code doesn’t make any sense, don’t worry. There’s a bunch of D3
 to learn, and I’ll help you out. If it’s obvious, you’re a pro\! This
 book will be much quicker to read.

@@ -42,7 +42,12 @@ Steps 👇
 
 You can see [my solution on
 CodeSandbox](https://codesandbox.io/s/j73xlyr8v5). I recommend you
-follow along with your existing code.
+follow along with your existing
+code.
+
+<iframe src="https://codesandbox.io/embed/j73xlyr8v5?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 ### Pass in a render prop
 

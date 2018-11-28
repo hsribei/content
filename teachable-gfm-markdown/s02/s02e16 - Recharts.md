@@ -10,7 +10,12 @@ Recharts is like a more colorful Victory. A pile of charting components,
 some customization, loves animating everything by default.
 
 Here’s what it takes to implement a Barchart using Recharts. [You can
-try it on CodeSandbox](https://codesandbox.io/s/mmkrjl7qxp)
+try it on
+CodeSandbox](https://codesandbox.io/s/mmkrjl7qxp)
+
+<iframe src="https://codesandbox.io/embed/mmkrjl7qxp?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+
+</iframe>
 
 ``` javascript
 const data = [
