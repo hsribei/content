@@ -1,0 +1,28 @@
+<h2 id="recharts">Recharts</h2>
+<blockquote>
+<p>A composable charting library built on React components</p>
+</blockquote>
+<p><a href="http://recharts.org/"><img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/recharts.png" alt="Recharts homepage" /></a></p>
+<p>Recharts is like a more colorful Victory. A pile of charting components, some customization, loves animating everything by default.</p>
+<p>Here’s what it takes to implement a Barchart using Recharts. <a href="https://codesandbox.io/s/mmkrjl7qxp">You can try it on CodeSandbox</a></p>
+<iframe src="https://codesandbox.io/embed/mmkrjl7qxp?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+</iframe>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">const</span> data <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">13000</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">16500</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb18-4" title="4">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">14250</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb18-5" title="5">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">19000</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb18-6" title="6">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-7" title="7"></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="kw">const</span> App <span class="op">=</span> () <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb18-9" title="9">  <span class="op">&lt;</span>div style<span class="op">={</span>styles<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb18-10" title="10">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Recharts basic demo&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-11" title="11">    <span class="op">&lt;</span>BarChart width<span class="op">={</span><span class="dv">500</span><span class="op">}</span> height<span class="op">={</span><span class="dv">300</span><span class="op">}</span> data<span class="op">={</span>data<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb18-12" title="12">      <span class="op">&lt;</span>XAxis dataKey<span class="op">=</span><span class="st">&quot;quarter&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb18-13" title="13">      <span class="op">&lt;</span>YAxis dataKey<span class="op">=</span><span class="st">&quot;earnings&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb18-14" title="14">      <span class="op">&lt;</span>Bar dataKey<span class="op">=</span><span class="st">&quot;earnings&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb18-15" title="15">    &lt;/BarChart<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-16" title="16">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb18-17" title="17">)<span class="op">;</span></a></code></pre></div>
+<p>More involved than Victory, but same principle. Fake some data, render a drawing area this time with <code>&lt;BarChart&gt;</code> and feed it some data. Inside the <code>&lt;BarChart&gt;</code> render two axes, and a <code>&lt;Bar&gt;</code> for each entry.</p>
+<p>Recharts hits a great balance of flexibility and ease … unless you don’t like animation by default. Then you’re in trouble.</p>

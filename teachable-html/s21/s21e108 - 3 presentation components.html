@@ -1,0 +1,125 @@
+<h2 id="presentation-components">3 presentation components</h2>
+<p>We start with the presentation components because they’re the simplest. To render a collection of particles, we need:</p>
+<ul>
+<li>a stateless <code>Particle</code></li>
+<li>a stateless <code>Particles</code></li>
+<li>a class-based <code>App</code></li>
+</ul>
+<p>None of them contain state, but <code>App</code> has to be a class-based component so that we can use <code>componentDidMount</code>. We need it to attach D3 event listeners.</p>
+<h3 id="particle">Particle</h3>
+<p>The <code>Particle</code> component is a circle. It looks like this:</p>
+<div class="sourceCode" id="cb141" data-caption="Particle component"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb141-1" title="1"><span class="co">// src/components/Particles/Particle.jsx</span></a>
+<a class="sourceLine" id="cb141-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb141-3" title="3"></a>
+<a class="sourceLine" id="cb141-4" title="4"><span class="kw">const</span> Particle <span class="op">=</span> (<span class="op">{</span> x<span class="op">,</span> y <span class="op">}</span>) <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb141-5" title="5">    <span class="op">&lt;</span>circle cx<span class="op">={</span>x<span class="op">}</span> cy<span class="op">={</span>y<span class="op">}</span> r<span class="op">=</span><span class="st">&quot;1.8&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb141-6" title="6">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb141-7" title="7"></a>
+<a class="sourceLine" id="cb141-8" title="8"><span class="im">export</span> <span class="im">default</span> Particle<span class="op">;</span></a></code></pre></div>
+<p>It takes <code>x</code> and <code>y</code> coordinates and returns an SVG circle.</p>
+<h3 id="svg-particles">Particles</h3>
+<p>The <code>Particles</code> component isn’t much smarter – it returns a list of circles wrapped in a grouping element, like this:</p>
+<div class="sourceCode" id="cb142" data-caption="Particles list"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb142-1" title="1"><span class="co">// src/components/Particles/index.jsx</span></a>
+<a class="sourceLine" id="cb142-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb142-3" title="3"><span class="im">import</span> Particle <span class="im">from</span> <span class="st">&#39;./Particle&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb142-4" title="4"></a>
+<a class="sourceLine" id="cb142-5" title="5"><span class="kw">const</span> Particles <span class="op">=</span> (<span class="op">{</span> particles <span class="op">}</span>) <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb142-6" title="6">    <span class="op">&lt;</span>g<span class="op">&gt;{</span><span class="va">particles</span>.<span class="at">map</span>(particle <span class="op">=&gt;</span></a>
+<a class="sourceLine" id="cb142-7" title="7">        <span class="op">&lt;</span>Particle key<span class="op">={</span><span class="va">particle</span>.<span class="at">id</span><span class="op">}</span> <span class="op">{</span>...<span class="at">particle</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb142-8" title="8">        )<span class="op">}</span></a>
+<a class="sourceLine" id="cb142-9" title="9">    &lt;/g<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb142-10" title="10">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb142-11" title="11"></a>
+<a class="sourceLine" id="cb142-12" title="12"><span class="im">export</span> <span class="im">default</span> Particles<span class="op">;</span></a></code></pre></div>
+<p>Walk through the array of particles, render a Particle component for each. Declarative rendering that you’ve seen before :)</p>
+<p>We can take an array of <code>{id, x, y}</code> objects and render SVG circles. Now comes our first fun component: the <code>App</code>.</p>
+<h3 id="app">App</h3>
+<p><code>App</code> takes care of rendering the scene and attaching d3 event listeners. It gets actions via props and ties them to mouse events. You can think of actions as callbacks that work on the global data store directly. No need to pass them through many levels of props.</p>
+<p>The rendering part looks like this:</p>
+<div class="sourceCode" id="cb143" data-caption="App component"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb143-1" title="1"><span class="co">// src/components/index.jsx</span></a>
+<a class="sourceLine" id="cb143-2" title="2"></a>
+<a class="sourceLine" id="cb143-3" title="3"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span> Component <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb143-4" title="4"><span class="im">import</span> <span class="op">{</span> select <span class="im">as</span> d3Select<span class="op">,</span> mouse <span class="im">as</span> d3Mouse<span class="op">,</span> touches <span class="im">as</span> d3Touches <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;d3&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb143-5" title="5"></a>
+<a class="sourceLine" id="cb143-6" title="6"><span class="im">import</span> Particles <span class="im">from</span> <span class="st">&#39;./Particles&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb143-7" title="7"><span class="im">import</span> Footer <span class="im">from</span> <span class="st">&#39;./Footer&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb143-8" title="8"><span class="im">import</span> Header <span class="im">from</span> <span class="st">&#39;./Header&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb143-9" title="9"></a>
+<a class="sourceLine" id="cb143-10" title="10"><span class="kw">class</span> App <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb143-11" title="11">  <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb143-12" title="12">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb143-13" title="13">        <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb143-14" title="14">            <span class="op">&lt;</span>div onMouseDown<span class="op">={</span>e <span class="op">=&gt;</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">startTicker</span>()<span class="op">}</span> style<span class="op">={{</span><span class="dt">overflow</span><span class="op">:</span> <span class="st">&#39;hidden&#39;</span><span class="op">}}&gt;</span></a>
+<a class="sourceLine" id="cb143-15" title="15">                 <span class="op">&lt;</span>Header /<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb143-16" title="16">                 <span class="op">&lt;</span>svg width<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">svgWidth</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb143-17" title="17">                      height<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">svgHeight</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb143-18" title="18">                      ref<span class="op">=</span><span class="st">&quot;svg&quot;</span></a>
+<a class="sourceLine" id="cb143-19" title="19">                      style<span class="op">={{</span><span class="dt">background</span><span class="op">:</span> <span class="st">&#39;rgba(124, 224, 249, .3)&#39;</span><span class="op">}}&gt;</span></a>
+<a class="sourceLine" id="cb143-20" title="20">                     <span class="op">&lt;</span>Particles particles<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">particles</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb143-21" title="21">                 &lt;/svg<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb143-22" title="22">                 <span class="op">&lt;</span>Footer N<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="va">particles</span>.<span class="at">length</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb143-23" title="23">             &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb143-24" title="24">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb143-25" title="25">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb143-26" title="26"><span class="op">}</span></a>
+<a class="sourceLine" id="cb143-27" title="27"></a>
+<a class="sourceLine" id="cb143-28" title="28"><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></a></code></pre></div>
+<p>There’s more going on, but the gist is that we return a <code>&lt;div&gt;</code> with a <code>Header</code>, a <code>Footer</code>, and an <code>&lt;svg&gt;</code>. Inside <code>&lt;svg&gt;</code>, we use <code>Particles</code> to render many circles. The Header and Footer components are just some helpful text.</p>
+<p>Notice that the core of our rendering function only says <em>“Put all Particles here, please”</em>. There’s nothing about what’s moved, what’s new, or what’s no longer needed. We don’t have to worry about that.</p>
+<p>We get a list of coordinates and naively render some circles. React takes care of the rest.</p>
+<p>Oh, and we call <code>startTicker()</code> when a user clicks on our scene. No reason to have the clock running <em>before</em> any particles exist.</p>
+<h4 id="d3-event-listeners">D3 event listeners</h4>
+<p>To let users generate particles, we have to wire up some functions in <code>componentDidMount</code>. That looks like this:</p>
+<div class="sourceCode" id="cb144" data-caption="Event listeners"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb144-1" title="1"><span class="co">// src/components/index.jsx</span></a>
+<a class="sourceLine" id="cb144-2" title="2"></a>
+<a class="sourceLine" id="cb144-3" title="3"><span class="kw">class</span> App <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-4" title="4">    svgWrap <span class="op">=</span> <span class="va">React</span>.<span class="at">createRef</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-5" title="5">    </a>
+<a class="sourceLine" id="cb144-6" title="6">    <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-7" title="7">        <span class="kw">let</span> svg <span class="op">=</span> <span class="at">d3Select</span>(<span class="kw">this</span>.<span class="va">svgWrap</span>.<span class="at">current</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-8" title="8"></a>
+<a class="sourceLine" id="cb144-9" title="9">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;mousedown&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-10" title="10">            <span class="kw">this</span>.<span class="at">updateMousePos</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-11" title="11">            <span class="kw">this</span>.<span class="va">props</span>.<span class="at">startParticles</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-12" title="12">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-13" title="13">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;touchstart&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-14" title="14">            <span class="kw">this</span>.<span class="at">updateTouchPos</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-15" title="15">            <span class="kw">this</span>.<span class="va">props</span>.<span class="at">startParticles</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-16" title="16">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-17" title="17">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;mousemove&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-18" title="18">            <span class="kw">this</span>.<span class="at">updateMousePos</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-19" title="19">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-20" title="20">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;touchmove&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-21" title="21">            <span class="kw">this</span>.<span class="at">updateTouchPos</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-22" title="22">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-23" title="23">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;mouseup&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-24" title="24">            <span class="kw">this</span>.<span class="va">props</span>.<span class="at">stopParticles</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-25" title="25">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-26" title="26">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;touchend&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-27" title="27">            <span class="kw">this</span>.<span class="va">props</span>.<span class="at">stopParticles</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-28" title="28">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-29" title="29">        <span class="va">svg</span>.<span class="at">on</span>(<span class="st">&#39;mouseleave&#39;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-30" title="30">            <span class="kw">this</span>.<span class="va">props</span>.<span class="at">stopParticles</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-31" title="31">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-32" title="32">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb144-33" title="33"></a>
+<a class="sourceLine" id="cb144-34" title="34">    <span class="at">updateMousePos</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-35" title="35">        <span class="kw">let</span> [x<span class="op">,</span> y] <span class="op">=</span> <span class="at">d3Mouse</span>(<span class="kw">this</span>.<span class="va">svgWrap</span>.<span class="at">current</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-36" title="36">        <span class="kw">this</span>.<span class="va">props</span>.<span class="at">updateMousePos</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-37" title="37">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb144-38" title="38"></a>
+<a class="sourceLine" id="cb144-39" title="39">    <span class="at">updateTouchPos</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb144-40" title="40">        <span class="kw">let</span> [x<span class="op">,</span> y] <span class="op">=</span> <span class="at">d3Touches</span>(<span class="kw">this</span>.<span class="va">svgWrap</span>.<span class="at">current</span>)[<span class="dv">0</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-41" title="41">        <span class="kw">this</span>.<span class="va">props</span>.<span class="at">updateMousePos</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb144-42" title="42">    <span class="op">}</span></a></code></pre></div>
+<p>There are several events we take into account:</p>
+<ul>
+<li><code>mousedown</code> and <code>touchstart</code> turn on particle generation</li>
+<li><code>mousemove</code> and <code>touchmove</code> update the mouse location</li>
+<li><code>mouseup</code>, <code>touchend</code>, and <code>mouseleave</code> turn off particle generation</li>
+</ul>
+<p>Inside our event callbacks, we use <code>updateMousePos</code> and <code>updateTouchPos</code> to update Redux state. They use <code>d3Mouse</code> and <code>d3Touches</code> to get <code>(x, y)</code> coordinates for new particles relative to our SVG element and call Redux actions passed-in via props. The particle generation step uses this data as each particle’s initial position.</p>
+<p>You’ll see that in the next section. I agree, it smells kind of convoluted, but it’s for good reason: We need a reference to a mouse event to get the cursor position, and we want to decouple particle generation from event handling.</p>
+<p>Remember, React isn’t smart enough to figure out mouse position relative to our drawing area. React knows that we clicked a DOM node. <a href="https://github.com/d3/d3-selection/blob/master/src/mouse.js">D3 does some magic</a> to find exact coordinates.</p>
+<p>Touch events return lists of coordinates. One for each finger. We use only the first coordinate because shooting particles out of multiple fingers would make this example too hard.</p>
+<p>That’s it for rendering and user events. <a href="https://github.com/Swizec/react-particles-experiment/blob/svg-based-branch/src/components/index.jsx">107 lines of code</a>.</p>

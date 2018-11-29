@@ -1,0 +1,55 @@
+<h2 id="step-2-prep-data-parsing-functions">Step 2: Prep data parsing functions</h2>
+<p>We’re putting data loading logic in a separate file from <code>App.js</code> because it’s a bunch of functions that work together and don’t have much to do with the <code>App</code> component itself.</p>
+<p>We start with two imports and four data parsing functions:</p>
+<ul>
+<li><code>cleanIncome</code>, which parses each row of household income data</li>
+<li><code>dateParse</code>, which we use for parsing dates</li>
+<li><code>cleanSalary</code>, which parses each row of salary data</li>
+<li><code>cleanUSStateName</code>, which parses US state names</li>
+</ul>
+<div class="sourceCode" id="cb60" data-caption="Data parsing functions"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb60-1" title="1"><span class="co">// src/DataHandling.js</span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">&#39;d3&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="im">import</span> _ <span class="im">from</span> <span class="st">&#39;lodash&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="kw">const</span> cleanIncome <span class="op">=</span> (d) <span class="op">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb60-6" title="6">    <span class="dt">countyName</span><span class="op">:</span> d[<span class="st">&#39;Name&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-7" title="7">    <span class="dt">USstate</span><span class="op">:</span> d[<span class="st">&#39;State&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-8" title="8">    <span class="dt">medianIncome</span><span class="op">:</span> <span class="at">Number</span>(d[<span class="st">&#39;Median Household Income&#39;</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-9" title="9">    <span class="dt">lowerBound</span><span class="op">:</span> <span class="at">Number</span>(d[<span class="st">&#39;90% CI Lower Bound&#39;</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-10" title="10">    <span class="dt">upperBound</span><span class="op">:</span> <span class="at">Number</span>(d[<span class="st">&#39;90% CI Upper Bound&#39;</span>])</a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-12" title="12"></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="kw">const</span> dateParse <span class="op">=</span> <span class="va">d3</span>.<span class="at">timeParse</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-14" title="14"></a>
+<a class="sourceLine" id="cb60-15" title="15"><span class="kw">const</span> cleanSalary <span class="op">=</span> (d) <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-16" title="16">    <span class="cf">if</span> (<span class="op">!</span>d[<span class="st">&#39;base salary&#39;</span>] <span class="op">||</span> <span class="at">Number</span>(d[<span class="st">&#39;base salary&#39;</span>]) <span class="op">&gt;</span> <span class="dv">300000</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-17" title="17">        <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb60-18" title="18">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb60-19" title="19"></a>
+<a class="sourceLine" id="cb60-20" title="20">    <span class="cf">return</span> <span class="op">{</span><span class="dt">employer</span><span class="op">:</span> <span class="va">d</span>.<span class="at">employer</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-21" title="21">            <span class="dt">submit_date</span><span class="op">:</span> <span class="at">dateParse</span>(d[<span class="st">&#39;submit date&#39;</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-22" title="22">            <span class="dt">start_date</span><span class="op">:</span> <span class="at">dateParse</span>(d[<span class="st">&#39;start date&#39;</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-23" title="23">            <span class="dt">case_status</span><span class="op">:</span> d[<span class="st">&#39;case status&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-24" title="24">            <span class="dt">job_title</span><span class="op">:</span> d[<span class="st">&#39;job title&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-25" title="25">            <span class="dt">clean_job_title</span><span class="op">:</span> d[<span class="st">&#39;job title&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-26" title="26">            <span class="dt">base_salary</span><span class="op">:</span> <span class="at">Number</span>(d[<span class="st">&#39;base salary&#39;</span>])<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-27" title="27">            <span class="dt">city</span><span class="op">:</span> d[<span class="st">&#39;city&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-28" title="28">            <span class="dt">USstate</span><span class="op">:</span> d[<span class="st">&#39;state&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-29" title="29">            <span class="dt">county</span><span class="op">:</span> d[<span class="st">&#39;county&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-30" title="30">            <span class="dt">countyID</span><span class="op">:</span> d[<span class="st">&#39;countyID&#39;</span>]</a>
+<a class="sourceLine" id="cb60-31" title="31">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb60-32" title="32"><span class="op">}</span></a>
+<a class="sourceLine" id="cb60-33" title="33"></a>
+<a class="sourceLine" id="cb60-34" title="34"><span class="kw">const</span> cleanUSStateName <span class="op">=</span> (d) <span class="op">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb60-35" title="35">    <span class="dt">code</span><span class="op">:</span> <span class="va">d</span>.<span class="at">code</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-36" title="36">    <span class="dt">id</span><span class="op">:</span> <span class="at">Number</span>(<span class="va">d</span>.<span class="at">id</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-37" title="37">    <span class="dt">name</span><span class="op">:</span> <span class="va">d</span>.<span class="at">name</span></a>
+<a class="sourceLine" id="cb60-38" title="38"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-39" title="39"></a>
+<a class="sourceLine" id="cb60-40" title="40"><span class="kw">const</span> cleanCounty <span class="op">=</span> d <span class="op">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb60-41" title="41">    <span class="dt">id</span><span class="op">:</span> <span class="at">Number</span>(<span class="va">d</span>.<span class="at">id</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb60-42" title="42">    <span class="dt">name</span><span class="op">:</span> name</a>
+<a class="sourceLine" id="cb60-43" title="43"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You’ll see those <code>d3</code> and <code>lodash</code> imports a lot.</p>
+<p>Our data parsing functions all follow the same approach: Take a row of data as <code>d</code>, return a dictionary with nicer key names, cast any numbers or dates into appropriate formats. They all start as strings.</p>
+<p>Doing all this parsing now, keeps the rest of our codebase clean. Handling data is always messy. You want to contain that mess as much as possible.</p>

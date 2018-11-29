@@ -1,0 +1,23 @@
+<h2 id="redux-actions">6 Redux Actions</h2>
+<p>Redux actions are a fancy way of saying <em>“Yo, a thing happened!”</em>. They’re functions you call to get structured metadata that’s passed into Redux reducers.</p>
+<p>Our particle generator uses 6 actions:</p>
+<ol type="1">
+<li><code>tickTime</code> steps our animation to the next frame</li>
+<li><code>tickerStarted</code> fires when everything begins</li>
+<li><code>startParticles</code> fires when we hold down the mouse</li>
+<li><code>stopParticles</code> fires when we release</li>
+<li><code>updateMousePos</code> keeps mouse position saved in state</li>
+<li><code>resizeScreen</code> saves new screen size so we know where edges lie</li>
+</ol>
+<p>Our actions look something like this:</p>
+<div class="sourceCode" id="cb145" data-caption="A Redux action"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb145-1" title="1"><span class="im">export</span> <span class="kw">function</span> <span class="at">updateMousePos</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb145-2" title="2">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb145-3" title="3">        <span class="dt">type</span><span class="op">:</span> UPDATE_MOUSE_POS<span class="op">,</span></a>
+<a class="sourceLine" id="cb145-4" title="4">        <span class="dt">x</span><span class="op">:</span> x<span class="op">,</span></a>
+<a class="sourceLine" id="cb145-5" title="5">        <span class="dt">y</span><span class="op">:</span> y</a>
+<a class="sourceLine" id="cb145-6" title="6">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb145-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>A function that accepts params and returns an object with a type and meta data. Technically this is an action generator and the object is an action, but that distinction has long since been lost in the community.</p>
+<p>Actions <em>must</em> have a <code>type</code>. Reducers use the type to decide what to do. The rest is optional.</p>
+<p>You can see <a href="https://github.com/Swizec/react-particles-experiment/blob/master/src/actions/index.js">all the actions on GitHub</a>.</p>
+<p>I find this to be the least elegant part of Redux. Makes sense in large applications, but way too convoluted for small apps. Simpler alternatives exist like doing it yourself with React Context.</p>

@@ -1,0 +1,17 @@
+<h2 id="what-you-get">What you get</h2>
+<p>Running <code>create-react-app</code> installs tools and libraries. There’s around 80MB of them as of October 2016. This is why using a generator is easier than slogging through on your own.</p>
+<p>Crucially, there is a single dependency in your project – <code>react-scripts</code>. But it gives you everything you need to build modern React apps.</p>
+<ul>
+<li><strong>Webpack</strong> - a module bundler and file loader. It turns your app into a single JavaScript file, and it even lets you import images and styles like they were code.</li>
+<li><strong>Babel</strong> - a JavaScript transpiler. It turns your modern JS code (ES6, ECMAScript2015, 2016, ES7, whatever you call it) into code that can run on real world browsers. It’s the ecosystem’s answer to slow browser adoption.</li>
+<li><strong>ESLint</strong> - linting! It annoys you when you write code that is bad. This is a good thing. :smile:</li>
+<li><strong>Jest</strong> - a test runner. Having tests set up from the beginning of a project is a good idea. We won’t really write tests in this book, but I will show you how it’s done.</li>
+</ul>
+<p>All tools come preconfigured with sane defaults and ready to use. You have no idea how revolutionary this is. Check the appendixes to see how hard setting up an environment used to be. I’m so happy that <code>create-react-app</code> exists.</p>
+<hr />
+<p>Besides the toolchain, <code>create-react-app</code> also gives you a default directory structure and a ton of helpful docs.</p>
+<p>You should read the <code>README.md</code> file. It’s full of great advice, and it goes into more detail about the app generator than we can get into here. The team also makes sure it’s kept up-to-date.</p>
+<p>All of the code samples in this book are going to follow the default directory structure. Public assets like HTML files, datasets, and some images go into <code>public/</code>. Code goes into <code>src/</code>.</p>
+<p>Code is anything that we <code>import</code> or <code>require()</code>. That includes JavaScript files themselves, as well as stylesheets and images.</p>
+<p>You can poke around <code>src/App.js</code> to see how it’s structured and what happens when you change something. You’re going to change bits and pieces of this file as you go through the book.</p>
+<p>I suggest you keep <code>npm start</code> running at all times while coding. The browser will refresh on every code change, so you’ll be able to see instant results.</p>

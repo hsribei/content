@@ -1,0 +1,18 @@
+<h4 id="onexit">onExit</h4>
+<p>Our exit transition goes in the <code>onExit</code> callback.</p>
+<div class="sourceCode" id="cb138" data-caption="Leave transition"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb138-1" title="1"><span class="co">// src/components/Alphabet/</span></a>
+<a class="sourceLine" id="cb138-2" title="2">    onExit <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb138-3" title="3">        <span class="co">// Letter is dropping out</span></a>
+<a class="sourceLine" id="cb138-4" title="4">        <span class="kw">let</span> node <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="kw">this</span>.<span class="va">letterRef</span>.<span class="at">current</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb138-5" title="5"></a>
+<a class="sourceLine" id="cb138-6" title="6">        <span class="va">node</span>.<span class="at">style</span>(<span class="st">&quot;fill&quot;</span><span class="op">,</span> ExitColor)</a>
+<a class="sourceLine" id="cb138-7" title="7">            .<span class="at">transition</span>(<span class="kw">this</span>.<span class="at">transition</span>)</a>
+<a class="sourceLine" id="cb138-8" title="8">            .<span class="at">attr</span>(<span class="st">&quot;y&quot;</span><span class="op">,</span> <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb138-9" title="9">            .<span class="at">style</span>(<span class="st">&quot;fill-opacity&quot;</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
+<a class="sourceLine" id="cb138-10" title="10">            .<span class="at">on</span>(<span class="st">&quot;end&quot;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="kw">this</span>.<span class="at">setState</span>(<span class="kw">this</span>.<span class="at">defaultState</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb138-11" title="11">    <span class="op">};</span></a></code></pre></div>
+<p>Same as before, we take control of the DOM, run a transition, and update state when we’re done. We start with forcing our letter into a new color, then move it 60px down, transition to invisible, and reset state.</p>
+<p>But why are we resetting state instead of updating to current reality?</p>
+<p>Our components never unmount.</p>
+<p>We avoid unmounts to keep transitions smoother. Instead of unmounting, we have to reset state back to its default values.</p>
+<p>That moves the letter back into its enter state and ensures even re-used letters drop down from the top. Took me a while to tinker that one out.</p>

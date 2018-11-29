@@ -1,0 +1,48 @@
+<h2 id="step-2-preloader-component">Step 2: Preloader component</h2>
+<p>Our <code>Preloader</code> is a small component that pretends it’s the <code>App</code> and renders a static title, description, and a screenshot of the end result. It goes in <code>src/components/Preloader.js</code>.</p>
+<p>We’ll put all of our components in <code>src/components/</code>.</p>
+<p>We start the component off with some imports, an export, and a functional stateless component that returns an empty div element.</p>
+<div class="sourceCode" id="cb52" data-caption="Preloader skeleton"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="co">// src/components/Preloader.js</span></a>
+<a class="sourceLine" id="cb52-2" title="2"></a>
+<a class="sourceLine" id="cb52-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb52-4" title="4"></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="im">import</span> PreloaderImg <span class="im">from</span> <span class="st">&quot;../assets/preloading.png&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb52-6" title="6"></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="kw">const</span> Preloader <span class="op">=</span> () <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb52-8" title="8">    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App container&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb52-9" title="9"></a>
+<a class="sourceLine" id="cb52-10" title="10">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb52-11" title="11">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-12" title="12"></a>
+<a class="sourceLine" id="cb52-13" title="13"><span class="im">export</span> <span class="im">default</span> Preloader<span class="op">;</span></a></code></pre></div>
+<p>We <code>import</code> React (which we need to make JSX syntax work) and the <code>PreloaderImg</code> for our image. We can import images because of the Webpack configuration that comes with <code>create-react-app</code>. The webpack image loader returns a URL that we put in the <code>PreloaderImg</code> constant.</p>
+<p>At the bottom, we <code>export default Preloader</code> so that we can use it in <code>App.js</code> as <code>import Preloader</code>. Default exports are great when your file exports a single object. Named exports when you want to export multiple items. You’ll see that play out in the rest of this project.</p>
+<p>The <code>Preloader</code> function takes no props (because we don’t need any) and returns an empty <code>div</code>. Let’s fill it in.</p>
+<div class="sourceCode" id="cb53" data-caption="Preloader content"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1"><span class="co">// src/components/Preloader.js</span></a>
+<a class="sourceLine" id="cb53-2" title="2"></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="kw">const</span> Preloader <span class="op">=</span> () <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb53-4" title="4">    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App container&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-5" title="5">        <span class="op">&lt;</span>h1<span class="op">&gt;</span>The average H1B <span class="kw">in</span> tech pays $86<span class="op">,</span><span class="dv">164</span>/year&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-6" title="6">        <span class="op">&lt;</span>p className<span class="op">=</span><span class="st">&quot;lead&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-7" title="7">            Since <span class="dv">2012</span> the US tech industry has sponsored <span class="dv">176</span><span class="op">,</span><span class="dv">075</span> H1B work</a>
+<a class="sourceLine" id="cb53-8" title="8">            <span class="va">visas</span>. <span class="at">Most</span> of them paid <span class="op">&lt;</span>b<span class="op">&gt;</span>$60<span class="op">,</span><span class="dv">660</span> to $111<span class="op">,</span><span class="dv">668</span>&lt;/b<span class="op">&gt;</span> per <span class="at">year</span> (<span class="dv">1</span></a>
+<a class="sourceLine" id="cb53-9" title="9">            standard deviation).<span class="op">{</span><span class="st">&quot; &quot;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb53-10" title="10">            <span class="op">&lt;</span>span<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-11" title="11">                The best city <span class="cf">for</span> an H1B is <span class="op">&lt;</span>b<span class="op">&gt;</span>Kirkland<span class="op">,</span> WA&lt;/b<span class="op">&gt;</span> <span class="cf">with</span> an average</a>
+<a class="sourceLine" id="cb53-12" title="12">                individual salary <span class="op">&lt;</span>b<span class="op">&gt;</span>$39<span class="op">,</span><span class="dv">465</span> above local household median&lt;/b<span class="op">&gt;</span>.</a>
+<a class="sourceLine" id="cb53-13" title="13">                Median household salary is a good proxy <span class="cf">for</span> cost of living <span class="kw">in</span> an</a>
+<a class="sourceLine" id="cb53-14" title="14">                <span class="va">area</span>.</a>
+<a class="sourceLine" id="cb53-15" title="15">            &lt;/span<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-16" title="16">        &lt;/p<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-17" title="17">        <span class="op">&lt;</span>img</a>
+<a class="sourceLine" id="cb53-18" title="18">            src<span class="op">={</span>PreloaderImg<span class="op">}</span></a>
+<a class="sourceLine" id="cb53-19" title="19">            style<span class="op">={{</span> <span class="dt">width</span><span class="op">:</span> <span class="st">&quot;100%&quot;</span> <span class="op">}}</span></a>
+<a class="sourceLine" id="cb53-20" title="20">            alt<span class="op">=</span><span class="st">&quot;Loading preview&quot;</span></a>
+<a class="sourceLine" id="cb53-21" title="21">        /&gt;</a>
+<a class="sourceLine" id="cb53-22" title="22">        <span class="op">&lt;</span>h2 className<span class="op">=</span><span class="st">&quot;text-center&quot;</span><span class="op">&gt;</span>Loading <span class="va">data</span> ...&lt;/h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-23" title="23">    &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb53-24" title="24">)<span class="op">;</span></a></code></pre></div>
+<p>A little cheating with grabbing copy from the future, but that’s okay. In real life you’d use some temporary text, then fill it in later.</p>
+<p>The code itself looks like HTML. We have the usual tags - <code>h1</code>, <code>p</code>, <code>b</code>, <code>img</code>, and <code>h2</code>. That’s what I like about JSX: it’s familiar. Even if you don’t know React, you can guess what’s going on here.</p>
+<p>But look at the <code>img</code> tag: the <code>src</code> attribute is dynamic, defined by <code>PreloaderImg</code>, and the <code>style</code> attribute takes an object, not a string. That’s because JSX is more than HTML; it’s JavaScript. Think of props as function arguments – any valid JavaScript fits.</p>
+<p>That will be a cornerstone of our project.</p>

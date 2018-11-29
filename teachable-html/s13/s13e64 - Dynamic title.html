@@ -1,0 +1,308 @@
+<h2 id="dynamic-title">Dynamic title</h2>
+<p>We begin with the title because it shows up first.</p>
+<p>We start with an import in <code>App.js</code> and add it to the render method. You know the drill :smile:</p>
+<div class="sourceCode" id="cb87" data-caption="Adding Title to main App component"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb87-1" title="1"><span class="co">// src/App.js</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="im">import</span> CountyMap <span class="im">from</span> <span class="st">&#39;./components/CountyMap&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-3" title="3"><span class="im">import</span> Histogram <span class="im">from</span> <span class="st">&#39;./components/Histogram&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-4" title="4"><span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb87-5" title="5"><span class="im">import</span> <span class="op">{</span> Title <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./components/Meta&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-6" title="6"><span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb87-7" title="7"></a>
+<a class="sourceLine" id="cb87-8" title="8"><span class="kw">class</span> App <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-9" title="9">    state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-10" title="10">        <span class="dt">techSalaries</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb87-11" title="11">        <span class="dt">countyNames</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb87-12" title="12">        <span class="dt">medianIncomes</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb87-13" title="13">        <span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb87-14" title="14">        <span class="dt">filteredBy</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-15" title="15">            <span class="dt">USstate</span><span class="op">:</span> <span class="st">&#39;*&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb87-16" title="16">            <span class="dt">year</span><span class="op">:</span> <span class="st">&#39;*&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb87-17" title="17">            <span class="dt">jobTitle</span><span class="op">:</span> <span class="st">&#39;*&#39;</span></a>
+<a class="sourceLine" id="cb87-18" title="18">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-19" title="19">        <span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb87-20" title="20">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-21" title="21"></a>
+<a class="sourceLine" id="cb87-22" title="22">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb87-23" title="23"></a>
+<a class="sourceLine" id="cb87-24" title="24">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb87-25" title="25">            <span class="kw">const</span> <span class="op">{</span> filteredBy <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">state</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb87-26" title="26">        <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb87-27" title="27">        <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb87-28" title="28">            <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;App container&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb87-29" title="29">                <span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb87-30" title="30">                <span class="op">&lt;</span>Title data<span class="op">={</span>filteredSalaries<span class="op">}</span></a>
+<a class="sourceLine" id="cb87-31" title="31">                       filteredBy<span class="op">={</span>filteredBy<span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb87-32" title="32">                <span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb87-33" title="33">                <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb87-34" title="34">            &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb87-35" title="35">        )</a>
+<a class="sourceLine" id="cb87-36" title="36">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb87-37" title="37"><span class="op">}</span></a></code></pre></div>
+<p>Ok, I lied. We did a lot more than just imports and adding to render.</p>
+<p>We also set up the <code>App</code> component for future user-controlled data filtering. The <code>filteredBy</code> key in <code>state</code> tells us what the user is filtering by – 3 options: <code>USstate</code>, <code>year</code>, and <code>jobTitle</code>. We set them to “everything” by default.</p>
+<p>We added them now so that we can immediately write our <code>Title</code> component in a filterable way. No need to make changes later.</p>
+<p>As you can see, <code>Title</code> takes <code>data</code> and <code>filteredBy</code> props.</p>
+<h3 id="prep-meta-component">Prep Meta component</h3>
+<p>Before we begin the <code>Title</code> component, there are a few things to take care of. Our meta components work together for a common purpose – showing meta data. Grouping them in a directory makes sense.</p>
+<p>We make a <code>components/Meta</code> directory and add an <code>index.js</code>. It makes importing easier.</p>
+<div class="sourceCode" id="cb88" data-caption="Meta index.js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb88-1" title="1"><span class="co">// src/components/Meta/index.js</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="im">export</span> <span class="op">{</span> <span class="im">default</span> <span class="im">as</span> Title <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./Title&#39;</span></a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="im">export</span> <span class="op">{</span> <span class="im">default</span> <span class="im">as</span> Description <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./Description&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>We have to name our <code>Title</code> and <code>Description</code> re-exports because you can’t have two default exports.</p>
+<h4 id="get-the-usstatesmap-file">Get the USStatesMap file</h4>
+<p>You need the <code>USStatesMap</code> file.</p>
+<p>It’s a big dictionary that translates US state codes to full names. You can <a href="https://github.com/Swizec/react-d3js-step-by-step/blob/4f94fcd1c3caeb0fc410636243ca99764e27c5e6/src/components/Meta/USStatesMap.js">get it from Github</a> and save it as <code>components/Meta/USStatesMap.js</code>.</p>
+<p>We’ll use it when creating titles and descriptions.</p>
+<h3 id="implement-title">Implement Title</h3>
+<p>We’re building two types of titles based on user selection. If both <code>years</code> and <code>US state</code> were selected, we return <code>In {US state}, the average {job title} paid ${mean}/year in {year}</code>. If not, we return <code>{job title} paid ${mean}/year in {state} in {year}</code>.</p>
+<p>I know, it’s confusing. They look like the same sentence turned around. Notice the <em>and</em>. First option when <em>both</em> are selected, second when either/or.</p>
+<p>We start with imports, a stub, and a default export.</p>
+<div class="sourceCode" id="cb89" data-caption="Title component stub"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb89-1" title="1"><span class="co">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span> Component <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb89-3" title="3"><span class="im">import</span> <span class="op">{</span> scaleLinear <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;d3-scale&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb89-4" title="4"><span class="im">import</span> <span class="op">{</span> mean <span class="im">as</span> d3mean<span class="op">,</span> extent <span class="im">as</span> d3extent <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;d3-array&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb89-5" title="5"></a>
+<a class="sourceLine" id="cb89-6" title="6"><span class="im">import</span> USStatesMap <span class="im">from</span> <span class="st">&#39;./USStatesMap&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb89-7" title="7"></a>
+<a class="sourceLine" id="cb89-8" title="8"><span class="kw">class</span> Title <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-9" title="9">    get <span class="at">yearsFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-10" title="10">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb89-11" title="11"></a>
+<a class="sourceLine" id="cb89-12" title="12">    get <span class="at">USstateFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-13" title="13">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb89-14" title="14"></a>
+<a class="sourceLine" id="cb89-15" title="15">    get <span class="at">jobTitleFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb89-17" title="17"></a>
+<a class="sourceLine" id="cb89-18" title="18">    get <span class="at">format</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-19" title="19">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb89-20" title="20"></a>
+<a class="sourceLine" id="cb89-21" title="21">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb89-22" title="22">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb89-23" title="23"><span class="op">}</span></a>
+<a class="sourceLine" id="cb89-24" title="24"></a>
+<a class="sourceLine" id="cb89-25" title="25"><span class="im">export</span> <span class="im">default</span> Title<span class="op">;</span></a></code></pre></div>
+<p>We import only what we need from D3’s <code>d3-scale</code> and <code>d3-array</code> packages. I consider this best practice until you’re importing so much that it gets messy to look at.</p>
+<p>In the <code>Title</code> component, we have 4 getters and a render. Getters are ES6 functions that work like dynamic properties. You specify a function without arguments, and you use it without <code>()</code>. It’s neat.</p>
+<h4 id="the-getters">The getters</h4>
+<ol type="1">
+<li><code>yearsFragment</code> describes the selected year</li>
+<li><code>USstateFragment</code> describes the selected US state</li>
+<li><code>jobTitleFragment</code> describes the selected job title</li>
+<li><code>format</code> returns a number formatter</li>
+</ol>
+<p>We can implement <code>yearsFragment</code>, <code>USstateFragment</code>, and <code>format</code> in one code sample. They’re short.</p>
+<div class="sourceCode" id="cb90" data-caption="3 short getters in Title"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb90-1" title="1"><span class="co">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb90-2" title="2"><span class="kw">class</span> Title <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb90-3" title="3">    get <span class="at">yearsFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb90-4" title="4">        <span class="kw">const</span> year <span class="op">=</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="va">filteredBy</span>.<span class="at">year</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb90-5" title="5"></a>
+<a class="sourceLine" id="cb90-6" title="6">        <span class="cf">return</span> year <span class="op">===</span> <span class="st">&#39;*&#39;</span> <span class="op">?</span> <span class="st">&quot;&quot;</span> : <span class="vs">`in </span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb90-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb90-8" title="8"></a>
+<a class="sourceLine" id="cb90-9" title="9">    <span class="at">getteFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb90-10" title="10">        <span class="kw">const</span> USstate <span class="op">=</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="va">filteredBy</span>.<span class="at">USstate</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb90-11" title="11"></a>
+<a class="sourceLine" id="cb90-12" title="12">        <span class="cf">return</span> USstate <span class="op">===</span> <span class="st">&#39;*&#39;</span> <span class="op">?</span> <span class="st">&quot;&quot;</span> : USStatesMap[<span class="va">USstate</span>.<span class="at">toUpperCase</span>()]<span class="op">;</span></a>
+<a class="sourceLine" id="cb90-13" title="13">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb90-14" title="14"></a>
+<a class="sourceLine" id="cb90-15" title="15">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb90-16" title="16"></a>
+<a class="sourceLine" id="cb90-17" title="17">    get <span class="at">format</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb90-18" title="18">        <span class="cf">return</span> <span class="at">scaleLinear</span>()</a>
+<a class="sourceLine" id="cb90-19" title="19">                 .<span class="at">domain</span>(<span class="at">d3extent</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">data</span><span class="op">,</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">base_salary</span>))</a>
+<a class="sourceLine" id="cb90-20" title="20">                 .<span class="at">tickFormat</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb90-21" title="21">    <span class="op">}</span></a></code></pre></div>
+<p>In both <code>yearsFragment</code> and <code>USstateFragment</code>, we get the appropriate value from Title’s <code>filteredBy</code> prop, then return a string with the value or an empty string.</p>
+<p>We rely on D3’s built-in number formatters to build <code>format</code>. Linear scales have the one that turns <code>10000</code> into <code>10,000</code>. Tick formatters don’t work well without a <code>domain</code>, so we define it. We don’t need a range because we never use the scale itself.</p>
+<p><code>format</code> returns a function, which makes it a <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher order function</a>. Being a getter makes it really nice to use: <code>this.format()</code>. Looks just like a normal function call :D</p>
+<p>The <code>jobTitleFragment</code> getter is conceptually no harder than <code>yearsFragment</code> and <code>USstateFragment</code>, but it comes with a few more conditionals.</p>
+<div class="sourceCode" id="cb91" data-caption="Title.jobTitleFragment"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb91-1" title="1"><span class="co">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb91-2" title="2"></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="kw">class</span> Title <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-4" title="4">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb91-5" title="5">    get <span class="at">jobTitleFragment</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-6" title="6">        <span class="kw">const</span> <span class="op">{</span> jobTitle<span class="op">,</span> year <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">filteredBy</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-7" title="7">        <span class="kw">let</span> title <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-8" title="8"></a>
+<a class="sourceLine" id="cb91-9" title="9">        <span class="cf">if</span> (jobTitle <span class="op">===</span> <span class="st">&quot;*&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-10" title="10">            <span class="cf">if</span> (year <span class="op">===</span> <span class="st">&quot;*&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-11" title="11">                title <span class="op">=</span> <span class="st">&quot;The average H1B in tech pays&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-12" title="12">            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-13" title="13">                title <span class="op">=</span> <span class="st">&quot;The average tech H1B paid&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-14" title="14">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb91-15" title="15">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-16" title="16">            title <span class="op">=</span> <span class="vs">`Software </span><span class="sc">${</span>jobTitle<span class="sc">}</span><span class="vs">s on an H1B`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-17" title="17">            <span class="cf">if</span> (year <span class="op">===</span> <span class="st">&quot;*&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-18" title="18">                title <span class="op">+=</span> <span class="st">&quot; make&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-19" title="19">            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb91-20" title="20">                title <span class="op">+=</span> <span class="st">&quot; made&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb91-21" title="21">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb91-22" title="22">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb91-23" title="23"></a>
+<a class="sourceLine" id="cb91-24" title="24">        <span class="cf">return</span> title<span class="op">;</span></a>
+<a class="sourceLine" id="cb91-25" title="25">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb91-26" title="26">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb91-27" title="27"><span class="op">}</span></a></code></pre></div>
+<p>{caption: “Title.jobTitleFragment”}</p>
+<pre><code>
+//
+// Example 1
+//
+// src/components/Meta/Title.js
+import React, { Component } from &#39;react&#39;;
+import { scaleLinear } from &#39;d3-scale&#39;;
+import { mean as d3mean, extent as d3extent } from &#39;d3-array&#39;;
+
+import USStatesMap from &#39;./USStatesMap&#39;;
+
+class Title extends Component {
+    get yearsFragment() {
+    }
+
+    get USstateFragment() {
+    }
+
+    get jobTitleFragment() {
+    }
+
+    get format() {
+    }
+
+    render() {
+    }
+}
+
+export default Title;
+
+
+//
+// Example 2
+//
+// src/components/Meta/Title.js
+class Title extends Component {
+    get yearsFragment() {
+        const year = this.props.filteredBy.year;
+
+        return year === &#39;*&#39; ? &quot;&quot; : `in ${year}`;
+    }
+
+    getteFragment() {
+        const USstate = this.props.filteredBy.USstate;
+
+        return USstate === &#39;*&#39; ? &quot;&quot; : USStatesMap[USstate.toUpperCase()];
+    }
+
+    // ...
+
+    get format() {
+        return scaleLinear()
+                 .domain(d3extent(this.props.data, d =&gt; d.base_salary))
+                 .tickFormat();
+    }
+}
+
+//
+// Example 3
+//
+// src/components/Meta/Title.js
+class Title extends Component {
+    // ...
+    get jobTitleFragment() {
+        const { jobTitle, year } = this.props.filteredBy;
+        let title = &quot;&quot;;
+
+        if (jobTitle === &#39;*&#39;) {
+            if (year === &#39;*&#39;) {
+                title = &quot;The average H1B in tech pays&quot;;
+            }else{
+                title = &quot;The average tech H1B paid&quot;;
+            }
+        }else{
+            if (jobTitle === &#39;*&#39;) {
+                title = &quot;H1Bs in tech pay&quot;;
+            }else{
+                title = `Software ${jobTitle}s on an H1B`;
+
+                if (year === &#39;*&#39;) {
+                    title += &quot; make&quot;;
+                }else{
+                    title += &quot; made&quot;;
+                }
+            }
+        }
+
+        return title;
+    }
+    // ...
+}
+
+//
+// Example 4
+//
+// src/components/Meta/Title.js
+class Title extends Component {
+    // ...
+    render() {
+        const mean = this.format(d3mean(this.props.data, d =&gt; d.base_salary));
+
+        let title;
+
+        if (this.yearsFragment &amp;&amp; this.USstateFragment) {
+            title = (
+                &lt;h2&gt;
+                    In {this.USstateFragment}, {this.jobTitleFragment}
+                    ${mean}/year {this.yearsFragment}
+                &lt;/h2&gt;
+            );
+        }else{
+            title = (
+                &lt;h2&gt;
+                    {this.jobTitleFragment} ${mean}/year
+                    {this.USstateFragment ? `in ${this.stateFragment}` : &#39;&#39;}
+                    {this.yearsFragment}
+                &lt;/h2&gt;
+            );
+        }
+
+        return title;
+    }
+}
+</code></pre>
+<p>We’re dealing with the <code>(jobTitle, year)</code> combination. Each influences the other when building the fragment for a total 4 different options.</p>
+<h4 id="the-render">The render</h4>
+<p>We put all this together in the <code>render</code> method. A conditional decides which of the two situations we’re in, and we return an <code>&lt;h2&gt;</code> tag with the right text.</p>
+<div class="sourceCode" id="cb93" data-caption="Title.render"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb93-1" title="1"><span class="co">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="kw">class</span> Title <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb93-3" title="3">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb93-4" title="4">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb93-5" title="5">        <span class="kw">const</span> mean <span class="op">=</span> <span class="kw">this</span>.<span class="at">format</span>(<span class="at">d3mean</span>(<span class="kw">this</span>.<span class="va">props</span>.<span class="at">data</span><span class="op">,</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">base_salary</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-6" title="6"></a>
+<a class="sourceLine" id="cb93-7" title="7">        <span class="kw">let</span> title<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-8" title="8"></a>
+<a class="sourceLine" id="cb93-9" title="9">        <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">yearsFragment</span> <span class="op">&amp;&amp;</span> <span class="kw">this</span>.<span class="at">USstateFragment</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb93-10" title="10">            title <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb93-11" title="11">                <span class="op">&lt;</span>h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb93-12" title="12">                    In <span class="op">{</span><span class="kw">this</span>.<span class="at">USstateFragment</span><span class="op">},</span> <span class="op">{</span><span class="kw">this</span>.<span class="at">jobTitleFragment</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb93-13" title="13">                    $<span class="op">{</span>mean<span class="op">}</span><span class="ss">/year {this.yearsFragment}</span></a>
+<a class="sourceLine" id="cb93-14" title="14"><span class="ss">                &lt;/h2</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb93-15" title="15">            )<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-16" title="16">        <span class="op">}</span><span class="cf">else</span><span class="op">{</span></a>
+<a class="sourceLine" id="cb93-17" title="17">            title <span class="op">=</span> (</a>
+<a class="sourceLine" id="cb93-18" title="18">                <span class="op">&lt;</span>h2<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb93-19" title="19">                    <span class="op">{</span><span class="kw">this</span>.<span class="at">jobTitleFragment</span><span class="op">}</span> $<span class="op">{</span>mean<span class="op">}</span><span class="ss">/year</span></a>
+<a class="sourceLine" id="cb93-20" title="20"><span class="ss">                    {this.USstateFragment </span><span class="sc">?</span><span class="ss"> `in ${this.stateFragment}` : &#39;&#39;}</span></a>
+<a class="sourceLine" id="cb93-21" title="21"><span class="ss">                    {this.yearsFragment}</span></a>
+<a class="sourceLine" id="cb93-22" title="22"><span class="ss">                &lt;/h2</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb93-23" title="23">            )<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-24" title="24">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb93-25" title="25"></a>
+<a class="sourceLine" id="cb93-26" title="26">        <span class="cf">return</span> title<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-27" title="27">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb93-28" title="28"><span class="op">}</span></a></code></pre></div>
+<p>Calculate the mean value using <code>d3.mean</code> with a value accessor, turn it into a pretty number with <code>this.format</code>, then use one of two string patterns to make a <code>title</code>.</p>
+<p>And a title appears.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/dataviz-with-title.png" alt="Dataviz with title" /><figcaption>Dataviz with title</figcaption>
+</figure>
+<p>If it doesn’t, consult <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/4f94fcd1c3caeb0fc410636243ca99764e27c5e6">this diff on Github</a>.</p>

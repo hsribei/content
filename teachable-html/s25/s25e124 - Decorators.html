@@ -1,0 +1,11 @@
+<h3 id="decorators">Decorators</h3>
+<p>Before we begin, let me tell you about decorators.</p>
+<p>MobX embraces them to make its API easier to use. You can use MobX without decorators, but decorators make it better.</p>
+<p>A couple years ago, decorators got very close to becoming an official spec, then got held back. I don’t know <em>why</em>, but they’re a great feature whose syntax is unlikely to change. So even if MobX has to change its implementation when decorators do land in the JavaScript spec, you’re not likely to have to change anything.</p>
+<p>You can think of decorators as function wrappers. Instead of code like this:</p>
+<div class="sourceCode" id="cb161" data-caption="Decoratorless function wrapping"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb161-1" title="1"><span class="at">inject</span>(<span class="st">&#39;store&#39;</span><span class="op">,</span> (<span class="op">{</span> store <span class="op">}</span>) <span class="op">=&gt;</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>A thing <span class="cf">with</span> <span class="op">{</span><span class="va">store</span>.<span class="at">value</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can write the same code like this:</p>
+<div class="sourceCode" id="cb162" data-caption="Function wrapping with decorators"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb162-1" title="1">@<span class="at">inject</span>(<span class="st">&#39;store&#39;</span>)</a>
+<a class="sourceLine" id="cb162-2" title="2">(<span class="op">{</span> store <span class="op">}</span>) <span class="op">=&gt;</span> <span class="op">&lt;</span>div<span class="op">&gt;</span>A thing <span class="cf">with</span> <span class="op">{</span><span class="va">store</span>.<span class="at">value</span><span class="op">}</span>&lt;/div<span class="op">&gt;</span></a></code></pre></div>
+<p>Not much of a difference, but it becomes better looking when you work with classes or combine multiple decorators. That’s when they shine. No more <code>})))}))</code> at the end of your functions.</p>
+<p>By the way, <code>inject</code> is to MobX much like <code>connect</code> is to Redux. I’ll explain in a bit.</p>

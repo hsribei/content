@@ -1,0 +1,13 @@
+<h3 id="project-setup">Project setup</h3>
+<p>To get started you’ll need a project. Either start one with <code>create-react-app</code> or in CodeSandbox. Either will work.</p>
+<p>You’ll need a base App component that renders an SVG with an <code>&lt;Alphabet&gt;</code> child. Our component is self-contained so that’s all you need.</p>
+<p>Something like this 👇</p>
+<div class="sourceCode" id="cb132" data-caption="Base App component"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb132-1" title="1"><span class="im">import</span> Alphabet <span class="im">from</span> <span class="st">&#39;./components/Alphabet`;</span></a>
+<a class="sourceLine" id="cb132-2" title="2"></a>
+<a class="sourceLine" id="cb132-3" title="3"><span class="kw">const</span> App <span class="op">=</span> () <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb132-4" title="4">  <span class="op">&lt;</span>svg width<span class="op">=</span><span class="st">&quot;100%&quot;</span> height<span class="op">=</span><span class="st">&quot;600&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb132-5" title="5">    <span class="op">&lt;</span>Alphabet x<span class="op">={</span><span class="dv">32</span><span class="op">}</span> y<span class="op">={</span><span class="dv">300</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb132-6" title="6">  &lt;/svg<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb132-7" title="7">)</a></code></pre></div>
+<p>I follow the convention of putting components in a <code>src/components</code> directory. You don’t have to.</p>
+<p>Remember to install dependencies: d3 and react-transition-group</p>

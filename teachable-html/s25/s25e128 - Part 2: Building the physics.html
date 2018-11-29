@@ -1,0 +1,109 @@
+<h3 id="part-2-building-the-physics">Part 2: Building the physics</h3>
+<p>Our whole physics engine fits into a single MobX store. It contains the collision detection, marble movement calculations, and drives the game loop itself.</p>
+<p>The general approach goes like this:</p>
+<ol type="1">
+<li>Have an observable array of marbles</li>
+<li>Run a <code>simulationStep</code> on each <code>requestAnimationFrame</code> using <code>d3.timer</code></li>
+<li>Change marble positions and speed</li>
+<li>MobX observables and observers trigger re-renders of marbles that move</li>
+</ol>
+<p>The <a href="https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js">whole Physics store</a> is some 120 lines of code. We’ll go slow. Here’s the skeleton:</p>
+<div class="sourceCode" id="cb172" data-caption="Physics skeleton"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb172-1" title="1"><span class="co">// src/logic/Physics.js</span></a>
+<a class="sourceLine" id="cb172-2" title="2"></a>
+<a class="sourceLine" id="cb172-3" title="3"><span class="kw">class</span> Physics <span class="op">{</span></a>
+<a class="sourceLine" id="cb172-4" title="4">    @observable MarbleR <span class="op">=</span> <span class="dv">25</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb172-5" title="5">    @observable width <span class="op">=</span> <span class="dv">800</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb172-6" title="6">    @observable height <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb172-7" title="7">    @observable marbles <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb172-8" title="8">    timer <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb172-9" title="9"></a>
+<a class="sourceLine" id="cb172-10" title="10">    @computed get <span class="at">initialPositions</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb172-11" title="11"></a>
+<a class="sourceLine" id="cb172-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb172-13" title="13"></a>
+<a class="sourceLine" id="cb172-14" title="14">    @action <span class="at">startGameLoop</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb172-15" title="15"></a>
+<a class="sourceLine" id="cb172-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb172-17" title="17"></a>
+<a class="sourceLine" id="cb172-18" title="18">    @action <span class="at">simulationStep</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb172-19" title="19"></a>
+<a class="sourceLine" id="cb172-20" title="20">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb172-21" title="21"></a>
+<a class="sourceLine" id="cb172-22" title="22">    @action <span class="at">shoot</span>(<span class="op">{</span> x<span class="op">,</span> y<span class="op">,</span> vx<span class="op">,</span> vy <span class="op">},</span> i) <span class="op">{</span></a>
+<a class="sourceLine" id="cb172-23" title="23"></a>
+<a class="sourceLine" id="cb172-24" title="24">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb172-25" title="25"><span class="op">}</span></a></code></pre></div>
+<p>We have four observable properties, a <code>timer</code>, a <code>@computed</code> property for initial positions, and 3 actions. <code>startGameLoop</code> starts our game, <code>simulationStep</code> holds the main logic, and <code>shoot</code> shoots a particular marble.</p>
+<p>Let’s walk through.</p>
+<h4 id="initialpositions">initialPositions</h4>
+<div class="sourceCode" id="cb173" data-caption="initialPositions function"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb173-1" title="1"><span class="co">// src/logic/Physics.js</span></a>
+<a class="sourceLine" id="cb173-2" title="2"><span class="kw">class</span> Physics <span class="op">{</span></a>
+<a class="sourceLine" id="cb173-3" title="3">        <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb173-4" title="4">    @computed get <span class="at">initialPositions</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb173-5" title="5">        <span class="kw">const</span> <span class="op">{</span> width<span class="op">,</span> height<span class="op">,</span> MarbleR <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-6" title="6">              center <span class="op">=</span> width/<span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb173-7" title="7"></a>
+<a class="sourceLine" id="cb173-8" title="8">        <span class="kw">const</span> lines <span class="op">=</span> <span class="dv">4</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-9" title="9">              maxY <span class="op">=</span> <span class="dv">200</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb173-10" title="10"></a>
+<a class="sourceLine" id="cb173-11" title="11">        <span class="kw">let</span> marbles <span class="op">=</span> <span class="at">range</span>(lines<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">-1</span>).<span class="at">map</span>(y <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb173-12" title="12">            <span class="cf">if</span> (y <span class="op">===</span> lines) <span class="cf">return</span> [<span class="op">{</span> <span class="dt">x</span><span class="op">:</span> center<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> maxY<span class="op">,</span></a>
+<a class="sourceLine" id="cb173-13" title="13">                                       <span class="dt">vx</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">vy</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">MarbleR</span><span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-14" title="14"></a>
+<a class="sourceLine" id="cb173-15" title="15">            <span class="kw">const</span> left <span class="op">=</span> center <span class="op">-</span> y<span class="op">*</span>(MarbleR<span class="op">+</span><span class="dv">5</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb173-16" title="16">                  right <span class="op">=</span> center <span class="op">+</span> y<span class="op">*</span>(MarbleR<span class="op">+</span><span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-17" title="17"></a>
+<a class="sourceLine" id="cb173-18" title="18">            <span class="cf">return</span> <span class="at">range</span>(left<span class="op">,</span> right<span class="op">,</span> MarbleR<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">5</span>).<span class="at">map</span>(x <span class="op">=&gt;</span> (<span class="op">{</span></a>
+<a class="sourceLine" id="cb173-19" title="19">                <span class="dt">x</span><span class="op">:</span> x<span class="op">,</span></a>
+<a class="sourceLine" id="cb173-20" title="20">                <span class="dt">y</span><span class="op">:</span> maxY<span class="op">-</span>y<span class="op">*</span>(MarbleR<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">5</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb173-21" title="21">                <span class="dt">vx</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-22" title="22">                <span class="dt">vy</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-23" title="23">                <span class="dt">r</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">MarbleR</span></a>
+<a class="sourceLine" id="cb173-24" title="24">            <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-25" title="25">        <span class="op">}</span>).<span class="at">reduce</span>((acc<span class="op">,</span> pos) <span class="op">=&gt;</span> <span class="va">acc</span>.<span class="at">concat</span>(pos)<span class="op">,</span> [])<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-26" title="26"></a>
+<a class="sourceLine" id="cb173-27" title="27">        marbles <span class="op">=</span> [].<span class="at">concat</span>(marbles<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb173-28" title="28">            <span class="dt">x</span><span class="op">:</span> width/<span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-29" title="29">            <span class="dt">y</span><span class="op">:</span> height<span class="dv">-150</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-30" title="30">            <span class="dt">vx</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-31" title="31">            <span class="dt">vy</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb173-32" title="32">            <span class="dt">r</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">MarbleR</span></a>
+<a class="sourceLine" id="cb173-33" title="33">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-34" title="34"></a>
+<a class="sourceLine" id="cb173-35" title="35">        <span class="va">marbles</span>.<span class="at">forEach</span>((m<span class="op">,</span> i) <span class="op">=&gt;</span> marbles[i].<span class="at">id</span> <span class="op">=</span> i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-36" title="36"></a>
+<a class="sourceLine" id="cb173-37" title="37">        <span class="cf">return</span> marbles<span class="op">;</span></a>
+<a class="sourceLine" id="cb173-38" title="38">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb173-39" title="39">    <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb173-40" title="40"><span class="op">}</span></a></code></pre></div>
+<p>Believe it or not, this is like one of those <em>“Arrange things in a triangle”</em> puzzles you’d see in an old Learn How To Program book. Or a whiteboard interview.</p>
+<p>It took me 3 hours to build. Easy to get wrong, fiddly to implement.</p>
+<p>We start with a <code>range</code> of numbers. From <code>lines</code> to <code>0</code> in descending order. We iterate through this list of rows and change each into a list of marbles.</p>
+<p>4 marbles in the first row, 3 in the next, all the way down to 1 in last row.</p>
+<p>For each row, we calculate how much space we have on the <code>left</code> and <code>right</code> of the center and make a <code>range</code> of horizontal positions from <code>left</code> to <code>right</code> with a step of “1 marble size”. Using these positions and the known row, we create marbles as needed.</p>
+<p>We use a <code>.reduce</code> to flatten nested arrays and add the last marble. That’s a corner case I couldn’t solve elegantly, but I’m sure it’s possible.</p>
+<p>In the end, we add an <code>id</code> to each marble. We’re using index as the id, that’s true, but that still ensures we use consistent values throughout our app. Positions in the array may change.</p>
+<h4 id="shoot-and-startgameloop">shoot and startGameLoop</h4>
+<div class="sourceCode" id="cb174" data-caption="shoot and startGameLoop functions"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb174-1" title="1"><span class="co">// src/logic/Physics.js</span></a>
+<a class="sourceLine" id="cb174-2" title="2"><span class="kw">class</span> Physics <span class="op">{</span></a>
+<a class="sourceLine" id="cb174-3" title="3">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb174-4" title="4"></a>
+<a class="sourceLine" id="cb174-5" title="5">    @action <span class="at">startGameLoop</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb174-6" title="6">        <span class="kw">this</span>.<span class="at">marbles</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">initialPositions</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb174-7" title="7"></a>
+<a class="sourceLine" id="cb174-8" title="8">        <span class="kw">this</span>.<span class="at">timer</span> <span class="op">=</span> <span class="at">timer</span>(() <span class="op">=&gt;</span> <span class="kw">this</span>.<span class="at">simulationStep</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb174-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb174-10" title="10"></a>
+<a class="sourceLine" id="cb174-11" title="11">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb174-12" title="12"></a>
+<a class="sourceLine" id="cb174-13" title="13">    @action <span class="at">shoot</span>(<span class="op">{</span> x<span class="op">,</span> y<span class="op">,</span> vx<span class="op">,</span> vy <span class="op">},</span> i) <span class="op">{</span></a>
+<a class="sourceLine" id="cb174-14" title="14">        <span class="kw">const</span> maxSpeed <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb174-15" title="15"></a>
+<a class="sourceLine" id="cb174-16" title="16">        <span class="kw">this</span>.<span class="at">marbles</span>[i].<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span></a>
+<a class="sourceLine" id="cb174-17" title="17">        <span class="kw">this</span>.<span class="at">marbles</span>[i].<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb174-18" title="18">        <span class="kw">this</span>.<span class="at">marbles</span>[i].<span class="at">vx</span> <span class="op">=</span> vx <span class="op">&lt;</span> maxSpeed <span class="op">?</span> vx : maxSpeed<span class="op">;</span></a>
+<a class="sourceLine" id="cb174-19" title="19">        <span class="kw">this</span>.<span class="at">marbles</span>[i].<span class="at">vy</span> <span class="op">=</span> vy <span class="op">&lt;</span> maxSpeed <span class="op">?</span> vy : maxSpeed<span class="op">;</span></a>
+<a class="sourceLine" id="cb174-20" title="20">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb174-21" title="21"><span class="op">}</span></a></code></pre></div>
+<p><code>shoot</code> and <code>startGameLoop</code> are the simplest functions in our physics engine. <code>startGameLoop</code> gets the initial <code>marbles</code> array and starts a D3 timer. <code>shoot</code> updates a specific marble’s coordinates and speed vector.</p>
+<p>👌</p>

@@ -1,0 +1,120 @@
+<h2 id="step-5-add-us-state-and-job-title-filters">Step 5: Add US state and Job Title filters</h2>
+<p>With all that done, we can add two more filters: US states and job titles. Our <code>App</code> component is already set up to use them, so we just have to add them to the <code>Controls</code> component.</p>
+<p>We’ll start with the <code>render</code> method, then handle the parts I said earlier would look repetitive.</p>
+<div class="sourceCode" id="cb112" data-caption="Adding two more rows to Controls"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb112-1" title="1"><span class="co">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb112-2" title="2"><span class="kw">class</span> Controls <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb112-3" title="3">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb112-4" title="4">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb112-5" title="5">        <span class="kw">const</span> <span class="op">{</span> data <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">props</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb112-6" title="6"></a>
+<a class="sourceLine" id="cb112-7" title="7">        <span class="kw">const</span> years <span class="op">=</span> <span class="kw">new</span> <span class="at">Set</span>(<span class="va">data</span>.<span class="at">map</span>(d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="va">submit_date</span>.<span class="at">getFullYear</span>()))<span class="op">,</span></a>
+<a class="sourceLine" id="cb112-8" title="8">              <span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb112-9" title="9">              jobTitles <span class="op">=</span> <span class="kw">new</span> <span class="at">Set</span>(<span class="va">data</span>.<span class="at">map</span>(d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">clean_job_title</span>))<span class="op">,</span></a>
+<a class="sourceLine" id="cb112-10" title="10">              USstates <span class="op">=</span> <span class="kw">new</span> <span class="at">Set</span>(<span class="va">data</span>.<span class="at">map</span>(d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">USstate</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb112-11" title="11">              <span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb112-12" title="12"></a>
+<a class="sourceLine" id="cb112-13" title="13">        <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb112-14" title="14">            <span class="op">&lt;</span>div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb112-15" title="15">                <span class="op">&lt;</span>ControlRow data<span class="op">={</span>data<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-16" title="16">                            toggleNames<span class="op">={</span><span class="va">Array</span>.<span class="at">from</span>(<span class="va">years</span>.<span class="at">values</span>())<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-17" title="17">                            picked<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">year</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb112-18" title="18">                            updateDataFilter<span class="op">={</span><span class="kw">this</span>.<span class="at">updateYearFilter</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb112-19" title="19">                            /&gt;</a>
+<a class="sourceLine" id="cb112-20" title="20"></a>
+<a class="sourceLine" id="cb112-21" title="21">            <span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb112-22" title="22">                <span class="op">&lt;</span>ControlRow data<span class="op">={</span>data<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-23" title="23">                            toggleNames<span class="op">={</span><span class="va">Array</span>.<span class="at">from</span>(<span class="va">jobTitles</span>.<span class="at">values</span>())<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-24" title="24">                            picked<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">jobTitle</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb112-25" title="25">                            updateDataFilter<span class="op">={</span><span class="kw">this</span>.<span class="at">updateJobTitleFilter</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb112-26" title="26"></a>
+<a class="sourceLine" id="cb112-27" title="27">                <span class="op">&lt;</span>ControlRow data<span class="op">={</span>data<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-28" title="28">                            toggleNames<span class="op">={</span><span class="va">Array</span>.<span class="at">from</span>(<span class="va">USstates</span>.<span class="at">values</span>())<span class="op">}</span></a>
+<a class="sourceLine" id="cb112-29" title="29">                            picked<span class="op">={</span><span class="kw">this</span>.<span class="va">state</span>.<span class="at">USstate</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb112-30" title="30">                            updateDataFilter<span class="op">={</span><span class="kw">this</span>.<span class="at">updateUSstateFilter</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb112-31" title="31">                            capitalize<span class="op">=</span><span class="st">&quot;true&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb112-32" title="32">                <span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb112-33" title="33">            &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb112-34" title="34">        )</a>
+<a class="sourceLine" id="cb112-35" title="35">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb112-36" title="36"><span class="op">}</span></a></code></pre></div>
+<p>Ok, this part is plenty repetitive, too.</p>
+<p>We created new sets for <code>jobTitles</code> and <code>USstates</code>, then rendered two more <code>ControlRow</code> elements with appropriate attributes. They get <code>toggleNames</code> for building the buttons, <code>picked</code> to know which is active, an <code>updateDataFilter</code> callback, and we tell US states to render capitalized.</p>
+<p>The implementations of those <code>updateDataFilter</code> callbacks follow the same pattern as <code>updateYearFilter</code>.</p>
+<div class="sourceCode" id="cb113" data-caption="new updateDataFilter callbacks"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb113-1" title="1"><span class="co">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb113-2" title="2"></a>
+<a class="sourceLine" id="cb113-3" title="3"><span class="kw">class</span> Controls <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-4" title="4">    state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-5" title="5">        <span class="dt">yearFilter</span><span class="op">:</span> () <span class="op">=&gt;</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb113-6" title="6">        <span class="dt">jobTitleFilter</span><span class="op">:</span> () <span class="op">=&gt;</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb113-7" title="7">        <span class="dt">USstateFilter</span><span class="op">:</span> () <span class="op">=&gt;</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb113-8" title="8">        <span class="dt">year</span><span class="op">:</span> <span class="st">&quot;*&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb113-9" title="9">        <span class="dt">USstate</span><span class="op">:</span> <span class="st">&quot;*&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb113-10" title="10">        <span class="dt">jobTitle</span><span class="op">:</span> <span class="st">&quot;*&quot;</span></a>
+<a class="sourceLine" id="cb113-11" title="11">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb113-12" title="12"></a>
+<a class="sourceLine" id="cb113-13" title="13">    updateJobTitleFilter <span class="op">=</span> (title<span class="op">,</span> reset) <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-14" title="14">        <span class="kw">let</span> filter <span class="op">=</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">clean_job_title</span> <span class="op">===</span> title<span class="op">;</span></a>
+<a class="sourceLine" id="cb113-15" title="15"></a>
+<a class="sourceLine" id="cb113-16" title="16">        <span class="cf">if</span> (reset <span class="op">||</span> <span class="op">!</span>title) <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-17" title="17">            filter <span class="op">=</span> () <span class="op">=&gt;</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb113-18" title="18">            title <span class="op">=</span> <span class="st">&quot;*&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb113-19" title="19">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb113-20" title="20"></a>
+<a class="sourceLine" id="cb113-21" title="21">        <span class="kw">this</span>.<span class="at">setState</span>(</a>
+<a class="sourceLine" id="cb113-22" title="22">            <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-23" title="23">                <span class="dt">jobTitleFilter</span><span class="op">:</span> filter<span class="op">,</span></a>
+<a class="sourceLine" id="cb113-24" title="24">                <span class="dt">jobTitle</span><span class="op">:</span> title</a>
+<a class="sourceLine" id="cb113-25" title="25">            <span class="op">},</span></a>
+<a class="sourceLine" id="cb113-26" title="26">            () <span class="op">=&gt;</span> <span class="kw">this</span>.<span class="at">reportUpdateUpTheChain</span>()</a>
+<a class="sourceLine" id="cb113-27" title="27">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb113-28" title="28">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb113-29" title="29"></a>
+<a class="sourceLine" id="cb113-30" title="30">    updateUSstateFilter <span class="op">=</span> (USstate<span class="op">,</span> reset) <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-31" title="31">        <span class="kw">let</span> filter <span class="op">=</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">USstate</span> <span class="op">===</span> USstate<span class="op">;</span></a>
+<a class="sourceLine" id="cb113-32" title="32"></a>
+<a class="sourceLine" id="cb113-33" title="33">        <span class="cf">if</span> (reset <span class="op">||</span> <span class="op">!</span>USstate) <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-34" title="34">            filter <span class="op">=</span> () <span class="op">=&gt;</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb113-35" title="35">            USstate <span class="op">=</span> <span class="st">&quot;*&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb113-36" title="36">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb113-37" title="37"></a>
+<a class="sourceLine" id="cb113-38" title="38">        <span class="kw">this</span>.<span class="at">setState</span>(</a>
+<a class="sourceLine" id="cb113-39" title="39">            <span class="op">{</span></a>
+<a class="sourceLine" id="cb113-40" title="40">                <span class="dt">USstateFilter</span><span class="op">:</span> filter<span class="op">,</span></a>
+<a class="sourceLine" id="cb113-41" title="41">                <span class="dt">USstate</span><span class="op">:</span> USstate</a>
+<a class="sourceLine" id="cb113-42" title="42">            <span class="op">},</span></a>
+<a class="sourceLine" id="cb113-43" title="43">            () <span class="op">=&gt;</span> <span class="kw">this</span>.<span class="at">reportUpdateUpTheChain</span>()</a>
+<a class="sourceLine" id="cb113-44" title="44">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb113-45" title="45">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb113-46" title="46">    </a>
+<a class="sourceLine" id="cb113-47" title="47">    <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb113-48" title="48"><span class="op">}</span></a>
+<a class="sourceLine" id="cb113-49" title="49"></a>
+<a class="sourceLine" id="cb113-50" title="50"><span class="im">export</span> <span class="im">default</span> Controls<span class="op">;</span></a></code></pre></div>
+<p>Yes, they’re basically the same as <code>updateYearFilter</code>. The only difference is a changed <code>filter</code> function and using different keys in <code>setState()</code>.</p>
+<p>Why separate functions then? No need to get fancy. It would’ve made the code harder to read.</p>
+<p>Our last step is to add these new keys to the <code>reportUpdateUpTheChain</code> function.</p>
+<div class="sourceCode" id="cb114" data-caption="Add new filters to main state update"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb114-1" title="1"><span class="co">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb114-2" title="2"></a>
+<a class="sourceLine" id="cb114-3" title="3"><span class="kw">class</span> Controls <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb114-4" title="4">    <span class="at">reportUpdateUpTheChain</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb114-5" title="5">        <span class="kw">this</span>.<span class="va">props</span>.<span class="at">updateDataFilter</span>(</a>
+<a class="sourceLine" id="cb114-6" title="6">            (filters <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb114-7" title="7">                <span class="cf">return</span> d <span class="op">=&gt;</span></a>
+<a class="sourceLine" id="cb114-8" title="8">                    <span class="va">filters</span>.<span class="at">yearFilter</span>(d) <span class="op">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb114-9" title="9">                    <span class="va">filters</span>.<span class="at">jobTitleFilter</span>(d) <span class="op">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb114-10" title="10">                    <span class="va">filters</span>.<span class="at">USstateFilter</span>(d)<span class="op">;</span></a>
+<a class="sourceLine" id="cb114-11" title="11">            <span class="op">}</span>)(<span class="kw">this</span>.<span class="at">state</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb114-12" title="12">            <span class="op">{</span></a>
+<a class="sourceLine" id="cb114-13" title="13">                <span class="dt">USstate</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">USstate</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb114-14" title="14">                <span class="dt">year</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">year</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb114-15" title="15">                <span class="dt">jobTitle</span><span class="op">:</span> <span class="kw">this</span>.<span class="va">state</span>.<span class="at">jobTitle</span></a>
+<a class="sourceLine" id="cb114-16" title="16">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb114-17" title="17">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb114-18" title="18">    <span class="op">}</span></a></code></pre></div>
+<p>We add them to the filter condition with <code>&amp;&amp;</code> and expand the <code>filteredBy</code> argument.</p>
+<p>Two more rows of filters show up.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png" alt="All the filters" /><figcaption>All the filters</figcaption>
+</figure>
+<p>:clap:</p>
+<p>Again, if it didn’t work, consult <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f">the diff on GitHub</a>.</p>

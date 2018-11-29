@@ -1,0 +1,21 @@
+<h2 id="step-3-load-the-datasets">Step 3: Load the datasets</h2>
+<p>Now we can use D3 to load our data with fetch requests.</p>
+<div class="sourceCode" id="cb61" data-caption="Data loading"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb61-1" title="1"><span class="co">// src/DataHandling.js</span></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="im">export</span> <span class="kw">const</span> loadAllData <span class="op">=</span> (callback <span class="op">=</span> <span class="va">_</span>.<span class="at">noop</span>) <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-3" title="3">    <span class="va">Promise</span>.<span class="at">all</span>([</a>
+<a class="sourceLine" id="cb61-4" title="4">        <span class="va">d3</span>.<span class="at">json</span>(<span class="st">&quot;data/us.json&quot;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb61-5" title="5">        <span class="va">d3</span>.<span class="at">csv</span>(<span class="st">&quot;data/us-county-names-normalized.csv&quot;</span><span class="op">,</span> cleanCounty)<span class="op">,</span></a>
+<a class="sourceLine" id="cb61-6" title="6">        <span class="va">d3</span>.<span class="at">csv</span>(<span class="st">&quot;data/county-median-incomes.csv&quot;</span><span class="op">,</span> cleanIncome)<span class="op">,</span></a>
+<a class="sourceLine" id="cb61-7" title="7">        <span class="va">d3</span>.<span class="at">csv</span>(<span class="st">&quot;data/h1bs-2012-2016-shortened.csv&quot;</span><span class="op">,</span> cleanSalary)<span class="op">,</span></a>
+<a class="sourceLine" id="cb61-8" title="8">        <span class="va">d3</span>.<span class="at">tsv</span>(<span class="st">&quot;data/us-state-names.tsv&quot;</span><span class="op">,</span> cleanUSStateName)</a>
+<a class="sourceLine" id="cb61-9" title="9">    ]).<span class="at">then</span>(([us<span class="op">,</span> countyNames<span class="op">,</span> medianIncomes<span class="op">,</span> techSalaries<span class="op">,</span> USstateNames]) <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-10" title="10"></a>
+<a class="sourceLine" id="cb61-11" title="11">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-12" title="12"><span class="op">};</span></a></code></pre></div>
+<p>Here you can see another ES6 trick: default argument values. If <code>callback</code> is undefined, we set it to <code>_.noop</code> - a function that does nothing. This lets us later call <code>callback()</code> without worrying whether it’s defined.</p>
+<p>In version 5, D3 updated its data loading methods to use promises instead of callbacks. You can load a single file using <code>d3.csv(&quot;filename&quot;).then(data =&gt; ....</code>. The promise resolves with your data, or throws an error.</p>
+<p>If you’re on D3v4 and can’t upgrade, you’ll have to import from <code>d3-fetch</code>.</p>
+<p>Each <code>d3.csv</code> call makes a fetch request, parses the fetched CSV file into an array of JavaScript dictionaries, and passes each row through the provided cleanup function. We pass all median incomes through <code>cleanIncome</code>, salaries through <code>cleanSalary</code>, etc.</p>
+<p>To load multiple files, we use <code>Promise.all</code> with a list of unresolved promises. Once resolved, our <code>.then</code> handler gets a list of results. We use array destructuring to expand that list into our respective datasets before running some more logic to tie them together.</p>
+<p>D3 supports formats like <code>json</code>, <code>csv</code>, <code>tsv</code>, <code>text</code>, and <code>xml</code> out of the box. You can make it work with custom data sources through the underlying <code>request</code> API.</p>
+<p>PS: we’re using the shortened salary dataset to make page reloads faster while building our project.</p>

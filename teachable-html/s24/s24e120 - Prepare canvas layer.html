@@ -1,0 +1,27 @@
+<h3 id="preparing-a-canvas-layer">Preparing a canvas layer</h3>
+<p>Our changes start in <code>src/components/index.jsx</code>. We have to throw away the <code>&lt;svg&gt;</code> element and replace it with a Konva stage.</p>
+<p>You can think of a Konva stage as a Canvas element with a bunch of helper methods attached. Some of them Konva uses internally; others are exposed as an API. Functions like exporting to an image file, detecting intersections, etc.</p>
+<div class="sourceCode" id="cb155" data-caption="Import Konva and set the stage"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb155-1" title="1"><span class="co">// src/components/index.jsx</span></a>
+<a class="sourceLine" id="cb155-2" title="2"></a>
+<a class="sourceLine" id="cb155-3" title="3"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb155-4" title="4"><span class="im">import</span> <span class="op">{</span> Stage <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-konva&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb155-5" title="5"></a>
+<a class="sourceLine" id="cb155-6" title="6"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb155-7" title="7"><span class="kw">class</span> App <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb155-8" title="8">    <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb155-9" title="9">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb155-10" title="10">        <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb155-11" title="11">            <span class="co">// ..</span></a>
+<a class="sourceLine" id="cb155-12" title="12">                     <span class="op">&lt;</span>Stage width<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">svgWidth</span><span class="op">}</span> height<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">svgHeight</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb155-13" title="13">                         <span class="op">&lt;</span>Particles particles<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">particles</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb155-14" title="14"></a>
+<a class="sourceLine" id="cb155-15" title="15">                     &lt;/Stage<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb155-16" title="16"></a>
+<a class="sourceLine" id="cb155-17" title="17">                 &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb155-18" title="18">                 <span class="op">&lt;</span>Footer N<span class="op">={</span><span class="kw">this</span>.<span class="va">props</span>.<span class="va">particles</span>.<span class="at">length</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb155-19" title="19">             &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb155-20" title="20">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb155-21" title="21">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb155-22" title="22"><span class="op">}</span></a></code></pre></div>
+<p>We import <code>Stage</code> from <code>react-konva</code>, then use it instead of the <code>&lt;svg&gt;</code> element in the <code>render</code> method. It gets a <code>width</code> and a <code>height</code>.</p>
+<p>Inside, we render the <code>Particles</code> component. It’s going to create a Konva layer and use low-level Canvas methods to render particles as sprites.</p>

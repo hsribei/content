@@ -1,0 +1,24 @@
+<h4 id="onenter">onEnter</h4>
+<p>We start with the enter transition in the <code>onEnter</code> callback.</p>
+<div class="sourceCode" id="cb137" data-caption="Enter transition"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb137-1" title="1"><span class="co">// src/components/Letter.js</span></a>
+<a class="sourceLine" id="cb137-2" title="2">    onEnter <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb137-3" title="3">        <span class="co">// Letter is entering the visualization</span></a>
+<a class="sourceLine" id="cb137-4" title="4">        <span class="kw">let</span> node <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="kw">this</span>.<span class="va">letterRef</span>.<span class="at">current</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb137-5" title="5"></a>
+<a class="sourceLine" id="cb137-6" title="6">        <span class="va">node</span>.<span class="at">transition</span>()</a>
+<a class="sourceLine" id="cb137-7" title="7">            .<span class="at">duration</span>(<span class="dv">750</span>)</a>
+<a class="sourceLine" id="cb137-8" title="8">            .<span class="at">ease</span>(<span class="va">d3</span>.<span class="at">easeCubicInOut</span>)</a>
+<a class="sourceLine" id="cb137-9" title="9">            .<span class="at">attr</span>(<span class="st">&quot;y&quot;</span><span class="op">,</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb137-10" title="10">            .<span class="at">style</span>(<span class="st">&quot;fill-opacity&quot;</span><span class="op">,</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb137-11" title="11">            .<span class="at">on</span>(<span class="st">&quot;end&quot;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb137-12" title="12">                <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb137-13" title="13">                    <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb137-14" title="14">                    <span class="dt">fillOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb137-15" title="15">                    <span class="dt">color</span><span class="op">:</span> UpdateColor</a>
+<a class="sourceLine" id="cb137-16" title="16">                <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb137-17" title="17">            <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb137-18" title="18">    <span class="op">};</span></a></code></pre></div>
+<p>We use <code>d3.select</code> to grab our DOM node and take control with D3. Start a new transition with <code>.transition()</code>, specify a duration, an easing function, and specify the changes. Vertical position moves to <code>0</code>, opacity changes to <code>1</code>.</p>
+<p>This creates a drop-in fade-in effect.</p>
+<p>When our transition ends, we update state with the new <code>y</code> coordinate, <code>fillOpacity</code>, and <code>color</code>.</p>
+<p>The result is an invisible letter that starts at -60px and moves into 0px and full visibility over 750 milliseconds.</p>

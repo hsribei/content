@@ -1,0 +1,38 @@
+<h2 id="a-quick-blackbox-example---a-reactd3-axis">A quick blackbox example - a React+D3 axis</h2>
+<p>Now let’s say we want to use that same axis code but as a React component. The simplest way is to use a blackbox component approach like this:</p>
+<div class="sourceCode" id="cb22" data-caption="React blackbox axis"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">class</span> Axis <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-2" title="2">    gRef <span class="op">=</span> <span class="va">React</span>.<span class="at">createRef</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-3" title="3">        </a>
+<a class="sourceLine" id="cb22-4" title="4">    <span class="at">componentDidMount</span>() <span class="op">{</span> <span class="kw">this</span>.<span class="at">d3render</span>() <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-5" title="5">    <span class="at">componentDidUpdate</span>() <span class="op">{</span> <span class="kw">this</span>.<span class="at">d3render</span>() <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-6" title="6"></a>
+<a class="sourceLine" id="cb22-7" title="7">    <span class="at">d3render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-8" title="8">        <span class="kw">const</span> scale <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()</a>
+<a class="sourceLine" id="cb22-9" title="9">                      .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>])</a>
+<a class="sourceLine" id="cb22-10" title="10">                      .<span class="at">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">200</span>])<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-11" title="11">        <span class="kw">const</span> axis <span class="op">=</span> <span class="va">d3</span>.<span class="at">axisBottom</span>(scale)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-12" title="12"></a>
+<a class="sourceLine" id="cb22-13" title="13">        <span class="va">d3</span>.<span class="at">select</span>(<span class="kw">this</span>.<span class="at">gRef</span>)</a>
+<a class="sourceLine" id="cb22-14" title="14">          .<span class="at">call</span>(axis)<span class="op">;</span>  </a>
+<a class="sourceLine" id="cb22-15" title="15">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-16" title="16"></a>
+<a class="sourceLine" id="cb22-17" title="17">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-18" title="18">        <span class="cf">return</span> <span class="op">&lt;</span>g transform<span class="op">=</span><span class="st">&quot;translate(10, 30)&quot;</span> ref<span class="op">={</span><span class="kw">this</span>.<span class="at">gRef</span><span class="op">}</span> /&gt;</a>
+<a class="sourceLine" id="cb22-19" title="19">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-20" title="20"><span class="op">}</span></a></code></pre></div>
+<p>So much code! Worth it for the other benefits of using React in your dataviz. You’ll see :)</p>
+<p>We created an <code>Axis</code> component that extends React’s base <code>Component</code> class. We can’t use functional components because we need lifecycle hooks.</p>
+<p>Our component has a <code>render</code> method. It returns a grouping element (<code>g</code>) moved 10px to the right and 30px down using the <code>transform</code> attribute. Same as before.</p>
+<p>A React ref saved in <code>this.gRef</code> and passed into our <code>&lt;g&gt;</code> element with <code>ref</code> lets us talk to the DOM node directly. We need this to hand over rendering control to D3.</p>
+<p>The <code>d3render</code> method looks familiar. It’s the same code we used in the vanilla D3 example. Scale, axis, select, call. Only difference is that instead of selecting <code>svg</code> and appending a <code>g</code> element, we select the <code>g</code> element rendered by React and use that.</p>
+<p>We use <code>componentDidUpdate</code> and <code>componentDidMount</code> to keep our render up to date. Ensures that our axis re-renders every time React’s engine decides to render our component.</p>
+<p>That wasn’t so bad, was it?</p>
+<p><a href="https://codesandbox.io/s/3xy2jr1y5m">Try it out on Codesandbox</a>.</p>
+<iframe src="https://codesandbox.io/embed/3xy2jr1y5m?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+</iframe>
+<p>You can make the axis more useful by getting positioning, scale, and orientation from props. We’ll do that in our big project.</p>
+<h3 id="practical-exercise">Practical exercise</h3>
+<p>Try implementing those as an exercise. Make the axis more reusable with some carefully placed props.</p>
+<p>Here’s my solution, if you get stuck 👉 <a href="https://codesandbox.io/s/5ywlj6jn4l">https://codesandbox.io/s/5ywlj6jn4l</a></p>
+<iframe src="https://codesandbox.io/embed/5ywlj6jn4l?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+</iframe>

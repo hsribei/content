@@ -1,0 +1,165 @@
+<h2 id="step-3-countymapcountymap.js">Step 3: CountyMap/CountyMap.js</h2>
+<p>Here comes the fun part - declaratively drawing a map. You’ll see why I love using React for dataviz.</p>
+<p>We’re using the <a href="#full-feature-integration">full-feature integration</a> approach and a lot of D3 maps magic. Drawing a map with D3 I’m always surprised how little code it takes.</p>
+<p>Start with the imports: React, D3, lodash, topojson, County component.</p>
+<div class="sourceCode" id="cb67" data-caption="Import CountyMap dependencies"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb67-1" title="1"><span class="co">// src/components/CountyMap/CountyMap.js</span></a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="im">import</span> React<span class="op">,</span> <span class="op">{</span> Component <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">&#39;d3&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st">&#39;topojson&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-5" title="5"><span class="im">import</span> _ <span class="im">from</span> <span class="st">&#39;lodash&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb67-6" title="6"></a>
+<a class="sourceLine" id="cb67-7" title="7"><span class="im">import</span> County <span class="im">from</span> <span class="st">&#39;./County&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Out of these, we haven’t built <code>County</code> yet, and you haven’t seen <code>topojson</code> before.</p>
+<p>TopoJSON is a geographical data format based on JSON. We’re using the <code>topojson</code> library to translate our geographical datasets into GeoJSON, which is another way of defining geo data with JSON.</p>
+<p>I don’t know why there are two, but TopoJSON produces smaller files, and GeoJSON can be fed directly into D3’s geo functions. ¯\<em>(ツ)</em>/¯</p>
+<p>Maybe it’s a case of <a href="https://xkcd.com/927/">competing standards</a>.</p>
+<h3 id="constructor">Constructor</h3>
+<p>We stub out the <code>CountyMap</code> component then fill it in with logic.</p>
+<div class="sourceCode" id="cb68" data-caption="CountyMap stub"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb68-1" title="1"><span class="co">// src/components/CountyMap/CountyMap.js</span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="kw">class</span> CountyMap <span class="kw">extends</span> Component <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-3" title="3">    <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-4" title="4">        <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb68-5" title="5"></a>
+<a class="sourceLine" id="cb68-6" title="6">        <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-7" title="7">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-9" title="9"></a>
+<a class="sourceLine" id="cb68-10" title="10">    <span class="kw">static</span> <span class="at">getDerivedStateFromProps</span>(props<span class="op">,</span> state) <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-11" title="11"></a>
+<a class="sourceLine" id="cb68-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-13" title="13"></a>
+<a class="sourceLine" id="cb68-14" title="14">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-15" title="15">        <span class="kw">const</span> <span class="op">{</span> usTopoJson <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">props</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-16" title="16">        </a>
+<a class="sourceLine" id="cb68-17" title="17">        <span class="cf">if</span> (<span class="op">!</span>usTopoJson) <span class="op">{</span></a>
+<a class="sourceLine" id="cb68-18" title="18">            <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb68-19" title="19">        <span class="op">}</span><span class="cf">else</span><span class="op">{</span></a>
+<a class="sourceLine" id="cb68-20" title="20">            <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb68-21" title="21"></a>
+<a class="sourceLine" id="cb68-22" title="22">            )<span class="op">;</span></a>
+<a class="sourceLine" id="cb68-23" title="23">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-24" title="24">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb68-25" title="25"><span class="op">}</span></a>
+<a class="sourceLine" id="cb68-26" title="26"></a>
+<a class="sourceLine" id="cb68-27" title="27"><span class="im">export</span> <span class="im">default</span> CountyMap<span class="op">;</span></a></code></pre></div>
+<p>We’ll set up default D3 state in <code>constructor</code> and keep it up to date with <code>getDerivedStateFromProps</code>.</p>
+<p>We need three D3 objects to build a choropleth map: a geographical projection, a path generator, and a quantize scale for colors.</p>
+<div class="sourceCode" id="cb69" data-caption="D3 objects for a map"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb69-1" title="1"><span class="co">// src/components/CountyMap/CountyMap.js</span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="kw">class</span> CountyMap <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb69-3" title="3">    <span class="at">constructor</span>(props) <span class="op">{</span></a>
+<a class="sourceLine" id="cb69-4" title="4">        <span class="kw">super</span>(props)<span class="op">;</span></a>
+<a class="sourceLine" id="cb69-5" title="5"></a>
+<a class="sourceLine" id="cb69-6" title="6">        <span class="kw">const</span> projection <span class="op">=</span> <span class="va">d3</span>.<span class="at">geoAlbersUsa</span>().<span class="at">scale</span>(<span class="dv">1280</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb69-7" title="7"></a>
+<a class="sourceLine" id="cb69-8" title="8">        <span class="kw">this</span>.<span class="at">state</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb69-9" title="9">            <span class="dt">geoPath</span><span class="op">:</span> <span class="va">d3</span>.<span class="at">geoPath</span>().<span class="at">projection</span>(projection)<span class="op">,</span></a>
+<a class="sourceLine" id="cb69-10" title="10">            <span class="dt">quantize</span><span class="op">:</span> <span class="va">d3</span>.<span class="at">scaleQuantize</span>().<span class="at">range</span>(<span class="va">d3</span>.<span class="at">range</span>(<span class="dv">9</span>))<span class="op">,</span></a>
+<a class="sourceLine" id="cb69-11" title="11">            projection</a>
+<a class="sourceLine" id="cb69-12" title="12">        <span class="op">};</span></a>
+<a class="sourceLine" id="cb69-13" title="13">    <span class="op">}</span></a></code></pre></div>
+<p>You might remember geographical projections from high school. They map a sphere to a flat surface. We use <code>geoAlbersUsa</code> because it’s made specifically for maps of the USA.</p>
+<p>D3 offers many other projections. You can see them on <a href="https://github.com/d3/d3-geo#projections">d3-geo’s Github page</a>.</p>
+<p>A <code>geoPath</code> generator takes a projection and returns a function that generates the <code>d</code> attribute of <code>&lt;path&gt;</code> elements. This is the most general way to specify SVG shapes. I won’t go into explaining the <code>d</code> here, but it’s <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d">an entire language</a> for describing shapes.</p>
+<p><code>quantize</code> is a D3 scale. We’ve talked about the basics of scales in the <a href="#blackbox-axis">D3 Axis example</a>. This one splits a domain into 9 quantiles and assigns them specific values from the <code>range</code>.</p>
+<p>Let’s say our domain goes from 0 to 90. Calling the scale with any number between 0 and 9 would return 1. 10 to 19 returns 2 and so on. We’ll use it to pick colors from an array.</p>
+<h3 id="getderivedstatefromprops">getDerivedStateFromProps</h3>
+<p>Keeping our geo path and quantize scale up to date is simple, but we’ll make it harder by adding a zoom feature. It won’t work until we build the filtering, but hey, we’ll already have it by then! :D</p>
+<div class="sourceCode" id="cb70" data-caption="CountyMap getDerivedStateFromProps"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb70-1" title="1">        <span class="co">// src/components/CountyMap/CountyMap.js</span></a>
+<a class="sourceLine" id="cb70-2" title="2">    <span class="kw">static</span> <span class="at">getDerivedStateFromProps</span>(props<span class="op">,</span> state) <span class="op">{</span></a>
+<a class="sourceLine" id="cb70-3" title="3">        <span class="kw">let</span> <span class="op">{</span> projection<span class="op">,</span> quantize<span class="op">,</span> geoPath <span class="op">}</span> <span class="op">=</span> state<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-4" title="4"></a>
+<a class="sourceLine" id="cb70-5" title="5">        projection</a>
+<a class="sourceLine" id="cb70-6" title="6">            .<span class="at">translate</span>([<span class="va">props</span>.<span class="at">width</span> / <span class="dv">2</span><span class="op">,</span> <span class="va">props</span>.<span class="at">height</span> / <span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb70-7" title="7">            .<span class="at">scale</span>(<span class="va">props</span>.<span class="at">width</span> <span class="op">*</span> <span class="fl">1.3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-8" title="8"></a>
+<a class="sourceLine" id="cb70-9" title="9">        <span class="cf">if</span> (<span class="va">props</span>.<span class="at">zoom</span> <span class="op">&amp;&amp;</span> <span class="va">props</span>.<span class="at">usTopoJson</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb70-10" title="10">            <span class="kw">const</span> us <span class="op">=</span> <span class="va">props</span>.<span class="at">usTopoJson</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb70-11" title="11">                USstatePaths <span class="op">=</span> <span class="va">topojson</span>.<span class="at">feature</span>(us<span class="op">,</span> <span class="va">us</span>.<span class="va">objects</span>.<span class="at">states</span>).<span class="at">features</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb70-12" title="12">                id <span class="op">=</span> <span class="va">_</span>.<span class="at">find</span>(<span class="va">props</span>.<span class="at">USstateNames</span><span class="op">,</span> <span class="op">{</span> <span class="dt">code</span><span class="op">:</span> <span class="va">props</span>.<span class="at">zoom</span> <span class="op">}</span>).<span class="at">id</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb70-13" title="13"></a>
+<a class="sourceLine" id="cb70-14" title="14">            <span class="va">projection</span>.<span class="at">scale</span>(<span class="va">props</span>.<span class="at">width</span> <span class="op">*</span> <span class="fl">4.5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-15" title="15"></a>
+<a class="sourceLine" id="cb70-16" title="16">            <span class="kw">const</span> centroid <span class="op">=</span> <span class="va">geoPath</span>.<span class="at">centroid</span>(<span class="va">_</span>.<span class="at">find</span>(USstatePaths<span class="op">,</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> id <span class="op">}</span>))<span class="op">,</span></a>
+<a class="sourceLine" id="cb70-17" title="17">                translate <span class="op">=</span> <span class="va">projection</span>.<span class="at">translate</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-18" title="18"></a>
+<a class="sourceLine" id="cb70-19" title="19">            <span class="va">projection</span>.<span class="at">translate</span>([</a>
+<a class="sourceLine" id="cb70-20" title="20">                translate[<span class="dv">0</span>] <span class="op">-</span> centroid[<span class="dv">0</span>] <span class="op">+</span> <span class="va">props</span>.<span class="at">width</span> / <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb70-21" title="21">                translate[<span class="dv">1</span>] <span class="op">-</span> centroid[<span class="dv">1</span>] <span class="op">+</span> <span class="va">props</span>.<span class="at">height</span> / <span class="dv">2</span></a>
+<a class="sourceLine" id="cb70-22" title="22">            ])<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-23" title="23">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb70-24" title="24"></a>
+<a class="sourceLine" id="cb70-25" title="25">        <span class="cf">if</span> (<span class="va">props</span>.<span class="at">values</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb70-26" title="26">            <span class="va">quantize</span>.<span class="at">domain</span>([</a>
+<a class="sourceLine" id="cb70-27" title="27">                <span class="va">d3</span>.<span class="at">quantile</span>(<span class="va">props</span>.<span class="at">values</span><span class="op">,</span> <span class="fl">0.15</span><span class="op">,</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">value</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb70-28" title="28">                <span class="va">d3</span>.<span class="at">quantile</span>(<span class="va">props</span>.<span class="at">values</span><span class="op">,</span> <span class="fl">0.85</span><span class="op">,</span> d <span class="op">=&gt;</span> <span class="va">d</span>.<span class="at">value</span>)</a>
+<a class="sourceLine" id="cb70-29" title="29">            ])<span class="op">;</span></a>
+<a class="sourceLine" id="cb70-30" title="30">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb70-31" title="31"></a>
+<a class="sourceLine" id="cb70-32" title="32">        <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb70-33" title="33">            ...<span class="at">state</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb70-34" title="34">            projection<span class="op">,</span></a>
+<a class="sourceLine" id="cb70-35" title="35">            quantize</a>
+<a class="sourceLine" id="cb70-36" title="36">        <span class="op">};</span></a>
+<a class="sourceLine" id="cb70-37" title="37">    <span class="op">}</span></a></code></pre></div>
+<p>There’s a lot going on here.</p>
+<p>We destructure <code>projection</code>, <code>quantize</code>, and <code>geoPath</code> out of component state. These are the D3 object we’re about to update.</p>
+<p>First up is the projection. We translate (move) it to the center of our drawing area and set the scale property. You have to play around with this value until you get a nice result because it’s different for every projection.</p>
+<p>Then we do some weird stuff if <code>zoom</code> is defined.</p>
+<p>We get the list of all US state features in our geo data, find the one we’re <code>zoom</code>-ing on, and use the <code>geoPath.centroid</code> method to calculate its center point. This gives us a new coordinate to <code>translate</code> our projection onto.</p>
+<p>The calculation in <code>.translate()</code> helps us align the center point of our <code>zoom</code> US state with the center of the drawing area.</p>
+<p>While all of this is going on, we also tweak the <code>.scale</code> property to make the map bigger. This creates a zooming effect.</p>
+<p>After all that, we update the quantize scale’s domain with new values. Using <code>d3.quantile</code> lets us offset the scale to produce a more interesting map. Again, I discovered these values through experiment - they cut off the top and bottom of the range because there isn’t much there. This brings higher contrast to the richer middle of the range.</p>
+<p>With our D3 objects updated, we return a new derived state. <em>Technically</em> you don’t have to do this but you should. Due to how JavaScript works, you already updated D3 objects in place, but you should pretend <code>this.state</code> is immutable and return a new copy.</p>
+<p>Overall that makes your code easier to understand and closer to React principles.</p>
+<h3 id="render">render</h3>
+<p>After all that hard work, the <code>render</code> method is a breeze. We prep our data then loop through it and render a <code>County</code> element for each entry.</p>
+<div class="sourceCode" id="cb71" data-caption="CountyMap render"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb71-1" title="1">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-2" title="2">        <span class="kw">const</span> <span class="op">{</span> geoPath<span class="op">,</span> quantize <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">state</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb71-3" title="3">            <span class="op">{</span> usTopoJson<span class="op">,</span> values<span class="op">,</span> zoom <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">props</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb71-4" title="4"></a>
+<a class="sourceLine" id="cb71-5" title="5">        <span class="cf">if</span> (<span class="op">!</span>usTopoJson) <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-6" title="6">            <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb71-7" title="7">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb71-8" title="8">            <span class="kw">const</span> us <span class="op">=</span> usTopoJson<span class="op">,</span></a>
+<a class="sourceLine" id="cb71-9" title="9">                USstatesMesh <span class="op">=</span> <span class="va">topojson</span>.<span class="at">mesh</span>(</a>
+<a class="sourceLine" id="cb71-10" title="10">                    us<span class="op">,</span></a>
+<a class="sourceLine" id="cb71-11" title="11">                    <span class="va">us</span>.<span class="va">objects</span>.<span class="at">states</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb71-12" title="12">                    (a<span class="op">,</span> b) <span class="op">=&gt;</span> a <span class="op">!==</span> b</a>
+<a class="sourceLine" id="cb71-13" title="13">                )<span class="op">,</span></a>
+<a class="sourceLine" id="cb71-14" title="14">                counties <span class="op">=</span> <span class="va">topojson</span>.<span class="at">feature</span>(us<span class="op">,</span> <span class="va">us</span>.<span class="va">objects</span>.<span class="at">counties</span>).<span class="at">features</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb71-15" title="15"></a>
+<a class="sourceLine" id="cb71-16" title="16">            <span class="kw">const</span> countyValueMap <span class="op">=</span> <span class="va">_</span>.<span class="at">fromPairs</span>(</a>
+<a class="sourceLine" id="cb71-17" title="17">                <span class="va">values</span>.<span class="at">map</span>(d <span class="op">=&gt;</span> [<span class="va">d</span>.<span class="at">countyID</span><span class="op">,</span> <span class="va">d</span>.<span class="at">value</span>])</a>
+<a class="sourceLine" id="cb71-18" title="18">            )<span class="op">;</span></a>
+<a class="sourceLine" id="cb71-19" title="19"></a>
+<a class="sourceLine" id="cb71-20" title="20">            <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb71-21" title="21">                <span class="op">&lt;</span>g<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb71-22" title="22">                    <span class="op">{</span><span class="va">counties</span>.<span class="at">map</span>(feature <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb71-23" title="23">                        <span class="op">&lt;</span>County</a>
+<a class="sourceLine" id="cb71-24" title="24">                            geoPath<span class="op">={</span>geoPath<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-25" title="25">                            feature<span class="op">={</span>feature<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-26" title="26">                            zoom<span class="op">={</span>zoom<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-27" title="27">                            key<span class="op">={</span><span class="va">feature</span>.<span class="at">id</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb71-28" title="28">                            quantize<span class="op">={</span>quantize<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-29" title="29">                            value<span class="op">={</span>countyValueMap[<span class="va">feature</span>.<span class="at">id</span>]<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-30" title="30">                        /&gt;</a>
+<a class="sourceLine" id="cb71-31" title="31">                    ))<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-32" title="32"></a>
+<a class="sourceLine" id="cb71-33" title="33">                    <span class="op">&lt;</span>path</a>
+<a class="sourceLine" id="cb71-34" title="34">                        d<span class="op">={</span><span class="at">geoPath</span>(USstatesMesh)<span class="op">}</span></a>
+<a class="sourceLine" id="cb71-35" title="35">                        style<span class="op">={{</span></a>
+<a class="sourceLine" id="cb71-36" title="36">                            <span class="dt">fill</span><span class="op">:</span> <span class="st">&quot;none&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb71-37" title="37">                            <span class="dt">stroke</span><span class="op">:</span> <span class="st">&quot;#fff&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb71-38" title="38">                            <span class="dt">strokeLinejoin</span><span class="op">:</span> <span class="st">&quot;round&quot;</span></a>
+<a class="sourceLine" id="cb71-39" title="39">                        <span class="op">}}</span></a>
+<a class="sourceLine" id="cb71-40" title="40">                    /&gt;</a>
+<a class="sourceLine" id="cb71-41" title="41">                &lt;/g<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb71-42" title="42">            )<span class="op">;</span></a>
+<a class="sourceLine" id="cb71-43" title="43">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb71-44" title="44">    <span class="op">}</span></a></code></pre></div>
+<p>We use destructuring to save all relevant props and state in constants, then use the TopoJSON library to grab data out of the <code>usTopoJson</code> dataset.</p>
+<p><code>.mesh</code> calculates a mesh for US states – a thin line around the edges. <code>.feature</code> calculates feature for each count – fill in with color.</p>
+<p>Mesh and feature aren’t tied to US states or counties by the way. It’s just a matter of what you get back: borders or flat areas. What you need depends on what you’re building.</p>
+<p>We use Lodash’s <code>_.fromPairs</code> to build a dictionary that maps county identifiers to their values. Building it beforehand makes our code faster. You can read some details about the speed optimizations <a href="https://swizec.com/blog/optimizing-react-choropleth-map-rendering/swizec/7302">here</a>.</p>
+<p>As promised, the <code>return</code> statement loops through the list of <code>counties</code> and renders <code>County</code> components. Each gets a bunch of attributes and returns a <code>&lt;path&gt;</code> element that looks like a specific county.</p>
+<p>For US state borders, we render a single <code>&lt;path&gt;</code> element and use <code>geoPath</code> to generate the <code>d</code> attribute.</p>

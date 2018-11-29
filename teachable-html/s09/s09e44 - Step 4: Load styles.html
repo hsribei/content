@@ -1,0 +1,30 @@
+<h2 id="step-4-load-bootstrap-styles">Step 4: Load Bootstrap styles</h2>
+<p>We’re going to use Bootstrap styles to avoid reinventing the wheel. We’re ignoring their JavaScript widgets and the amazing integration built by the <a href="http://react-bootstrap.github.io/">react-bootstrap</a> team. Just the stylesheets please.</p>
+<p>They’ll make our fonts look better, help with layouting, and make buttons look like buttons. We <em>could</em> use styled components, but writing our own styles detracts from this tutorial.</p>
+<p>We load stylesheets in <code>src/index.js</code>.</p>
+<div class="sourceCode" id="cb56" data-caption="Add Bootstrap in index.js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb56-1" title="1"><span class="co">// src/index.js</span></a>
+<a class="sourceLine" id="cb56-2" title="2"></a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="co">// markua-start-insert</span></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="im">import</span> <span class="st">&#39;bootstrap/dist/css/bootstrap.css&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb56-8" title="8"><span class="co">// markua-end-insert</span></a>
+<a class="sourceLine" id="cb56-9" title="9"></a>
+<a class="sourceLine" id="cb56-10" title="10"><span class="va">ReactDOM</span>.<span class="at">render</span>(</a>
+<a class="sourceLine" id="cb56-11" title="11">  <span class="op">&lt;</span>App /<span class="op">&gt;,</span></a>
+<a class="sourceLine" id="cb56-12" title="12">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)</a>
+<a class="sourceLine" id="cb56-13" title="13">)<span class="op">;</span></a></code></pre></div>
+<p>Another benefit of Webpack: <code>import</code>-ing stylesheets. These imports turn into <code>&lt;style&gt;</code> tags with CSS in their body at runtime.</p>
+<p>This is also a good opportunity to see how <code>index.js</code> works to render our app 👇</p>
+<ol type="1">
+<li>loads <code>App</code> and React</li>
+<li>loads styles</li>
+<li>Uses <code>ReactDOM</code> to render <code>&lt;App /&gt;</code> into the DOM</li>
+</ol>
+<p>That’s it.</p>
+<p>Your preloader screen should look better now.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-screenshot.png" alt="Preloader screenshot" /><figcaption>Preloader screenshot</figcaption>
+</figure>
+<p>If you don’t, try comparing your changes to this <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/798ec9eca54333da63b91c66b93339565d6d582a">diff on Github</a>.</p>

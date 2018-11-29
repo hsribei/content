@@ -1,0 +1,38 @@
+<h3 id="step-5-correcting-for-time-and-frame-drops">Step 5: Correcting for time and frame drops</h3>
+<p>If you run the CodeSandbox a few times, you’ll notice two bugs.</p>
+<ol type="1">
+<li><p>Sometimes our ball gets trapped at the bottom of the bounce. We won’t fix this one; it’s tricky.</p></li>
+<li><p>When you slow down your computer, the ball lags. That’s not how things behave in real life.</p></li>
+</ol>
+<p>We’re dealing with dropped frames.</p>
+<p>Modern browsers slow down JavaScript in tabs that aren’t focused, on computers running off batteries, when batteries get low… many different reasons. To make our animation silky smooth, we have to take this into account.</p>
+<p>That involves calculating how many frames we dropped and adjusting our physics.</p>
+<div class="sourceCode" id="cb128" data-caption="Adjust for frame drops"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb128-1" title="1"><span class="co">// BouncingBall.js</span></a>
+<a class="sourceLine" id="cb128-2" title="2">  gameLoop <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb128-3" title="3">    <span class="kw">let</span> <span class="op">{</span> y<span class="op">,</span> vy<span class="op">,</span> lastFrame <span class="op">}</span> <span class="op">=</span> <span class="kw">this</span>.<span class="at">state</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb128-4" title="4"></a>
+<a class="sourceLine" id="cb128-5" title="5">    <span class="kw">let</span> frames <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb128-6" title="6"></a>
+<a class="sourceLine" id="cb128-7" title="7">    <span class="cf">if</span> (lastFrame) <span class="op">{</span></a>
+<a class="sourceLine" id="cb128-8" title="8">      frames <span class="op">=</span> (<span class="va">d3</span>.<span class="at">now</span>() <span class="op">-</span> lastFrame) / (<span class="dv">1000</span> / <span class="dv">60</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb128-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb128-10" title="10"></a>
+<a class="sourceLine" id="cb128-11" title="11">    <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> frames<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb128-12" title="12">      <span class="cf">if</span> (y <span class="op">&gt;</span> <span class="kw">this</span>.<span class="va">props</span>.<span class="at">max_h</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb128-13" title="13">        vy <span class="op">=</span> <span class="op">-</span>vy <span class="op">*</span> <span class="fl">0.87</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb128-14" title="14">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb128-15" title="15"></a>
+<a class="sourceLine" id="cb128-16" title="16">      y <span class="op">=</span> y <span class="op">+</span> vy<span class="op">;</span></a>
+<a class="sourceLine" id="cb128-17" title="17">      vy <span class="op">=</span> vy <span class="op">+</span> <span class="fl">0.3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb128-18" title="18">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb128-19" title="19"></a>
+<a class="sourceLine" id="cb128-20" title="20">    <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb128-21" title="21">      y<span class="op">,</span></a>
+<a class="sourceLine" id="cb128-22" title="22">      vy<span class="op">,</span></a>
+<a class="sourceLine" id="cb128-23" title="23">      <span class="dt">lastFrame</span><span class="op">:</span> <span class="va">d3</span>.<span class="at">now</span>()</a>
+<a class="sourceLine" id="cb128-24" title="24">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb128-25" title="25">  <span class="op">};</span></a></code></pre></div>
+<p>We add <code>lastFrame</code> to game state and set it with <code>d3.now()</code>. This gives us a high resolution timestamp that’s pegged to <code>requestAnimationFrame</code>. D3 guarantees that every <code>d3.now()</code> called within the same frame gets the same timestamp.</p>
+<p><code>(d3.now()-lastFrame)/16</code> tells us how many frames were meant to have happened since last iteration. Most of the time, this value will be <code>1</code>.</p>
+<p>We use <code>frames</code> to simulate as many frames as we need in a quick loop. Run the same calculations with the same height checks. This simulates the missing frames and makes our animation look smooth.</p>
+<p>Try it out on CodeSandbox: <a href="https://codesandbox.io/s/8n3p6720wl">click me for time-fixed bouncy ball</a></p>

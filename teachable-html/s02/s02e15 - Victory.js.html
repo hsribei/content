@@ -1,0 +1,26 @@
+<h2 id="victory">Victory</h2>
+<blockquote>
+<p>React.js components for modular charting and data visualization</p>
+</blockquote>
+<p><a href="http://formidable.com/open-source/victory/"><img src="https://raw.githubusercontent.com/hsribei/react-d3js-es6-ebook/teachable-only/manuscript/resources/images/2018/victoryjs.jpg" alt="Victory.js logo" /></a></p>
+<p>Victory offers low level components for basic charting and reimplements a lot of D3’s API. Great when you need to create basic charts without a lot of customization. Supports React Native.</p>
+<p>Here’s what it takes to implement a Barchart using Victory.js. <a href="https://codesandbox.io/s/3v3q013x36">You can try it on CodeSandbox</a></p>
+<iframe src="https://codesandbox.io/embed/3v3q013x36?codemirror=1&amp;view=split" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+</iframe>
+<div class="sourceCode" id="cb17" data-caption="Bar chart in Victory.js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">const</span> data <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">13000</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">16500</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">14250</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="op">{</span> <span class="dt">quarter</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">earnings</span><span class="op">:</span> <span class="dv">19000</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-6" title="6">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-7" title="7"></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="kw">const</span> App <span class="op">=</span> () <span class="op">=&gt;</span> (</a>
+<a class="sourceLine" id="cb17-9" title="9">  <span class="op">&lt;</span>div style<span class="op">={</span>styles<span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb17-10" title="10">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Victory basic demo&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-11" title="11">    <span class="op">&lt;</span>VictoryChart domainPadding<span class="op">={</span><span class="dv">20</span><span class="op">}&gt;</span></a>
+<a class="sourceLine" id="cb17-12" title="12">      <span class="op">&lt;</span>VictoryBar data<span class="op">={</span>data<span class="op">}</span> x<span class="op">=</span><span class="st">&quot;quarter&quot;</span> y<span class="op">=</span><span class="st">&quot;earnings&quot;</span> /&gt;</a>
+<a class="sourceLine" id="cb17-13" title="13">    &lt;/VictoryChart<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-14" title="14">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb17-15" title="15">)<span class="op">;</span></a></code></pre></div>
+<p>Create some fake data, render a <code>&lt;VictoryChart&gt;</code> rendering area, add a <code>&lt;VictoryBar&gt;</code> component, give it data and axis keys. Quick and easy.</p>
+<p>My favorite feature of Victory is that components use fake random data until you pass your own. Means you always know what to expect.</p>

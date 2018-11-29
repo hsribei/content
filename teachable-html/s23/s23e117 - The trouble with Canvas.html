@@ -1,0 +1,7 @@
+<h2 id="the-trouble-with-html5-canvas">The trouble with HTML5 Canvas</h2>
+<p>The tricky thing with HTML5 Canvas is that the API is low level and that canvas is flat. As far as your JavaScript and React code are concerned, it’s a flat image. It could be anything.</p>
+<p>The lack of structure makes it difficult to detect clicks on elements, interactions between shapes, when something covers something else, how the user interacts with your stuff and so on Anything that requires understanding what’s rendered.</p>
+<p>You have to move most of that logic into your data store and manually keep track.</p>
+<p>As you can imagine, this becomes cumbersome. And you still can’t detect user interaction because all you get is <em>“User clicked on coordinate (x, y). Have fun.”</em></p>
+<p>At the same time, the low level API makes abstractions difficult. You can’t create components for “this is a map” or “histogram goes here”. You’re always down to circles and rectangles and basic shapes.</p>
+<p>Your code soon looks like the D3.js spaghetti we tried to avoid in the first place.</p>

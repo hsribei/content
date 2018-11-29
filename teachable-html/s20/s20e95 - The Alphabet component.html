@@ -1,0 +1,54 @@
+<h3 id="the-alphabet-component">The Alphabet component</h3>
+<p>The <code>Alphabet</code> component holds a list of letters in component state and renders a collection of <code>Letter</code> components in a loop.</p>
+<p>We start with a skeleton like this:</p>
+<div class="sourceCode" id="cb133" data-caption="Alphabet skeleton"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb133-1" title="1"><span class="co">// src/components/Alphabet.js</span></a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb133-3" title="3"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st">&quot;d3&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb133-4" title="4"><span class="im">import</span> <span class="op">{</span> TransitionGroup <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react-transition-group&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb133-5" title="5"></a>
+<a class="sourceLine" id="cb133-6" title="6"><span class="im">import</span> Letter <span class="im">from</span> <span class="st">&quot;./Letter&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb133-7" title="7"></a>
+<a class="sourceLine" id="cb133-8" title="8"><span class="kw">class</span> Alphabet <span class="kw">extends</span> <span class="va">React</span>.<span class="at">Component</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb133-9" title="9">    <span class="kw">static</span> letters <span class="op">=</span> <span class="st">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span>.<span class="at">split</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb133-10" title="10">    state <span class="op">=</span> <span class="op">{</span> <span class="dt">alphabet</span><span class="op">:</span> [] <span class="op">};</span></a>
+<a class="sourceLine" id="cb133-11" title="11"></a>
+<a class="sourceLine" id="cb133-12" title="12">    <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb133-13" title="13">        <span class="co">// start interval</span></a>
+<a class="sourceLine" id="cb133-14" title="14">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb133-15" title="15"></a>
+<a class="sourceLine" id="cb133-16" title="16">    shuffleAlphabet <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb133-17" title="17">       <span class="co">// generate new alphabet</span></a>
+<a class="sourceLine" id="cb133-18" title="18">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb133-19" title="19"></a>
+<a class="sourceLine" id="cb133-20" title="20">    <span class="at">render</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb133-21" title="21">        <span class="kw">let</span> transform <span class="op">=</span> <span class="vs">`translate(</span><span class="sc">${</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">x</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span><span class="kw">this</span>.<span class="va">props</span>.<span class="at">y</span><span class="sc">}</span><span class="vs">)`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb133-22" title="22"></a>
+<a class="sourceLine" id="cb133-23" title="23">        <span class="cf">return</span> (</a>
+<a class="sourceLine" id="cb133-24" title="24">            <span class="co">// spit out letters</span></a>
+<a class="sourceLine" id="cb133-25" title="25">        )<span class="op">;</span></a>
+<a class="sourceLine" id="cb133-26" title="26">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb133-27" title="27"><span class="op">}</span></a>
+<a class="sourceLine" id="cb133-28" title="28"></a>
+<a class="sourceLine" id="cb133-29" title="29"><span class="im">export</span> <span class="im">default</span> Alphabet<span class="op">;</span></a></code></pre></div>
+<p>We import dependencies and define the <code>Alphabet</code> component. It keeps a list of available letters in a static <code>letters</code> property and an empty <code>alphabet</code> in component state.</p>
+<p>We’ll start a <code>d3.interval</code> on <code>componentDidMount</code> and use <code>shuffleAlphabet</code> to generate alphabet subsets.</p>
+<p>To showcase enter-update-exit transitions, we create a new alphabet every second and a half. Using <code>d3.interval</code> lets us do that in a browser friendly way.</p>
+<div class="sourceCode" id="cb134" data-caption="Alphabet game loop"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb134-1" title="1"><span class="co">// src/components/Alphabet/index.js</span></a>
+<a class="sourceLine" id="cb134-2" title="2">    <span class="at">componentDidMount</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb134-3" title="3">        <span class="va">d3</span>.<span class="at">interval</span>(<span class="kw">this</span>.<span class="at">shuffleAlphabet</span><span class="op">,</span> <span class="dv">1500</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb134-4" title="4">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb134-5" title="5"></a>
+<a class="sourceLine" id="cb134-6" title="6">    shuffleAlphabet <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb134-7" title="7">        <span class="kw">const</span> alphabet <span class="op">=</span> d3</a>
+<a class="sourceLine" id="cb134-8" title="8">            .<span class="at">shuffle</span>(<span class="va">Alphabet</span>.<span class="at">letters</span>)</a>
+<a class="sourceLine" id="cb134-9" title="9">            .<span class="at">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> <span class="va">Alphabet</span>.<span class="va">letters</span>.<span class="at">length</span>))</a>
+<a class="sourceLine" id="cb134-10" title="10">            .<span class="at">sort</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb134-11" title="11"></a>
+<a class="sourceLine" id="cb134-12" title="12">        <span class="kw">this</span>.<span class="at">setState</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb134-13" title="13">            alphabet</a>
+<a class="sourceLine" id="cb134-14" title="14">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb134-15" title="15">    <span class="op">};</span></a></code></pre></div>
+<p>Think of this as our game loop: Change alphabet state in consistent time intervals.</p>
+<p>We use <code>d3.interval( //.., 1500)</code> to call <code>shuffleAlphabet</code> every 1.5 seconds. Same as <code>setInterval</code>, but friendlier to batteries and CPUs because it pegs to <code>requestAnimationFrame</code>. On each period, we use <code>shuffleAlphabet</code> to shuffle available letters, slice out a random amount, sort them, and update component state with <code>setState</code>.</p>
+<p>This process ensures our alphabet is both random and in alphabetical order.</p>
+<p>Starting the interval in <code>componentDidMount</code> ensures it only runs when our Alphabet is on the page. In real life you should stop it on <code>componentWillUnmount</code>. Since this is a tiny experiment and we know <code>&lt;Alphabet&gt;</code> never unmounts without a page refresh, it’s okay to skip that step.</p>

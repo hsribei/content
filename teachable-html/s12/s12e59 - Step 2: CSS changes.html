@@ -1,0 +1,43 @@
+<h2 id="histogram-css">Step 2: CSS changes</h2>
+<p>As mentioned, opinions vary on the best approach to styling React apps. Some say stylesheets per component, some say styling inside JavaScript, others swear by global app styling.</p>
+<p>The truth is somewhere in between. Do what fits your project and your team. We’re using global stylesheets because it’s the simplest.</p>
+<p>Create a new file <code>src/style.css</code> and add these 29 lines:</p>
+<div class="sourceCode" id="cb76" data-caption="style.css stylesheet"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb76-1" title="1"><span class="fu">.histogram</span> <span class="fu">.bar</span> rect {</a>
+<a class="sourceLine" id="cb76-2" title="2">    <span class="kw">fill</span>: <span class="cn">steelblue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-3" title="3">    shape-rendering: crispEdges<span class="op">;</span></a>
+<a class="sourceLine" id="cb76-4" title="4">}</a>
+<a class="sourceLine" id="cb76-5" title="5"></a>
+<a class="sourceLine" id="cb76-6" title="6"><span class="fu">.histogram</span> <span class="fu">.bar</span> text {</a>
+<a class="sourceLine" id="cb76-7" title="7">    <span class="kw">fill</span>: <span class="cn">#fff</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-8" title="8">    <span class="kw">font</span>: <span class="dv">12</span><span class="dt">px</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-9" title="9">}</a>
+<a class="sourceLine" id="cb76-10" title="10"></a>
+<a class="sourceLine" id="cb76-11" title="11">button {</a>
+<a class="sourceLine" id="cb76-12" title="12">    <span class="kw">margin-right</span>: <span class="dv">.5</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-13" title="13">    <span class="kw">margin-bottom</span>: <span class="dv">.3</span><span class="dt">em</span> <span class="at">!important</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-14" title="14">}</a>
+<a class="sourceLine" id="cb76-15" title="15"></a>
+<a class="sourceLine" id="cb76-16" title="16"><span class="fu">.row</span> {</a>
+<a class="sourceLine" id="cb76-17" title="17">    <span class="kw">margin-top</span>: <span class="dv">1</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-18" title="18">}</a>
+<a class="sourceLine" id="cb76-19" title="19"></a>
+<a class="sourceLine" id="cb76-20" title="20"><span class="fu">.mean</span> text {</a>
+<a class="sourceLine" id="cb76-21" title="21">    <span class="kw">font</span>: <span class="dv">11</span><span class="dt">px</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-22" title="22">    <span class="kw">fill</span>: <span class="cn">grey</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-23" title="23">}</a>
+<a class="sourceLine" id="cb76-24" title="24"></a>
+<a class="sourceLine" id="cb76-25" title="25"><span class="fu">.mean</span> path {</a>
+<a class="sourceLine" id="cb76-26" title="26">    stroke-dasharray: <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-27" title="27">    stroke: <span class="cn">grey</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-28" title="28">    stroke-width: <span class="dv">1</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb76-29" title="29">}</a></code></pre></div>
+<p>We won’t go into details about the CSS here. Many better books have been written about it.</p>
+<p>In broad strokes:</p>
+<ul>
+<li>we’re making <code>.histogram</code> rectangles – the bars – blue</li>
+<li>labels white <code>12px</code> font</li>
+<li><code>button</code>s and <code>.row</code>s have some spacing</li>
+<li>the <code>.mean</code> line is a dotted grey with gray <code>11px</code> text.</li>
+</ul>
+<p>More CSS than we need for just the histogram, but we’re already here so might as well write it now.</p>
+<p>Adding our CSS before building the Histogram means it’s going to look beautiful the first time around.</p>

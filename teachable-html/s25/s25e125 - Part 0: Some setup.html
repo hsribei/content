@@ -1,0 +1,14 @@
+<h3 id="part-0-some-setup">Part 0: Some setup</h3>
+<p>Because decorators aren’t in the JavaScript spec, we have to tweak how we start our project. We can still use <code>create-react-app</code>, but there’s an additional step.</p>
+<p>You should start a new project like this:</p>
+<pre data-caption="Create the billiards game project"><code>$ create-react-app billiards-game --scripts-version custom-react-scripts</code></pre>
+<p>This creates a new directory with a full setup for React. Just like you’re used to.</p>
+<p>The addition of <code>--scripts-version custom-react-scripts</code> employs <span class="citation" data-cites="kitze">@kitze</span>’s <a href="https://github.com/kitze/custom-react-scripts">custom-react-scripts</a> project to give us more configuration options. Like the ability to enable decorators.</p>
+<p>We enable them in the <code>.env</code> file. Add this line:</p>
+<pre data-caption="Add to .env settings"><code>// billiards-game/.env
+// ...
+REACT_APP_DECORATORS=true</code></pre>
+<p>No installation necessary. I think <code>custom-react-scripts</code> uses the <code>transform-decorators-legacy</code> Babel plugin behind the scenes. It’s pre-installed, and we enable it with that <code>.env</code> change.</p>
+<p>Before we begin, you should install some other dependencies as well:</p>
+<pre data-caption="Install libraries"><code>$ npm install --save konva react-konva mobx mobx-react d3-timer d3-scale d3-quadtree</code></pre>
+<p>This gives you Konva, MobX, and the parts of D3 that we need. You’re now ready to build the billiards game.</p>
