@@ -1,16 +1,16 @@
 <h2 id="basic-architecture">Basic architecture</h2>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/unidirectionalflow.png" alt="Unidirectional data flow" /><figcaption>Unidirectional data flow</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/unidirectionalflow.png" alt="Unidirectional data flow"><figcaption>Unidirectional data flow</figcaption>
 </figure>
 <p>We’re using a unidirectional data flow architecture with a single source of truth. That means you always know what to expect. Think of your app as a giant circle.</p>
 <p>Data goes from your source of truth into your components. Events go from your components into your source of truth. All in one direction</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture.png" alt="The basic architecture" /><figcaption>The basic architecture</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture.png" alt="The basic architecture"><figcaption>The basic architecture</figcaption>
 </figure>
 <p>Our main App component holds state for your entire application. Anything that multiple components should be aware of lives here. This state flows down the hierarchy via props. Changes happen via callbacks, also passed down through props.</p>
 <p>Like this 👇</p>
 <ul>
-<li>The Main Component – <code>App</code> – holds the truth</li>
+<li>The Main Component – <code style="white-space: pre-wrap;">App</code> – holds the truth</li>
 <li>Truth flows down through props</li>
 <li>Child components react to user events</li>
 <li>They announce changes using callbacks</li>
@@ -19,15 +19,15 @@
 <li>UI updates through re-renders</li>
 </ul>
 <p>This looks roundabout, but it’s amazing. Far better than worrying about parts of the UI growing out of sync with the rest of your app. I could talk your ear off with debugging horror stories, but I’m nice, so I won’t.</p>
-<p>When a user clicks one of our controls, a <code>Toggle</code>, it invokes a callback. This in turn invokes a callback on <code>ControlRow</code>, which invokes a callback on <code>Controls</code>, which invokes a callback on <code>App</code>.</p>
+<p>When a user clicks one of our controls, a <code style="white-space: pre-wrap;">Toggle</code>, it invokes a callback. This in turn invokes a callback on <code style="white-space: pre-wrap;">ControlRow</code>, which invokes a callback on <code style="white-space: pre-wrap;">Controls</code>, which invokes a callback on <code style="white-space: pre-wrap;">App</code>.</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png" alt="Callback chain" /><figcaption>Callback chain</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png" alt="Callback chain"><figcaption>Callback chain</figcaption>
 </figure>
-<p>With each hop, the nature of our callback changes. <code>Toggle</code> tells <code>ControlRow</code> which entry was toggled, <code>ControlRow</code> tells <code>Controls</code> how to update the data filter function, and <code>Controls</code> gives <code>App</code> a composite filter built from all the controls. You’ll see how that works in the next chapter.</p>
+<p>With each hop, the nature of our callback changes. <code style="white-space: pre-wrap;">Toggle</code> tells <code style="white-space: pre-wrap;">ControlRow</code> which entry was toggled, <code style="white-space: pre-wrap;">ControlRow</code> tells <code style="white-space: pre-wrap;">Controls</code> how to update the data filter function, and <code style="white-space: pre-wrap;">Controls</code> gives <code style="white-space: pre-wrap;">App</code> a composite filter built from all the controls. You’ll see how that works in the next chapter.</p>
 <p>All you have to remember right now is that callbacks evolve from passing low-level information to high-level business logic. Starts with <em>“I was clicked”</em> ends with <em>“Update visualization filter”</em></p>
-<p>When the final callback is invoked, <code>App</code> updates its repository of truth – <code>this.state</code> – and communicates the change back down the chain via props. No additional wiring needed on your part. React’s got you covered.</p>
+<p>When the final callback is invoked, <code style="white-space: pre-wrap;">App</code> updates its repository of truth – <code style="white-space: pre-wrap;">this.state</code> – and communicates the change back down the chain via props. No additional wiring needed on your part. React’s got you covered.</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_dataflow.png" alt="Data flows down" /><figcaption>Data flows down</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_dataflow.png" alt="Data flows down"><figcaption>Data flows down</figcaption>
 </figure>
 <p>You can think of it like calling functions with new arguments. Because the functions – components – render the UI, your interface updates.</p>
 <p>Because your components are well-made and rely on their props to render, React’s engine can optimize these changes. It compares the new and old component trees and decides which components to re-render and which to leave alone.</p>

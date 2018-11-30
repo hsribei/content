@@ -2,22 +2,22 @@
 <p>Now comes the fun part. All that extra effort we put into making our components aware of filtering, and it all comes down to this: User controls.</p>
 <p>Here’s what we’re building:</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/controls.png" alt="User controlled filters" /><figcaption>User controlled filters</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/controls.png" alt="User controlled filters"><figcaption>User controlled filters</figcaption>
 </figure>
 <p>It’s a set of filters for users to slice and dice our visualization. The shortened dataset gives you 2 years, 12 job titles, and 50 US states. You’ll get 5+ years and many more job titles with the full dataset.</p>
-<p>We’re using the <a href="#basic-architecture">architecture we discussed</a> earlier to make it work. Clicking buttons updates a filter function and communicates it all the way up to the <code>App</code> component. <code>App</code> then uses it to update <code>this.state.filteredSalaries</code>, which triggers a re-render and updates our dataviz.</p>
+<p>We’re using the <a href="#basic-architecture">architecture we discussed</a> earlier to make it work. Clicking buttons updates a filter function and communicates it all the way up to the <code style="white-space: pre-wrap;">App</code> component. <code style="white-space: pre-wrap;">App</code> then uses it to update <code style="white-space: pre-wrap;">this.state.filteredSalaries</code>, which triggers a re-render and updates our dataviz.</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png" alt="Architecture sketch" /><figcaption>Architecture sketch</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png" alt="Architecture sketch"><figcaption>Architecture sketch</figcaption>
 </figure>
 <p>We’re building controls in 4 steps, top to bottom:</p>
 <ol type="1">
-<li>Update <code>App.js</code> with filtering and a <code>&lt;Controls&gt;</code> render</li>
-<li>Build a <code>Controls</code> component, which builds the filter based on inputs</li>
-<li>Build a <code>ControlRow</code> component, which handles a row of buttons</li>
-<li>Build a <code>Toggle</code> component, which is a button</li>
+<li>Update <code style="white-space: pre-wrap;">App.js</code> with filtering and a <code style="white-space: pre-wrap;">&lt;Controls&gt;</code> render</li>
+<li>Build a <code style="white-space: pre-wrap;">Controls</code> component, which builds the filter based on inputs</li>
+<li>Build a <code style="white-space: pre-wrap;">ControlRow</code> component, which handles a row of buttons</li>
+<li>Build a <code style="white-space: pre-wrap;">Toggle</code> component, which is a button</li>
 </ol>
 <p>We’ll go through the files linearly. That makes them easier for me to explain and easier for you to understand, but that also means there’s going to be a long period where all you’re seeing is an error like this:</p>
 <figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/controls-error.png" alt="Controls error during coding" /><figcaption>Controls error during coding</figcaption>
+<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/controls-error.png" alt="Controls error during coding"><figcaption>Controls error during coding</figcaption>
 </figure>
-<p>If you want to see what’s up during this process, remove an import or two and maybe a thing from render. For instance, it’s complaining about <code>ControlRow</code> in this screenshot. Remove the <code>ControlRow</code> import on top and delete <code>&lt;ControlRow ... /&gt;</code> from render. The error goes away, and you see what you’re doing.</p>
+<p>If you want to see what’s up during this process, remove an import or two and maybe a thing from render. For instance, it’s complaining about <code style="white-space: pre-wrap;">ControlRow</code> in this screenshot. Remove the <code style="white-space: pre-wrap;">ControlRow</code> import on top and delete <code style="white-space: pre-wrap;">&lt;ControlRow ... /&gt;</code> from render. The error goes away, and you see what you’re doing.</p>

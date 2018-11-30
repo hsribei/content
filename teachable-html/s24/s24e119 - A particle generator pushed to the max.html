@@ -5,7 +5,7 @@
 <p>Well, I say JavaScript was the bottleneck, but monitor size plays a role too. It goes up to 20,000 on my laptop screen, juuuust grazes 30,000 on my large desktop monitor, and averages about 17,000 on my iPhone 5SE.</p>
 <p>Friends with newer laptops got it up to 35,000.</p>
 <p>You can see it in action hosted on <a href="http://swizec.github.io/react-particles-experiment/">Github pages</a>.</p>
-<p>We’re keeping most of our existing code. The real changes happen in <code>src/components/index.jsx</code>, where a Konva stage replaces the <code>&lt;svg&gt;</code> element, and in <code>src/components/Particles.jsx</code>, where we change what we render. There’s a small tweak in the reducer to generate more particles per tick.</p>
+<p>We’re keeping most of our existing code. The real changes happen in <code style="white-space: pre-wrap;">src/components/index.jsx</code>, where a Konva stage replaces the <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element, and in <code style="white-space: pre-wrap;">src/components/Particles.jsx</code>, where we change what we render. There’s a small tweak in the reducer to generate more particles per tick.</p>
 <p>You should go into your particle generator directory, install Konva and react-konva, and then make the changes below. Trying things out is better than just reading my code ;)</p>
-<pre data-caption="Install Konva"><code>$ npm install --save konva react-konva</code></pre>
+<pre data-caption="Install Konva"><code style="white-space: pre-wrap;">$ npm install --save konva react-konva</code></pre>
 <p>{aside} react-konva is a thin wrapper on Konva itself. There’s no need to think about it as its own thing. For the most part, you can go into the Konva docs, read about something, and it Just Works™ in react-konva. {/aside}</p>
