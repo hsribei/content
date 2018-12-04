@@ -255,7 +255,7 @@ functionally pure: produce the same result every time they are called
 with the same argument values. Randomness is impure.
 
 We don’t need our particle vectors to be deterministic, so I think this
-is fine. Let’s say our universe is stochastic instead :smile:
+is fine. Let’s say our universe is stochastic instead 😄
 
 {aside} Stochastic means that our universe/physic simulation is governed
 by probabilities. You can still model such a universe and reason about

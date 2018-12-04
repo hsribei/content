@@ -150,7 +150,7 @@ Two more rows of filters show up.
 ![All the
 filters](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png)
 
-:clap:
+👏
 
 Again, if it didn’t work, consult [the diff on
 GitHub](https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f).

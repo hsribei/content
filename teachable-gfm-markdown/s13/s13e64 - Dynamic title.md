@@ -4,7 +4,7 @@
 We begin with the title because it shows up first.
 
 We start with an import in `App.js` and add it to the render method. You
-know the drill :smile:
+know the drill 😄
 
 ``` javascript
 // src/App.js

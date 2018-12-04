@@ -163,7 +163,7 @@
 <p>Then we generate new particles.</p>
 <p>We loop through <code style="white-space: pre-wrap;">particlesPerTick</code> particles, create them at <code style="white-space: pre-wrap;">mousePos</code> coordinates, and insert at the beginning of the array. In my tests that performed best. Particles get random movement vectors.</p>
 <p>This randomness is a Redux faux pas. Reducers are supposed to be functionally pure: produce the same result every time they are called with the same argument values. Randomness is impure.</p>
-<p>We don’t need our particle vectors to be deterministic, so I think this is fine. Let’s say our universe is stochastic instead :smile:</p>
+<p>We don’t need our particle vectors to be deterministic, so I think this is fine. Let’s say our universe is stochastic instead 😄</p>
 <p>{aside} Stochastic means that our universe/physic simulation is governed by probabilities. You can still model such a universe and reason about its behavior. A lot of real world physics is stochastic in nature. {/aside}</p>
 <p>We now have an array full of old and new particles. We remove all out-of-bounds particles with a <code style="white-space: pre-wrap;">filter</code>, then walk through what’s left to move each particle by its vector.</p>
 <p>To simulate gravity, we update vectors’ vertical component using our <code style="white-space: pre-wrap;">Gravity</code> constant. That makes particles fall down faster and faster creating a nice parabola.</p>

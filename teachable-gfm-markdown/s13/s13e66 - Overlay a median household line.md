@@ -15,7 +15,7 @@ Inside `src/App.js`, we first have to add an import, then extract the
 median household value from state, and in the end, add `MedianLine` to
 the render method.
 
-Let’s see if we can do it in a single code block :smile:
+Let’s see if we can do it in a single code block 😄
 
 ``` javascript
 // src/App.js
@@ -60,7 +60,7 @@ You probably don’t remember `medianIncomesByUSState` anymore. We set it
 up way back when [tying datasets together](#tie-datasets-together). It
 groups our salary data by US state.
 
-See, using good names helps :smile:
+See, using good names helps 😄
 
 When rendering `MedianLine`, we give it sizing and positioning props,
 the dataset, a `value` accessor, and the median value to show. We could

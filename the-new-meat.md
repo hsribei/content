@@ -2525,7 +2525,7 @@ React apps.
     that can run on real world browsers. It’s the ecosystem’s answer to
     slow browser adoption.
   - **ESLint** - linting\! It annoys you when you write code that is
-    bad. This is a good thing. :smile:
+    bad. This is a good thing. 😄
   - **Jest** - a test runner. Having tests set up from the beginning of
     a project is a good idea. We won’t really write tests in this book,
     but I will show you how it’s done.
@@ -3327,7 +3327,7 @@ In the `render` method, we’ll:
 We call our dataset `filteredTechSalaries` because we’re going to add
 filtering in the [subchapter about adding user
 controls](#user-controls). Using the proper name now means less code to
-change later. The magic of foresight :smile:
+change later. The magic of foresight 😄
 
 We use `_.groupBy` to build a dictionary mapping each `countyID` to an
 array of salaries, and we use our `countyValue` method to build an array
@@ -4298,7 +4298,7 @@ controls](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-ver
 We begin with the title because it shows up first.
 
 We start with an import in `App.js` and add it to the render method. You
-know the drill :smile:
+know the drill 😄
 
     // src/App.js
     import CountyMap from './components/CountyMap';
@@ -4788,7 +4788,7 @@ Inside `src/App.js`, we first have to add an import, then extract the
 median household value from state, and in the end, add `MedianLine` to
 the render method.
 
-Let’s see if we can do it in a single code block :smile:
+Let’s see if we can do it in a single code block 😄
 
     // src/App.js
     import Histogram from './components/Histogram';
@@ -4831,7 +4831,7 @@ You probably don’t remember `medianIncomesByUSState` anymore. We set it
 up way back when [tying datasets together](#tie-datasets-together). It
 groups our salary data by US state.
 
-See, using good names helps :smile:
+See, using good names helps 😄
 
 When rendering `MedianLine`, we give it sizing and positioning props,
 the dataset, a `value` accessor, and the median value to show. We could
@@ -5148,7 +5148,7 @@ ready.
 
 If this seems roundabout … I’ve seen worse. The callbacks approach makes
 our app easier to componentize and keeps the code relatively unmessy.
-Imagine putting everything we’ve done so far in `App`\! :laughing:
+Imagine putting everything we’ve done so far in `App`\! 😆
 
 ## Step 2: Build Controls component
 
@@ -5629,7 +5629,7 @@ Two more rows of filters show up.
 ![All the
 filters](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png)
 
-:clap:
+👏
 
 Again, if it didn’t work, consult [the diff on
 GitHub](https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f).
@@ -7860,7 +7860,7 @@ functionally pure: produce the same result every time they are called
 with the same argument values. Randomness is impure.
 
 We don’t need our particle vectors to be deterministic, so I think this
-is fine. Let’s say our universe is stochastic instead :smile:
+is fine. Let’s say our universe is stochastic instead 😄
 
 {aside} Stochastic means that our universe/physic simulation is governed
 by probabilities. You can still model such a universe and reason about
@@ -7901,7 +7901,7 @@ important discoveries:
 -----
 
 There you go: Animating with React, Redux, and D3. Kind of a new
-superpower :wink:
+superpower 😉
 
 Here’s the recap:
 
@@ -9235,7 +9235,7 @@ marble out of our list before feeding the quadtree.
 
 Once we have a quadtree, we use `.find` to look for the nearest marble
 within two radiuses – `MarbleR*2` – of the current marble. That’s
-exactly the one we’re colliding with\! :smile:
+exactly the one we’re colliding with\! 😄
 
 **Handling collisions with marbles** involves math. The sort of thing
 you think you remember from high school, and suddenly realize you don’t
@@ -9722,7 +9722,7 @@ is yours forever.
 
 I hope you have enjoyed this book. Tweet
 \[@Swizec\](https://twitter.com/Swizec) and tell me what you’re
-building. :smile:
+building. 😄
 
 Questions? Poke me on twitter. I’m
 \[@Swizec\](https://twitter.com/Swizec). Or send me an email to

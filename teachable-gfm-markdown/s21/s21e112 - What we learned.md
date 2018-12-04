@@ -22,7 +22,7 @@ important discoveries:
 -----
 
 There you go: Animating with React, Redux, and D3. Kind of a new
-superpower :wink:
+superpower 😉
 
 Here’s the recap:
 

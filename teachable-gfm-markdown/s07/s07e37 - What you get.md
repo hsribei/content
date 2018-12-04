@@ -17,7 +17,7 @@ React apps.
     that can run on real world browsers. It’s the ecosystem’s answer to
     slow browser adoption.
   - **ESLint** - linting\! It annoys you when you write code that is
-    bad. This is a good thing. :smile:
+    bad. This is a good thing. 😄
   - **Jest** - a test runner. Having tests set up from the beginning of
     a project is a good idea. We won’t really write tests in this book,
     but I will show you how it’s done.

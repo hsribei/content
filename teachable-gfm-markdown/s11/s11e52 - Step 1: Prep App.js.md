@@ -105,7 +105,7 @@ render() {
 We call our dataset `filteredTechSalaries` because we’re going to add
 filtering in the [subchapter about adding user
 controls](#user-controls). Using the proper name now means less code to
-change later. The magic of foresight :smile:
+change later. The magic of foresight 😄
 
 We use `_.groupBy` to build a dictionary mapping each `countyID` to an
 array of salaries, and we use our `countyValue` method to build an array

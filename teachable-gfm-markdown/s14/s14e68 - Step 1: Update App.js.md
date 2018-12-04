@@ -150,4 +150,4 @@ ready.
 
 If this seems roundabout … I’ve seen worse. The callbacks approach makes
 our app easier to componentize and keeps the code relatively unmessy.
-Imagine putting everything we’ve done so far in `App`\! :laughing:
+Imagine putting everything we’ve done so far in `App`\! 😆

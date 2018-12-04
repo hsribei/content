@@ -140,7 +140,7 @@ marble out of our list before feeding the quadtree.
 
 Once we have a quadtree, we use `.find` to look for the nearest marble
 within two radiuses – `MarbleR*2` – of the current marble. That’s
-exactly the one we’re colliding with\! :smile:
+exactly the one we’re colliding with\! 😄
 
 **Handling collisions with marbles** involves math. The sort of thing
 you think you remember from high school, and suddenly realize you don’t
