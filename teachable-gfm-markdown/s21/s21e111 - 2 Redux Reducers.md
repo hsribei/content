@@ -271,4 +271,4 @@ To simulate gravity, we update vectors’ vertical component using our
 creating a nice parabola.
 
 Our reducer is done. Our particle generator works. Our thing animates
-smoothly. /
+smoothly. \\o/

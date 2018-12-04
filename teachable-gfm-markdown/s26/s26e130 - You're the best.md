@@ -1,7 +1,7 @@
 
 # Conclusion
 
-You finished the book\! You’re my new favorite person /
+You finished the book\! You’re my new favorite person \\o/
 
 You’ve built a really big interactive data visualization, a few silly
 animations, learned the basics of Redux and MobX, looked into rendering

@@ -22,7 +22,7 @@ it too.
 dataviz](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/deployed-dataviz.png)
 
 Congratz\! You’ve built and deployed your first React and D3 dataviz.
-You’re amazing /
+You’re amazing \\o/
 
 Thanks for following along with the meaty part of my book. You’re now
 well equipped to build cool things.
