@@ -1,9 +1,10 @@
 
 ## A particle generator pushed to 20,000 elements with Canvas
 
-Our [SVG-based particle generator](#animating-react-redux) caps out at a
-few thousand elements. Animation becomes slow as times between
-iterations of our game loop increase.
+Our [SVG-based particle
+generator](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906668#animating-react-redux)
+caps out at a few thousand elements. Animation becomes slow as times
+between iterations of our game loop increase.
 
 Old elements leave the screen and get pruned faster than we can create
 new ones. This creates a natural upper limit to how many elements we can

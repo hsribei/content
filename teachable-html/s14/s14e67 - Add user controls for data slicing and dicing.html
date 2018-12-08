@@ -5,7 +5,7 @@
 <img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/controls.png" alt="User controlled filters"><figcaption>User controlled filters</figcaption>
 </figure>
 <p>It’s a set of filters for users to slice and dice our visualization. The shortened dataset gives you 2 years, 12 job titles, and 50 US states. You’ll get 5+ years and many more job titles with the full dataset.</p>
-<p>We’re using the <a href="#basic-architecture">architecture we discussed</a> earlier to make it work. Clicking buttons updates a filter function and communicates it all the way up to the <code style="white-space: pre-wrap;">App</code> component. <code style="white-space: pre-wrap;">App</code> then uses it to update <code style="white-space: pre-wrap;">this.state.filteredSalaries</code>, which triggers a re-render and updates our dataviz.</p>
+<p>We’re using the <a href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887770#basic-architecture">architecture we discussed</a> earlier to make it work. Clicking buttons updates a filter function and communicates it all the way up to the <code style="white-space: pre-wrap;">App</code> component. <code style="white-space: pre-wrap;">App</code> then uses it to update <code style="white-space: pre-wrap;">this.state.filteredSalaries</code>, which triggers a re-render and updates our dataviz.</p>
 <figure>
 <img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture_callbacks.png" alt="Architecture sketch"><figcaption>Architecture sketch</figcaption>
 </figure>

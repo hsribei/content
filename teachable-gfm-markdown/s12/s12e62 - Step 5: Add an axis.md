@@ -3,8 +3,9 @@
 
 Our histogram is pretty, but it needs an axis to be useful. You’ve
 already learned how to implement an axis when we talked about [blackbox
-integration](#blackbox-axis). We’re going to use the same approach and
-copy those concepts into the real project.
+integration](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis).
+We’re going to use the same approach and copy those concepts into the
+real project.
 
 ### D3blackbox
 

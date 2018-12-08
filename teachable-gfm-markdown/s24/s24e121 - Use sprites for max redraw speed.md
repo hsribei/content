@@ -1,8 +1,10 @@
 
 ### Using sprites for max redraw speed
 
-Our [SVG-based Particles](#svg-particles) component was simple. Iterate
-through a list of particles, render a `<Particle>` component for each.
+Our [SVG-based
+Particles](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906670#svg-particles)
+component was simple. Iterate through a list of particles, render a
+`<Particle>` component for each.
 
 We’re going to completely rewrite that. Our new approach goes like this:
 

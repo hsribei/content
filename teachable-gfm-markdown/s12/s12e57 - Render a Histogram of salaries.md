@@ -25,5 +25,7 @@ disease](https://www.cdc.gov/nchs/fastats/deaths.htm). ;)
 
 We’ll start our histogram with some changes in `App.js`, make a
 `Histogram` component using the [full-feature
-approach](#full-feature-integration), add an `Axis` using the [blackbox
-HOC approach](#blackbox-hoc), and finally add some styling.
+approach](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration),
+add an `Axis` using the [blackbox HOC
+approach](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887729#blackbox-hoc),
+and finally add some styling.

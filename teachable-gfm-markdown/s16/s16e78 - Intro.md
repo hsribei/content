@@ -36,5 +36,5 @@ animations. Using game loops and using transitions.
 
 We’re starting with an example or two in CodeSandbox, then building some
 bigger stuff. No more big huge projects like the [tech salary
-visualization](#salary-visualization), though. Takes too long to set up
-and doesn’t focus on animation.
+visualization](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888870#salary-visualization),
+though. Takes too long to set up and doesn’t focus on animation.

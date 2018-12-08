@@ -57,8 +57,9 @@ class App extends Component {
 ```
 
 You probably don’t remember `medianIncomesByUSState` anymore. We set it
-up way back when [tying datasets together](#tie-datasets-together). It
-groups our salary data by US state.
+up way back when [tying datasets
+together](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888897#tie-datasets-together).
+It groups our salary data by US state.
 
 See, using good names helps 😄
 
@@ -160,7 +161,8 @@ using a `transform` on the entire group to vertically position the final
 element.
 
 Remember, we already styled `medianLine` when we built [histogram
-styles](#histogram-css) earlier.
+styles](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888921#histogram-css)
+earlier.
 
 ``` css
 .mean text {

@@ -51,5 +51,7 @@ We’re sticking with the basic approach because it’s easier to explain,
 works without additional libraries, and is Good Enough™.
 
 You can see an approach to using Redux in dataviz in the [Animating with
-React, Redux, and D3 chapter](#animating-react-redux), and we tackle
-MobX in the [MobX chapter](#refactoring-to-mobx).
+React, Redux, and D3
+chapter](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906668#animating-react-redux),
+and we tackle MobX in the [MobX
+chapter](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906696).

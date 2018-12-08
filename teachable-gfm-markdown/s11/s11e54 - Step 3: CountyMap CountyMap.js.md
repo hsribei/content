@@ -4,7 +4,8 @@
 Here comes the fun part - declaratively drawing a map. You’ll see why I
 love using React for dataviz.
 
-We’re using the [full-feature integration](#full-feature-integration)
+We’re using the [full-feature
+integration](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration)
 approach and a lot of D3 maps magic. Drawing a map with D3 I’m always
 surprised how little code it takes.
 
@@ -103,8 +104,10 @@ language](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d)
 for describing shapes.
 
 `quantize` is a D3 scale. We’ve talked about the basics of scales in the
-[D3 Axis example](#blackbox-axis). This one splits a domain into 9
-quantiles and assigns them specific values from the `range`.
+[D3 Axis
+example](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis).
+This one splits a domain into 9 quantiles and assigns them specific
+values from the `range`.
 
 Let’s say our domain goes from 0 to 90. Calling the scale with any
 number between 0 and 9 would return 1. 10 to 19 returns 2 and so on.

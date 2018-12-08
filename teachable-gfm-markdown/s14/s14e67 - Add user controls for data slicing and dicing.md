@@ -14,8 +14,9 @@ It’s a set of filters for users to slice and dice our visualization. The
 shortened dataset gives you 2 years, 12 job titles, and 50 US states.
 You’ll get 5+ years and many more job titles with the full dataset.
 
-We’re using the [architecture we discussed](#basic-architecture) earlier
-to make it work. Clicking buttons updates a filter function and
+We’re using the [architecture we
+discussed](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887770#basic-architecture)
+earlier to make it work. Clicking buttons updates a filter function and
 communicates it all the way up to the `App` component. `App` then uses
 it to update `this.state.filteredSalaries`, which triggers a re-render
 and updates our dataviz.

@@ -2,8 +2,9 @@
 ## Step 3: Histogram component
 
 We’re following the [full-feature
-integration](#full-feature-integration) approach for our Histogram
-component. React talks to the DOM, D3 calculates the props.
+integration](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration)
+approach for our Histogram component. React talks to the DOM, D3
+calculates the props.
 
 We’ll use two components:
 

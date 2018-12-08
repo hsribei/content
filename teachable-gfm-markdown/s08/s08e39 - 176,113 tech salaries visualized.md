@@ -16,10 +16,12 @@ view.
 It’s going to be great.
 
 At this point, I assume you’ve used `create-react-app` to set up your
-environment. Check the [getting started](#getting-started) section if
-you haven’t. I’m also assuming you’ve read the [basics
-chapter](#the-meat-start). I’m still going to explain what we’re doing,
-but knowing the basics helps.
+environment. Check the [getting
+started](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888622#getting-started)
+section if you haven’t. I’m also assuming you’ve read the [basics
+chapter](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887708#the-meat-start).
+I’m still going to explain what we’re doing, but knowing the basics
+helps.
 
 I suggest you follow along, keep `npm start` running, and watch your
 visualization change in real time as you code. It’s rewarding as hell.

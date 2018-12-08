@@ -20,8 +20,9 @@ Adapting to the user’s network speed, built-in preload functionality,
 stuff like that. More on that in the chapter on React Suspense and Time
 Slicing.
 
-Make sure you’ve installed [all dependencies](#install-dependencies) and
-that `npm start` is running.
+Make sure you’ve installed [all
+dependencies](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888625#install-dependencies)
+and that `npm start` is running.
 
 We’re building our preloader in 4 steps:
 

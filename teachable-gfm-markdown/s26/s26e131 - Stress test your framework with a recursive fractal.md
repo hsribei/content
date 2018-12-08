@@ -2,8 +2,8 @@
 ## Stress test your framework with a recursive fractal
 
 To show you how these speed improvements look in real life, I’ve devised
-a stress test. A \[pythagorean fractal
-tree\](https://en.wikipedia.org/wiki/Pythagoras\_tree\_(fractal) that
+a stress test. A [pythagorean fractal
+tree](https://en.wikipedia.org/wiki/Pythagoras_tree_\(fractal\)) that
 moves around when you move your mouse.
 
 ![Pythagorean
