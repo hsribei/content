@@ -89,9 +89,9 @@ two step process:
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 
-// markua-start-insert
+// Insert the line(s) between here...
 import Axis from './Axis';
-// markua-end-insert
+// ...and here.
 
 // ...
 class Histogram extends Component {
@@ -107,12 +107,12 @@ class Histogram extends Component {
                 <g className="bars">
                     {bars.map(this.makeBar)}
                 </g>
-                // markua-start-insert
+                // Insert the line(s) between here...
                 <Axis x={axisMargin-3}
                       y={0}
                       data={bars}
                       scale={yScale} />
-                // markua-end-insert
+                // ...and here.
             </g>
         );
     }

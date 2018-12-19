@@ -97,21 +97,21 @@ That should throw some errors. We have to change the `d3.select` and get
 
 ``` javascript
 const Barchart = D3blackbox(function () {
-  // markua-start-delete
+  // Delete the line(s) between here...
     var svg = d3.select("svg"),
-  // markua-end-delete
-  // markua-start-insert
+  // ...and here.
+  // Insert the line(s) between here...
   var svg = d3.select(this.anchor.current)
-  // markua-end-insert
+  // ...and here.
         margin = {top: 20, right: 20, bottom: 30, left: 40},
-        // markua-start-delete
+        // Delete the line(s) between here...
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
-        // markua-end-delete
-        // markua-start-insert
+        // ...and here.
+        // Insert the line(s) between here...
         width = +this.props.width - margin.left - margin.right,
         height = +this.props.height - margin.top - margin.bottom;
-        // markua-end-insert
+        // ...and here.
 ```
 
 Most D3 examples use a global `svg` variable to refer to their drawing
@@ -126,21 +126,21 @@ Next step is to change where our barchart gets its data. Gotta use the
 public URL.
 
 ``` javascript
-//markua-start-delete
+//Delete the line(s) between here...
 d3.tsv("data.tsv", function(d) {
-// markua-end-delete
-// markua-start-insert
+// ...and here.
+// Insert the line(s) between here...
 d3.tsv("https://cdn.rawgit.com/mbostock/3885304/raw/a91f37f5f4b43269df3dbabcda0090310c05285d/data.tsv", function(d) {
-// markua-end-insert
+// ...and here.
       d.frequency = +d.frequency;
       return d;
-// markua-start-delete
+// Delete the line(s) between here...
     }, function(error, data) {
       if (error) throw error;
-// markua-end-delete
-// markua-start-insert
+// ...and here.
+// Insert the line(s) between here...
     }).then(function(data) {
-// markua-end-insert
+// ...and here.
 ```
 
 Same link, absolute version. And we updated the callback-based code to

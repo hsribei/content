@@ -12,12 +12,12 @@ Go into `src/DataHandling.js` and change one line:
 export const loadAllData = (callback = _.noop) => {
     d3.queue()
         // ..
-        // markua-start-delete
+        // Delete the line(s) between here...
         .defer(d3.csv, 'data/h1bs-2012-2016-shortened.csv', cleanSalary)
-        // markua-end-delete
-        // markua-start-insert
+        // ...and here.
+        // Insert the line(s) between here...
         .defer(d3.csv, 'data/h1bs-2012-2016.csv', cleanSalary)
-        // markua-end-insert
+        // ...and here.
 ```
 
 We change the file name, and that’s that. Full dataset locked and

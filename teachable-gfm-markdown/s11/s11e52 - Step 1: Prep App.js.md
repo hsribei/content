@@ -9,9 +9,9 @@ or two, update `render`.
 import Preloader from './components/Preloader';
 import { loadAllData } from './DataHandling';
 
-// markua-start-insert
+// Insert the line(s) between here...
 import CountyMap from './components/CountyMap';
-// markua-end-insert
+// ...and here.
 ```
 
 That imports the `CountyMap` component from `components/CountyMap/`.
@@ -60,9 +60,9 @@ In the `render` method, we’ll:
 ``` javascript
 // src/App.js
 render() {
-    // markua-start-insert
+    // Insert the line(s) between here...
     const { countyNames, usTopoJson, techSalaries, } = this.state;
-    // markua-end-insert
+    // ...and here.
         
     if (techSalaries.length < 1) {
         return (
@@ -70,7 +70,7 @@ render() {
         );
     }
 
-    // markua-start-insert
+    // Insert the line(s) between here...
     const filteredSalaries = techSalaries,
           filteredSalariesMap = _.groupBy(filteredSalaries, 'countyID'),
           countyValues = countyNames.map(
@@ -78,14 +78,14 @@ render() {
           ).filter(d => !_.isNull(d));
 
     let zoom = null;
-    // markua-end-insert
+    // ...and here.
 
         return (
           <div className="App container">
-            // markua-start-delete
+            // Delete the line(s) between here...
             <h1>Loaded {techSalaries.length} salaries</h1>
-            // markua-end-delete
-            // markua-start-insert
+            // ...and here.
+            // Insert the line(s) between here...
             <svg width="1100" height="500">
                 <CountyMap usTopoJson={usTopoJson}
                            USstateNames={USstateNames}
@@ -96,7 +96,7 @@ render() {
                            height={500}
                            zoom={zoom} />
             </svg>
-            // markua-end-insert
+            // ...and here.
           </div>
         );
 }

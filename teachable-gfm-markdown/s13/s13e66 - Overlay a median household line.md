@@ -21,26 +21,26 @@ Let’s see if we can do it in a single code block 😄
 // src/App.js
 import Histogram from './components/Histogram';
 import { Title, Description, GraphDescription } from './components/Meta';
-// markua-start-insert
+// Insert the line(s) between here...
 import MedianLine from './components/MedianLine';
-// markua-end-insert
+// ...and here.
 
 class App extends Component {
     // ...
     render() {
         // ...
         let zoom = null,
-            // markua-start-insert
+            // Insert the line(s) between here...
             medianHousehold = this.state.medianIncomesByUSState['US'][0]
                                   .medianIncome;
-            // markua-end-insert
+            // ...and here.
 
         return (
             // ...
             <svg width="1100" height="500">
                 <CountyMap // ... />
                 <Histogram // ... />
-                // markua-start-insert
+                // Insert the line(s) between here...
                 <MedianLine data={filteredSalaries}
                             x={500}
                             y={10}
@@ -49,7 +49,7 @@ class App extends Component {
                             bottomMargin={5}
                             median={medianHousehold}
                             value={d => d.base_salary} />
-                // markua-end-insert
+                // ...and here.
             </svg>
         )
     }

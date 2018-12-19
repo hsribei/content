@@ -12,17 +12,17 @@ histogram. I’ll explain when we get there.
 // src/App.js
 import MedianLine from './components/MedianLine';
 
-// markua-start-insert
+// Insert the line(s) between here...
 import Controls from './components/Controls';
-// markua-end-insert
+// ...and here.
 
 class App extends React.Component {
     state = {
         // ...
         medianIncomes: [],
-        // markua-start-insert
+        // Insert the line(s) between here...
         salariesFilter: () => true,
-        // markua-end-insert
+        // ...and here.
         filteredBy: {
             // ...
         }
@@ -30,14 +30,14 @@ class App extends React.Component {
 
     // ...
 
-    // markua-start-insert
+    // Insert the line(s) between here...
     updateDataFilter = (filter, filteredBy) => {
         this.setState({
             salariesFilter: filter,
             filteredBy: filteredBy
         });
     }
-    // markua-end-insert
+    // ...and here.
 
     render() {
         // ...
@@ -59,25 +59,25 @@ class App extends React.Component {
 
     render() {
         // ...
-        // markua-start-delete
+        // Delete the line(s) between here...
         const filteredSalaries = techSalaries
-        // markua-end-delete
-        // markua-start-insert
+        // ...and here.
+        // Insert the line(s) between here...
         const filteredSalaries = techSalaries
                                      .filter(this.state.salariesFilter)
-        // markua-end-insert
+        // ...and here.
 
         // ...
 
         let zoom = null,
             medianHousehold = // ...
-        // markua-start-insert
+        // Insert the line(s) between here...
         if (filteredBy.USstate !== '*') {
             zoom = this.state.filteredBy.USstate;
             medianHousehold = d3.mean(medianIncomesByUSState[zoom],
                                       d => d.medianIncome);
         }
-        // markua-end-insert
+        // ...and here.
 
         // ...
     }
@@ -117,21 +117,21 @@ class App extends React.Component {
                 <svg //...>
                     <CountyMap //... />
 
-                    // markua-start-insert
+                    // Insert the line(s) between here...
                     <rect x="500" y="0"
                           width="600"
                           height="500"
                           style={{fill: 'white'}} />
-                    // markua-end-insert
+                    // ...and here.
 
                     <Histogram //... />
                     <MedianLine //.. />
                 </svg>
 
-                // markua-start-insert
+                // Insert the line(s) between here...
                 <Controls data={techSalaries}
                           updateDataFilter={this.updateDataFilter} />
-                // markua-end-insert
+                // ...and here.
             </div>
         )
     }

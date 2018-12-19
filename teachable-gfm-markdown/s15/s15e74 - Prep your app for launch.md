@@ -55,14 +55,14 @@ Add two lines to package.json:
 
 ``` json
 // package.json
-// markua-start-insert
+// Insert the line(s) between here...
 "homepage": "https://<your username>.github.io/<your repo name>"
-// markua-end-insert
+// ...and here.
 "scripts": {
     "eject": "react-scripts eject",
-    // markua-start-insert
+    // Insert the line(s) between here...
     "deploy": "npm run build && gh-pages -d build"
-    // markua-end-insert
+    // ...and here.
 }
 ```
 

@@ -8,17 +8,17 @@ the `create-react-app` defaults and import our `Preloader` component.
 // src/App.js
 
 import React from 'react';
-// markua-start-delete
+// Delete the line(s) between here...
 import logo from './logo.svg';
 import './App.css';
-// markua-end-delete
+// ...and here.
 
-// markua-start-insert
+// Insert the line(s) between here...
 import Preloader from './components/Preloader';
-// markua-end-insert
+// ...and here.
 
 class App extends React.Component {
-    // markua-start-delete
+    // Delete the line(s) between here...
   render() {
     return (
       <div className="App">
@@ -32,7 +32,7 @@ class App extends React.Component {
       </div>
     );
   }
-    // markua-end-delete
+    // ...and here.
 }
 
 export default App;
@@ -49,7 +49,7 @@ Let’s define a default `state` and a `render` method that uses our
 // src/App.js
 
 class App extends React.Component {
-    // markua-start-insert
+    // Insert the line(s) between here...
     state = {
         techSalaries: []
     }
@@ -69,7 +69,7 @@ class App extends React.Component {
             </div>
         );
     }
-    // markua-end-insert
+    // ...and here.
 }
 ```
 

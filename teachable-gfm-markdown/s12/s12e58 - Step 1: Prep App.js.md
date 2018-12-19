@@ -8,17 +8,17 @@ You know the drill, don’t you? Import some stuff, add it to the
 // src/App.js
 import _ from 'lodash';
 
-// markua-start-insert
+// Insert the line(s) between here...
 import './style.css';
-// markua-end-insert
+// ...and here.
 
 import Preloader from './components/Preloader';
 import { loadAllData } from './DataHandling';
 
 import CountyMap from './components/CountyMap';
-// markua-start-insert
+// Insert the line(s) between here...
 import Histogram from './components/Histogram';
-// markua-end-insert
+// ...and here.
 ```
 
 We import `style.css` and the `Histogram` component. That’s what I love
@@ -54,7 +54,7 @@ render() {
                            width={500}
                            height={500}
                            zoom={zoom} />
-                // markua-start-insert
+                // Insert the line(s) between here...
                 <Histogram bins={10}
                            width={500}
                            height={500}
@@ -64,7 +64,7 @@ render() {
                            axisMargin={83}
                            bottomMargin={5}
                            value={d => d.base_salary} />
-                // markua-end-insert
+                // ...and here.
             </svg>
         </div>
     );

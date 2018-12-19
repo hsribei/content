@@ -10,15 +10,15 @@ and Lodash. We’ll need them later.
 ``` javascript
 // src/App.js
 import React from 'react';
-// markua-start-insert
+// Insert the line(s) between here...
 import * as d3 from 'd3';
 import _ from 'lodash';
-// markua-end-insert
+// ...and here.
 
 import Preloader from './components/Preloader';
-// markua-start-insert
+// Insert the line(s) between here...
 import { loadAllData } from './DataHandling';
-// markua-end-insert
+// ...and here.
 ```
 
 You already know about default imports. Importing with `{}` is how we
@@ -32,7 +32,7 @@ Don’t worry about the missing `DataHandling` file. It’s coming soon.
 class App extends React.Component {
     state = {
         techSalaries: [],
-        // markua-start-insert
+        // Insert the line(s) between here...
         medianIncomes: [],
                 countyNames: [],
     };
@@ -40,7 +40,7 @@ class App extends React.Component {
     componentDidMount() {
         loadAllData(data => this.setState(data));
     }
-    // markua-end-insert
+    // ...and here.
 ```
 
 We initiate data loading inside the `componentDidMount` lifecycle hook.
@@ -79,13 +79,13 @@ finishes loading.
       }
 
     return (
-        // markua-start-delete
+        // Delete the line(s) between here...
         <div className="App">
-        // markua-end-delete
-        // markua-start-insert
+        // ...and here.
+        // Insert the line(s) between here...
         <div className="App container">
             <h1>Loaded {techSalaries.length} salaries</h1>
-        // markua-end-insert
+        // ...and here.
         </div>
     );
 }

@@ -16,10 +16,10 @@ class Controls extends Component {
         const { data } = this.props;
 
         const years = new Set(data.map(d => d.submit_date.getFullYear())),
-              // markua-start-insert
+              // Insert the line(s) between here...
               jobTitles = new Set(data.map(d => d.clean_job_title)),
               USstates = new Set(data.map(d => d.USstate));
-              // markua-end-insert
+              // ...and here.
 
         return (
             <div>
@@ -29,7 +29,7 @@ class Controls extends Component {
                             updateDataFilter={this.updateYearFilter}
                             />
 
-            // markua-start-insert
+            // Insert the line(s) between here...
                 <ControlRow data={data}
                             toggleNames={Array.from(jobTitles.values())}
                             picked={this.state.jobTitle}
@@ -40,7 +40,7 @@ class Controls extends Component {
                             picked={this.state.USstate}
                             updateDataFilter={this.updateUSstateFilter}
                             capitalize="true" />
-                // markua-end-insert
+                // ...and here.
             </div>
         )
     }

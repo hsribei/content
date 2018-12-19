@@ -10,22 +10,22 @@ know the drill 😄
 // src/App.js
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
-// markua-start-insert
+// Insert the line(s) between here...
 import { Title } from './components/Meta';
-// markua-end-insert
+// ...and here.
 
 class App extends Component {
     state = {
         techSalaries: [],
         countyNames: [],
         medianIncomes: [],
-        // markua-start-insert
+        // Insert the line(s) between here...
         filteredBy: {
             USstate: '*',
             year: '*',
             jobTitle: '*'
         }
-        // markua-end-insert
+        // ...and here.
     }
 
     // ...
@@ -35,10 +35,10 @@ class App extends Component {
         // ..
         return (
             <div className="App container">
-                // markua-start-insert
+                // Insert the line(s) between here...
                 <Title data={filteredSalaries}
                        filteredBy={filteredBy} />
-                // markua-end-insert
+                // ...and here.
                 // ...
             </div>
         )

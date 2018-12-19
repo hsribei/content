@@ -18,9 +18,9 @@ We load stylesheets in `src/index.js`.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// markua-start-insert
+// Insert the line(s) between here...
 import 'bootstrap/dist/css/bootstrap.css';
-// markua-end-insert
+// ...and here.
 
 ReactDOM.render(
   <App />,

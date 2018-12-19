@@ -14,17 +14,17 @@ titles, Twitter cards, Facebook Open Graph things, and so on.
 <!-- public/index.html -->
 <head>
     <!-- //... -->
-    // markua-start-insert
+    // Insert the line(s) between here...
     <title>How much does an H1B in tech pay?</title>
 
     <link rel="canonical"
           href="https://swizec.github.io/react-d3js-step-by-step/" />
-    // markua-end-insert
+    // ...and here.
 </head>
 <body>
     <!-- //... -->
     <div id="root">
-        // markua-start-insert
+        // Insert the line(s) between here...
          <h2>The average H1B in tech pays $86,164/year</h2>
 
      <p class="lead">
@@ -36,7 +36,7 @@ titles, Twitter cards, Facebook Open Graph things, and so on.
              Median household salary is a good proxy for cost of
              living in an area.</span>
          </p>
-        // markua-end-insert
+        // ...and here.
     </div>
 </body>
 ```
