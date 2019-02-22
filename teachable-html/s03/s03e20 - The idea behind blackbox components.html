@@ -4,7 +4,11 @@
 <p>D3 controlling the DOM is <em>okay</em>, but it means React can’t help you there. That’s why it’s called a Blackbox – React can’t see inside.</p>
 <p>No render engine, no tree diffing, no dev tools to inspect what’s going. Just a blob of DOM elements.</p>
 <p>Okay for small components or when you’re prototyping, but I’ve had people come to my workshops and say <em>“We built our whole app with the blackbox approach. It takes a few seconds to re-render when you click something. Please help”</em></p>
-<p>🤔</p>
-<p>Here’s how it works: - React renders an anchor element - D3 hijacks it and puts stuff in</p>
+<p>:thinking:</p>
+<p>Here’s how it works:</p>
+<ul>
+<li>React renders an anchor element</li>
+<li>D3 hijacks it and puts stuff in</li>
+</ul>
 <p>You manually re-render on props and state changes. Throwing away and rebuilding the entire DOM subtree on each render. With complex visualizations this becomes a huge hit on performance.</p>
 <p>Use this technique sparingly.</p>

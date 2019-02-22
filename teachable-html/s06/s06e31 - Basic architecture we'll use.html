@@ -8,7 +8,7 @@
 <img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/architecture.png" alt="The basic architecture"><figcaption>The basic architecture</figcaption>
 </figure>
 <p>Our main App component holds state for your entire application. Anything that multiple components should be aware of lives here. This state flows down the hierarchy via props. Changes happen via callbacks, also passed down through props.</p>
-<p>Like this 👇</p>
+<p>Like this <span class="emoji" data-emoji="point_down">👇</span></p>
 <ul>
 <li>The Main Component – <code style="white-space: pre-wrap;">App</code> – holds the truth</li>
 <li>Truth flows down through props</li>
@@ -31,5 +31,5 @@
 </figure>
 <p>You can think of it like calling functions with new arguments. Because the functions – components – render the UI, your interface updates.</p>
 <p>Because your components are well-made and rely on their props to render, React’s engine can optimize these changes. It compares the new and old component trees and decides which components to re-render and which to leave alone.</p>
-<p>Functional programming for HTML! 😎</p>
+<p>Functional programming for HTML! <span class="emoji" data-emoji="sunglasses">😎</span></p>
 <p>The functional programming concepts we’re relying on are called <a href="https://en.wikipedia.org/wiki/Referential_transparency">referential transparency</a>, <a href="https://en.wikipedia.org/wiki/Idempotence">idempotent functions</a>, and <a href="https://en.wikipedia.org/wiki/Pure_function">functional purity</a>. I suggest Googling them if you want to learn the theory behind it all.</p>
