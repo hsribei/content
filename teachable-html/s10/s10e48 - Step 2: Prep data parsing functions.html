@@ -1,13 +1,41 @@
-<h2 id="step-2-prep-data-parsing-functions">Step 2: Prep data parsing functions</h2>
-<p>We’re putting data loading logic in a separate file from <code style="white-space: pre-wrap;">App.js</code> because it’s a bunch of functions that work together and don’t have much to do with the <code style="white-space: pre-wrap;">App</code> component itself.</p>
-<p>We start with two imports and four data parsing functions:</p>
-<ul>
-<li><code style="white-space: pre-wrap;">cleanIncome</code>, which parses each row of household income data</li>
-<li><code style="white-space: pre-wrap;">dateParse</code>, which we use for parsing dates</li>
-<li><code style="white-space: pre-wrap;">cleanSalary</code>, which parses each row of salary data</li>
-<li><code style="white-space: pre-wrap;">cleanUSStateName</code>, which parses US state names</li>
-</ul>
-<div class="sourceCode" id="cb62" data-caption="Data parsing functions" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb62-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/DataHandling.js</span></a>
+    <h2 id="step-2-prep-data-parsing-functions">
+      Step 2: Prep data parsing functions
+    </h2>
+    <p>
+      We’re putting data loading logic in a separate file from
+      <code style="white-space: pre-wrap;">App.js</code> because it’s a bunch
+      of functions that work together and don’t have much to do with the
+      <code style="white-space: pre-wrap;">App</code> component itself.
+    </p>
+    <p>We start with two imports and four data parsing functions:</p>
+    <ul>
+      <li>
+        <code style="white-space: pre-wrap;">cleanIncome</code>, which parses
+        each row of household income data
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">dateParse</code>, which we use for
+        parsing dates
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">cleanSalary</code>, which parses
+        each row of salary data
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">cleanUSStateName</code>, which
+        parses US state names
+      </li>
+    </ul>
+    <div
+      class="sourceCode"
+      id="cb62"
+      data-caption="Data parsing functions"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb62-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/DataHandling.js</span></a>
 <a class="sourceLine" id="cb62-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb62-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> _ <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;lodash&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb62-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -49,7 +77,20 @@
 <a class="sourceLine" id="cb62-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> cleanCounty <span class="op" style="color: #666666;">=</span> d <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> (<span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb62-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">id</span><span class="op" style="color: #666666;">:</span> <span class="at" style="color: #7d9029;">Number</span>(<span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">id</span>)<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb62-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">name</span><span class="op" style="color: #666666;">:</span> name</a>
-<a class="sourceLine" id="cb62-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>You’ll see those <code style="white-space: pre-wrap;">d3</code> and <code style="white-space: pre-wrap;">lodash</code> imports a lot.</p>
-<p>Our data parsing functions all follow the same approach: Take a row of data as <code style="white-space: pre-wrap;">d</code>, return a dictionary with nicer key names, cast any numbers or dates into appropriate formats. They all start as strings.</p>
-<p>Doing all this parsing now, keeps the rest of our codebase clean. Handling data is always messy. You want to contain that mess as much as possible.</p>
+<a class="sourceLine" id="cb62-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      You’ll see those <code style="white-space: pre-wrap;">d3</code> and
+      <code style="white-space: pre-wrap;">lodash</code> imports a lot.
+    </p>
+    <p>
+      Our data parsing functions all follow the same approach: Take a row of
+      data as <code style="white-space: pre-wrap;">d</code>, return a
+      dictionary with nicer key names, cast any numbers or dates into
+      appropriate formats. They all start as strings.
+    </p>
+    <p>
+      Doing all this parsing now, keeps the rest of our codebase clean.
+      Handling data is always messy. You want to contain that mess as much as
+      possible.
+    </p>

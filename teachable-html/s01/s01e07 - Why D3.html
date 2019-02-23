@@ -1,14 +1,47 @@
-<p>D3 is the best library out there for custom data visualization. It comes with a rich ecosystem of functions for almost anything you can think of. From simple medians, to automatic axis generators, and force diagrams.</p>
-<p>Most data visualization you see on the web is built with D3. The New York Times uses it, Guardian uses it, r/dataisbeautiful is full of it.</p>
-<p>Learning D3 from scratch is where life gets tricky.</p>
-<p>There are several gotchas that trip you up and make examples look like magic. You’ve probably noticed this, if you ever looked at an example project built with D3. They’re full of spaghetti code, global variables, and often aren’t made to be maintainable.</p>
-<p>Most examples are just one-off toys after all. It’s art.</p>
-<p>A lot of dataviz that <em>isn’t</em> art, is charts and graphs. You’ll often find that using D3 to build those, is too complicated. D3 gives you more power than you need.</p>
-<p>If you want charts, I suggest using a charting library.</p>
-<p>Where many charting libraries fall short is customization. The API is limited, you can’t do everything you want, and it gets easier to just build it yourself.</p>
-<p>A lot of what you end up doing in real life is finding a D3 example that looks like what you want to build and adapting it. That’s why you should learn at least some D3.</p>
-<p>But D3 is hard to read. Take this barchart code, for example <span class="emoji" data-emoji="point_down">👇</span></p>
-<div class="sourceCode" id="cb6" data-caption="Barchart in pure D3" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb6-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">tsv</span>(<span class="st" style="color: #4070a0;">&quot;data.tsv&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span></a>
+    <p>
+      D3 is the best library out there for custom data visualization. It comes
+      with a rich ecosystem of functions for almost anything you can think of.
+      From simple medians, to automatic axis generators, and force diagrams.
+    </p>
+    <p>
+      Most data visualization you see on the web is built with D3. The New York
+      Times uses it, Guardian uses it, r/dataisbeautiful is full of it.
+    </p>
+    <p>Learning D3 from scratch is where life gets tricky.</p>
+    <p>
+      There are several gotchas that trip you up and make examples look like
+      magic. You’ve probably noticed this, if you ever looked at an example
+      project built with D3. They’re full of spaghetti code, global variables,
+      and often aren’t made to be maintainable.
+    </p>
+    <p>Most examples are just one-off toys after all. It’s art.</p>
+    <p>
+      A lot of dataviz that <em>isn’t</em> art, is charts and graphs. You’ll
+      often find that using D3 to build those, is too complicated. D3 gives you
+      more power than you need.
+    </p>
+    <p>If you want charts, I suggest using a charting library.</p>
+    <p>
+      Where many charting libraries fall short is customization. The API is
+      limited, you can’t do everything you want, and it gets easier to just
+      build it yourself.
+    </p>
+    <p>
+      A lot of what you end up doing in real life is finding a D3 example that
+      looks like what you want to build and adapting it. That’s why you should
+      learn at least some D3.
+    </p>
+    <p>But D3 is hard to read. Take this barchart code, for example 👇</p>
+    <div
+      class="sourceCode"
+      id="cb6"
+      data-caption="Barchart in pure D3"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb6-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">tsv</span>(<span class="st" style="color: #4070a0;">&quot;data.tsv&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb6-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span> <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">+</span><span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb6-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="cf" style="color: #007020; font-weight: bold;">return</span> d<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb6-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">},</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(error<span class="op" style="color: #666666;">,</span> data) <span class="op" style="color: #666666;">{</span></a>
@@ -19,7 +52,7 @@
 <a class="sourceLine" id="cb6-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb6-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="va" style="color: #19177c;">g</span>.<span class="at" style="color: #7d9029;">append</span>(<span class="st" style="color: #4070a0;">&quot;g&quot;</span>)</a>
 <a class="sourceLine" id="cb6-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;class&quot;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&quot;axis axis--x&quot;</span>)</a>
-<a class="sourceLine" id="cb6-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;transform&quot;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&quot;translate(0,&quot;</span> <span class="op" style="color: #666666;">+</span> height <span class="op" style="color: #666666;">+</span> <span class="st" style="color: #4070a0;">&quot;)&quot;</span>)</a>
+<a class="sourceLine" id="cb6-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;transform&quot;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&quot;translate(0,&quot;</span> <span class="op" style="color: #666666;">+</span> height <span class="op" style="color: #666666;">+</span> <span class="st" style="color: #4070a0;">&quot😉&quot;</span>)</a>
 <a class="sourceLine" id="cb6-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">call</span>(<span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">axisBottom</span>(x))<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb6-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb6-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="va" style="color: #19177c;">g</span>.<span class="at" style="color: #7d9029;">append</span>(<span class="st" style="color: #4070a0;">&quot;g&quot;</span>)</a>
@@ -40,6 +73,7 @@
 <a class="sourceLine" id="cb6-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;y&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span> <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="at" style="color: #7d9029;">y</span>(<span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span>)<span class="op" style="color: #666666;">;</span> <span class="op" style="color: #666666;">}</span>)</a>
 <a class="sourceLine" id="cb6-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;width&quot;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">x</span>.<span class="at" style="color: #7d9029;">bandwidth</span>())</a>
 <a class="sourceLine" id="cb6-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;height&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span> <span class="cf" style="color: #007020; font-weight: bold;">return</span> height <span class="op" style="color: #666666;">-</span> <span class="at" style="color: #7d9029;">y</span>(<span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span>)<span class="op" style="color: #666666;">;</span> <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb6-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>Can you tell what’s going on? I’d need to read it pretty carefully.</p>
-<p>Which brings us to <span class="emoji" data-emoji="point_right">👉</span></p>
+<a class="sourceLine" id="cb6-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>Can you tell what’s going on? I’d need to read it pretty carefully.</p>
+    <p>Which brings us to 👉</p>

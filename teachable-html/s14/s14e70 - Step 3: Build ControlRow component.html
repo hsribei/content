@@ -1,7 +1,22 @@
-<h2 id="step-3-build-controlrow-component">Step 3: Build ControlRow component</h2>
-<p>Let’s build the <code style="white-space: pre-wrap;">ControlRow</code> component. It renders a row of controls and ensures only one at a time is selected.</p>
-<p>We’ll start with a stub and go from there.</p>
-<div class="sourceCode" id="cb109" data-caption="ControlRow stub" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb109-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
+    <h2 id="step-3-build-controlrow-component">
+      Step 3: Build ControlRow component
+    </h2>
+    <p>
+      Let’s build the
+      <code style="white-space: pre-wrap;">ControlRow</code> component. It
+      renders a row of controls and ensures only one at a time is selected.
+    </p>
+    <p>We’ll start with a stub and go from there.</p>
+    <div
+      class="sourceCode"
+      id="cb109"
+      data-caption="ControlRow stub"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb109-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
 <a class="sourceLine" id="cb109-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb109-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb109-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> Toggle <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;./Toggle&quot;</span><span class="op" style="color: #666666;">;</span></a>
@@ -19,22 +34,58 @@
 <a class="sourceLine" id="cb109-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb109-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb109-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb109-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> ControlRow<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We start with imports, big surprise, then make a stub with 3 methods. Can you guess what they are?</p>
-<ul>
-<li><code style="white-space: pre-wrap;">makePick</code> is the <code style="white-space: pre-wrap;">Toggle</code> click callback</li>
-<li><code style="white-space: pre-wrap;">_addToggle</code> is a rendering helper method</li>
-<li><code style="white-space: pre-wrap;">render</code> renders a row of buttons</li>
-</ul>
-<div class="sourceCode" id="cb110" data-caption="makePick implementation" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb110-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
+<a class="sourceLine" id="cb109-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> ControlRow<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We start with imports, big surprise, then make a stub with 3 methods. Can
+      you guess what they are?
+    </p>
+    <ul>
+      <li>
+        <code style="white-space: pre-wrap;">makePick</code> is the
+        <code style="white-space: pre-wrap;">Toggle</code> click callback
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">_addToggle</code> is a rendering
+        helper method
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">render</code> renders a row of
+        buttons
+      </li>
+    </ul>
+    <div
+      class="sourceCode"
+      id="cb110"
+      data-caption="makePick implementation"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb110-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
 <a class="sourceLine" id="cb110-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb110-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> ControlRow <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb110-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    makePick <span class="op" style="color: #666666;">=</span> (picked<span class="op" style="color: #666666;">,</span> newState) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb110-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// if newState is false, we want to reset</span></a>
 <a class="sourceLine" id="cb110-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">updateDataFilter</span>(picked<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">!</span>newState)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb110-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p><code style="white-space: pre-wrap;">makePick</code> calls the data filter update and passes in the new value and whether we want to unselect. Pretty simple right?</p>
-<div class="sourceCode" id="cb111" data-caption="Render a row of controls" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb111-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
+<a class="sourceLine" id="cb110-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      <code style="white-space: pre-wrap;">makePick</code> calls the data
+      filter update and passes in the new value and whether we want to
+      unselect. Pretty simple right?
+    </p>
+    <div
+      class="sourceCode"
+      id="cb111"
+      data-caption="Render a row of controls"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb111-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/ControlRow.js</span></a>
 <a class="sourceLine" id="cb111-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> ControlRow <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb111-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb111-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -68,11 +119,48 @@
 <a class="sourceLine" id="cb111-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb111-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb111-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb111-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Rendering comes in two functions: <code style="white-space: pre-wrap;">_addToggle</code>, which is a helper, and <code style="white-space: pre-wrap;">render</code>, which is the main render.</p>
-<p>In <code style="white-space: pre-wrap;">render</code>, we set up two <code style="white-space: pre-wrap;">div</code>s with Bootstrap classes. The first is a <code style="white-space: pre-wrap;">row</code>, and the second is a full-width column. I tried using a column for each button, but it was annoying to manage and used too much space.</p>
-<p>Inside the divs, we map over all toggles and use <code style="white-space: pre-wrap;">_addToggle</code> to render each of them.</p>
-<p><code style="white-space: pre-wrap;">_addToggle</code> renders a <code style="white-space: pre-wrap;">Toggle</code> component with a <code style="white-space: pre-wrap;">label</code>, <code style="white-space: pre-wrap;">name</code>, <code style="white-space: pre-wrap;">value</code> and <code style="white-space: pre-wrap;">onClick</code> callback. The label is just a prettier version of the name, which also serves as a key in our <code style="white-space: pre-wrap;">toggleValues</code> dictionary. It’s going to be the <code style="white-space: pre-wrap;">picked</code> attribute in <code style="white-space: pre-wrap;">makePick</code>.</p>
-<p>Your browser should continue showing an error, but it should change to talking about the <code style="white-space: pre-wrap;">Toggle</code> component instead of <code style="white-space: pre-wrap;">ControlRow</code>.</p>
-<p><img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/toggle-error.png"></p>
-<p>Let’s build it.</p>
+<a class="sourceLine" id="cb111-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Rendering comes in two functions:
+      <code style="white-space: pre-wrap;">_addToggle</code>, which is a
+      helper, and <code style="white-space: pre-wrap;">render</code>, which is
+      the main render.
+    </p>
+    <p>
+      In <code style="white-space: pre-wrap;">render</code>, we set up two
+      <code style="white-space: pre-wrap;">div</code>s with Bootstrap classes.
+      The first is a <code style="white-space: pre-wrap;">row</code>, and the
+      second is a full-width column. I tried using a column for each button,
+      but it was annoying to manage and used too much space.
+    </p>
+    <p>
+      Inside the divs, we map over all toggles and use
+      <code style="white-space: pre-wrap;">_addToggle</code> to render each of
+      them.
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">_addToggle</code> renders a
+      <code style="white-space: pre-wrap;">Toggle</code> component with a
+      <code style="white-space: pre-wrap;">label</code>,
+      <code style="white-space: pre-wrap;">name</code>,
+      <code style="white-space: pre-wrap;">value</code> and
+      <code style="white-space: pre-wrap;">onClick</code> callback. The label
+      is just a prettier version of the name, which also serves as a key in our
+      <code style="white-space: pre-wrap;">toggleValues</code> dictionary. It’s
+      going to be the
+      <code style="white-space: pre-wrap;">picked</code> attribute in
+      <code style="white-space: pre-wrap;">makePick</code>.
+    </p>
+    <p>
+      Your browser should continue showing an error, but it should change to
+      talking about the
+      <code style="white-space: pre-wrap;">Toggle</code> component instead of
+      <code style="white-space: pre-wrap;">ControlRow</code>.
+    </p>
+    <p>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/toggle-error.png"
+      />
+    </p>
+    <p>Let’s build it.</p>

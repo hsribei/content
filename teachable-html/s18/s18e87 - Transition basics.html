@@ -1,15 +1,60 @@
-<h1 id="using-transitions-for-simple-animation">Using transitions for simple animation</h1>
-<p>Game loops are great for fine-grained control. And when all you need is a little flourish on user action, that’s where transitions shine.</p>
-<p>No details, just keyframes.</p>
-<p>Transitions let you animate SVG elements by saying <em>“I want this property to change to this new value and take this long to do so”</em>.</p>
-<p>Start-end keyframes are the simplest. You define the starting position. Start a transition. Define the end position. D3 figures out the rest. Everything from calculating the perfect rate of change to match your start and end values and your duration, to <em>what</em> to change and handling dropped frames.</p>
-<p>Quite magical.</p>
-<p>You can also sequence transitions to create complex keyframe-based animation. Each new transition definition is like a new keyframe. D3 figures out the rest.</p>
-<p>Better yet, you can use easing functions to make your animation look more natural. Make rate of change follow a mathematical curve to create smooth natural movement.</p>
-<p>You can read more about the <em>why</em> of easing functions in Disney’s <a href="https://en.wikipedia.org/wiki/12_basic_principles_of_animation">12 Basic Principles of Animation</a>. Bottom line is that it makes your animation feel natural.</p>
-<p><em>How</em> they work is hard to explain. You can grok part of it in my <a href="https://swizec.com/blog/silky-smooth-piechart-transitions-react-d3js/swizec/8258">Custom transition tweens</a> article.</p>
-<p>But don’t worry about it. All you have to know is that many easing functions exist. <a href="https://easings.net/">easings.net</a> lists the common ones. D3 implements everything on that list.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/easings.net.png" alt="Common easing functions"><figcaption>Common easing functions</figcaption>
-</figure>
-<p>Let’s try an example: A swipe transition.</p>
+    <h1 id="using-transitions-for-simple-animation">
+      Using transitions for simple animation
+    </h1>
+    <p>
+      Game loops are great for fine-grained control. And when all you need is a
+      little flourish on user action, that’s where transitions shine.
+    </p>
+    <p>No details, just keyframes.</p>
+    <p>
+      Transitions let you animate SVG elements by saying
+      <em
+        >“I want this property to change to this new value and take this long
+        to do so”</em
+      >.
+    </p>
+    <p>
+      Start-end keyframes are the simplest. You define the starting position.
+      Start a transition. Define the end position. D3 figures out the rest.
+      Everything from calculating the perfect rate of change to match your
+      start and end values and your duration, to <em>what</em> to change and
+      handling dropped frames.
+    </p>
+    <p>Quite magical.</p>
+    <p>
+      You can also sequence transitions to create complex keyframe-based
+      animation. Each new transition definition is like a new keyframe. D3
+      figures out the rest.
+    </p>
+    <p>
+      Better yet, you can use easing functions to make your animation look more
+      natural. Make rate of change follow a mathematical curve to create smooth
+      natural movement.
+    </p>
+    <p>
+      You can read more about the <em>why</em> of easing functions in Disney’s
+      <a href="https://en.wikipedia.org/wiki/12_basic_principles_of_animation"
+        >12 Basic Principles of Animation</a
+      >. Bottom line is that it makes your animation feel natural.
+    </p>
+    <p>
+      <em>How</em> they work is hard to explain. You can grok part of it in my
+      <a
+        href="https://swizec.com/blog/silky-smooth-piechart-transitions-react-d3js/swizec/8258"
+        >Custom transition tweens</a
+      >
+      article.
+    </p>
+    <p>
+      But don’t worry about it. All you have to know is that many easing
+      functions exist. <a href="https://easings.net/">easings.net</a> lists the
+      common ones. D3 implements everything on that list.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/easings.net.png"
+        alt="Common easing functions"
+      />
+      <figcaption>Common easing functions</figcaption>
+    </figure>
+    <p>Let’s try an example: A swipe transition.</p>

@@ -1,6 +1,20 @@
-<h3 id="step-1-stub-out-app-and-ball">Step 1: stub out App and Ball</h3>
-<p>We start with a skeleton: An <code style="white-space: pre-wrap;">App</code> component rendering a <code style="white-space: pre-wrap;">BouncingBall</code> component inside an SVG, and a <code style="white-space: pre-wrap;">Ball</code> component.</p>
-<div class="sourceCode" id="cb126" data-caption="App component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb126-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// index.js</span></a>
+    <h3 id="step-1-stub-out-app-and-ball">Step 1: stub out App and Ball</h3>
+    <p>
+      We start with a skeleton: An
+      <code style="white-space: pre-wrap;">App</code> component rendering a
+      <code style="white-space: pre-wrap;">BouncingBall</code> component inside
+      an SVG, and a <code style="white-space: pre-wrap;">Ball</code> component.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb126"
+      data-caption="App component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb126-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// index.js</span></a>
 <a class="sourceLine" id="cb126-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb126-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> render <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react-dom&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb126-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -14,15 +28,44 @@
 <a class="sourceLine" id="cb126-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb126-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb126-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb126-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">render</span>(<span class="op" style="color: #666666;">&lt;</span>App /<span class="op" style="color: #666666;">&gt;,</span> <span class="va" style="color: #19177c;">document</span>.<span class="at" style="color: #7d9029;">getElementById</span>(<span class="st" style="color: #4070a0;">&quot;root&quot;</span>))<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>App imports dependencies, imports <code style="white-space: pre-wrap;">BouncingBall</code>, renders it all into a <code style="white-space: pre-wrap;">root</code> DOM node. CodeSandbox gives us most of this code by default.</p>
-<div class="sourceCode" id="cb127" data-caption="Ball component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb127-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Ball.js</span></a>
+<a class="sourceLine" id="cb126-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">render</span>(<span class="op" style="color: #666666;">&lt;</span>App /<span class="op" style="color: #666666;">&gt;,</span> <span class="va" style="color: #19177c;">document</span>.<span class="at" style="color: #7d9029;">getElementById</span>(<span class="st" style="color: #4070a0;">&quot;root&quot;</span>))<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      App imports dependencies, imports
+      <code style="white-space: pre-wrap;">BouncingBall</code>, renders it all
+      into a <code style="white-space: pre-wrap;">root</code> DOM node.
+      CodeSandbox gives us most of this code by default.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb127"
+      data-caption="Ball component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb127-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Ball.js</span></a>
 <a class="sourceLine" id="cb127-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb127-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb127-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Ball <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">&lt;</span>circle cx<span class="op" style="color: #666666;">={</span>x<span class="op" style="color: #666666;">}</span> cy<span class="op" style="color: #666666;">={</span>y<span class="op" style="color: #666666;">}</span> r<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;5&quot;</span> /&gt;<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb127-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb127-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Ball<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We’re calling it a ball, but eh it’s a just a circle. You can make this more fun if you want. Right now it’s a black SVG circle that renders at a specified <code style="white-space: pre-wrap;">x, y</code> coordinate with a radius of <code style="white-space: pre-wrap;">5</code> pixels.</p>
-<p>It’s these coordinates that we’re going to play with to make the ball drop and bounce. Each time, React is going to re-render and move our ball to its new coordinates. Because we change them so quickly, it looks like the ball is animated. You’ll see.</p>
-<hr>
-<p>Those are the boring components. The animation game loop fun happens in <code style="white-space: pre-wrap;">BouncingBall</code>.</p>
+<a class="sourceLine" id="cb127-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Ball<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We’re calling it a ball, but eh it’s a just a circle. You can make this
+      more fun if you want. Right now it’s a black SVG circle that renders at a
+      specified <code style="white-space: pre-wrap;">x, y</code> coordinate
+      with a radius of <code style="white-space: pre-wrap;">5</code> pixels.
+    </p>
+    <p>
+      It’s these coordinates that we’re going to play with to make the ball
+      drop and bounce. Each time, React is going to re-render and move our ball
+      to its new coordinates. Because we change them so quickly, it looks like
+      the ball is animated. You’ll see.
+    </p>
+    <hr />
+    <p>
+      Those are the boring components. The animation game loop fun happens in
+      <code style="white-space: pre-wrap;">BouncingBall</code>.
+    </p>

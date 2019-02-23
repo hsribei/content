@@ -1,24 +1,91 @@
-<h2 id="trying-the-stress-test-in-preact-and-inferno">Trying the stress test in Preact and Inferno</h2>
-<p>The Pythagoras tree example got converted into 6 different UI libraries: React, Preact, Inferno, Vue, Angular 2, and CycleJS.</p>
-<p>Mostly by the creators of those libraries themselves because they’re awesome and much smarter than I am. You can see the result, in gifs, on <a href="https://swizec.com/blog/animating-svg-nodes-react-preact-inferno-vue/swizec/7311">my blog here</a>.</p>
-<p>We’re focusing on React-like libraries, so here’s a rundown of changes required for Preact and Inferno with links to full code.</p>
-<h3 id="preact">Preact</h3>
-<p>Implemented by Jason Miller, creator of Preact. <a href="https://github.com/developit/preact-fractals">Full code on Github</a></p>
-<p><img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preact-pythagora.gif"></p>
-<p>Jason used the <code style="white-space: pre-wrap;">preact-compat</code> layer to make Preact pretend that it’s React. This might impact performance.</p>
-<p>What I love about the Preact example is that it uses async rendering to look smoother. You can see the redraw cycle lag behind the mouse movement producing curious effects.</p>
-<p>I like it.</p>
-<p>Here’s how he did it: <a href="https://github.com/Swizec/react-fractals/compare/master...developit:master">full diff on github</a></p>
-<p>In <code style="white-space: pre-wrap;">package.json</code>, he added <code style="white-space: pre-wrap;">preact</code>, <code style="white-space: pre-wrap;">preact-compat</code>, and preact -compat clones for React libraries. I guess you need the latter so you don’t have to change your imports.</p>
-<p>He changed the functional <code style="white-space: pre-wrap;">Pythagoras</code> component into a stateful component to enable async rendering.</p>
-<div class="sourceCode" id="cb187" data-caption="Change &lt;Pythagoras&gt; to a class" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb187-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/Pythagoras.js</span></a>
+    <h2 id="trying-the-stress-test-in-preact-and-inferno">
+      Trying the stress test in Preact and Inferno
+    </h2>
+    <p>
+      The Pythagoras tree example got converted into 6 different UI libraries:
+      React, Preact, Inferno, Vue, Angular 2, and CycleJS.
+    </p>
+    <p>
+      Mostly by the creators of those libraries themselves because they’re
+      awesome and much smarter than I am. You can see the result, in gifs, on
+      <a
+        href="https://swizec.com/blog/animating-svg-nodes-react-preact-inferno-vue/swizec/7311"
+        >my blog here</a
+      >.
+    </p>
+    <p>
+      We’re focusing on React-like libraries, so here’s a rundown of changes
+      required for Preact and Inferno with links to full code.
+    </p>
+    <h3 id="preact">Preact</h3>
+    <p>
+      Implemented by Jason Miller, creator of Preact.
+      <a href="https://github.com/developit/preact-fractals"
+        >Full code on Github</a
+      >
+    </p>
+    <p>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preact-pythagora.gif"
+      />
+    </p>
+    <p>
+      Jason used the
+      <code style="white-space: pre-wrap;">preact-compat</code> layer to make
+      Preact pretend that it’s React. This might impact performance.
+    </p>
+    <p>
+      What I love about the Preact example is that it uses async rendering to
+      look smoother. You can see the redraw cycle lag behind the mouse movement
+      producing curious effects.
+    </p>
+    <p>I like it.</p>
+    <p>
+      Here’s how he did it:
+      <a
+        href="https://github.com/Swizec/react-fractals/compare/master...developit:master"
+        >full diff on github</a
+      >
+    </p>
+    <p>
+      In <code style="white-space: pre-wrap;">package.json</code>, he added
+      <code style="white-space: pre-wrap;">preact</code>,
+      <code style="white-space: pre-wrap;">preact-compat</code>, and preact
+      -compat clones for React libraries. I guess you need the latter so you
+      don’t have to change your imports.
+    </p>
+    <p>
+      He changed the functional
+      <code style="white-space: pre-wrap;">Pythagoras</code> component into a
+      stateful component to enable async rendering.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb187"
+      data-caption="Change &lt;Pythagoras&gt; to a class"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb187-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/Pythagoras.js</span></a>
 <a class="sourceLine" id="cb187-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="kw" style="color: #007020; font-weight: bold;">class</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb187-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>(props) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb187-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="at" style="color: #7d9029;">Pythagoras</span>(props)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb187-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb187-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>And enabled debounced asynchronous rendering:</p>
-<div class="sourceCode" id="cb188" data-caption="Debounce rendering" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb188-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/index.js</span></a>
+<a class="sourceLine" id="cb187-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>And enabled debounced asynchronous rendering:</p>
+    <div
+      class="sourceCode"
+      id="cb188"
+      data-caption="Debounce rendering"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb188-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/index.js</span></a>
 <a class="sourceLine" id="cb188-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> options <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;preact&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb188-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="va" style="color: #19177c;">options</span>.<span class="at" style="color: #7d9029;">syncComponentUpdates</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">false</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb188-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -28,15 +95,59 @@
 <a class="sourceLine" id="cb188-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">clearTimeout</span>(timer)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb188-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    timer <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">setTimeout</span>(f<span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">100</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb188-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">requestIdleCallback</span>(f)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb188-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>My favorite part is that you can use Preact as a drop-in replacement for React and it Just Works™ <em>and</em> works well. This is promising for anyone who wants a quick win in their codebase.</p>
-<h3 id="inferno">Inferno</h3>
-<p>Implemented by Dominic Gannaway, creator of Inferno. <a href="https://github.com/trueadm/inferno-fractals">Full code on Github</a></p>
-<p>You <em>can</em> use Inferno as a drop-in replacement for React, and I did when I tried to build this myself. Dominic says that impacts performance, though, so he made a proper fork. You can see the <a href="https://github.com/Swizec/react-fractals/compare/master...trueadm:master">full diff on Github</a></p>
-<p>Dominic changed all <code style="white-space: pre-wrap;">react-scripts</code> references to <code style="white-space: pre-wrap;">inferno-scripts</code>, and it’s a good sign that such a thing exists. He also changed the <code style="white-space: pre-wrap;">react</code> dependency to <code style="white-space: pre-wrap;">inferno-beta36</code>, but I’m sure it’s out of beta by the time you’re reading this. The experiment was done in December 2016.</p>
-<p>From there, the main changes are to the imports – React becomes Inferno – and he changed some class methods to bound fat arrow functions. Probably a stylistic choice.</p>
-<p>He also had to change a string-based ref into a callback ref. Inferno doesn’t do string-based refs for performance reasons, and we need refs so we can use D3 to detect mouse position on SVG.</p>
-<div class="sourceCode" id="cb189" data-caption="Change ref to callback" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb189-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+<a class="sourceLine" id="cb188-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      My favorite part is that you can use Preact as a drop-in replacement for
+      React and it Just Works™ <em>and</em> works well. This is promising for
+      anyone who wants a quick win in their codebase.
+    </p>
+    <h3 id="inferno">Inferno</h3>
+    <p>
+      Implemented by Dominic Gannaway, creator of Inferno.
+      <a href="https://github.com/trueadm/inferno-fractals"
+        >Full code on Github</a
+      >
+    </p>
+    <p>
+      You <em>can</em> use Inferno as a drop-in replacement for React, and I
+      did when I tried to build this myself. Dominic says that impacts
+      performance, though, so he made a proper fork. You can see the
+      <a
+        href="https://github.com/Swizec/react-fractals/compare/master...trueadm:master"
+        >full diff on Github</a
+      >
+    </p>
+    <p>
+      Dominic changed all
+      <code style="white-space: pre-wrap;">react-scripts</code> references to
+      <code style="white-space: pre-wrap;">inferno-scripts</code>, and it’s a
+      good sign that such a thing exists. He also changed the
+      <code style="white-space: pre-wrap;">react</code> dependency to
+      <code style="white-space: pre-wrap;">inferno-beta36</code>, but I’m sure
+      it’s out of beta by the time you’re reading this. The experiment was done
+      in December 2016.
+    </p>
+    <p>
+      From there, the main changes are to the imports – React becomes Inferno
+      – and he changed some class methods to bound fat arrow functions.
+      Probably a stylistic choice.
+    </p>
+    <p>
+      He also had to change a string-based ref into a callback ref. Inferno
+      doesn’t do string-based refs for performance reasons, and we need refs so
+      we can use D3 to detect mouse position on SVG.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb189"
+      data-caption="Change ref to callback"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb189-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb189-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb189-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb189-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
@@ -47,6 +158,22 @@
 <a class="sourceLine" id="cb189-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb189-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb189-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">&lt;</span>svg width<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">width</span><span class="op" style="color: #666666;">}</span> height<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">height</span><span class="op" style="color: #666666;">}</span> ref<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">svgElemeRef</span> <span class="op" style="color: #666666;">}&gt;</span></a>
-<a class="sourceLine" id="cb189-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>In the core <code style="white-space: pre-wrap;">Pythagoras</code> component, he added two Inferno-specific props: <code style="white-space: pre-wrap;">noNormalize</code> and <code style="white-space: pre-wrap;">hasNonKeyedChildren</code>.</p>
-<p>According to <a href="https://github.com/trueadm/inferno/issues/565">this issue</a>, <code style="white-space: pre-wrap;">noNormalize</code> is a benchmark-focused flag that improves performance, and I can’t figure out what <code style="white-space: pre-wrap;">hasNonKeyedChildren</code> does. I assume both are performance optimizations for the Virtual DOM diffing algorithm.</p>
+<a class="sourceLine" id="cb189-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      In the core
+      <code style="white-space: pre-wrap;">Pythagoras</code> component, he
+      added two Inferno-specific props:
+      <code style="white-space: pre-wrap;">noNormalize</code> and
+      <code style="white-space: pre-wrap;">hasNonKeyedChildren</code>.
+    </p>
+    <p>
+      According to
+      <a href="https://github.com/trueadm/inferno/issues/565">this issue</a>,
+      <code style="white-space: pre-wrap;">noNormalize</code> is a
+      benchmark-focused flag that improves performance, and I can’t figure out
+      what
+      <code style="white-space: pre-wrap;">hasNonKeyedChildren</code> does. I
+      assume both are performance optimizations for the Virtual DOM diffing
+      algorithm.
+    </p>

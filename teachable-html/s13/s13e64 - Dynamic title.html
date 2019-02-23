@@ -1,7 +1,20 @@
-<h2 id="dynamic-title">Dynamic title</h2>
-<p>We begin with the title because it shows up first.</p>
-<p>We start with an import in <code style="white-space: pre-wrap;">App.js</code> and add it to the render method. You know the drill <span class="emoji" data-emoji="smile">😄</span></p>
-<div class="sourceCode" id="cb89" data-caption="Adding Title to main App component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb89-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+    <h2 id="dynamic-title">Dynamic title</h2>
+    <p>We begin with the title because it shows up first.</p>
+    <p>
+      We start with an import in
+      <code style="white-space: pre-wrap;">App.js</code> and add it to the
+      render method. You know the drill 😄
+    </p>
+    <div
+      class="sourceCode"
+      id="cb89"
+      data-caption="Adding Title to main App component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb89-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb89-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> CountyMap <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./components/CountyMap&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb89-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> Histogram <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./components/Histogram&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb89-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
@@ -37,27 +50,112 @@
 <a class="sourceLine" id="cb89-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb89-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )</a>
 <a class="sourceLine" id="cb89-36" title="36" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb89-37" title="37" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Ok, I lied. We did a lot more than just imports and adding to render.</p>
-<p>We also set up the <code style="white-space: pre-wrap;">App</code> component for future user-controlled data filtering. The <code style="white-space: pre-wrap;">filteredBy</code> key in <code style="white-space: pre-wrap;">state</code> tells us what the user is filtering by – 3 options: <code style="white-space: pre-wrap;">USstate</code>, <code style="white-space: pre-wrap;">year</code>, and <code style="white-space: pre-wrap;">jobTitle</code>. We set them to “everything” by default.</p>
-<p>We added them now so that we can immediately write our <code style="white-space: pre-wrap;">Title</code> component in a filterable way. No need to make changes later.</p>
-<p>As you can see, <code style="white-space: pre-wrap;">Title</code> takes <code style="white-space: pre-wrap;">data</code> and <code style="white-space: pre-wrap;">filteredBy</code> props.</p>
-<h3 id="prep-meta-component">Prep Meta component</h3>
-<p>Before we begin the <code style="white-space: pre-wrap;">Title</code> component, there are a few things to take care of. Our meta components work together for a common purpose – showing meta data. Grouping them in a directory makes sense.</p>
-<p>We make a <code style="white-space: pre-wrap;">components/Meta</code> directory and add an <code style="white-space: pre-wrap;">index.js</code>. It makes importing easier.</p>
-<div class="sourceCode" id="cb90" data-caption="Meta index.js" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb90-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/index.js</span></a>
+<a class="sourceLine" id="cb89-37" title="37" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Ok, I lied. We did a lot more than just imports and adding to render.
+    </p>
+    <p>
+      We also set up the
+      <code style="white-space: pre-wrap;">App</code> component for future
+      user-controlled data filtering. The
+      <code style="white-space: pre-wrap;">filteredBy</code> key in
+      <code style="white-space: pre-wrap;">state</code> tells us what the user
+      is filtering by – 3 options:
+      <code style="white-space: pre-wrap;">USstate</code>,
+      <code style="white-space: pre-wrap;">year</code>, and
+      <code style="white-space: pre-wrap;">jobTitle</code>. We set them to
+      “everything” by default.
+    </p>
+    <p>
+      We added them now so that we can immediately write our
+      <code style="white-space: pre-wrap;">Title</code> component in a
+      filterable way. No need to make changes later.
+    </p>
+    <p>
+      As you can see, <code style="white-space: pre-wrap;">Title</code> takes
+      <code style="white-space: pre-wrap;">data</code> and
+      <code style="white-space: pre-wrap;">filteredBy</code> props.
+    </p>
+    <h3 id="prep-meta-component">Prep Meta component</h3>
+    <p>
+      Before we begin the
+      <code style="white-space: pre-wrap;">Title</code> component, there are a
+      few things to take care of. Our meta components work together for a
+      common purpose – showing meta data. Grouping them in a directory makes
+      sense.
+    </p>
+    <p>
+      We make a
+      <code style="white-space: pre-wrap;">components/Meta</code> directory and
+      add an <code style="white-space: pre-wrap;">index.js</code>. It makes
+      importing easier.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb90"
+      data-caption="Meta index.js"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb90-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/index.js</span></a>
 <a class="sourceLine" id="cb90-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="op" style="color: #666666;">{</span> <span class="im">default</span> <span class="im">as</span> Title <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./Title&#39;</span></a>
-<a class="sourceLine" id="cb90-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="op" style="color: #666666;">{</span> <span class="im">default</span> <span class="im">as</span> Description <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./Description&#39;</span><span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We have to name our <code style="white-space: pre-wrap;">Title</code> and <code style="white-space: pre-wrap;">Description</code> re-exports because you can’t have two default exports.</p>
-<h4 id="get-the-usstatesmap-file">Get the USStatesMap file</h4>
-<p>You need the <code style="white-space: pre-wrap;">USStatesMap</code> file.</p>
-<p>It’s a big dictionary that translates US state codes to full names. You can <a href="https://github.com/Swizec/react-d3js-step-by-step/blob/4f94fcd1c3caeb0fc410636243ca99764e27c5e6/src/components/Meta/USStatesMap.js">get it from Github</a> and save it as <code style="white-space: pre-wrap;">components/Meta/USStatesMap.js</code>.</p>
-<p>We’ll use it when creating titles and descriptions.</p>
-<h3 id="implement-title">Implement Title</h3>
-<p>We’re building two types of titles based on user selection. If both <code style="white-space: pre-wrap;">years</code> and <code style="white-space: pre-wrap;">US state</code> were selected, we return <code style="white-space: pre-wrap;">In {US state}, the average {job title} paid ${mean}/year in {year}</code>. If not, we return <code style="white-space: pre-wrap;">{job title} paid ${mean}/year in {state} in {year}</code>.</p>
-<p>I know, it’s confusing. They look like the same sentence turned around. Notice the <em>and</em>. First option when <em>both</em> are selected, second when either/or.</p>
-<p>We start with imports, a stub, and a default export.</p>
-<div class="sourceCode" id="cb91" data-caption="Title component stub" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb91-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb90-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="op" style="color: #666666;">{</span> <span class="im">default</span> <span class="im">as</span> Description <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./Description&#39;</span><span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We have to name our <code style="white-space: pre-wrap;">Title</code> and
+      <code style="white-space: pre-wrap;">Description</code> re-exports
+      because you can’t have two default exports.
+    </p>
+    <h4 id="get-the-usstatesmap-file">Get the USStatesMap file</h4>
+    <p>
+      You need the
+      <code style="white-space: pre-wrap;">USStatesMap</code> file.
+    </p>
+    <p>
+      It’s a big dictionary that translates US state codes to full names. You
+      can
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/blob/4f94fcd1c3caeb0fc410636243ca99764e27c5e6/src/components/Meta/USStatesMap.js"
+        >get it from Github</a
+      >
+      and save it as
+      <code style="white-space: pre-wrap;">components/Meta/USStatesMap.js</code
+      >.
+    </p>
+    <p>We’ll use it when creating titles and descriptions.</p>
+    <h3 id="implement-title">Implement Title</h3>
+    <p>
+      We’re building two types of titles based on user selection. If both
+      <code style="white-space: pre-wrap;">years</code> and
+      <code style="white-space: pre-wrap;">US state</code> were selected, we
+      return
+      <code style="white-space: pre-wrap;"
+        >In {US state}, the average {job title} paid ${mean}/year in
+        {year}</code
+      >. If not, we return
+      <code style="white-space: pre-wrap;"
+        >{job title} paid ${mean}/year in {state} in {year}</code
+      >.
+    </p>
+    <p>
+      I know, it’s confusing. They look like the same sentence turned around.
+      Notice the <em>and</em>. First option when <em>both</em> are selected,
+      second when either/or.
+    </p>
+    <p>We start with imports, a stub, and a default export.</p>
+    <div
+      class="sourceCode"
+      id="cb91"
+      data-caption="Title component stub"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb91-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
 <a class="sourceLine" id="cb91-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb91-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> scaleLinear <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3-scale&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb91-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> mean <span class="im">as</span> d3mean<span class="op" style="color: #666666;">,</span> extent <span class="im">as</span> d3extent <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3-array&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -81,18 +179,57 @@
 <a class="sourceLine" id="cb91-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb91-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb91-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb91-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Title<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We import only what we need from D3’s <code style="white-space: pre-wrap;">d3-scale</code> and <code style="white-space: pre-wrap;">d3-array</code> packages. I consider this best practice until you’re importing so much that it gets messy to look at.</p>
-<p>In the <code style="white-space: pre-wrap;">Title</code> component, we have 4 getters and a render. Getters are ES6 functions that work like dynamic properties. You specify a function without arguments, and you use it without <code style="white-space: pre-wrap;">()</code>. It’s neat.</p>
-<h4 id="the-getters">The getters</h4>
-<ol type="1">
-<li><code style="white-space: pre-wrap;">yearsFragment</code> describes the selected year</li>
-<li><code style="white-space: pre-wrap;">USstateFragment</code> describes the selected US state</li>
-<li><code style="white-space: pre-wrap;">jobTitleFragment</code> describes the selected job title</li>
-<li><code style="white-space: pre-wrap;">format</code> returns a number formatter</li>
-</ol>
-<p>We can implement <code style="white-space: pre-wrap;">yearsFragment</code>, <code style="white-space: pre-wrap;">USstateFragment</code>, and <code style="white-space: pre-wrap;">format</code> in one code sample. They’re short.</p>
-<div class="sourceCode" id="cb92" data-caption="3 short getters in Title" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb92-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb91-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Title<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We import only what we need from D3’s
+      <code style="white-space: pre-wrap;">d3-scale</code> and
+      <code style="white-space: pre-wrap;">d3-array</code> packages. I consider
+      this best practice until you’re importing so much that it gets messy to
+      look at.
+    </p>
+    <p>
+      In the <code style="white-space: pre-wrap;">Title</code> component, we
+      have 4 getters and a render. Getters are ES6 functions that work like
+      dynamic properties. You specify a function without arguments, and you use
+      it without <code style="white-space: pre-wrap;">()</code>. It’s neat.
+    </p>
+    <h4 id="the-getters">The getters</h4>
+    <ol type="1">
+      <li>
+        <code style="white-space: pre-wrap;">yearsFragment</code> describes the
+        selected year
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">USstateFragment</code> describes
+        the selected US state
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">jobTitleFragment</code> describes
+        the selected job title
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">format</code> returns a number
+        formatter
+      </li>
+    </ol>
+    <p>
+      We can implement
+      <code style="white-space: pre-wrap;">yearsFragment</code>,
+      <code style="white-space: pre-wrap;">USstateFragment</code>, and
+      <code style="white-space: pre-wrap;">format</code> in one code sample.
+      They’re short.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb92"
+      data-caption="3 short getters in Title"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb92-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
 <a class="sourceLine" id="cb92-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Title <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb92-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    get <span class="at" style="color: #7d9029;">yearsFragment</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb92-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">const</span> year <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="va" style="color: #19177c;">filteredBy</span>.<span class="at" style="color: #7d9029;">year</span><span class="op" style="color: #666666;">;</span></a>
@@ -112,12 +249,50 @@
 <a class="sourceLine" id="cb92-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="at" style="color: #7d9029;">scaleLinear</span>()</a>
 <a class="sourceLine" id="cb92-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                 .<span class="at" style="color: #7d9029;">domain</span>(<span class="at" style="color: #7d9029;">d3extent</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">data</span><span class="op" style="color: #666666;">,</span> d <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">base_salary</span>))</a>
 <a class="sourceLine" id="cb92-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                 .<span class="at" style="color: #7d9029;">tickFormat</span>()<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb92-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>In both <code style="white-space: pre-wrap;">yearsFragment</code> and <code style="white-space: pre-wrap;">USstateFragment</code>, we get the appropriate value from Title’s <code style="white-space: pre-wrap;">filteredBy</code> prop, then return a string with the value or an empty string.</p>
-<p>We rely on D3’s built-in number formatters to build <code style="white-space: pre-wrap;">format</code>. Linear scales have the one that turns <code style="white-space: pre-wrap;">10000</code> into <code style="white-space: pre-wrap;">10,000</code>. Tick formatters don’t work well without a <code style="white-space: pre-wrap;">domain</code>, so we define it. We don’t need a range because we never use the scale itself.</p>
-<p><code style="white-space: pre-wrap;">format</code> returns a function, which makes it a <a href="https://en.wikipedia.org/wiki/Higher-order_function">higher order function</a>. Being a getter makes it really nice to use: <code style="white-space: pre-wrap;">this.format()</code>. Looks just like a normal function call <span class="emoji" data-emoji="smile">😄</span></p>
-<p>The <code style="white-space: pre-wrap;">jobTitleFragment</code> getter is conceptually no harder than <code style="white-space: pre-wrap;">yearsFragment</code> and <code style="white-space: pre-wrap;">USstateFragment</code>, but it comes with a few more conditionals.</p>
-<div class="sourceCode" id="cb93" data-caption="Title.jobTitleFragment" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb93-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb92-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      In both <code style="white-space: pre-wrap;">yearsFragment</code> and
+      <code style="white-space: pre-wrap;">USstateFragment</code>, we get the
+      appropriate value from Title’s
+      <code style="white-space: pre-wrap;">filteredBy</code> prop, then return
+      a string with the value or an empty string.
+    </p>
+    <p>
+      We rely on D3’s built-in number formatters to build
+      <code style="white-space: pre-wrap;">format</code>. Linear scales have
+      the one that turns <code style="white-space: pre-wrap;">10000</code> into
+      <code style="white-space: pre-wrap;">10,000</code>. Tick formatters don’t
+      work well without a <code style="white-space: pre-wrap;">domain</code>,
+      so we define it. We don’t need a range because we never use the scale
+      itself.
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">format</code> returns a function,
+      which makes it a
+      <a href="https://en.wikipedia.org/wiki/Higher-order_function"
+        >higher order function</a
+      >. Being a getter makes it really nice to use:
+      <code style="white-space: pre-wrap;">this.format()</code>. Looks just
+      like a normal function call 😄
+    </p>
+    <p>
+      The <code style="white-space: pre-wrap;">jobTitleFragment</code> getter
+      is conceptually no harder than
+      <code style="white-space: pre-wrap;">yearsFragment</code> and
+      <code style="white-space: pre-wrap;">USstateFragment</code>, but it comes
+      with a few more conditionals.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb93"
+      data-caption="Title.jobTitleFragment"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb93-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
 <a class="sourceLine" id="cb93-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb93-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Title <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb93-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
@@ -143,11 +318,32 @@
 <a class="sourceLine" id="cb93-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">return</span> title<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb93-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb93-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
-<a class="sourceLine" id="cb93-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>We’re dealing with the <code style="white-space: pre-wrap;">(jobTitle, year)</code> combination. Each influences the other when building the fragment for a total 4 different options.</p>
-<h4 id="the-render">The render</h4>
-<p>We put all this together in the <code style="white-space: pre-wrap;">render</code> method. A conditional decides which of the two situations we’re in, and we return an <code style="white-space: pre-wrap;">&lt;h2&gt;</code> tag with the right text.</p>
-<div class="sourceCode" id="cb94" data-caption="Title.render" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb94-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
+<a class="sourceLine" id="cb93-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      We’re dealing with the
+      <code style="white-space: pre-wrap;">(jobTitle, year)</code> combination.
+      Each influences the other when building the fragment for a total 4
+      different options.
+    </p>
+    <h4 id="the-render">The render</h4>
+    <p>
+      We put all this together in the
+      <code style="white-space: pre-wrap;">render</code> method. A conditional
+      decides which of the two situations we’re in, and we return an
+      <code style="white-space: pre-wrap;">&lt;h2&gt;</code> tag with the right
+      text.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb94"
+      data-caption="Title.render"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb94-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Title.js</span></a>
 <a class="sourceLine" id="cb94-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Title <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb94-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb94-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -174,10 +370,28 @@
 <a class="sourceLine" id="cb94-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb94-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">return</span> title<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb94-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb94-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Calculate the mean value using <code style="white-space: pre-wrap;">d3.mean</code> with a value accessor, turn it into a pretty number with <code style="white-space: pre-wrap;">this.format</code>, then use one of two string patterns to make a <code style="white-space: pre-wrap;">title</code>.</p>
-<p>And a title appears.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/dataviz-with-title.png" alt="Dataviz with title"><figcaption>Dataviz with title</figcaption>
-</figure>
-<p>If it doesn’t, consult <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/4f94fcd1c3caeb0fc410636243ca99764e27c5e6">this diff on Github</a>.</p>
+<a class="sourceLine" id="cb94-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Calculate the mean value using
+      <code style="white-space: pre-wrap;">d3.mean</code> with a value
+      accessor, turn it into a pretty number with
+      <code style="white-space: pre-wrap;">this.format</code>, then use one of
+      two string patterns to make a
+      <code style="white-space: pre-wrap;">title</code>.
+    </p>
+    <p>And a title appears.</p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/dataviz-with-title.png"
+        alt="Dataviz with title"
+      />
+      <figcaption>Dataviz with title</figcaption>
+    </figure>
+    <p>
+      If it doesn’t, consult
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/commit/4f94fcd1c3caeb0fc410636243ca99764e27c5e6"
+        >this diff on Github</a
+      >.
+    </p>

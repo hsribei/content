@@ -1,16 +1,67 @@
-<h1 id="enter-exit-animation">Enter/update/exit animation</h1>
-<p>Now that you know how to use transitions, it’s time to take it up a notch. Enter/exit animations.</p>
-<p>Enter/exit animations are the most common use of transitions. They’re what happens when a new element enters or exits the picture. For example: in visualizations like this famous <a href="https://www.youtube.com/watch?v=LLCF7vPanrY">Nuclear Detonation Timeline</a> by Isao Hashimoto. Each new Boom! flashes to look like an explosion.</p>
-<p>I don’t know how Hashimoto did it, but with React &amp; D3, you’d do it with enter/exit transitions.</p>
-<p>Another favorite of mine is this <a href="https://bl.ocks.org/mbostock/3808234">animated alphabet</a> example by Mike Bostock, the creator of D3, that showcases enter/update/exit transitions.</p>
-<p>That’s what we’re going to build: An animated alphabet. New letters fall down and are green, updated letters move right or left, deleted letters are red and fall down.</p>
-<p>You can play with a more advanced version <a href="http://swizec.github.io/react-d3-enter-exit-transitions/">here</a>. Same principle as the alphabet, but it animates what you type.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/typing-screenshot.png" alt="Typing animation screenshot"><figcaption>Typing animation screenshot</figcaption>
-</figure>
-<p>We’re building the alphabet version because the <a href="https://swizec.com/blog/animated-string-diffing-with-react-and-d3/swizec/6952">string diffing algorithm</a> is a pain to explain. I learned that the hard way when giving workshops on React and D3…</p>
-<figure>
-<img src="https://cdn.staticaly.com/gh/hsribei/react-d3js-es6-ebook/024f7e0ae8547f5288f61bc442370f0f689d84eb/manuscript/resources/images/es6v2/string-diffing.jpg" alt="String diffing algorithm sketch"><figcaption>String diffing algorithm sketch</figcaption>
-</figure>
-<p>See?</p>
-<p>Easy on paper, but the code is long and weird. That, or I’m bad at implementing it. Either way, it’s too tangential to explain here. You can <a href="https://swizec.com/blog/animated-string-diffing-with-react-and-d3/swizec/6952">read the article about it</a>.</p>
+    <h1 id="enter-exit-animation">Enter/update/exit animation</h1>
+    <p>
+      Now that you know how to use transitions, it’s time to take it up a
+      notch. Enter/exit animations.
+    </p>
+    <p>
+      Enter/exit animations are the most common use of transitions. They’re
+      what happens when a new element enters or exits the picture. For example:
+      in visualizations like this famous
+      <a href="https://www.youtube.com/watch?v=LLCF7vPanrY"
+        >Nuclear Detonation Timeline</a
+      >
+      by Isao Hashimoto. Each new Boom! flashes to look like an explosion.
+    </p>
+    <p>
+      I don’t know how Hashimoto did it, but with React &amp; D3, you’d do it
+      with enter/exit transitions.
+    </p>
+    <p>
+      Another favorite of mine is this
+      <a href="https://bl.ocks.org/mbostock/3808234">animated alphabet</a>
+      example by Mike Bostock, the creator of D3, that showcases
+      enter/update/exit transitions.
+    </p>
+    <p>
+      That’s what we’re going to build: An animated alphabet. New letters fall
+      down and are green, updated letters move right or left, deleted letters
+      are red and fall down.
+    </p>
+    <p>
+      You can play with a more advanced version
+      <a href="http://swizec.github.io/react-d3-enter-exit-transitions/"
+        >here</a
+      >. Same principle as the alphabet, but it animates what you type.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/typing-screenshot.png"
+        alt="Typing animation screenshot"
+      />
+      <figcaption>Typing animation screenshot</figcaption>
+    </figure>
+    <p>
+      We’re building the alphabet version because the
+      <a
+        href="https://swizec.com/blog/animated-string-diffing-with-react-and-d3/swizec/6952"
+        >string diffing algorithm</a
+      >
+      is a pain to explain. I learned that the hard way when giving workshops
+      on React and D3…
+    </p>
+    <figure>
+      <img
+        src="https://cdn.staticaly.com/gh/hsribei/react-d3js-es6-ebook/024f7e0ae8547f5288f61bc442370f0f689d84eb/manuscript/resources/images/es6v2/string-diffing.jpg"
+        alt="String diffing algorithm sketch"
+      />
+      <figcaption>String diffing algorithm sketch</figcaption>
+    </figure>
+    <p>See?</p>
+    <p>
+      Easy on paper, but the code is long and weird. That, or I’m bad at
+      implementing it. Either way, it’s too tangential to explain here. You can
+      <a
+        href="https://swizec.com/blog/animated-string-diffing-with-react-and-d3/swizec/6952"
+        >read the article about it</a
+      >.
+    </p>

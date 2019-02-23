@@ -1,6 +1,19 @@
-<h2 id="step-1-prep-app.js-2">Step 1: Prep App.js</h2>
-<p>You know the drill, don’t you? Import some stuff, add it to the <code style="white-space: pre-wrap;">render()</code> method in the <code style="white-space: pre-wrap;">App</code> component.</p>
-<div class="sourceCode" id="cb76" data-caption="Histogram imports" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb76-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+    <h2 id="step-1-prep-app.js-2">Step 1: Prep App.js</h2>
+    <p>
+      You know the drill, don’t you? Import some stuff, add it to the
+      <code style="white-space: pre-wrap;">render()</code> method in the
+      <code style="white-space: pre-wrap;">App</code> component.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb76"
+      data-caption="Histogram imports"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb76-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb76-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> _ <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;lodash&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb76-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb76-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
@@ -13,12 +26,40 @@
 <a class="sourceLine" id="cb76-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> CountyMap <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./components/CountyMap&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb76-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
 <a class="sourceLine" id="cb76-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> Histogram <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./components/Histogram&#39;</span><span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb76-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre></div>
-<p>We import <code style="white-space: pre-wrap;">style.css</code> and the <code style="white-space: pre-wrap;">Histogram</code> component. That’s what I love about Webpack - you can import CSS in JavaScript. We got the setup with <code style="white-space: pre-wrap;">create-react-app</code>.</p>
-<p>There are competing schools of thought about styling React apps. Some say each component should come with its own CSS files, some think it should be in large per-app CSS files, many think CSS-in-JS is the way to go.</p>
-<p>Personally I like to use CSS for general cross-component styling and styled-components for more specific styles. We’re using CSS in this project because it works and means we don’t have to learn yet another dependency.</p>
-<p>After the imports, we can render our <code style="white-space: pre-wrap;">Histogram</code> in the <code style="white-space: pre-wrap;">App</code> component.</p>
-<div class="sourceCode" id="cb77" data-caption="Render Histogram in App" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb77-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+<a class="sourceLine" id="cb76-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre>
+    </div>
+    <p>
+      We import <code style="white-space: pre-wrap;">style.css</code> and the
+      <code style="white-space: pre-wrap;">Histogram</code> component. That’s
+      what I love about Webpack - you can import CSS in JavaScript. We got the
+      setup with <code style="white-space: pre-wrap;">create-react-app</code>.
+    </p>
+    <p>
+      There are competing schools of thought about styling React apps. Some say
+      each component should come with its own CSS files, some think it should
+      be in large per-app CSS files, many think CSS-in-JS is the way to go.
+    </p>
+    <p>
+      Personally I like to use CSS for general cross-component styling and
+      styled-components for more specific styles. We’re using CSS in this
+      project because it works and means we don’t have to learn yet another
+      dependency.
+    </p>
+    <p>
+      After the imports, we can render our
+      <code style="white-space: pre-wrap;">Histogram</code> in the
+      <code style="white-space: pre-wrap;">App</code> component.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb77"
+      data-caption="Render Histogram in App"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb77-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb77-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb77-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb77-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
@@ -48,7 +89,19 @@
 <a class="sourceLine" id="cb77-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/svg<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb77-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb77-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb77-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>We render the <code style="white-space: pre-wrap;">Histogram</code> component with a bunch of props. They specify the dimensions we want, positioning, and pass data to the component. We’re using <code style="white-space: pre-wrap;">filteredSalaries</code> even though we haven’t set up any filtering yet. One less line of code to change later <span class="emoji" data-emoji="ok_hand">👌</span></p>
-<p>That’s it. <code style="white-space: pre-wrap;">App</code> is ready to render our <code style="white-space: pre-wrap;">Histogram</code>.</p>
-<p>You should now see an error about missing files. That’s normal.</p>
+<a class="sourceLine" id="cb77-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      We render the
+      <code style="white-space: pre-wrap;">Histogram</code> component with a
+      bunch of props. They specify the dimensions we want, positioning, and
+      pass data to the component. We’re using
+      <code style="white-space: pre-wrap;">filteredSalaries</code> even though
+      we haven’t set up any filtering yet. One less line of code to change
+      later 👌
+    </p>
+    <p>
+      That’s it. <code style="white-space: pre-wrap;">App</code> is ready to
+      render our <code style="white-space: pre-wrap;">Histogram</code>.
+    </p>
+    <p>You should now see an error about missing files. That’s normal.</p>

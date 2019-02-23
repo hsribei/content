@@ -1,32 +1,104 @@
-<h2 id="props-might-update">Props might update</h2>
-<p>The story is a little different when our props might update. Since we’re using D3 objects to calculate SVG properties, we have to make sure those objects are updated <em>before</em> we render.</p>
-<p>No problem in React 15: Update in <code style="white-space: pre-wrap;">componentWillUpdate</code>. But since React 16.3 we’ve been told never to use that again. Causes problems for modern async rendering.</p>
-<p>The official recommended solution is that anything that used to go in <code style="white-space: pre-wrap;">componentWillUpdate</code>, can go in <code style="white-space: pre-wrap;">componentDidUpdate</code>. But not so fast!</p>
-<p>Updating D3 objects in <code style="white-space: pre-wrap;">componentDidUpdate</code> would mean our visualization always renders one update behind. Stale renders! <span class="emoji" data-emoji="scream">😱</span></p>
-<p>The new <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> to the rescue. Our integration follows a 3-step pattern:</p>
-<ul>
-<li>set up D3 objects in component state</li>
-<li>update D3 objects in <code style="white-space: pre-wrap;">getDerivedStateFromProps</code></li>
-<li>output SVG in <code style="white-space: pre-wrap;">render()</code></li>
-</ul>
-<p><code style="white-space: pre-wrap;">getDerivedStateFromProps</code> is officially discouraged, and yet the best tool we have to make sure D3 state is updated <em>before</em> we render.</p>
-<p>Because React calls <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> on every component render, not just when our props actually change, you should avoid recalculating complex things too often. Use memoization helpers, check for changes before updating, stuff like that.</p>
-<h3 id="an-updateable-scatterplot">An updateable scatterplot</h3>
-<p>Let’s update our scatterplot so it can deal with resizing and updating data.</p>
-<p>3 steps <span class="emoji" data-emoji="point_down">👇</span></p>
-<ul>
-<li>add an interaction that resizes the scatterplot</li>
-<li>move scales to state</li>
-<li>update scales in <code style="white-space: pre-wrap;">getDerivedStateFromProps</code></li>
-</ul>
-<p>You can see <a href="https://codesandbox.io/s/ll9kp8or0l">my final solution on CodeSandbox</a>. I recommend you follow along updating your existing code.</p>
-<iframe src="https://codesandbox.io/embed/ll9kp8or0l?codemirror=1&amp;view=split" style="width:100%; height:500px; border:open_mouth:; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
-</iframe>
-<h4 id="resize-scatterplot-on-click">Resize scatterplot on click</h4>
-<p>To test our scatterplot’s adaptability, we have to add an interaction: Resize the scatterplot on click.</p>
-<p>That change happens in <code style="white-space: pre-wrap;">App.js</code>. Click on the <code style="white-space: pre-wrap;">&lt;svg&gt;</code>, reduce width and height by 30%.</p>
-<p>Move sizing into App state and add an <code style="white-space: pre-wrap;">onClick</code> handler.</p>
-<div class="sourceCode" id="cb40" data-caption="Sizing into state and click handler" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb40-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
+    <h2 id="props-might-update">Props might update</h2>
+    <p>
+      The story is a little different when our props might update. Since we’re
+      using D3 objects to calculate SVG properties, we have to make sure those
+      objects are updated <em>before</em> we render.
+    </p>
+    <p>
+      No problem in React 15: Update in
+      <code style="white-space: pre-wrap;">componentWillUpdate</code>. But
+      since React 16.3 we’ve been told never to use that again. Causes problems
+      for modern async rendering.
+    </p>
+    <p>
+      The official recommended solution is that anything that used to go in
+      <code style="white-space: pre-wrap;">componentWillUpdate</code>, can go
+      in <code style="white-space: pre-wrap;">componentDidUpdate</code>. But
+      not so fast!
+    </p>
+    <p>
+      Updating D3 objects in
+      <code style="white-space: pre-wrap;">componentDidUpdate</code> would mean
+      our visualization always renders one update behind. Stale renders! 😱
+    </p>
+    <p>
+      The new
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> to
+      the rescue. Our integration follows a 3-step pattern:
+    </p>
+    <ul>
+      <li>set up D3 objects in component state</li>
+      <li>
+        update D3 objects in
+        <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>
+      </li>
+      <li>
+        output SVG in <code style="white-space: pre-wrap;">render()</code>
+      </li>
+    </ul>
+    <p>
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> is
+      officially discouraged, and yet the best tool we have to make sure D3
+      state is updated <em>before</em> we render.
+    </p>
+    <p>
+      Because React calls
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> on
+      every component render, not just when our props actually change, you
+      should avoid recalculating complex things too often. Use memoization
+      helpers, check for changes before updating, stuff like that.
+    </p>
+    <h3 id="an-updateable-scatterplot">An updateable scatterplot</h3>
+    <p>
+      Let’s update our scatterplot so it can deal with resizing and updating
+      data.
+    </p>
+    <p>3 steps 👇</p>
+    <ul>
+      <li>add an interaction that resizes the scatterplot</li>
+      <li>move scales to state</li>
+      <li>
+        update scales in
+        <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>
+      </li>
+    </ul>
+    <p>
+      You can see
+      <a href="https://codesandbox.io/s/ll9kp8or0l"
+        >my final solution on CodeSandbox</a
+      >. I recommend you follow along updating your existing code.
+    </p>
+    <iframe
+      src="https://codesandbox.io/embed/ll9kp8or0l?codemirror=1&amp;view=split"
+      style="width:100%; height:500px; border😮; border-radius: 4px; overflow:hidden;"
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    >
+    </iframe>
+    <h4 id="resize-scatterplot-on-click">Resize scatterplot on click</h4>
+    <p>
+      To test our scatterplot’s adaptability, we have to add an interaction:
+      Resize the scatterplot on click.
+    </p>
+    <p>
+      That change happens in
+      <code style="white-space: pre-wrap;">App.js</code>. Click on the
+      <code style="white-space: pre-wrap;">&lt;svg&gt;</code>, reduce width and
+      height by 30%.
+    </p>
+    <p>
+      Move sizing into App state and add an
+      <code style="white-space: pre-wrap;">onClick</code> handler.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb40"
+      data-caption="Sizing into state and click handler"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb40-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
 <a class="sourceLine" id="cb40-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb40-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb40-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">width</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">300</span><span class="op" style="color: #666666;">,</span></a>
@@ -42,10 +114,33 @@
 <a class="sourceLine" id="cb40-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb40-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb40-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
-<a class="sourceLine" id="cb40-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> width<span class="op" style="color: #666666;">,</span> height <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We changed our App component from a function to a class, added <code style="white-space: pre-wrap;">state</code> with default <code style="white-space: pre-wrap;">width</code> and <code style="white-space: pre-wrap;">height</code>, and an <code style="white-space: pre-wrap;">onClick</code> method that reduces size by 30%. The <code style="white-space: pre-wrap;">render</code> method reads <code style="white-space: pre-wrap;">width</code> and <code style="white-space: pre-wrap;">height</code> from state.</p>
-<p>Now gotta change rendering to listen to these values and fire the <code style="white-space: pre-wrap;">onClick</code> handler.</p>
-<div class="sourceCode" id="cb41" data-caption="Use state in rendering" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb41-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
+<a class="sourceLine" id="cb40-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> width<span class="op" style="color: #666666;">,</span> height <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We changed our App component from a function to a class, added
+      <code style="white-space: pre-wrap;">state</code> with default
+      <code style="white-space: pre-wrap;">width</code> and
+      <code style="white-space: pre-wrap;">height</code>, and an
+      <code style="white-space: pre-wrap;">onClick</code> method that reduces
+      size by 30%. The
+      <code style="white-space: pre-wrap;">render</code> method reads
+      <code style="white-space: pre-wrap;">width</code> and
+      <code style="white-space: pre-wrap;">height</code> from state.
+    </p>
+    <p>
+      Now gotta change rendering to listen to these values and fire the
+      <code style="white-space: pre-wrap;">onClick</code> handler.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb41"
+      data-caption="Use state in rendering"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb41-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
 <a class="sourceLine" id="cb41-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb41-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">&lt;</span>svg width<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;800&quot;</span> height<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;800&quot;</span> onClick<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">onClick</span><span class="op" style="color: #666666;">}&gt;</span></a>
 <a class="sourceLine" id="cb41-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">&lt;</span>Scatterplot</a>
@@ -55,17 +150,50 @@
 <a class="sourceLine" id="cb41-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    height<span class="op" style="color: #666666;">={</span>height<span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb41-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    data<span class="op" style="color: #666666;">={</span>data<span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb41-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  /&gt;</a>
-<a class="sourceLine" id="cb41-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/svg<span class="op" style="color: #666666;">&gt;</span></a></code></pre></div>
-<p>Similar rendering as before. We have an <code style="white-space: pre-wrap;">&lt;svg&gt;</code> that contains a <code style="white-space: pre-wrap;">&lt;Scatterplot&gt;</code>. The svg fires <code style="white-space: pre-wrap;">this.onClick</code> on click events and the scatterplot uses our <code style="white-space: pre-wrap;">width</code> and <code style="white-space: pre-wrap;">height</code> values for its props.</p>
-<p>If you try this code now, you should see a funny effect where axes move, but the scatterplot doesn’t resize.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/not-resizing-scatterplot.png" alt="Axes move, scatterplot doesn’t resize"><figcaption>Axes move, scatterplot doesn’t resize</figcaption>
-</figure>
-<p>Peculiar isn’t it? Try to guess why.</p>
-<h4 id="move-scales-to-state">Move scales to state</h4>
-<p>The horizontal axis moves because it’s render at <code style="white-space: pre-wrap;">height</code> vertical coordinate. Datapoints don’t move because the scales that position them are calculated once – on component mount.</p>
-<p>First step to keeping scales up to date is to move them from component values into state.</p>
-<div class="sourceCode" id="cb42" data-caption="Move scales into state" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb42-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
+<a class="sourceLine" id="cb41-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/svg<span class="op" style="color: #666666;">&gt;</span></a></code></pre>
+    </div>
+    <p>
+      Similar rendering as before. We have an
+      <code style="white-space: pre-wrap;">&lt;svg&gt;</code> that contains a
+      <code style="white-space: pre-wrap;">&lt;Scatterplot&gt;</code>. The svg
+      fires <code style="white-space: pre-wrap;">this.onClick</code> on click
+      events and the scatterplot uses our
+      <code style="white-space: pre-wrap;">width</code> and
+      <code style="white-space: pre-wrap;">height</code> values for its props.
+    </p>
+    <p>
+      If you try this code now, you should see a funny effect where axes move,
+      but the scatterplot doesn’t resize.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/not-resizing-scatterplot.png"
+        alt="Axes move, scatterplot doesn’t resize"
+      />
+      <figcaption>Axes move, scatterplot doesn’t resize</figcaption>
+    </figure>
+    <p>Peculiar isn’t it? Try to guess why.</p>
+    <h4 id="move-scales-to-state">Move scales to state</h4>
+    <p>
+      The horizontal axis moves because it’s render at
+      <code style="white-space: pre-wrap;">height</code> vertical coordinate.
+      Datapoints don’t move because the scales that position them are
+      calculated once – on component mount.
+    </p>
+    <p>
+      First step to keeping scales up to date is to move them from component
+      values into state.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb42"
+      data-caption="Move scales into state"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb42-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
 <a class="sourceLine" id="cb42-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Scatterplot <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb42-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb42-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">xScale</span><span class="op" style="color: #666666;">:</span> d3</a>
@@ -76,22 +204,61 @@
 <a class="sourceLine" id="cb42-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">scaleLinear</span>()</a>
 <a class="sourceLine" id="cb42-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">domain</span>([<span class="dv" style="color: #40a070;">0</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">1</span>])</a>
 <a class="sourceLine" id="cb42-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">range</span>([<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">height</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span>])</a>
-<a class="sourceLine" id="cb42-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>Same scale definition code we had before. Linear scales, domain from 0 to 1, using props for ranges. But now they’re wrapped in a <code style="white-space: pre-wrap;">state = {}</code> object and it’s <code style="white-space: pre-wrap;">xScale: d3 ...</code> instead of <code style="white-space: pre-wrap;">xScale = d3 ...</code>.</p>
-<p>Our render function should use these as well. Small change:</p>
-<div class="sourceCode" id="cb43" data-caption="Render function uses state scales" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb43-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
+<a class="sourceLine" id="cb42-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      Same scale definition code we had before. Linear scales, domain from 0 to
+      1, using props for ranges. But now they’re wrapped in a
+      <code style="white-space: pre-wrap;">state = {}</code> object and it’s
+      <code style="white-space: pre-wrap;">xScale: d3 ...</code> instead of
+      <code style="white-space: pre-wrap;">xScale = d3 ...</code>.
+    </p>
+    <p>Our render function should use these as well. Small change:</p>
+    <div
+      class="sourceCode"
+      id="cb43"
+      data-caption="Render function uses state scales"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb43-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
 <a class="sourceLine" id="cb43-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb43-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> data<span class="op" style="color: #666666;">,</span> height <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">props</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb43-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="op" style="color: #666666;">{</span> yScale<span class="op" style="color: #666666;">,</span> xScale <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb43-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb43-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> (</a>
 <a class="sourceLine" id="cb43-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="op" style="color: #666666;">&lt;</span>g transform<span class="op" style="color: #666666;">={</span><span class="vs" style="color: #4070a0;">`translate(</span><span class="sc" style="color: #4070a0;">${</span>x<span class="sc" style="color: #4070a0;">}</span><span class="vs" style="color: #4070a0;">, </span><span class="sc" style="color: #4070a0;">${</span>y<span class="sc" style="color: #4070a0;">}</span><span class="vs" style="color: #4070a0;">)`</span><span class="op" style="color: #666666;">}&gt;</span></a>
-<a class="sourceLine" id="cb43-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">{</span><span class="va" style="color: #19177c;">data</span>.<span class="at" style="color: #7d9029;">map</span>(([x<span class="op" style="color: #666666;">,</span> y]) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">&lt;</span>circle cx<span class="op" style="color: #666666;">={</span><span class="at" style="color: #7d9029;">xScale</span>(<span class="op" style="color: #666666;">:</span><span class="dt" style="color: #902000;">satisfied</span><span class="op" style="color: #666666;">:}</span> cy<span class="op" style="color: #666666;">={</span><span class="at" style="color: #7d9029;">yScale</span>(y)<span class="op" style="color: #666666;">}</span> r<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;5&quot;</span> /&gt;)<span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>We use destructuring to take our scales from state, then use them when mapping over our data.</p>
-<p>Clicking on the SVG produces the same result as before, but we’re almost there. Just one more step.</p>
-<h4 id="update-scales-in-getderivedstatefromprops">Update scales in <code style="white-space: pre-wrap;">getDerivedStateFromProps</code></h4>
-<p>Last step is to update our scales’ ranges in <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>. This method runs every time React touches our component for any reason.</p>
-<div class="sourceCode" id="cb44" data-caption="Update scales" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb44-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
+<a class="sourceLine" id="cb43-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">{</span><span class="va" style="color: #19177c;">data</span>.<span class="at" style="color: #7d9029;">map</span>(([x<span class="op" style="color: #666666;">,</span> y]) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">&lt;</span>circle cx<span class="op" style="color: #666666;">={</span><span class="at" style="color: #7d9029;">xScale</span>(<span class="op" style="color: #666666;">:</span><span class="dt" style="color: #902000;">satisfied</span><span class="op" style="color: #666666;">:}</span> cy<span class="op" style="color: #666666;">={</span><span class="at" style="color: #7d9029;">yScale</span>(y)<span class="op" style="color: #666666;">}</span> r<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;5&quot;</span> /&gt😉<span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      We use destructuring to take our scales from state, then use them when
+      mapping over our data.
+    </p>
+    <p>
+      Clicking on the SVG produces the same result as before, but we’re almost
+      there. Just one more step.
+    </p>
+    <h4 id="update-scales-in-getderivedstatefromprops">
+      Update scales in
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>
+    </h4>
+    <p>
+      Last step is to update our scales’ ranges in
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>.
+      This method runs every time React touches our component for any reason.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb44"
+      data-caption="Update scales"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb44-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
 <a class="sourceLine" id="cb44-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Scatterplot <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">PureComponent</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb44-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb44-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">static</span> <span class="at" style="color: #7d9029;">getDerivedStateFromProps</span>(props<span class="op" style="color: #666666;">,</span> state) <span class="op" style="color: #666666;">{</span></a>
@@ -105,11 +272,33 @@
 <a class="sourceLine" id="cb44-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      yScale<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb44-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      xScale</a>
 <a class="sourceLine" id="cb44-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a>
-<a class="sourceLine" id="cb44-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Take scales from state, update ranges with new values, return new state. Nice and easy.</p>
-<p>Notice that <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> is a static method shared by all instances of our Scatterplot component. You have no reference to a <code style="white-space: pre-wrap;">this</code> and have to calculate new state purely from the <code style="white-space: pre-wrap;">props</code> and <code style="white-space: pre-wrap;">state</code> passed into your method.</p>
-<p>It’s a lot like a Redux reducer, if that helps you think about it. If you don’t know what Redux reducers are, don’t worry. Just remember to return a new version of component state.</p>
-<p>Your Scatterplot should now update its size on every click.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/scatterplot-resizes.png" alt="Scatterplot resizes"><figcaption>Scatterplot resizes</figcaption>
-</figure>
+<a class="sourceLine" id="cb44-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Take scales from state, update ranges with new values, return new state.
+      Nice and easy.
+    </p>
+    <p>
+      Notice that
+      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code> is a
+      static method shared by all instances of our Scatterplot component. You
+      have no reference to a
+      <code style="white-space: pre-wrap;">this</code> and have to calculate
+      new state purely from the
+      <code style="white-space: pre-wrap;">props</code> and
+      <code style="white-space: pre-wrap;">state</code> passed into your
+      method.
+    </p>
+    <p>
+      It’s a lot like a Redux reducer, if that helps you think about it. If you
+      don’t know what Redux reducers are, don’t worry. Just remember to return
+      a new version of component state.
+    </p>
+    <p>Your Scatterplot should now update its size on every click.</p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/scatterplot-resizes.png"
+        alt="Scatterplot resizes"
+      />
+      <figcaption>Scatterplot resizes</figcaption>
+    </figure>

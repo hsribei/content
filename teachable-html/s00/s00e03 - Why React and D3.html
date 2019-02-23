@@ -1,23 +1,79 @@
-<h1 id="why-react-and-d3">Why React and D3</h1>
-<p>React is Facebook’s approach to writing modern JavaScript front-ends. It encourages building an app out of small, re-usable components. Each component is self-contained and only knows how to render a small bit of the interface.</p>
-<p>The catch is that many frameworks have attempted this: everything from Angular to Backbone and jQuery plugins. But where jQuery plugins get become messy, Angular depends too much on HTML structure, and Backbone needs a lot of boilerplate, React has found a sweet spot.</p>
-<p>I’ve found React a joy to use. Using React was the first time in my life that I could move a piece of HTML in a modern app without rewriting half my JavaScript. It’s like a super power.</p>
-<p>React being the most popular JavaScript framework out there, the world seems to agree. React is great. :atom_symbol:</p>
-<p>D3 is Mike Bostock’s infamous data visualization library. It’s used by The New York Times along with many other sites. It is the workhorse of data visualization on the web, and many charting libraries out there are based on it.</p>
-<p>But D3 is a fairly low-level library. You can’t just say <em>“I have data; give me a bar chart”</em>. Well, you can, but it takes a few more lines of code than that. Once you get used to it though, D3 is a joy to use.</p>
-<p>Just like React, D3 is declarative.</p>
-<p>You tell your code <em>what</em> you want instead of <em>how</em> you want it. It gives you access straight to the SVG so you can manipulate your lines and rectangles as you want. The problem is that D3 isn’t so great, if all you want are charts.</p>
-<p>That’s where React comes in.</p>
-<p>Once you’ve created a histogram component, you can always get a histogram with <code style="white-space: pre-wrap;">&lt;Histogram x="5" ... /&gt;</code>. Once you have a piechart, it’s always <code style="white-space: pre-wrap;">&lt;Piechart x="20" ... /&gt;</code>. Just like they were HTML elements.</p>
-<p>Doesn’t that sound like the best? I think it’s amazing.</p>
-<p>It gets better!</p>
-<p>With React, you can make different graph and chart components share the same data. When your data changes, the whole visualization reacts.</p>
-<p>Your graph changes. The title changes. The description changes. Everything changes. Mind, blown.</p>
-<p>Look how this H1B salary visualization changes when the user picks a subset of the data to look at.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_default_h1b.png" alt="Default H1B histogram"><figcaption>Default H1B histogram</figcaption>
-</figure>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_changed_h1b.png" alt="Changes after user picks a data subset"><figcaption>Changes after user picks a data subset</figcaption>
-</figure>
-<p>React + D3: a powerful combination indeed.</p>
+    <h1 id="why-react-and-d3">Why React and D3</h1>
+    <p>
+      React is Facebook’s approach to writing modern JavaScript front-ends. It
+      encourages building an app out of small, re-usable components. Each
+      component is self-contained and only knows how to render a small bit of
+      the interface.
+    </p>
+    <p>
+      The catch is that many frameworks have attempted this: everything from
+      Angular to Backbone and jQuery plugins. But where jQuery plugins get
+      become messy, Angular depends too much on HTML structure, and Backbone
+      needs a lot of boilerplate, React has found a sweet spot.
+    </p>
+    <p>
+      I’ve found React a joy to use. Using React was the first time in my life
+      that I could move a piece of HTML in a modern app without rewriting half
+      my JavaScript. It’s like a super power.
+    </p>
+    <p>
+      React being the most popular JavaScript framework out there, the world
+      seems to agree. React is great. ⚛️
+    </p>
+    <p>
+      D3 is Mike Bostock’s infamous data visualization library. It’s used by
+      The New York Times along with many other sites. It is the workhorse of
+      data visualization on the web, and many charting libraries out there are
+      based on it.
+    </p>
+    <p>
+      But D3 is a fairly low-level library. You can’t just say
+      <em>“I have data; give me a bar chart”</em>. Well, you can, but it takes
+      a few more lines of code than that. Once you get used to it though, D3 is
+      a joy to use.
+    </p>
+    <p>Just like React, D3 is declarative.</p>
+    <p>
+      You tell your code <em>what</em> you want instead of <em>how</em> you
+      want it. It gives you access straight to the SVG so you can manipulate
+      your lines and rectangles as you want. The problem is that D3 isn’t so
+      great, if all you want are charts.
+    </p>
+    <p>That’s where React comes in.</p>
+    <p>
+      Once you’ve created a histogram component, you can always get a histogram
+      with
+      <code style="white-space: pre-wrap;">&lt;Histogram x="5" ... /&gt;</code
+      >. Once you have a piechart, it’s always
+      <code style="white-space: pre-wrap;">&lt;Piechart x="20" ... /&gt;</code
+      >. Just like they were HTML elements.
+    </p>
+    <p>Doesn’t that sound like the best? I think it’s amazing.</p>
+    <p>It gets better!</p>
+    <p>
+      With React, you can make different graph and chart components share the
+      same data. When your data changes, the whole visualization reacts.
+    </p>
+    <p>
+      Your graph changes. The title changes. The description changes.
+      Everything changes. Mind, blown.
+    </p>
+    <p>
+      Look how this H1B salary visualization changes when the user picks a
+      subset of the data to look at.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_default_h1b.png"
+        alt="Default H1B histogram"
+      />
+      <figcaption>Default H1B histogram</figcaption>
+    </figure>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/full_changed_h1b.png"
+        alt="Changes after user picks a data subset"
+      />
+      <figcaption>Changes after user picks a data subset</figcaption>
+    </figure>
+    <p>React + D3: a powerful combination indeed.</p>

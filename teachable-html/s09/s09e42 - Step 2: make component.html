@@ -1,8 +1,29 @@
-<h2 id="step-2-preloader-component">Step 2: Preloader component</h2>
-<p>Our <code style="white-space: pre-wrap;">Preloader</code> is a small component that pretends it’s the <code style="white-space: pre-wrap;">App</code> and renders a static title, description, and a screenshot of the end result. It goes in <code style="white-space: pre-wrap;">src/components/Preloader.js</code>.</p>
-<p>We’ll put all of our components in <code style="white-space: pre-wrap;">src/components/</code>.</p>
-<p>We start the component off with some imports, an export, and a functional stateless component that returns an empty div element.</p>
-<div class="sourceCode" id="cb54" data-caption="Preloader skeleton" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb54-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Preloader.js</span></a>
+    <h2 id="step-2-preloader-component">Step 2: Preloader component</h2>
+    <p>
+      Our <code style="white-space: pre-wrap;">Preloader</code> is a small
+      component that pretends it’s the
+      <code style="white-space: pre-wrap;">App</code> and renders a static
+      title, description, and a screenshot of the end result. It goes in
+      <code style="white-space: pre-wrap;">src/components/Preloader.js</code>.
+    </p>
+    <p>
+      We’ll put all of our components in
+      <code style="white-space: pre-wrap;">src/components/</code>.
+    </p>
+    <p>
+      We start the component off with some imports, an export, and a functional
+      stateless component that returns an empty div element.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb54"
+      data-caption="Preloader skeleton"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb54-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Preloader.js</span></a>
 <a class="sourceLine" id="cb54-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb54-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb54-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -14,11 +35,42 @@
 <a class="sourceLine" id="cb54-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb54-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb54-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb54-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Preloader<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We <code style="white-space: pre-wrap;">import</code> React (which we need to make JSX syntax work) and the <code style="white-space: pre-wrap;">PreloaderImg</code> for our image. We can import images because of the Webpack configuration that comes with <code style="white-space: pre-wrap;">create-react-app</code>. The webpack image loader returns a URL that we put in the <code style="white-space: pre-wrap;">PreloaderImg</code> constant.</p>
-<p>At the bottom, we <code style="white-space: pre-wrap;">export default Preloader</code> so that we can use it in <code style="white-space: pre-wrap;">App.js</code> as <code style="white-space: pre-wrap;">import Preloader</code>. Default exports are great when your file exports a single object. Named exports when you want to export multiple items. You’ll see that play out in the rest of this project.</p>
-<p>The <code style="white-space: pre-wrap;">Preloader</code> function takes no props (because we don’t need any) and returns an empty <code style="white-space: pre-wrap;">div</code>. Let’s fill it in.</p>
-<div class="sourceCode" id="cb55" data-caption="Preloader content" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb55-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Preloader.js</span></a>
+<a class="sourceLine" id="cb54-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Preloader<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We <code style="white-space: pre-wrap;">import</code> React (which we
+      need to make JSX syntax work) and the
+      <code style="white-space: pre-wrap;">PreloaderImg</code> for our image.
+      We can import images because of the Webpack configuration that comes with
+      <code style="white-space: pre-wrap;">create-react-app</code>. The webpack
+      image loader returns a URL that we put in the
+      <code style="white-space: pre-wrap;">PreloaderImg</code> constant.
+    </p>
+    <p>
+      At the bottom, we
+      <code style="white-space: pre-wrap;">export default Preloader</code> so
+      that we can use it in
+      <code style="white-space: pre-wrap;">App.js</code> as
+      <code style="white-space: pre-wrap;">import Preloader</code>. Default
+      exports are great when your file exports a single object. Named exports
+      when you want to export multiple items. You’ll see that play out in the
+      rest of this project.
+    </p>
+    <p>
+      The <code style="white-space: pre-wrap;">Preloader</code> function takes
+      no props (because we don’t need any) and returns an empty
+      <code style="white-space: pre-wrap;">div</code>. Let’s fill it in.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb55"
+      data-caption="Preloader content"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb55-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Preloader.js</span></a>
 <a class="sourceLine" id="cb55-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb55-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Preloader <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> (</a>
 <a class="sourceLine" id="cb55-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">&lt;</span>div className<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;App container&quot;</span><span class="op" style="color: #666666;">&gt;</span></a>
@@ -41,8 +93,29 @@
 <a class="sourceLine" id="cb55-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        /&gt;</a>
 <a class="sourceLine" id="cb55-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">&lt;</span>h2 className<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;text-center&quot;</span><span class="op" style="color: #666666;">&gt;</span>Loading <span class="va" style="color: #19177c;">data</span> ...&lt;/h2<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb55-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
-<a class="sourceLine" id="cb55-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>A little cheating with grabbing copy from the future, but that’s okay. In real life you’d use some temporary text, then fill it in later.</p>
-<p>The code itself looks like HTML. We have the usual tags - <code style="white-space: pre-wrap;">h1</code>, <code style="white-space: pre-wrap;">p</code>, <code style="white-space: pre-wrap;">b</code>, <code style="white-space: pre-wrap;">img</code>, and <code style="white-space: pre-wrap;">h2</code>. That’s what I like about JSX: it’s familiar. Even if you don’t know React, you can guess what’s going on here.</p>
-<p>But look at the <code style="white-space: pre-wrap;">img</code> tag: the <code style="white-space: pre-wrap;">src</code> attribute is dynamic, defined by <code style="white-space: pre-wrap;">PreloaderImg</code>, and the <code style="white-space: pre-wrap;">style</code> attribute takes an object, not a string. That’s because JSX is more than HTML; it’s JavaScript. Think of props as function arguments – any valid JavaScript fits.</p>
-<p>That will be a cornerstone of our project.</p>
+<a class="sourceLine" id="cb55-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      A little cheating with grabbing copy from the future, but that’s okay. In
+      real life you’d use some temporary text, then fill it in later.
+    </p>
+    <p>
+      The code itself looks like HTML. We have the usual tags -
+      <code style="white-space: pre-wrap;">h1</code>,
+      <code style="white-space: pre-wrap;">p</code>,
+      <code style="white-space: pre-wrap;">b</code>,
+      <code style="white-space: pre-wrap;">img</code>, and
+      <code style="white-space: pre-wrap;">h2</code>. That’s what I like about
+      JSX: it’s familiar. Even if you don’t know React, you can guess what’s
+      going on here.
+    </p>
+    <p>
+      But look at the <code style="white-space: pre-wrap;">img</code> tag: the
+      <code style="white-space: pre-wrap;">src</code> attribute is dynamic,
+      defined by <code style="white-space: pre-wrap;">PreloaderImg</code>, and
+      the <code style="white-space: pre-wrap;">style</code> attribute takes an
+      object, not a string. That’s because JSX is more than HTML; it’s
+      JavaScript. Think of props as function arguments – any valid JavaScript
+      fits.
+    </p>
+    <p>That will be a cornerstone of our project.</p>

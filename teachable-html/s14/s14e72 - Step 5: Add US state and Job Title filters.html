@@ -1,7 +1,27 @@
-<h2 id="step-5-add-us-state-and-job-title-filters">Step 5: Add US state and Job Title filters</h2>
-<p>With all that done, we can add two more filters: US states and job titles. Our <code style="white-space: pre-wrap;">App</code> component is already set up to use them, so we just have to add them to the <code style="white-space: pre-wrap;">Controls</code> component.</p>
-<p>We’ll start with the <code style="white-space: pre-wrap;">render</code> method, then handle the parts I said earlier would look repetitive.</p>
-<div class="sourceCode" id="cb113" data-caption="Adding two more rows to Controls" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb113-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+    <h2 id="step-5-add-us-state-and-job-title-filters">
+      Step 5: Add US state and Job Title filters
+    </h2>
+    <p>
+      With all that done, we can add two more filters: US states and job
+      titles. Our <code style="white-space: pre-wrap;">App</code> component is
+      already set up to use them, so we just have to add them to the
+      <code style="white-space: pre-wrap;">Controls</code> component.
+    </p>
+    <p>
+      We’ll start with the
+      <code style="white-space: pre-wrap;">render</code> method, then handle
+      the parts I said earlier would look repetitive.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb113"
+      data-caption="Adding two more rows to Controls"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb113-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb113-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Controls <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb113-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb113-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -36,11 +56,37 @@
 <a class="sourceLine" id="cb113-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb113-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )</a>
 <a class="sourceLine" id="cb113-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb113-36" title="36" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Ok, this part is plenty repetitive, too.</p>
-<p>We created new sets for <code style="white-space: pre-wrap;">jobTitles</code> and <code style="white-space: pre-wrap;">USstates</code>, then rendered two more <code style="white-space: pre-wrap;">ControlRow</code> elements with appropriate attributes. They get <code style="white-space: pre-wrap;">toggleNames</code> for building the buttons, <code style="white-space: pre-wrap;">picked</code> to know which is active, an <code style="white-space: pre-wrap;">updateDataFilter</code> callback, and we tell US states to render capitalized.</p>
-<p>The implementations of those <code style="white-space: pre-wrap;">updateDataFilter</code> callbacks follow the same pattern as <code style="white-space: pre-wrap;">updateYearFilter</code>.</p>
-<div class="sourceCode" id="cb114" data-caption="new updateDataFilter callbacks" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb114-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb113-36" title="36" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>Ok, this part is plenty repetitive, too.</p>
+    <p>
+      We created new sets for
+      <code style="white-space: pre-wrap;">jobTitles</code> and
+      <code style="white-space: pre-wrap;">USstates</code>, then rendered two
+      more <code style="white-space: pre-wrap;">ControlRow</code> elements with
+      appropriate attributes. They get
+      <code style="white-space: pre-wrap;">toggleNames</code> for building the
+      buttons, <code style="white-space: pre-wrap;">picked</code> to know which
+      is active, an
+      <code style="white-space: pre-wrap;">updateDataFilter</code> callback,
+      and we tell US states to render capitalized.
+    </p>
+    <p>
+      The implementations of those
+      <code style="white-space: pre-wrap;">updateDataFilter</code> callbacks
+      follow the same pattern as
+      <code style="white-space: pre-wrap;">updateYearFilter</code>.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb114"
+      data-caption="new updateDataFilter callbacks"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb114-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb114-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb114-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Controls <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb114-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
@@ -89,11 +135,34 @@
 <a class="sourceLine" id="cb114-47" title="47" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb114-48" title="48" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb114-49" title="49" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb114-50" title="50" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Controls<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>Yes, they’re basically the same as <code style="white-space: pre-wrap;">updateYearFilter</code>. The only difference is a changed <code style="white-space: pre-wrap;">filter</code> function and using different keys in <code style="white-space: pre-wrap;">setState()</code>.</p>
-<p>Why separate functions then? No need to get fancy. It would’ve made the code harder to read.</p>
-<p>Our last step is to add these new keys to the <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> function.</p>
-<div class="sourceCode" id="cb115" data-caption="Add new filters to main state update" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb115-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb114-50" title="50" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Controls<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      Yes, they’re basically the same as
+      <code style="white-space: pre-wrap;">updateYearFilter</code>. The only
+      difference is a changed
+      <code style="white-space: pre-wrap;">filter</code> function and using
+      different keys in <code style="white-space: pre-wrap;">setState()</code>.
+    </p>
+    <p>
+      Why separate functions then? No need to get fancy. It would’ve made the
+      code harder to read.
+    </p>
+    <p>
+      Our last step is to add these new keys to the
+      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code>
+      function.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb115"
+      data-caption="Add new filters to main state update"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb115-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb115-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb115-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Controls <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb115-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">reportUpdateUpTheChain</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -110,11 +179,26 @@
 <a class="sourceLine" id="cb115-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                <span class="dt" style="color: #902000;">jobTitle</span><span class="op" style="color: #666666;">:</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">state</span>.<span class="at" style="color: #7d9029;">jobTitle</span></a>
 <a class="sourceLine" id="cb115-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb115-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb115-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>We add them to the filter condition with <code style="white-space: pre-wrap;">&amp;&amp;</code> and expand the <code style="white-space: pre-wrap;">filteredBy</code> argument.</p>
-<p>Two more rows of filters show up.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png" alt="All the filters"><figcaption>All the filters</figcaption>
-</figure>
-<p><span class="emoji" data-emoji="clap">👏</span></p>
-<p>Again, if it didn’t work, consult <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f">the diff on GitHub</a>.</p>
+<a class="sourceLine" id="cb115-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      We add them to the filter condition with
+      <code style="white-space: pre-wrap;">&amp;&amp;</code> and expand the
+      <code style="white-space: pre-wrap;">filteredBy</code> argument.
+    </p>
+    <p>Two more rows of filters show up.</p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png"
+        alt="All the filters"
+      />
+      <figcaption>All the filters</figcaption>
+    </figure>
+    <p>👏</p>
+    <p>
+      Again, if it didn’t work, consult
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f"
+        >the diff on GitHub</a
+      >.
+    </p>

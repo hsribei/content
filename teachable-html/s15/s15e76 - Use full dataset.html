@@ -1,7 +1,20 @@
-<h2 id="full-dataset">Full dataset</h2>
-<p>One more step left. Use the whole dataset!</p>
-<p>Go into <code style="white-space: pre-wrap;">src/DataHandling.js</code> and change one line:</p>
-<div class="sourceCode" id="cb124" data-caption="Switch to full dataset" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb124-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Example 4</span></a>
+    <h2 id="full-dataset">Full dataset</h2>
+    <p>One more step left. Use the whole dataset!</p>
+    <p>
+      Go into
+      <code style="white-space: pre-wrap;">src/DataHandling.js</code> and
+      change one line:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb124"
+      data-caption="Switch to full dataset"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb124-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Example 4</span></a>
 <a class="sourceLine" id="cb124-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">//</span></a>
 <a class="sourceLine" id="cb124-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/DataHandling.js</span></a>
 <a class="sourceLine" id="cb124-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="kw" style="color: #007020; font-weight: bold;">const</span> loadAllData <span class="op" style="color: #666666;">=</span> (callback <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">_</span>.<span class="at" style="color: #7d9029;">noop</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
@@ -12,5 +25,9 @@
 <a class="sourceLine" id="cb124-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a>
 <a class="sourceLine" id="cb124-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
 <a class="sourceLine" id="cb124-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        .<span class="at" style="color: #7d9029;">defer</span>(<span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">csv</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&#39;data/h1bs-2012-2016.csv&#39;</span><span class="op" style="color: #666666;">,</span> cleanSalary)</a>
-<a class="sourceLine" id="cb124-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre></div>
-<p>We change the file name, and that’s that. Full dataset locked and loaded. Dataviz ready to go.</p>
+<a class="sourceLine" id="cb124-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre>
+    </div>
+    <p>
+      We change the file name, and that’s that. Full dataset locked and loaded.
+      Dataviz ready to go.
+    </p>

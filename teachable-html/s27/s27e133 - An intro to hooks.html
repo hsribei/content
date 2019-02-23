@@ -1,14 +1,45 @@
-<h1 id="refactor-your-components-with-react-hooks">Refactor your components with React Hooks</h1>
-<p>Hooks launched with great fanfare and community excitement in February 2019. A whole new way to write React components.</p>
-<p>Not a fundamental change, the React team would say, but a mind shift after all. A change in how you think about state, side effects, and component structure. You might not like hooks at first. With a little practice they’re going to feel more natural than the component lifecycle model you’re used to now.</p>
-<p>Hooks exist to:</p>
-<ul>
-<li>help you write less code for little bits of logic</li>
-<li>help you move logic out of your components</li>
-<li>help you reuse logic between components</li>
-</ul>
-<p>Some say it removes complexity around the <code style="white-space: pre-wrap;">this</code> keyword in JavaScript and I’m not sure that it does. Yes, there’s no more <code style="white-space: pre-wrap;">this</code> because everything is a function, that’s true. But you replace that with passing a lot of function arguments around and being careful about function scope.</p>
-<p>My favorite React Hooks magic trick is that you can and should write your own. Reusable or not, a custom hook almost always cleans up your code.</p>
-<p>Oh and good news! Hooks are backwards compatible. You can write new stuff with hooks and keep your old stuff unchanged. <span class="emoji" data-emoji="ok_hand">👌</span></p>
-<p>In this section we’re going to look at the core React hooks, talk about the most important hook for dataviz, then refactor our big example from earlier to use hooks.</p>
-<p>You’ll need to upgrade React to at least version <code style="white-space: pre-wrap;">16.8.0</code> to use hooks.</p>
+    <h1 id="refactor-your-components-with-react-hooks">
+      Refactor your components with React Hooks
+    </h1>
+    <p>
+      Hooks launched with great fanfare and community excitement in February
+      2019. A whole new way to write React components.
+    </p>
+    <p>
+      Not a fundamental change, the React team would say, but a mind shift
+      after all. A change in how you think about state, side effects, and
+      component structure. You might not like hooks at first. With a little
+      practice they’re going to feel more natural than the component lifecycle
+      model you’re used to now.
+    </p>
+    <p>Hooks exist to:</p>
+    <ul>
+      <li>help you write less code for little bits of logic</li>
+      <li>help you move logic out of your components</li>
+      <li>help you reuse logic between components</li>
+    </ul>
+    <p>
+      Some say it removes complexity around the
+      <code style="white-space: pre-wrap;">this</code> keyword in JavaScript
+      and I’m not sure that it does. Yes, there’s no more
+      <code style="white-space: pre-wrap;">this</code> because everything is a
+      function, that’s true. But you replace that with passing a lot of
+      function arguments around and being careful about function scope.
+    </p>
+    <p>
+      My favorite React Hooks magic trick is that you can and should write your
+      own. Reusable or not, a custom hook almost always cleans up your code.
+    </p>
+    <p>
+      Oh and good news! Hooks are backwards compatible. You can write new stuff
+      with hooks and keep your old stuff unchanged. 👌
+    </p>
+    <p>
+      In this section we’re going to look at the core React hooks, talk about
+      the most important hook for dataviz, then refactor our big example from
+      earlier to use hooks.
+    </p>
+    <p>
+      You’ll need to upgrade React to at least version
+      <code style="white-space: pre-wrap;">16.8.0</code> to use hooks.
+    </p>

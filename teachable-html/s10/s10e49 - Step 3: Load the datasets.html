@@ -1,6 +1,15 @@
-<h2 id="step-3-load-the-datasets">Step 3: Load the datasets</h2>
-<p>Now we can use D3 to load our data with fetch requests.</p>
-<div class="sourceCode" id="cb63" data-caption="Data loading" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb63-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/DataHandling.js</span></a>
+    <h2 id="step-3-load-the-datasets">Step 3: Load the datasets</h2>
+    <p>Now we can use D3 to load our data with fetch requests.</p>
+    <div
+      class="sourceCode"
+      id="cb63"
+      data-caption="Data loading"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb63-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/DataHandling.js</span></a>
 <a class="sourceLine" id="cb63-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="kw" style="color: #007020; font-weight: bold;">const</span> loadAllData <span class="op" style="color: #666666;">=</span> (callback <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">_</span>.<span class="at" style="color: #7d9029;">noop</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb63-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="va" style="color: #19177c;">Promise</span>.<span class="at" style="color: #7d9029;">all</span>([</a>
 <a class="sourceLine" id="cb63-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">json</span>(<span class="st" style="color: #4070a0;">&quot;data/us.json&quot;</span>)<span class="op" style="color: #666666;">,</span></a>
@@ -11,11 +20,54 @@
 <a class="sourceLine" id="cb63-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    ]).<span class="at" style="color: #7d9029;">then</span>(([us<span class="op" style="color: #666666;">,</span> countyNames<span class="op" style="color: #666666;">,</span> medianIncomes<span class="op" style="color: #666666;">,</span> techSalaries<span class="op" style="color: #666666;">,</span> USstateNames]) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb63-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb63-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb63-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>Here you can see another ES6 trick: default argument values. If <code style="white-space: pre-wrap;">callback</code> is undefined, we set it to <code style="white-space: pre-wrap;">_.noop</code> - a function that does nothing. This lets us later call <code style="white-space: pre-wrap;">callback()</code> without worrying whether it’s defined.</p>
-<p>In version 5, D3 updated its data loading methods to use promises instead of callbacks. You can load a single file using <code style="white-space: pre-wrap;">d3.csv("filename").then(data =&gt; ....</code>. The promise resolves with your data, or throws an error.</p>
-<p>If you’re on D3v4 and can’t upgrade, you’ll have to import from <code style="white-space: pre-wrap;">d3-fetch</code>.</p>
-<p>Each <code style="white-space: pre-wrap;">d3.csv</code> call makes a fetch request, parses the fetched CSV file into an array of JavaScript dictionaries, and passes each row through the provided cleanup function. We pass all median incomes through <code style="white-space: pre-wrap;">cleanIncome</code>, salaries through <code style="white-space: pre-wrap;">cleanSalary</code>, etc.</p>
-<p>To load multiple files, we use <code style="white-space: pre-wrap;">Promise.all</code> with a list of unresolved promises. Once resolved, our <code style="white-space: pre-wrap;">.then</code> handler gets a list of results. We use array destructuring to expand that list into our respective datasets before running some more logic to tie them together.</p>
-<p>D3 supports formats like <code style="white-space: pre-wrap;">json</code>, <code style="white-space: pre-wrap;">csv</code>, <code style="white-space: pre-wrap;">tsv</code>, <code style="white-space: pre-wrap;">text</code>, and <code style="white-space: pre-wrap;">xml</code> out of the box. You can make it work with custom data sources through the underlying <code style="white-space: pre-wrap;">request</code> API.</p>
-<p>PS: we’re using the shortened salary dataset to make page reloads faster while building our project.</p>
+<a class="sourceLine" id="cb63-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      Here you can see another ES6 trick: default argument values. If
+      <code style="white-space: pre-wrap;">callback</code> is undefined, we set
+      it to <code style="white-space: pre-wrap;">_.noop</code> - a function
+      that does nothing. This lets us later call
+      <code style="white-space: pre-wrap;">callback()</code> without worrying
+      whether it’s defined.
+    </p>
+    <p>
+      In version 5, D3 updated its data loading methods to use promises instead
+      of callbacks. You can load a single file using
+      <code style="white-space: pre-wrap;"
+        >d3.csv("filename").then(data =&gt; ....</code
+      >. The promise resolves with your data, or throws an error.
+    </p>
+    <p>
+      If you’re on D3v4 and can’t upgrade, you’ll have to import from
+      <code style="white-space: pre-wrap;">d3-fetch</code>.
+    </p>
+    <p>
+      Each <code style="white-space: pre-wrap;">d3.csv</code> call makes a
+      fetch request, parses the fetched CSV file into an array of JavaScript
+      dictionaries, and passes each row through the provided cleanup function.
+      We pass all median incomes through
+      <code style="white-space: pre-wrap;">cleanIncome</code>, salaries through
+      <code style="white-space: pre-wrap;">cleanSalary</code>, etc.
+    </p>
+    <p>
+      To load multiple files, we use
+      <code style="white-space: pre-wrap;">Promise.all</code> with a list of
+      unresolved promises. Once resolved, our
+      <code style="white-space: pre-wrap;">.then</code> handler gets a list of
+      results. We use array destructuring to expand that list into our
+      respective datasets before running some more logic to tie them together.
+    </p>
+    <p>
+      D3 supports formats like
+      <code style="white-space: pre-wrap;">json</code>,
+      <code style="white-space: pre-wrap;">csv</code>,
+      <code style="white-space: pre-wrap;">tsv</code>,
+      <code style="white-space: pre-wrap;">text</code>, and
+      <code style="white-space: pre-wrap;">xml</code> out of the box. You can
+      make it work with custom data sources through the underlying
+      <code style="white-space: pre-wrap;">request</code> API.
+    </p>
+    <p>
+      PS: we’re using the shortened salary dataset to make page reloads faster
+      while building our project.
+    </p>

@@ -1,14 +1,40 @@
-<h2 id="usestate-useeffect-and-usecontext">useState, useEffect, and useContext</h2>
-<p>React comes with <a href="https://reactjs.org/docs/hooks-reference.html">a bunch of basic and advanced hooks</a>. The core hooks are:</p>
-<ul>
-<li><code style="white-space: pre-wrap;">useState</code> for managing state</li>
-<li><code style="white-space: pre-wrap;">useEffect</code> for side-effects</li>
-<li><code style="white-space: pre-wrap;">useContext</code> for React’s context API</li>
-</ul>
-<p>Here’s how to think about them in a nutshell <span class="emoji" data-emoji="point_down">👇</span></p>
-<h3 id="usestate">useState</h3>
-<p>The <code style="white-space: pre-wrap;">useState</code> hook replaces pairs of state getters and setters.</p>
-<div class="sourceCode" id="cb190" data-caption="State without hooks" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb190-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> myComponent <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
+    <h2 id="usestate-useeffect-and-usecontext">
+      useState, useEffect, and useContext
+    </h2>
+    <p>
+      React comes with
+      <a href="https://reactjs.org/docs/hooks-reference.html"
+        >a bunch of basic and advanced hooks</a
+      >. The core hooks are:
+    </p>
+    <ul>
+      <li>
+        <code style="white-space: pre-wrap;">useState</code> for managing state
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">useEffect</code> for side-effects
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">useContext</code> for React’s
+        context API
+      </li>
+    </ul>
+    <p>Here’s how to think about them in a nutshell 👇</p>
+    <h3 id="usestate">useState</h3>
+    <p>
+      The <code style="white-space: pre-wrap;">useState</code> hook replaces
+      pairs of state getters and setters.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb190"
+      data-caption="State without hooks"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb190-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> myComponent <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb190-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb190-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="dt" style="color: #902000;">value</span><span class="op" style="color: #666666;">:</span> <span class="st" style="color: #4070a0;">&#39;default&#39;</span></a>
 <a class="sourceLine" id="cb190-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
@@ -22,27 +48,74 @@
 <a class="sourceLine" id="cb190-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      </a>
 <a class="sourceLine" id="cb190-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">&lt;</span>input value<span class="op" style="color: #666666;">={</span>value<span class="op" style="color: #666666;">}</span> onChange<span class="op" style="color: #666666;">={</span>handleChange<span class="op" style="color: #666666;">}</span> /&gt;</a>
 <a class="sourceLine" id="cb190-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb190-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p><span class="emoji" data-emoji="point_down">👇</span></p>
-<div class="sourceCode" id="cb191" data-caption="useState hook" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb191-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> myComponent <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
+<a class="sourceLine" id="cb190-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>👇</p>
+    <div
+      class="sourceCode"
+      id="cb191"
+      data-caption="useState hook"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb191-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> myComponent <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb191-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> [value<span class="op" style="color: #666666;">,</span> setValue] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useState</span>(<span class="st" style="color: #4070a0;">&#39;default&#39;</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb191-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  </a>
 <a class="sourceLine" id="cb191-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> handleChange <span class="op" style="color: #666666;">=</span> (e) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="at" style="color: #7d9029;">setValue</span>(<span class="va" style="color: #19177c;">e</span>.<span class="va" style="color: #19177c;">target</span>.<span class="at" style="color: #7d9029;">value</span>)</a>
 <a class="sourceLine" id="cb191-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  </a>
 <a class="sourceLine" id="cb191-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">&lt;</span>input value<span class="op" style="color: #666666;">={</span>value<span class="op" style="color: #666666;">}</span> onChange<span class="op" style="color: #666666;">={</span>handleChange<span class="op" style="color: #666666;">}</span> /&gt;</a>
-<a class="sourceLine" id="cb191-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Less code to write and understand.</p>
-<p>In a class component you: - set a default value - create an <code style="white-space: pre-wrap;">onChange</code> callback that fires <code style="white-space: pre-wrap;">setState</code> - read value from state before rendering etc.</p>
-<p>Without modern fat arrow syntax you might run into trouble with binds.</p>
-<p>The hook approach moves that boilerplate to React’s plate. You call <code style="white-space: pre-wrap;">useState</code>. It takes a default value and returns a getter and a setter.</p>
-<p>You call that setter in your change handler.</p>
-<p>Behind the scenes React subscribes your component to that change. Your component re-renders.</p>
-<h3 id="useeffect">useEffect</h3>
-<p><code style="white-space: pre-wrap;">useEffect</code> replaces the <code style="white-space: pre-wrap;">componentDidMount</code>, <code style="white-space: pre-wrap;">componentDidUpdate</code>, <code style="white-space: pre-wrap;">shouldComponentUpdate</code>, <code style="white-space: pre-wrap;">componentWillUnmount</code> quadfecta. It’s like a trifecta, but four.</p>
-<p>Say you want a side-effect when your component updates, like make an API call. Gotta run it on mount and update. Want to subscribe to a DOM event? Gotta unsubscribe on unmount.</p>
-<p>Wanna do all this only when certain props change? Gotta check for that.</p>
-<p>Class:</p>
-<div class="sourceCode" id="cb192" data-caption="Side-effects without hooks" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb192-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> myComp <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
+<a class="sourceLine" id="cb191-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>Less code to write and understand.</p>
+    <p>
+      In a class component you: - set a default value - create an
+      <code style="white-space: pre-wrap;">onChange</code> callback that fires
+      <code style="white-space: pre-wrap;">setState</code> - read value from
+      state before rendering etc.
+    </p>
+    <p>
+      Without modern fat arrow syntax you might run into trouble with binds.
+    </p>
+    <p>
+      The hook approach moves that boilerplate to React’s plate. You call
+      <code style="white-space: pre-wrap;">useState</code>. It takes a default
+      value and returns a getter and a setter.
+    </p>
+    <p>You call that setter in your change handler.</p>
+    <p>
+      Behind the scenes React subscribes your component to that change. Your
+      component re-renders.
+    </p>
+    <h3 id="useeffect">useEffect</h3>
+    <p>
+      <code style="white-space: pre-wrap;">useEffect</code> replaces the
+      <code style="white-space: pre-wrap;">componentDidMount</code>,
+      <code style="white-space: pre-wrap;">componentDidUpdate</code>,
+      <code style="white-space: pre-wrap;">shouldComponentUpdate</code>,
+      <code style="white-space: pre-wrap;">componentWillUnmount</code>
+      quadfecta. It’s like a trifecta, but four.
+    </p>
+    <p>
+      Say you want a side-effect when your component updates, like make an API
+      call. Gotta run it on mount and update. Want to subscribe to a DOM event?
+      Gotta unsubscribe on unmount.
+    </p>
+    <p>
+      Wanna do all this only when certain props change? Gotta check for that.
+    </p>
+    <p>Class:</p>
+    <div
+      class="sourceCode"
+      id="cb192"
+      data-caption="Side-effects without hooks"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb192-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> myComp <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb192-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb192-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="dt" style="color: #902000;">value</span><span class="op" style="color: #666666;">:</span> <span class="st" style="color: #4070a0;">&#39;default&#39;</span></a>
 <a class="sourceLine" id="cb192-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
@@ -71,9 +144,19 @@
 <a class="sourceLine" id="cb192-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      </a>
 <a class="sourceLine" id="cb192-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">&lt;</span>input value<span class="op" style="color: #666666;">={</span>value<span class="op" style="color: #666666;">}</span> onChange<span class="op" style="color: #666666;">={</span>handleChange<span class="op" style="color: #666666;">}</span> /&gt;</a>
 <a class="sourceLine" id="cb192-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb192-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p><span class="emoji" data-emoji="point_down">👇</span></p>
-<div class="sourceCode" id="cb193" data-caption="useEffect hook" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb193-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> myComponent <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
+<a class="sourceLine" id="cb192-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>👇</p>
+    <div
+      class="sourceCode"
+      id="cb193"
+      data-caption="useEffect hook"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb193-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> myComponent <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb193-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> [value<span class="op" style="color: #666666;">,</span> setValue] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useState</span>(<span class="st" style="color: #4070a0;">&#39;default&#39;</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb193-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  </a>
 <a class="sourceLine" id="cb193-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> handleChange <span class="op" style="color: #666666;">=</span> (e) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="at" style="color: #7d9029;">setValue</span>(<span class="va" style="color: #19177c;">e</span>.<span class="va" style="color: #19177c;">target</span>.<span class="at" style="color: #7d9029;">value</span>)</a>
@@ -85,29 +168,86 @@
 <a class="sourceLine" id="cb193-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">useEffect</span>(saveValue<span class="op" style="color: #666666;">,</span> [value])<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb193-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  </a>
 <a class="sourceLine" id="cb193-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">&lt;</span>input value<span class="op" style="color: #666666;">={</span>value<span class="op" style="color: #666666;">}</span> onChange<span class="op" style="color: #666666;">={</span>handleChange<span class="op" style="color: #666666;">}</span> /&gt;</a>
-<a class="sourceLine" id="cb193-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>So much less code!</p>
-<p><code style="white-space: pre-wrap;">useEffect</code> runs your function on <code style="white-space: pre-wrap;">componentDidMount</code> and <code style="white-space: pre-wrap;">componentDidUpdate</code>. And that second argument, the <code style="white-space: pre-wrap;">[value]</code> part, tells it to run only when <code style="white-space: pre-wrap;">value</code> changes.</p>
-<p>No need to double check with a conditional. If your effect updates the component itself through a state setter, the second argument acts as a <code style="white-space: pre-wrap;">shouldComponentUpdate</code> of sorts.</p>
-<p>When you return a method from <code style="white-space: pre-wrap;">useEffect</code>, it acts as a <code style="white-space: pre-wrap;">componentWillUnmount</code>. Listening to, say, your mouse position looks like this:</p>
-<div class="sourceCode" id="cb194" data-caption="A mouse listener hook" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb194-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> [mouseX<span class="op" style="color: #666666;">,</span> setMouseX] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useState</span>()<span class="op" style="color: #666666;">;</span></a>
+<a class="sourceLine" id="cb193-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>So much less code!</p>
+    <p>
+      <code style="white-space: pre-wrap;">useEffect</code> runs your function
+      on <code style="white-space: pre-wrap;">componentDidMount</code> and
+      <code style="white-space: pre-wrap;">componentDidUpdate</code>. And that
+      second argument, the
+      <code style="white-space: pre-wrap;">[value]</code> part, tells it to run
+      only when <code style="white-space: pre-wrap;">value</code> changes.
+    </p>
+    <p>
+      No need to double check with a conditional. If your effect updates the
+      component itself through a state setter, the second argument acts as a
+      <code style="white-space: pre-wrap;">shouldComponentUpdate</code> of
+      sorts.
+    </p>
+    <p>
+      When you return a method from
+      <code style="white-space: pre-wrap;">useEffect</code>, it acts as a
+      <code style="white-space: pre-wrap;">componentWillUnmount</code>.
+      Listening to, say, your mouse position looks like this:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb194"
+      data-caption="A mouse listener hook"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb194-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> [mouseX<span class="op" style="color: #666666;">,</span> setMouseX] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useState</span>()<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb194-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> handleMouse <span class="op" style="color: #666666;">=</span> (e) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="at" style="color: #7d9029;">setMouseX</span>(<span class="va" style="color: #19177c;">e</span>.<span class="at" style="color: #7d9029;">screenX</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb194-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb194-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">useEffect</span>(() <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb194-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="va" style="color: #19177c;">window</span>.<span class="at" style="color: #7d9029;">addEventListener</span>(<span class="st" style="color: #4070a0;">&#39;mousemove&#39;</span><span class="op" style="color: #666666;">,</span> handleMouse)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb194-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="va" style="color: #19177c;">window</span>.<span class="at" style="color: #7d9029;">removeEventListener</span>(handleMouse)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb194-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)</a></code></pre></div>
-<p>Neat :okay_hand:</p>
-<h3 id="usecontext">useContext</h3>
-<p><code style="white-space: pre-wrap;">useContext</code> cleans up your render prop callbacky hell.</p>
-<div class="sourceCode" id="cb195" data-caption="Context without hooks" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb195-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> SomeContext <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">createContext</span>()</a>
+<a class="sourceLine" id="cb194-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)</a></code></pre>
+    </div>
+    <p>Neat :okay_hand:</p>
+    <h3 id="usecontext">useContext</h3>
+    <p>
+      <code style="white-space: pre-wrap;">useContext</code> cleans up your
+      render prop callbacky hell.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb195"
+      data-caption="Context without hooks"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb195-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> SomeContext <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">createContext</span>()</a>
 <a class="sourceLine" id="cb195-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb195-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb195-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb195-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">&lt;</span><span class="va" style="color: #19177c;">SomeContext</span>.<span class="at" style="color: #7d9029;">Consumer</span><span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb195-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">{</span>state <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> ...<span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb195-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/<span class="va" style="color: #19177c;">SomeContext</span>.<span class="at" style="color: #7d9029;">Consumer</span><span class="op" style="color: #666666;">&gt;</span></a></code></pre></div>
-<p><span class="emoji" data-emoji="point_down">👇</span></p>
-<div class="sourceCode" id="cb196" data-caption="Context with hooks" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb196-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> state <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useContext</span>(SomeContext)</a></code></pre></div>
-<p>Context state becomes just a value in your function. React auto subscribes to all updates.</p>
-<p>And those are the core hooks. useState, useEffect, and useContext. You can use them to build almost everything. :okay_hand:</p>
+<a class="sourceLine" id="cb195-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/<span class="va" style="color: #19177c;">SomeContext</span>.<span class="at" style="color: #7d9029;">Consumer</span><span class="op" style="color: #666666;">&gt;</span></a></code></pre>
+    </div>
+    <p>👇</p>
+    <div
+      class="sourceCode"
+      id="cb196"
+      data-caption="Context with hooks"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb196-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> state <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useContext</span>(SomeContext)</a></code></pre>
+    </div>
+    <p>
+      Context state becomes just a value in your function. React auto
+      subscribes to all updates.
+    </p>
+    <p>
+      And those are the core hooks. useState, useEffect, and useContext. You
+      can use them to build almost everything. :okay_hand:
+    </p>

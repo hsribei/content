@@ -1,30 +1,74 @@
-<h1 id="prep-for-launch">Prep for launch</h1>
-<p>You’ve built a great visualization. Congratz! Time to put it online and share with the world.</p>
-<p>To do that, we’re going to use Github Pages because our app is a glorified static website. There’s no backend, so all we need is something to serve our HTML, JavaScript, and CSV. Github Pages is perfect for that.</p>
-<p>It’s free, works well with <code style="white-space: pre-wrap;">create-react-app</code>, and can withstand a lot of traffic. You don’t want to worry about traffic when your app gets to the top of HackerNews or Reddit.</p>
-<p>There are a few things we should take care of:</p>
-<ul>
-<li>setting up deployment</li>
-<li>adding a page title</li>
-<li>adding some copy</li>
-<li>Twitter and Facebook cards</li>
-<li>an SEO tweak for search engines</li>
-<li>use the full dataset</li>
-</ul>
-<h2 id="setting-up-deployment">Setting up deployment</h2>
-<p>You’ll need a Github repository. If you’re like me, writing all this code without version control or off-site backup made you nervous, so you already have one.</p>
-<p>For everyone else, head over to Github, click the green <code style="white-space: pre-wrap;">New Repository</code> button and give it a name. Then copy the commands it gives you and run them in your console.</p>
-<p>It should be something like this:</p>
-<pre data-caption="Put code on github"><code style="white-space: pre-wrap;">$ git init
+    <h1 id="prep-for-launch">Prep for launch</h1>
+    <p>
+      You’ve built a great visualization. Congratz! Time to put it online and
+      share with the world.
+    </p>
+    <p>
+      To do that, we’re going to use Github Pages because our app is a
+      glorified static website. There’s no backend, so all we need is something
+      to serve our HTML, JavaScript, and CSV. Github Pages is perfect for that.
+    </p>
+    <p>
+      It’s free, works well with
+      <code style="white-space: pre-wrap;">create-react-app</code>, and can
+      withstand a lot of traffic. You don’t want to worry about traffic when
+      your app gets to the top of HackerNews or Reddit.
+    </p>
+    <p>There are a few things we should take care of:</p>
+    <ul>
+      <li>setting up deployment</li>
+      <li>adding a page title</li>
+      <li>adding some copy</li>
+      <li>Twitter and Facebook cards</li>
+      <li>an SEO tweak for search engines</li>
+      <li>use the full dataset</li>
+    </ul>
+    <h2 id="setting-up-deployment">Setting up deployment</h2>
+    <p>
+      You’ll need a Github repository. If you’re like me, writing all this code
+      without version control or off-site backup made you nervous, so you
+      already have one.
+    </p>
+    <p>
+      For everyone else, head over to Github, click the green
+      <code style="white-space: pre-wrap;">New Repository</code> button and
+      give it a name. Then copy the commands it gives you and run them in your
+      console.
+    </p>
+    <p>It should be something like this:</p>
+    <pre
+      data-caption="Put code on github"
+    ><code style="white-space: pre-wrap;">$ git init
 $ git commit -m &quot;My entire dataviz&quot;
 $ git remote add origin git://github ...
 $ git push origin -u master</code></pre>
-<p>If you’ve been git-ing locally without pushing, then you only need the <code style="white-space: pre-wrap;">git remote add</code> and <code style="white-space: pre-wrap;">git push origin</code> commands. This puts your code on Github. Great idea for anything you don’t want to lose if your computer craps out.</p>
-<p>Every Github repository comes with an optional Github Pages setup. The easiest way for us to use it is with the <code style="white-space: pre-wrap;">gh-pages</code> npm module.</p>
-<p>Install it with this command:</p>
-<pre data-caption="Install gh-pages helper"><code style="white-space: pre-wrap;">$ npm install --save-dev gh-pages</code></pre>
-<p>Add two lines to package.json:</p>
-<div class="sourceCode" id="cb119" data-caption="Update package.json" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode json" style="overflow: visible; margin: 0;"><code class="sourceCode json" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb119-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">package.json</span></a>
+    <p>
+      If you’ve been git-ing locally without pushing, then you only need the
+      <code style="white-space: pre-wrap;">git remote add</code> and
+      <code style="white-space: pre-wrap;">git push origin</code> commands.
+      This puts your code on Github. Great idea for anything you don’t want to
+      lose if your computer craps out.
+    </p>
+    <p>
+      Every Github repository comes with an optional Github Pages setup. The
+      easiest way for us to use it is with the
+      <code style="white-space: pre-wrap;">gh-pages</code> npm module.
+    </p>
+    <p>Install it with this command:</p>
+    <pre
+      data-caption="Install gh-pages helper"
+    ><code style="white-space: pre-wrap;">$ npm install --save-dev gh-pages</code></pre>
+    <p>Add two lines to package.json:</p>
+    <div
+      class="sourceCode"
+      id="cb119"
+      data-caption="Update package.json"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode json"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode json" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb119-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">package.json</span></a>
 <a class="sourceLine" id="cb119-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">Insert</span> <span class="er" style="color: #ff0000; font-weight: bold;">the</span> <span class="er" style="color: #ff0000; font-weight: bold;">line(s)</span> <span class="er" style="color: #ff0000; font-weight: bold;">between</span> <span class="er" style="color: #ff0000; font-weight: bold;">here...</span></a>
 <a class="sourceLine" id="cb119-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="er" style="color: #ff0000; font-weight: bold;">&quot;homepage&quot;:</span> <span class="er" style="color: #ff0000; font-weight: bold;">&quot;https://&lt;your</span> <span class="er" style="color: #ff0000; font-weight: bold;">username&gt;.github.io/&lt;your</span> <span class="er" style="color: #ff0000; font-weight: bold;">repo</span> <span class="er" style="color: #ff0000; font-weight: bold;">name&gt;&quot;</span></a>
 <a class="sourceLine" id="cb119-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">...and</span> <span class="er" style="color: #ff0000; font-weight: bold;">here.</span></a>
@@ -33,12 +77,31 @@ $ git push origin -u master</code></pre>
 <a class="sourceLine" id="cb119-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">Insert</span> <span class="er" style="color: #ff0000; font-weight: bold;">the</span> <span class="er" style="color: #ff0000; font-weight: bold;">line(s)</span> <span class="er" style="color: #ff0000; font-weight: bold;">between</span> <span class="er" style="color: #ff0000; font-weight: bold;">here...</span></a>
 <a class="sourceLine" id="cb119-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="dt" style="color: #902000;">&quot;deploy&quot;</span><span class="fu" style="color: #06287e;">:</span> <span class="st" style="color: #4070a0;">&quot;npm run build &amp;&amp; gh-pages -d build&quot;</span></a>
 <a class="sourceLine" id="cb119-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="er" style="color: #ff0000; font-weight: bold;">//</span> <span class="er" style="color: #ff0000; font-weight: bold;">...and</span> <span class="er" style="color: #ff0000; font-weight: bold;">here.</span></a>
-<a class="sourceLine" id="cb119-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="fu" style="color: #06287e;">}</span></a></code></pre></div>
-<p>We’ve been ignoring the <code style="white-space: pre-wrap;">package.json</code> file so far, but it’s a pretty important file. It specifies all of our project’s dependencies, meta data for npm, and scripts that we run locally. This is where <code style="white-space: pre-wrap;">npm start</code> is defined, for instance.</p>
-<p>We add a <code style="white-space: pre-wrap;">deploy</code> script that runs <code style="white-space: pre-wrap;">build</code> and a <code style="white-space: pre-wrap;">gh-pages</code> deploy, and we specify a <code style="white-space: pre-wrap;">homepage</code> URL. The URL tells our build script how to set up URLs for static files in <code style="white-space: pre-wrap;">index.html</code>.</p>
-<p>Github Pages URLs follow the schema:</p>
-<pre><code style="white-space: pre-wrap;">https://&lt;your username&gt;.github.io/&lt;your repo name&gt;</code></pre>
-<p>For instance, mine is:</p>
-<pre><code style="white-space: pre-wrap;">https://swizec.github.io/react-d3js-step-by-step</code></pre>
-<p>Yours will be different.</p>
-<p>You can deploy with <code style="white-space: pre-wrap;">npm run deploy</code>. Make sure all changes are committed. We’ll do it together when we’re done setting up.</p>
+<a class="sourceLine" id="cb119-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="fu" style="color: #06287e;">}</span></a></code></pre>
+    </div>
+    <p>
+      We’ve been ignoring the
+      <code style="white-space: pre-wrap;">package.json</code> file so far, but
+      it’s a pretty important file. It specifies all of our project’s
+      dependencies, meta data for npm, and scripts that we run locally. This is
+      where <code style="white-space: pre-wrap;">npm start</code> is defined,
+      for instance.
+    </p>
+    <p>
+      We add a <code style="white-space: pre-wrap;">deploy</code> script that
+      runs <code style="white-space: pre-wrap;">build</code> and a
+      <code style="white-space: pre-wrap;">gh-pages</code> deploy, and we
+      specify a <code style="white-space: pre-wrap;">homepage</code> URL. The
+      URL tells our build script how to set up URLs for static files in
+      <code style="white-space: pre-wrap;">index.html</code>.
+    </p>
+    <p>Github Pages URLs follow the schema:</p>
+    <pre><code style="white-space: pre-wrap;">https://&lt;your username&gt;.github.io/&lt;your repo name&gt;</code></pre>
+    <p>For instance, mine is:</p>
+    <pre><code style="white-space: pre-wrap;">https://swizec.github.io/react-d3js-step-by-step</code></pre>
+    <p>Yours will be different.</p>
+    <p>
+      You can deploy with
+      <code style="white-space: pre-wrap;">npm run deploy</code>. Make sure all
+      changes are committed. We’ll do it together when we’re done setting up.
+    </p>

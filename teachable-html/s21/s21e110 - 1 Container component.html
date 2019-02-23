@@ -1,11 +1,37 @@
-<h2 id="container-component">1 Container component</h2>
-<p>Containers are React components that talk to the Redux data store.</p>
-<p>You can think of presentation components as templates that render stuff and containers as smart-ish views that talk to controllers. Or maybe they’re the controllers.</p>
-<p>Sometimes it’s hard to tell. In theory presentation components render and don’t think, containers communicate and don’t render. Redux reducers and actions do the thinking.</p>
-<p>I’m not sure this separation is necessary in small projects.</p>
-<p>Maintaining it can be awkward and sometimes cumbersome in mid-size projects, but I’m sure it makes total sense at Facebook scale. We’re using it in this project because the community has decided that’s the way to go.</p>
-<p>We use the idiomatic <code style="white-space: pre-wrap;">connect()</code> approach. Like this:</p>
-<div class="sourceCode" id="cb149" data-caption="Main container component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb149-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/containers/AppContainer.jsx</span></a>
+    <h2 id="container-component">1 Container component</h2>
+    <p>Containers are React components that talk to the Redux data store.</p>
+    <p>
+      You can think of presentation components as templates that render stuff
+      and containers as smart-ish views that talk to controllers. Or maybe
+      they’re the controllers.
+    </p>
+    <p>
+      Sometimes it’s hard to tell. In theory presentation components render and
+      don’t think, containers communicate and don’t render. Redux reducers and
+      actions do the thinking.
+    </p>
+    <p>I’m not sure this separation is necessary in small projects.</p>
+    <p>
+      Maintaining it can be awkward and sometimes cumbersome in mid-size
+      projects, but I’m sure it makes total sense at Facebook scale. We’re
+      using it in this project because the community has decided that’s the way
+      to go.
+    </p>
+    <p>
+      We use the idiomatic
+      <code style="white-space: pre-wrap;">connect()</code> approach. Like
+      this:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb149"
+      data-caption="Main container component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb149-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/containers/AppContainer.jsx</span></a>
 <a class="sourceLine" id="cb149-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb149-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> connect <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react-redux&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb149-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
@@ -77,12 +103,36 @@
 <a class="sourceLine" id="cb149-70" title="70" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="at" style="color: #7d9029;">connect</span>(</a>
 <a class="sourceLine" id="cb149-71" title="71" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    mapStateToProps<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb149-72" title="72" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    mapDispatchToProps</a>
-<a class="sourceLine" id="cb149-73" title="73" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)(AppContainer)<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>I love the smell of boilerplate in the morning. <span class="emoji" data-emoji="nose">👃</span></p>
-<p>We import dependencies and define <code style="white-space: pre-wrap;">AppContainer</code> as a class-based React <code style="white-space: pre-wrap;">Component</code> so we have somewhere to put the D3 interval. The render method outputs our <code style="white-space: pre-wrap;">&lt;App&gt;</code> component using a bunch of props to pass relevant actions and values.</p>
-<p>The <code style="white-space: pre-wrap;">startTicker</code> method is a callback we pass into App. It runs on first click and starts the D3 interval if necessary. Each interval iteration triggers the <code style="white-space: pre-wrap;">tickTime</code> action.</p>
-<h3 id="appcontainer-talks-to-the-store">AppContainer talks to the store</h3>
-<div class="sourceCode" id="cb150" data-caption="The Reduxy part" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb150-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/containers/AppContainer.jsx</span></a>
+<a class="sourceLine" id="cb149-73" title="73" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)(AppContainer)<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>I love the smell of boilerplate in the morning. 👃</p>
+    <p>
+      We import dependencies and define
+      <code style="white-space: pre-wrap;">AppContainer</code> as a class-based
+      React <code style="white-space: pre-wrap;">Component</code> so we have
+      somewhere to put the D3 interval. The render method outputs our
+      <code style="white-space: pre-wrap;">&lt;App&gt;</code> component using a
+      bunch of props to pass relevant actions and values.
+    </p>
+    <p>
+      The <code style="white-space: pre-wrap;">startTicker</code> method is a
+      callback we pass into App. It runs on first click and starts the D3
+      interval if necessary. Each interval iteration triggers the
+      <code style="white-space: pre-wrap;">tickTime</code> action.
+    </p>
+    <h3 id="appcontainer-talks-to-the-store">
+      AppContainer talks to the store
+    </h3>
+    <div
+      class="sourceCode"
+      id="cb150"
+      data-caption="The Reduxy part"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb150-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/containers/AppContainer.jsx</span></a>
 <a class="sourceLine" id="cb150-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb150-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> mapStateToProps <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb150-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    generateParticles<span class="op" style="color: #666666;">,</span></a>
@@ -113,33 +163,91 @@
 <a class="sourceLine" id="cb150-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="at" style="color: #7d9029;">connect</span>(</a>
 <a class="sourceLine" id="cb150-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    mapStateToProps<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb150-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    mapDispatchToProps</a>
-<a class="sourceLine" id="cb150-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)(AppContainer)<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We’re using the <code style="white-space: pre-wrap;">connect()</code> idiom to connect our AppContainer to the Redux store. It’s a higher order component that handles all the details of connection to the store and staying in sync.</p>
-<p>We pass two arguments into connect. This returns a higher order component function, which we wrap around AppContainer.</p>
-<p>The first argument is <strong>mapStateToProps</strong>. It accepts current state as an argument, which we immediately deconstruct into interesting parts, and returns a key:value dictionary. Each key becomes a component prop with the corresponding value.</p>
-<p>You’d often use this opportunity to run ad-hoc calculations, or combine parts of state into single props. No need for that in our case, just pass it through.</p>
-<h4 id="dispatching-actions">Dispatching actions</h4>
-<p><strong>mapDispatchToProps</strong> is a dictionary that maps props to actions. Each prop turns into an action generator wrapped in a <code style="white-space: pre-wrap;">store.dispatch()</code> call. To fire an action inside a component we just call the function in that prop.</p>
-<p>But Swiz, we’re not writing key:value dictionaries, we’re just listing stuff!</p>
-<p>That’s a syntax supported in most modern JavaScript environments, called object literal property value shorthand. Our build system expands that <code style="white-space: pre-wrap;">mapDispatchToProps</code> dictionary into something like this:</p>
-<div class="sourceCode" id="cb151" data-caption="Compiler expands our dictionaries" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb151-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> mapDispatchToProps <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
+<a class="sourceLine" id="cb150-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)(AppContainer)<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We’re using the
+      <code style="white-space: pre-wrap;">connect()</code> idiom to connect
+      our AppContainer to the Redux store. It’s a higher order component that
+      handles all the details of connection to the store and staying in sync.
+    </p>
+    <p>
+      We pass two arguments into connect. This returns a higher order component
+      function, which we wrap around AppContainer.
+    </p>
+    <p>
+      The first argument is <strong>mapStateToProps</strong>. It accepts
+      current state as an argument, which we immediately deconstruct into
+      interesting parts, and returns a key:value dictionary. Each key becomes a
+      component prop with the corresponding value.
+    </p>
+    <p>
+      You’d often use this opportunity to run ad-hoc calculations, or combine
+      parts of state into single props. No need for that in our case, just pass
+      it through.
+    </p>
+    <h4 id="dispatching-actions">Dispatching actions</h4>
+    <p>
+      <strong>mapDispatchToProps</strong> is a dictionary that maps props to
+      actions. Each prop turns into an action generator wrapped in a
+      <code style="white-space: pre-wrap;">store.dispatch()</code> call. To
+      fire an action inside a component we just call the function in that prop.
+    </p>
+    <p>
+      But Swiz, we’re not writing key:value dictionaries, we’re just listing
+      stuff!
+    </p>
+    <p>
+      That’s a syntax supported in most modern JavaScript environments, called
+      object literal property value shorthand. Our build system expands that
+      <code style="white-space: pre-wrap;">mapDispatchToProps</code> dictionary
+      into something like this:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb151"
+      data-caption="Compiler expands our dictionaries"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb151-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> mapDispatchToProps <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb151-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">tickTime</span><span class="op" style="color: #666666;">:</span> tickTime<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb151-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">tickerStarted</span><span class="op" style="color: #666666;">:</span> tickerStarted<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb151-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">startParticles</span><span class="op" style="color: #666666;">:</span> startParticles<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb151-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">stopParticles</span><span class="op" style="color: #666666;">:</span> stopParticles<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb151-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">updateMousePos</span><span class="op" style="color: #666666;">:</span> updateMousePos</a>
-<a class="sourceLine" id="cb151-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>And you thought previous code had a lot of boilerplate … imagine if this was how you’d do it in real life <span class="emoji" data-emoji="stuck_out_tongue">😛</span></p>
-<p><code style="white-space: pre-wrap;">connect</code> wraps each of these action generators in <code style="white-space: pre-wrap;">store.dispatch()</code> calls. You can pass the resulting function into any component and fire actions by calling that method.</p>
-<h4 id="the-redux-loop">The Redux loop</h4>
-<p>To make a change therefore, a Redux loop unfolds:</p>
-<ol type="1">
-<li>Call our action triggerer, passed in through props</li>
-<li>Calls the generator, gets a <code style="white-space: pre-wrap;">{type: ...}</code> object</li>
-<li>Dispatches that object on the store</li>
-<li>Redux calls the reducer</li>
-<li>Reducer creates new state</li>
-<li>Store updates triggering React’s engine to flow updates through the props</li>
-</ol>
-<p>So that’s the container. 71 lines of boilerplate pretty code.</p>
-<p>The remaining piece of the puzzle is our reducer. Two reducers in fact.</p>
+<a class="sourceLine" id="cb151-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      And you thought previous code had a lot of boilerplate … imagine if this
+      was how you’d do it in real life 😛
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">connect</code> wraps each of these
+      action generators in
+      <code style="white-space: pre-wrap;">store.dispatch()</code> calls. You
+      can pass the resulting function into any component and fire actions by
+      calling that method.
+    </p>
+    <h4 id="the-redux-loop">The Redux loop</h4>
+    <p>To make a change therefore, a Redux loop unfolds:</p>
+    <ol type="1">
+      <li>Call our action triggerer, passed in through props</li>
+      <li>
+        Calls the generator, gets a
+        <code style="white-space: pre-wrap;">{type: ...}</code> object
+      </li>
+      <li>Dispatches that object on the store</li>
+      <li>Redux calls the reducer</li>
+      <li>Reducer creates new state</li>
+      <li>
+        Store updates triggering React’s engine to flow updates through the
+        props
+      </li>
+    </ol>
+    <p>So that’s the container. 71 lines of boilerplate pretty code.</p>
+    <p>
+      The remaining piece of the puzzle is our reducer. Two reducers in fact.
+    </p>

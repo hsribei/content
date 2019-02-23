@@ -1,10 +1,44 @@
-<h2 id="step-2-build-controls-component">Step 2: Build Controls component</h2>
-<p>The <code style="white-space: pre-wrap;">Controls</code> component builds our filter function and <code style="white-space: pre-wrap;">filteredBy</code> dictionary based on user choices.</p>
-<p><code style="white-space: pre-wrap;">Controls</code> renders 3 rows of buttons and builds filtering out of the choice made on each row. That makes <code style="white-space: pre-wrap;">Controls</code> kind of repetitive, but that’s okay.</p>
-<p>To keep this book shorter, we’re going to build everything for a <code style="white-space: pre-wrap;">year</code> filter first. Then I’ll explain how to add <code style="white-space: pre-wrap;">USstate</code> and <code style="white-space: pre-wrap;">jobTitle</code> filters on a higher level. Once you have one working, the rest follows that same pattern.</p>
-<p>Make a <code style="white-space: pre-wrap;">Controls</code> directory in <code style="white-space: pre-wrap;">src/components/</code> and let’s begin. The main <code style="white-space: pre-wrap;">Controls</code> component goes in your <code style="white-space: pre-wrap;">index.js</code> file.</p>
-<h3 id="stub-controls">Stub Controls</h3>
-<div class="sourceCode" id="cb105" data-caption="Controls stubbed for year filter" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb105-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+    <h2 id="step-2-build-controls-component">
+      Step 2: Build Controls component
+    </h2>
+    <p>
+      The <code style="white-space: pre-wrap;">Controls</code> component builds
+      our filter function and
+      <code style="white-space: pre-wrap;">filteredBy</code> dictionary based
+      on user choices.
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">Controls</code> renders 3 rows of
+      buttons and builds filtering out of the choice made on each row. That
+      makes <code style="white-space: pre-wrap;">Controls</code> kind of
+      repetitive, but that’s okay.
+    </p>
+    <p>
+      To keep this book shorter, we’re going to build everything for a
+      <code style="white-space: pre-wrap;">year</code> filter first. Then I’ll
+      explain how to add
+      <code style="white-space: pre-wrap;">USstate</code> and
+      <code style="white-space: pre-wrap;">jobTitle</code> filters on a higher
+      level. Once you have one working, the rest follows that same pattern.
+    </p>
+    <p>
+      Make a <code style="white-space: pre-wrap;">Controls</code> directory in
+      <code style="white-space: pre-wrap;">src/components/</code> and let’s
+      begin. The main
+      <code style="white-space: pre-wrap;">Controls</code> component goes in
+      your <code style="white-space: pre-wrap;">index.js</code> file.
+    </p>
+    <h3 id="stub-controls">Stub Controls</h3>
+    <div
+      class="sourceCode"
+      id="cb105"
+      data-caption="Controls stubbed for year filter"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb105-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb105-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb105-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb105-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> ControlRow <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;./ControlRow&quot;</span><span class="op" style="color: #666666;">;</span></a>
@@ -41,11 +75,38 @@
 <a class="sourceLine" id="cb105-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb105-36" title="36" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb105-37" title="37" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb105-38" title="38" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Controls<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We start with some imports and a <code style="white-space: pre-wrap;">Controls</code> class-based component. Inside, we define default <code style="white-space: pre-wrap;">state</code> with an always-true <code style="white-space: pre-wrap;">yearFilter</code> and an asterisk for <code style="white-space: pre-wrap;">year</code>.</p>
-<p>We also need an <code style="white-space: pre-wrap;">updateYearFilter</code> function, which we’ll use to update the filter, a <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> function, and a <code style="white-space: pre-wrap;">render</code> method. We’re using <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> to bubble updates to our parent component. It’s a simpler alternative to using React Context or a state management library.</p>
-<h3 id="filter-logic">Filter logic</h3>
-<div class="sourceCode" id="cb106" data-caption="year filtering logic in Controls" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb106-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+<a class="sourceLine" id="cb105-38" title="38" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Controls<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We start with some imports and a
+      <code style="white-space: pre-wrap;">Controls</code> class-based
+      component. Inside, we define default
+      <code style="white-space: pre-wrap;">state</code> with an always-true
+      <code style="white-space: pre-wrap;">yearFilter</code> and an asterisk
+      for <code style="white-space: pre-wrap;">year</code>.
+    </p>
+    <p>
+      We also need an
+      <code style="white-space: pre-wrap;">updateYearFilter</code> function,
+      which we’ll use to update the filter, a
+      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code>
+      function, and a
+      <code style="white-space: pre-wrap;">render</code> method. We’re using
+      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> to
+      bubble updates to our parent component. It’s a simpler alternative to
+      using React Context or a state management library.
+    </p>
+    <h3 id="filter-logic">Filter logic</h3>
+    <div
+      class="sourceCode"
+      id="cb106"
+      data-caption="year filtering logic in Controls"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb106-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb106-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Controls <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb106-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb106-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    updateYearFilter <span class="op" style="color: #666666;">=</span> (year<span class="op" style="color: #666666;">,</span> reset) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
@@ -64,20 +125,58 @@
 <a class="sourceLine" id="cb106-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">reportUpdateUpTheChain</span>()</a>
 <a class="sourceLine" id="cb106-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb106-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a>
-<a class="sourceLine" id="cb106-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p><code style="white-space: pre-wrap;">updateYearFilter</code> is a callback we pass into <code style="white-space: pre-wrap;">ControlRow</code>. When a user picks a year, their action triggers this function.</p>
-<p>When that happens, we create a new partial filter function. The <code style="white-space: pre-wrap;">App</code> component uses it inside a <code style="white-space: pre-wrap;">.filter</code> call like you saw earlier. We have to return <code style="white-space: pre-wrap;">true</code> for elements we want to keep and <code style="white-space: pre-wrap;">false</code> for elements we don’t.</p>
-<p>Comparing <code style="white-space: pre-wrap;">submit_date.getFullYear()</code> with <code style="white-space: pre-wrap;">year</code> achieves that.</p>
-<p>The <code style="white-space: pre-wrap;">reset</code> argument lets us reset filters back to defaults. Enables users to unselect options.</p>
-<p>When we have the <code style="white-space: pre-wrap;">year</code> and <code style="white-space: pre-wrap;">filter</code>, we update component state with <code style="white-space: pre-wrap;">this.setState</code>. This triggers a re-render and calls <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> afterwards. Great use-case for the little known setState callback <span class="emoji" data-emoji="smiley">😃</span></p>
-<p><code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> then calls <code style="white-space: pre-wrap;">this.props.updateDataFilter</code>, which is a callback method on <code style="white-space: pre-wrap;">App</code>. We defined it earlier – it needs a new filter method and a <code style="white-space: pre-wrap;">filteredBy</code> dictionary.</p>
-<pre data-caption="reportUpdateUpTheChain method"><code style="white-space: pre-wrap;">// src/components/Controls/index.js
+<a class="sourceLine" id="cb106-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      <code style="white-space: pre-wrap;">updateYearFilter</code> is a
+      callback we pass into
+      <code style="white-space: pre-wrap;">ControlRow</code>. When a user picks
+      a year, their action triggers this function.
+    </p>
+    <p>
+      When that happens, we create a new partial filter function. The
+      <code style="white-space: pre-wrap;">App</code> component uses it inside
+      a <code style="white-space: pre-wrap;">.filter</code> call like you saw
+      earlier. We have to return
+      <code style="white-space: pre-wrap;">true</code> for elements we want to
+      keep and <code style="white-space: pre-wrap;">false</code> for elements
+      we don’t.
+    </p>
+    <p>
+      Comparing
+      <code style="white-space: pre-wrap;">submit_date.getFullYear()</code>
+      with <code style="white-space: pre-wrap;">year</code> achieves that.
+    </p>
+    <p>
+      The <code style="white-space: pre-wrap;">reset</code> argument lets us
+      reset filters back to defaults. Enables users to unselect options.
+    </p>
+    <p>
+      When we have the <code style="white-space: pre-wrap;">year</code> and
+      <code style="white-space: pre-wrap;">filter</code>, we update component
+      state with <code style="white-space: pre-wrap;">this.setState</code>.
+      This triggers a re-render and calls
+      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code>
+      afterwards. Great use-case for the little known setState callback 😃
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code> then
+      calls
+      <code style="white-space: pre-wrap;">this.props.updateDataFilter</code>,
+      which is a callback method on
+      <code style="white-space: pre-wrap;">App</code>. We defined it earlier –
+      it needs a new filter method and a
+      <code style="white-space: pre-wrap;">filteredBy</code> dictionary.
+    </p>
+    <pre
+      data-caption="reportUpdateUpTheChain method"
+    ><code style="white-space: pre-wrap;">// src/components/Controls/index.js
 class Controls extends React.Component {
     // ...
     reportUpdateUpTheChain() {
         window.location.hash = [
             this.state.year || &quot;*&quot;
-        ].join(&quot;-&quot;);
+        ].join(&quot;-&quot😉;
 
         this.props.updateDataFilter(
             (filters =&gt; {
@@ -90,11 +189,33 @@ class Controls extends React.Component {
         );
     }
 }</code></pre>
-<p>Building the filter method looks tricky because we’re composing multiple functions. The new arrow function takes a dictionary of filters as an argument and returns a new function that <code style="white-space: pre-wrap;">&amp;&amp;</code>s them all. We invoke it immediately with <code style="white-space: pre-wrap;">this.state</code> as the argument.</p>
-<p>It looks silly when there’s just one filter, but I promise it makes sense.</p>
-<h3 id="render-2">Render</h3>
-<p>Great, we have the filter logic. Let’s render those rows of controls we’ve been talking about.</p>
-<div class="sourceCode" id="cb108" data-caption="Render the year ControlRow" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb108-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
+    <p>
+      Building the filter method looks tricky because we’re composing multiple
+      functions. The new arrow function takes a dictionary of filters as an
+      argument and returns a new function that
+      <code style="white-space: pre-wrap;">&amp;&amp;</code>s them all. We
+      invoke it immediately with
+      <code style="white-space: pre-wrap;">this.state</code> as the argument.
+    </p>
+    <p>
+      It looks silly when there’s just one filter, but I promise it makes
+      sense.
+    </p>
+    <h3 id="render-2">Render</h3>
+    <p>
+      Great, we have the filter logic. Let’s render those rows of controls
+      we’ve been talking about.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb108"
+      data-caption="Render the year ControlRow"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb108-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/index.js</span></a>
 <a class="sourceLine" id="cb108-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Controls <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb108-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb108-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -113,7 +234,25 @@ class Controls extends React.Component {
 <a class="sourceLine" id="cb108-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb108-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb108-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb108-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Once more, this is generalized code used for a single example: the <code style="white-space: pre-wrap;">year</code> filter.</p>
-<p>We build a <code style="white-space: pre-wrap;">Set</code> of distinct years in our dataset, then render a <code style="white-space: pre-wrap;">ControlRow</code> using props to give it our <code style="white-space: pre-wrap;">data</code>, a set of <code style="white-space: pre-wrap;">toggleNames</code>, a callback to update the filter, and which entry is <code style="white-space: pre-wrap;">picked</code> right now. Also known as the controlled component pattern, it enables us to maintain the data-flows-down, events-bubble-up architecture.</p>
-<p>If you don’t know about <code style="white-space: pre-wrap;">Set</code>s, they’re an ES6 data structure that ensures every entry is unique. Just like a mathematical set. They’re pretty fast.</p>
+<a class="sourceLine" id="cb108-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Once more, this is generalized code used for a single example: the
+      <code style="white-space: pre-wrap;">year</code> filter.
+    </p>
+    <p>
+      We build a <code style="white-space: pre-wrap;">Set</code> of distinct
+      years in our dataset, then render a
+      <code style="white-space: pre-wrap;">ControlRow</code> using props to
+      give it our <code style="white-space: pre-wrap;">data</code>, a set of
+      <code style="white-space: pre-wrap;">toggleNames</code>, a callback to
+      update the filter, and which entry is
+      <code style="white-space: pre-wrap;">picked</code> right now. Also known
+      as the controlled component pattern, it enables us to maintain the
+      data-flows-down, events-bubble-up architecture.
+    </p>
+    <p>
+      If you don’t know about <code style="white-space: pre-wrap;">Set</code>s,
+      they’re an ES6 data structure that ensures every entry is unique. Just
+      like a mathematical set. They’re pretty fast.
+    </p>

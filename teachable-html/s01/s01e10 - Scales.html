@@ -1,16 +1,58 @@
-<h3 id="scales">2) Scales</h3>
-<p>Scales are D3’s most versatile concept. They help you translate between two different spaces. Like, mathematical spaces.</p>
-<p>They’re like the mathematical functions you learned about in school. A domain maps to a range using some sort of formula.</p>
-<figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Function_color_example_3.svg/440px-Function_color_example_3.svg.png" alt="A basic function"><figcaption>A basic function</figcaption>
-</figure>
-<p>Colored shapes in the domain map to colors in the range. No formula for this one. That makes it an ordinal scale.</p>
-<div class="sourceCode" id="cb10" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb10-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> shapes <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">scaleOrdinal</span>()</a>
+    <h3 id="scales">2) Scales</h3>
+    <p>
+      Scales are D3’s most versatile concept. They help you translate between
+      two different spaces. Like, mathematical spaces.
+    </p>
+    <p>
+      They’re like the mathematical functions you learned about in school. A
+      domain maps to a range using some sort of formula.
+    </p>
+    <figure>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Function_color_example_3.svg/440px-Function_color_example_3.svg.png"
+        alt="A basic function"
+      />
+      <figcaption>A basic function</figcaption>
+    </figure>
+    <p>
+      Colored shapes in the domain map to colors in the range. No formula for
+      this one. That makes it an ordinal scale.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb10"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb10-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> shapes <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">scaleOrdinal</span>()</a>
 <a class="sourceLine" id="cb10-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">domain</span>([<span class="st" style="color: #4070a0;">&#39;red&#39;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&#39;orange&#39;</span><span class="op" style="color: #666666;">,</span> ...)</a>
-<a class="sourceLine" id="cb10-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">range</span>([<span class="st" style="color: #4070a0;">&#39;red&#39;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&#39;orange&#39;</span><span class="op" style="color: #666666;">,</span> ...)</a></code></pre></div>
-<p><a href="https://codesandbox.io/s/r0rw72z75o">Play with scales on CodeSandbox</a></p>
-<iframe src="https://codesandbox.io/embed/r0rw72z75o?codemirror=1&amp;view=split" style="width:100%; height:500px; border:open_mouth:; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
-</iframe>
-<p>Once you have this scale, you can use it to translate from shapes to colors. <code style="white-space: pre-wrap;">shapes('red triangle')</code> returns <code style="white-space: pre-wrap;">'red'</code> for example.</p>
-<p>Many different types of scales exist. Linear, logarithmic, quantize, etc. Any basic transformation you can think of exists. The rest you can create by writing custom scales.</p>
-<p>You’re most often going to use scales to turn your data values into coordinates. But other use-cases exist.</p>
+<a class="sourceLine" id="cb10-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">range</span>([<span class="st" style="color: #4070a0;">&#39;red&#39;</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&#39;orange&#39;</span><span class="op" style="color: #666666;">,</span> ...)</a></code></pre>
+    </div>
+    <p>
+      <a href="https://codesandbox.io/s/r0rw72z75o"
+        >Play with scales on CodeSandbox</a
+      >
+    </p>
+    <iframe
+      src="https://codesandbox.io/embed/r0rw72z75o?codemirror=1&amp;view=split"
+      style="width:100%; height:500px; border😮; border-radius: 4px; overflow:hidden;"
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    >
+    </iframe>
+    <p>
+      Once you have this scale, you can use it to translate from shapes to
+      colors.
+      <code style="white-space: pre-wrap;">shapes('red triangle')</code>
+      returns <code style="white-space: pre-wrap;">'red'</code> for example.
+    </p>
+    <p>
+      Many different types of scales exist. Linear, logarithmic, quantize, etc.
+      Any basic transformation you can think of exists. The rest you can create
+      by writing custom scales.
+    </p>
+    <p>
+      You’re most often going to use scales to turn your data values into
+      coordinates. But other use-cases exist.
+    </p>

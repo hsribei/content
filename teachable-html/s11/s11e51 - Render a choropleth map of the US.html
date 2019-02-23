@@ -1,15 +1,50 @@
-<h1 id="choropleth-map">Render a choropleth map of the US</h1>
-<p>With our data in hand, it’s time to draw some pictures. A choropleth map will show us the best places to be in tech.</p>
-<p>We’re showing the delta between median household salary in a statistical county and the average salary of an individual tech worker on a visa. The darker the blue, the higher the difference.</p>
-<p>The more a single salary can out-earn an entire household, the better off you are.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/choropleth-map-shortened-dataset.png" alt="Choropleth map with shortened dataset"><figcaption>Choropleth map with shortened dataset</figcaption>
-</figure>
-<p>There’s a lot of gray on this map because the shortened dataset doesn’t have that many counties. Full dataset is going to look better, I promise.</p>
-<p>Turns out immigration visa opportunities for techies aren’t evenly distributed throughout the country. Who knew?</p>
-<p>Just like before, we’re going to start with changes in our <code style="white-space: pre-wrap;">App</code> component, then build the new bit. This time, a <code style="white-space: pre-wrap;">CountyMap</code> component spread over three files:</p>
-<ul>
-<li><code style="white-space: pre-wrap;">CountyMap/index.js</code>, to make imports easier</li>
-<li><code style="white-space: pre-wrap;">CountyMap/CountyMap.js</code>, for overall map logic</li>
-<li><code style="white-space: pre-wrap;">CountyMap/County.js</code>, for individual county polygons</li>
-</ul>
+    <h1 id="choropleth-map">Render a choropleth map of the US</h1>
+    <p>
+      With our data in hand, it’s time to draw some pictures. A choropleth map
+      will show us the best places to be in tech.
+    </p>
+    <p>
+      We’re showing the delta between median household salary in a statistical
+      county and the average salary of an individual tech worker on a visa. The
+      darker the blue, the higher the difference.
+    </p>
+    <p>
+      The more a single salary can out-earn an entire household, the better off
+      you are.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/choropleth-map-shortened-dataset.png"
+        alt="Choropleth map with shortened dataset"
+      />
+      <figcaption>Choropleth map with shortened dataset</figcaption>
+    </figure>
+    <p>
+      There’s a lot of gray on this map because the shortened dataset doesn’t
+      have that many counties. Full dataset is going to look better, I promise.
+    </p>
+    <p>
+      Turns out immigration visa opportunities for techies aren’t evenly
+      distributed throughout the country. Who knew?
+    </p>
+    <p>
+      Just like before, we’re going to start with changes in our
+      <code style="white-space: pre-wrap;">App</code> component, then build the
+      new bit. This time, a
+      <code style="white-space: pre-wrap;">CountyMap</code> component spread
+      over three files:
+    </p>
+    <ul>
+      <li>
+        <code style="white-space: pre-wrap;">CountyMap/index.js</code>, to make
+        imports easier
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">CountyMap/CountyMap.js</code>, for
+        overall map logic
+      </li>
+      <li>
+        <code style="white-space: pre-wrap;">CountyMap/County.js</code>, for
+        individual county polygons
+      </li>
+    </ul>

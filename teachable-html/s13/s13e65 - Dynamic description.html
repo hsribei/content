@@ -1,18 +1,52 @@
-<h2 id="dynamic-description">Dynamic description</h2>
-<p>You know what? The dynamic description component is pretty much the same as the title. It’s just longer and more complex and uses more code. It’s interesting, but not super relevant to the topic of this book.</p>
-<p>So rather than explain it all here, I’m going to give you a link to the <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f">diff on Github</a></p>
-<p>We use the same approach as before:</p>
-<ol type="1">
-<li>Add imports in <code style="white-space: pre-wrap;">App.js</code></li>
-<li>Add component to <code style="white-space: pre-wrap;">App</code> render</li>
-<li>Add re-export to <code style="white-space: pre-wrap;">components/Meta/index.js</code></li>
-<li>Implement component in <code style="white-space: pre-wrap;">components/Meta/Description.js</code></li>
-<li>Use getters for sentence fragments</li>
-<li>Play with conditionals to construct different sentences</li>
-</ol>
-<p>142 lines of mundane code.</p>
-<p>All the interesting complexity goes into finding the richest city and county. That part looks like this:</p>
-<div class="sourceCode" id="cb95" data-caption="Richest county calculation" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb95-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Description.js</span></a>
+    <h2 id="dynamic-description">Dynamic description</h2>
+    <p>
+      You know what? The dynamic description component is pretty much the same
+      as the title. It’s just longer and more complex and uses more code. It’s
+      interesting, but not super relevant to the topic of this book.
+    </p>
+    <p>
+      So rather than explain it all here, I’m going to give you a link to the
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f"
+        >diff on Github</a
+      >
+    </p>
+    <p>We use the same approach as before:</p>
+    <ol type="1">
+      <li>
+        Add imports in <code style="white-space: pre-wrap;">App.js</code>
+      </li>
+      <li>
+        Add component to <code style="white-space: pre-wrap;">App</code> render
+      </li>
+      <li>
+        Add re-export to
+        <code style="white-space: pre-wrap;">components/Meta/index.js</code>
+      </li>
+      <li>
+        Implement component in
+        <code style="white-space: pre-wrap;"
+          >components/Meta/Description.js</code
+        >
+      </li>
+      <li>Use getters for sentence fragments</li>
+      <li>Play with conditionals to construct different sentences</li>
+    </ol>
+    <p>142 lines of mundane code.</p>
+    <p>
+      All the interesting complexity goes into finding the richest city and
+      county. That part looks like this:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb95"
+      data-caption="Richest county calculation"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb95-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Meta/Description.js</span></a>
 <a class="sourceLine" id="cb95-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">get <span class="at" style="color: #7d9029;">countyFragment</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb95-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> byCounty <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">_</span>.<span class="at" style="color: #7d9029;">groupBy</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">data</span><span class="op" style="color: #666666;">,</span> <span class="st" style="color: #4070a0;">&#39;countyID&#39;</span>)<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb95-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        medians <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">medianIncomesByCounty</span><span class="op" style="color: #666666;">;</span></a>
@@ -28,14 +62,40 @@
 <a class="sourceLine" id="cb95-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      countyMedian <span class="op" style="color: #666666;">=</span> medians[best[<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">countyID</span>][<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">medianIncome</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb95-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb95-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
-<a class="sourceLine" id="cb95-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>We group the dataset by county, then sort counties by their income delta. We look only at counties that are bigger than 1% of the entire dataset. And we define income delta as the difference between a county’s median household income and the median tech salary in our dataset.</p>
-<p>This code is not super efficient, but it gets the job done. We could optimize by just looking for the max value, for example.</p>
-<p>Similar code handles finding the best city.</p>
-<h3 id="render-the-description">render the description</h3>
-<p>I recommend copying the <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f"><code style="white-space: pre-wrap;">Description</code> component from GitHub</a>. Most of it has little to do with React and data visualization. It’s all about combining sentence fragments based on props.</p>
-<p>You then render the Description like this:</p>
-<div class="sourceCode" id="cb96" data-caption="Render Description component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb96-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/App.js</span></a>
+<a class="sourceLine" id="cb95-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      We group the dataset by county, then sort counties by their income delta.
+      We look only at counties that are bigger than 1% of the entire dataset.
+      And we define income delta as the difference between a county’s median
+      household income and the median tech salary in our dataset.
+    </p>
+    <p>
+      This code is not super efficient, but it gets the job done. We could
+      optimize by just looking for the max value, for example.
+    </p>
+    <p>Similar code handles finding the best city.</p>
+    <h3 id="render-the-description">render the description</h3>
+    <p>
+      I recommend copying the
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f"
+        ><code style="white-space: pre-wrap;">Description</code> component from
+        GitHub</a
+      >. Most of it has little to do with React and data visualization. It’s
+      all about combining sentence fragments based on props.
+    </p>
+    <p>You then render the Description like this:</p>
+    <div
+      class="sourceCode"
+      id="cb96"
+      data-caption="Render Description component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb96-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/App.js</span></a>
 <a class="sourceLine" id="cb96-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb96-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> Title<span class="op" style="color: #666666;">,</span> Description <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;./components/Meta&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb96-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -46,12 +106,35 @@
 <a class="sourceLine" id="cb96-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    allData<span class="op" style="color: #666666;">={</span>techSalaries<span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb96-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    filteredBy<span class="op" style="color: #666666;">={</span>filteredBy<span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb96-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    medianIncomesByCounty<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">state</span>.<span class="at" style="color: #7d9029;">medianIncomesByCounty</span><span class="op" style="color: #666666;">}</span></a>
-<a class="sourceLine" id="cb96-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">/&gt;</a></code></pre></div>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/dataviz-with-description.png" alt="Dataviz with Title and Description"><figcaption>Dataviz with Title and Description</figcaption>
-</figure>
-<p>Another similar component is the <code style="white-space: pre-wrap;">GraphDescription</code>. It shows a small description on top of each chart that explains how to read the picture. Less “Here’s a key takeaway”, more “color means X”.</p>
-<p>You can follow this <a href="https://github.com/Swizec/react-d3js-step-by-step/commit/37b5222546c3f8f58f3147ce0bef6a3c1afe1b47">diff on Github</a> to implement it. Same approach as <code style="white-space: pre-wrap;">Title</code> and <code style="white-space: pre-wrap;">Description</code>.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/dataviz-with-all-descriptions.png" alt="Dataviz with all descriptions"><figcaption>Dataviz with all descriptions</figcaption>
-</figure>
+<a class="sourceLine" id="cb96-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">/&gt;</a></code></pre>
+    </div>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/dataviz-with-description.png"
+        alt="Dataviz with Title and Description"
+      />
+      <figcaption>Dataviz with Title and Description</figcaption>
+    </figure>
+    <p>
+      Another similar component is the
+      <code style="white-space: pre-wrap;">GraphDescription</code>. It shows a
+      small description on top of each chart that explains how to read the
+      picture. Less “Here’s a key takeaway”, more “color means X”.
+    </p>
+    <p>
+      You can follow this
+      <a
+        href="https://github.com/Swizec/react-d3js-step-by-step/commit/37b5222546c3f8f58f3147ce0bef6a3c1afe1b47"
+        >diff on Github</a
+      >
+      to implement it. Same approach as
+      <code style="white-space: pre-wrap;">Title</code> and
+      <code style="white-space: pre-wrap;">Description</code>.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/dataviz-with-all-descriptions.png"
+        alt="Dataviz with all descriptions"
+      />
+      <figcaption>Dataviz with all descriptions</figcaption>
+    </figure>

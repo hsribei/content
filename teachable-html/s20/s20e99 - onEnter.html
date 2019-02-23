@@ -1,6 +1,18 @@
-<h4 id="onenter">onEnter</h4>
-<p>We start with the enter transition in the <code style="white-space: pre-wrap;">onEnter</code> callback.</p>
-<div class="sourceCode" id="cb140" data-caption="Enter transition" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb140-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Letter.js</span></a>
+    <h4 id="onenter">onEnter</h4>
+    <p>
+      We start with the enter transition in the
+      <code style="white-space: pre-wrap;">onEnter</code> callback.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb140"
+      data-caption="Enter transition"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb140-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Letter.js</span></a>
 <a class="sourceLine" id="cb140-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    onEnter <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb140-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// Letter is entering the visualization</span></a>
 <a class="sourceLine" id="cb140-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">let</span> node <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">letterRef</span>.<span class="at" style="color: #7d9029;">current</span>)<span class="op" style="color: #666666;">;</span></a>
@@ -17,8 +29,24 @@
 <a class="sourceLine" id="cb140-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                    <span class="dt" style="color: #902000;">color</span><span class="op" style="color: #666666;">:</span> UpdateColor</a>
 <a class="sourceLine" id="cb140-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb140-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb140-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>We use <code style="white-space: pre-wrap;">d3.select</code> to grab our DOM node and take control with D3. Start a new transition with <code style="white-space: pre-wrap;">.transition()</code>, specify a duration, an easing function, and specify the changes. Vertical position moves to <code style="white-space: pre-wrap;">0</code>, opacity changes to <code style="white-space: pre-wrap;">1</code>.</p>
-<p>This creates a drop-in fade-in effect.</p>
-<p>When our transition ends, we update state with the new <code style="white-space: pre-wrap;">y</code> coordinate, <code style="white-space: pre-wrap;">fillOpacity</code>, and <code style="white-space: pre-wrap;">color</code>.</p>
-<p>The result is an invisible letter that starts at -60px and moves into 0px and full visibility over 750 milliseconds.</p>
+<a class="sourceLine" id="cb140-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      We use <code style="white-space: pre-wrap;">d3.select</code> to grab our
+      DOM node and take control with D3. Start a new transition with
+      <code style="white-space: pre-wrap;">.transition()</code>, specify a
+      duration, an easing function, and specify the changes. Vertical position
+      moves to <code style="white-space: pre-wrap;">0</code>, opacity changes
+      to <code style="white-space: pre-wrap;">1</code>.
+    </p>
+    <p>This creates a drop-in fade-in effect.</p>
+    <p>
+      When our transition ends, we update state with the new
+      <code style="white-space: pre-wrap;">y</code> coordinate,
+      <code style="white-space: pre-wrap;">fillOpacity</code>, and
+      <code style="white-space: pre-wrap;">color</code>.
+    </p>
+    <p>
+      The result is an invisible letter that starts at -60px and moves into 0px
+      and full visibility over 750 milliseconds.
+    </p>

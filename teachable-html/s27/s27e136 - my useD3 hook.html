@@ -1,9 +1,30 @@
-<h2 id="my-used3-hook">my useD3 hook</h2>
-<p>Remember when we talked about D3 blackbox rendering? I built a hook for that so you don’t have to mess around with HOCs anymore :)</p>
-<p>Read the full docs at <a href="https://d3blackbox.com/">d3blackbox.com</a></p>
-<p>It works as a combination of <code style="white-space: pre-wrap;">useRef</code> and <code style="white-space: pre-wrap;">useEffect</code>. Hooks into component re-renders, gives you control of the anchor element, and re-runs your D3 render function on every component render.</p>
-<p>You use it like this:</p>
-<div class="sourceCode" id="cb198" data-caption="useD3 for quick integrations" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb198-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> useD3 <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3blackbox&quot;</span><span class="op" style="color: #666666;">;</span></a>
+    <h2 id="my-used3-hook">my useD3 hook</h2>
+    <p>
+      Remember when we talked about D3 blackbox rendering? I built a hook for
+      that so you don’t have to mess around with HOCs anymore 😃
+    </p>
+    <p>
+      Read the full docs at
+      <a href="https://d3blackbox.com/">d3blackbox.com</a>
+    </p>
+    <p>
+      It works as a combination of
+      <code style="white-space: pre-wrap;">useRef</code> and
+      <code style="white-space: pre-wrap;">useEffect</code>. Hooks into
+      component re-renders, gives you control of the anchor element, and
+      re-runs your D3 render function on every component render.
+    </p>
+    <p>You use it like this:</p>
+    <div
+      class="sourceCode"
+      id="cb198"
+      data-caption="useD3 for quick integrations"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb198-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> useD3 <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3blackbox&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb198-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">renderSomeD3</span>(anchor) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb198-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(anchor)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb198-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
@@ -12,5 +33,10 @@
 <a class="sourceLine" id="cb198-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> MyD3Component <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb198-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> refAnchor <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">useD3</span>(anchor <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="at" style="color: #7d9029;">renderSomeD3</span>(anchor))<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb198-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">&lt;</span>g ref<span class="op" style="color: #666666;">={</span>refAnchor<span class="op" style="color: #666666;">}</span> transform<span class="op" style="color: #666666;">={</span><span class="vs" style="color: #4070a0;">`translate(</span><span class="sc" style="color: #4070a0;">${</span>x<span class="sc" style="color: #4070a0;">}</span><span class="vs" style="color: #4070a0;">, </span><span class="sc" style="color: #4070a0;">${</span>y<span class="sc" style="color: #4070a0;">}</span><span class="vs" style="color: #4070a0;">)`</span><span class="op" style="color: #666666;">}</span> /&gt;<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb198-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>You’ll see how this works in more detail when we refactor the big example to hooks. We’ll use <code style="white-space: pre-wrap;">useD3</code> to build axes.</p>
+<a class="sourceLine" id="cb198-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      You’ll see how this works in more detail when we refactor the big example
+      to hooks. We’ll use <code style="white-space: pre-wrap;">useD3</code> to
+      build axes.
+    </p>

@@ -1,17 +1,49 @@
-<h3 id="d3-layouts">3) D3 layouts</h3>
-<p>Sure <code style="white-space: pre-wrap;">.enter.append</code> looks like magic, but D3 layouts are the real mind=blown of the D3 ecosystem. They take your input data and return a full-featured visualization thing.</p>
-<p>For example, a force layout using forces between nodes to place them on the screen.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/force-layout.png" alt="Force layout"><figcaption>Force layout</figcaption>
-</figure>
-<p>Or a circle packing layout that neatly packs circles.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/circle-packing-layout.png" alt="Circle packing layout"><figcaption>Circle packing layout</figcaption>
-</figure>
-<p>I don’t know the maths that goes into most of these. And that’s the point, you shouldn’t have to!</p>
-<p>Here’s a key insight about the magic of layouts: They’re the data part.</p>
-<p>You take a <code style="white-space: pre-wrap;">forceLayout</code> and feed it your data. It returns an object with a <code style="white-space: pre-wrap;">tick</code> event callback.</p>
-<div class="sourceCode" id="cb11" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb11-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> simulation <span class="op" style="color: #666666;">=</span> d3</a>
+    <h3 id="d3-layouts">3) D3 layouts</h3>
+    <p>
+      Sure <code style="white-space: pre-wrap;">.enter.append</code> looks like
+      magic, but D3 layouts are the real mind=blown of the D3 ecosystem. They
+      take your input data and return a full-featured visualization thing.
+    </p>
+    <p>
+      For example, a force layout using forces between nodes to place them on
+      the screen.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/force-layout.png"
+        alt="Force layout"
+      />
+      <figcaption>Force layout</figcaption>
+    </figure>
+    <p>Or a circle packing layout that neatly packs circles.</p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/circle-packing-layout.png"
+        alt="Circle packing layout"
+      />
+      <figcaption>Circle packing layout</figcaption>
+    </figure>
+    <p>
+      I don’t know the maths that goes into most of these. And that’s the
+      point, you shouldn’t have to!
+    </p>
+    <p>
+      Here’s a key insight about the magic of layouts: They’re the data part.
+    </p>
+    <p>
+      You take a <code style="white-space: pre-wrap;">forceLayout</code> and
+      feed it your data. It returns an object with a
+      <code style="white-space: pre-wrap;">tick</code> event callback.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb11"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb11-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> simulation <span class="op" style="color: #666666;">=</span> d3</a>
 <a class="sourceLine" id="cb11-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">forceSimulation</span>()</a>
 <a class="sourceLine" id="cb11-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">force</span>(</a>
 <a class="sourceLine" id="cb11-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="st" style="color: #4070a0;">&#39;link&#39;</span><span class="op" style="color: #666666;">,</span></a>
@@ -20,8 +52,23 @@
 <a class="sourceLine" id="cb11-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span>)</a>
 <a class="sourceLine" id="cb11-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  )</a>
 <a class="sourceLine" id="cb11-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">force</span>(<span class="st" style="color: #4070a0;">&#39;charge&#39;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">forceManyBody</span>())</a>
-<a class="sourceLine" id="cb11-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">force</span>(<span class="st" style="color: #4070a0;">&#39;center&#39;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">forceCenter</span>(width / <span class="dv" style="color: #40a070;">2</span><span class="op" style="color: #666666;">,</span> height / <span class="dv" style="color: #40a070;">2</span>))<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>This <code style="white-space: pre-wrap;">simulation</code> now handles everything <em>about</em> rendering your nodes. Changes their positions on every <code style="white-space: pre-wrap;">tick</code> callback, figures out how often to change stuff, etc.</p>
-<p>But it is up to you to render them. A layout handles your dataviz in the abstract. You’re in control of the rendering.</p>
-<p>For a force layout, you have to update the DOM on every tick of the animation. For circle packing, you render it once.</p>
-<p>Once you grok this, all the fancy visualizations out there start making sense. Also means you can use these fancy layouts in React <span class="emoji" data-emoji="raised_hands">🙌</span></p>
+<a class="sourceLine" id="cb11-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  .<span class="at" style="color: #7d9029;">force</span>(<span class="st" style="color: #4070a0;">&#39;center&#39;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">forceCenter</span>(width / <span class="dv" style="color: #40a070;">2</span><span class="op" style="color: #666666;">,</span> height / <span class="dv" style="color: #40a070;">2</span>))<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      This <code style="white-space: pre-wrap;">simulation</code> now handles
+      everything <em>about</em> rendering your nodes. Changes their positions
+      on every <code style="white-space: pre-wrap;">tick</code> callback,
+      figures out how often to change stuff, etc.
+    </p>
+    <p>
+      But it is up to you to render them. A layout handles your dataviz in the
+      abstract. You’re in control of the rendering.
+    </p>
+    <p>
+      For a force layout, you have to update the DOM on every tick of the
+      animation. For circle packing, you render it once.
+    </p>
+    <p>
+      Once you grok this, all the fancy visualizations out there start making
+      sense. Also means you can use these fancy layouts in React 🙌
+    </p>

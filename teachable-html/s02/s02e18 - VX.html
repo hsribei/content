@@ -1,14 +1,50 @@
-<h2 id="vx">VX</h2>
-<blockquote>
-<p>vx is collection of reusable low-level visualization components. vx combines the power of d3 to generate your visualization with the benefits of react for updating the DOM.</p>
-</blockquote>
-<p><a href="https://vx-demo.now.sh/"><img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/vx.png" alt="VX"></a></p>
-<p>VX is the closest to the approaches you’re learning in this book. React for rendering, D3 for calculations. When you build a set of custom components for your organization, a flavor of VX is what you often come up with.</p>
-<p>That’s why I recommend teams use VX when they need to get started quickly.</p>
-<p>Here’s what it takes to implement a Barchart using Nivo. <a href="https://codesandbox.io/s/k5853pryrv">You can try it on CodeSandbox</a></p>
-<iframe src="https://codesandbox.io/embed/k5853pryrv?codemirror=1&amp;view=split" style="width:100%; height:500px; border:open_mouth:; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
-</iframe>
-<div class="sourceCode" id="cb20" data-caption="Bar chart built in VX" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb20-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> data <span class="op" style="color: #666666;">=</span> [</a>
+    <h2 id="vx">VX</h2>
+    <blockquote>
+      <p>
+        vx is collection of reusable low-level visualization components. vx
+        combines the power of d3 to generate your visualization with the
+        benefits of react for updating the DOM.
+      </p>
+    </blockquote>
+    <p>
+      <a href="https://vx-demo.now.sh/"
+        ><img
+          src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/vx.png"
+          alt="VX"
+      /></a>
+    </p>
+    <p>
+      VX is the closest to the approaches you’re learning in this book. React
+      for rendering, D3 for calculations. When you build a set of custom
+      components for your organization, a flavor of VX is what you often come
+      up with.
+    </p>
+    <p>
+      That’s why I recommend teams use VX when they need to get started
+      quickly.
+    </p>
+    <p>
+      Here’s what it takes to implement a Barchart using Nivo.
+      <a href="https://codesandbox.io/s/k5853pryrv"
+        >You can try it on CodeSandbox</a
+      >
+    </p>
+    <iframe
+      src="https://codesandbox.io/embed/k5853pryrv?codemirror=1&amp;view=split"
+      style="width:100%; height:500px; border😮; border-radius: 4px; overflow:hidden;"
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    >
+    </iframe>
+    <div
+      class="sourceCode"
+      id="cb20"
+      data-caption="Bar chart built in VX"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb20-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> data <span class="op" style="color: #666666;">=</span> [</a>
 <a class="sourceLine" id="cb20-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">{</span> <span class="dt" style="color: #902000;">quarter</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">1</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">earnings</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">13000</span> <span class="op" style="color: #666666;">},</span></a>
 <a class="sourceLine" id="cb20-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">{</span> <span class="dt" style="color: #902000;">quarter</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">2</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">earnings</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">16500</span> <span class="op" style="color: #666666;">},</span></a>
 <a class="sourceLine" id="cb20-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">{</span> <span class="dt" style="color: #902000;">quarter</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">3</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">earnings</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">14250</span> <span class="op" style="color: #666666;">},</span></a>
@@ -52,6 +88,16 @@
 <a class="sourceLine" id="cb20-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      &lt;/svg<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb20-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb20-44" title="44" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  )<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb20-45" title="45" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre></div>
-<p>Move involved than previous examples, but means you have more control and fight the library less often. VX does the tedious stuff for you, so you can focus on the stuff that matters.</p>
-<p>This code creates value accessor methods, D3 scales, then iterates over an array of <code style="white-space: pre-wrap;">data</code> and renders a <code style="white-space: pre-wrap;">&lt;Bar</code> for each. The bar gets a bunch of props.</p>
+<a class="sourceLine" id="cb20-45" title="45" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
+    </div>
+    <p>
+      Move involved than previous examples, but means you have more control and
+      fight the library less often. VX does the tedious stuff for you, so you
+      can focus on the stuff that matters.
+    </p>
+    <p>
+      This code creates value accessor methods, D3 scales, then iterates over
+      an array of <code style="white-space: pre-wrap;">data</code> and renders
+      a <code style="white-space: pre-wrap;">&lt;Bar</code> for each. The bar
+      gets a bunch of props.
+    </p>

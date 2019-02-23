@@ -1,8 +1,32 @@
-<h2 id="step-4-histogrambar-subcomponent">Step 4: HistogramBar (sub)component</h2>
-<p>Before our histogram shows up, we need another component: <code style="white-space: pre-wrap;">HistogramBar</code>. We <em>could</em> have shoved all of it in the <code style="white-space: pre-wrap;">makeBar</code> function, but it makes sense to keep separate. Better future flexibility.</p>
-<p>You can write small components like this in the same file as their main component. They’re not reusable since they fit a specific use-case, and they’re small enough so your files don’t get too crazy.</p>
-<p>But in the interest of readability, let’s make a <code style="white-space: pre-wrap;">HistogramBar</code> file.</p>
-<div class="sourceCode" id="cb84" data-caption="HistogramBar component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb84-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/HistogramBar.js</span></a>
+    <h2 id="step-4-histogrambar-subcomponent">
+      Step 4: HistogramBar (sub)component
+    </h2>
+    <p>
+      Before our histogram shows up, we need another component:
+      <code style="white-space: pre-wrap;">HistogramBar</code>. We
+      <em>could</em> have shoved all of it in the
+      <code style="white-space: pre-wrap;">makeBar</code> function, but it
+      makes sense to keep separate. Better future flexibility.
+    </p>
+    <p>
+      You can write small components like this in the same file as their main
+      component. They’re not reusable since they fit a specific use-case, and
+      they’re small enough so your files don’t get too crazy.
+    </p>
+    <p>
+      But in the interest of readability, let’s make a
+      <code style="white-space: pre-wrap;">HistogramBar</code> file.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb84"
+      data-caption="HistogramBar component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb84-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/HistogramBar.js</span></a>
 <a class="sourceLine" id="cb84-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb84-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb84-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> HistogramBar <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> percent<span class="op" style="color: #666666;">,</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> width<span class="op" style="color: #666666;">,</span> height <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
@@ -35,15 +59,47 @@
 <a class="sourceLine" id="cb84-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb84-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb84-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb84-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> HistogramBar<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>Pretty long for a functional component. Most of it goes into deciding how much precision to render in the label, so it’s okay.</p>
-<p>We start with an SVG translate and a default <code style="white-space: pre-wrap;">label</code>. Then we update the label based on the bar size and its value.</p>
-<p>When we have a label we like, we return a <code style="white-space: pre-wrap;">&lt;g&gt;</code> grouping element with a rectangle and a text. Both positioned based on the <code style="white-space: pre-wrap;">width</code> and <code style="white-space: pre-wrap;">height</code> of the bar.</p>
-<p>Make sure to import <code style="white-space: pre-wrap;">HistogramBar</code> in the main <code style="white-space: pre-wrap;">Histogram</code> file.</p>
-<div class="sourceCode" id="cb85" data-caption="HistogramBar import" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb85-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/Histogram.js</span></a>
+<a class="sourceLine" id="cb84-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> HistogramBar<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      Pretty long for a functional component. Most of it goes into deciding how
+      much precision to render in the label, so it’s okay.
+    </p>
+    <p>
+      We start with an SVG translate and a default
+      <code style="white-space: pre-wrap;">label</code>. Then we update the
+      label based on the bar size and its value.
+    </p>
+    <p>
+      When we have a label we like, we return a
+      <code style="white-space: pre-wrap;">&lt;g&gt;</code> grouping element
+      with a rectangle and a text. Both positioned based on the
+      <code style="white-space: pre-wrap;">width</code> and
+      <code style="white-space: pre-wrap;">height</code> of the bar.
+    </p>
+    <p>
+      Make sure to import
+      <code style="white-space: pre-wrap;">HistogramBar</code> in the main
+      <code style="white-space: pre-wrap;">Histogram</code> file.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb85"
+      data-caption="HistogramBar import"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb85-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/Histogram.js</span></a>
 <a class="sourceLine" id="cb85-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb85-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> HistogramBar <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./HistogramBar&#39;</span></a></code></pre></div>
-<p>You should now see a histogram.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/histogram-without-axis.png" alt="Histogram without axis"><figcaption>Histogram without axis</figcaption>
-</figure>
+<a class="sourceLine" id="cb85-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> HistogramBar <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./HistogramBar&#39;</span></a></code></pre>
+    </div>
+    <p>You should now see a histogram.</p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/histogram-without-axis.png"
+        alt="Histogram without axis"
+      />
+      <figcaption>Histogram without axis</figcaption>
+    </figure>

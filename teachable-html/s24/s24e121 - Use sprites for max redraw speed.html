@@ -1,15 +1,48 @@
-<h3 id="using-sprites-for-max-redraw-speed">Using sprites for max redraw speed</h3>
-<p>Our <a href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906670#svg-particles">SVG-based Particles</a> component was simple. Iterate through a list of particles, render a <code style="white-space: pre-wrap;">&lt;Particle&gt;</code> component for each.</p>
-<p>We’re going to completely rewrite that. Our new approach goes like this:</p>
-<ol start="0" type="1">
-<li>Cache a sprite on <code style="white-space: pre-wrap;">componentDidMount</code></li>
-<li>Clear canvas</li>
-<li>Redraw all particles</li>
-<li>Repeat</li>
-</ol>
-<p>Because the new approach renders a flat image, and because we don’t care about interaction with individual particles, we can get rid of the <code style="white-space: pre-wrap;">Particle</code> component. The unnecessary layer of nesting was slowing us down.</p>
-<p>The new <code style="white-space: pre-wrap;">Particles</code> component looks like this:</p>
-<div class="sourceCode" id="cb159" data-caption="Sprite-based Particles component" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb159-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
+    <h3 id="using-sprites-for-max-redraw-speed">
+      Using sprites for max redraw speed
+    </h3>
+    <p>
+      Our
+      <a
+        href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906670#svg-particles"
+        >SVG-based Particles</a
+      >
+      component was simple. Iterate through a list of particles, render a
+      <code style="white-space: pre-wrap;">&lt;Particle&gt;</code> component
+      for each.
+    </p>
+    <p>
+      We’re going to completely rewrite that. Our new approach goes like this:
+    </p>
+    <ol start="0" type="1">
+      <li>
+        Cache a sprite on
+        <code style="white-space: pre-wrap;">componentDidMount</code>
+      </li>
+      <li>Clear canvas</li>
+      <li>Redraw all particles</li>
+      <li>Repeat</li>
+    </ol>
+    <p>
+      Because the new approach renders a flat image, and because we don’t care
+      about interaction with individual particles, we can get rid of the
+      <code style="white-space: pre-wrap;">Particle</code> component. The
+      unnecessary layer of nesting was slowing us down.
+    </p>
+    <p>
+      The new <code style="white-space: pre-wrap;">Particles</code> component
+      looks like this:
+    </p>
+    <div
+      class="sourceCode"
+      id="cb159"
+      data-caption="Sprite-based Particles component"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb159-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
 <a class="sourceLine" id="cb159-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb159-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb159-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> FastLayer <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react-konva&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -50,10 +83,22 @@
 <a class="sourceLine" id="cb159-39" title="39" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb159-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb159-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb159-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Particles<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>40 lines of code is a lot all at once. Let’s walk through step by step.</p>
-<h4 id="componentdidmount">componentDidMount</h4>
-<div class="sourceCode" id="cb160" data-caption="componentDidMount method" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb160-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
+<a class="sourceLine" id="cb159-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Particles<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      40 lines of code is a lot all at once. Let’s walk through step by step.
+    </p>
+    <h4 id="componentdidmount">componentDidMount</h4>
+    <div
+      class="sourceCode"
+      id="cb160"
+      data-caption="componentDidMount method"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb160-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
 <a class="sourceLine" id="cb160-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb160-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb160-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">componentDidMount</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -62,33 +107,110 @@
 <a class="sourceLine" id="cb160-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb160-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">sprite</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">new</span> <span class="at" style="color: #7d9029;">Image</span>()<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb160-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">sprite</span>.<span class="at" style="color: #7d9029;">src</span> <span class="op" style="color: #666666;">=</span> <span class="st" style="color: #4070a0;">&#39;http://i.imgur.com/m5l6lhr.png&#39;</span><span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb160-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>React calls <code style="white-space: pre-wrap;">componentDidMount</code> when our component first renders. We use it to set up 3 instance properties.</p>
-<p><code style="white-space: pre-wrap;">this.canvas</code> is a reference to the HTML5 Canvas element. We get it through a ref to the Konva layer, then spelunk through Konva internals to get the canvas itself. As the <code style="white-space: pre-wrap;">_</code> prefix indicates, Anton Lavrenov did not intend this to be a public API.</p>
-<p>Thanks to JavaScript’s permissiveness, we can use it anyway. <span class="emoji" data-emoji="raised_hands">🙌</span></p>
-<p><code style="white-space: pre-wrap;">this.canvasContext</code> is a reference to our canvas’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">CanvasRenderingContext2D</a>. It’s the interface we use to draw basic shapes, perform transformations, and so on. Context is the only part of canvas you ever interact with as a developer.</p>
-<p>Why it’s not just Canvas, I don’t know.</p>
-<p><code style="white-space: pre-wrap;">this.sprite</code> is a cached image. A small minion that we are going to copy-paste all over as our particle. Creating a new image object with <code style="white-space: pre-wrap;">new Image()</code> and setting the <code style="white-space: pre-wrap;">src</code> property downloads our sprite from the internet into browser memory.</p>
-<p>It looks like this:</p>
-<figure>
-<img src="http://i.imgur.com/m5l6lhr.png" alt="Our minion particle"><figcaption>Our minion particle</figcaption>
-</figure>
-<p>You might think it’s unsafe to copy references to rendered elements into component properties like that, but it’s okay. Our render function always renders the same thing, so the reference never changes. It just makes our code cleaner.</p>
-<p>Should our component unmount and re-mount, React will call <code style="white-space: pre-wrap;">componentDidMount</code> again and update our reference.</p>
-<h4 id="drawparticle">drawParticle</h4>
-<div class="sourceCode" id="cb161" data-caption="drawParticle code" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb161-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
+<a class="sourceLine" id="cb160-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      React calls
+      <code style="white-space: pre-wrap;">componentDidMount</code> when our
+      component first renders. We use it to set up 3 instance properties.
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">this.canvas</code> is a reference to
+      the HTML5 Canvas element. We get it through a ref to the Konva layer,
+      then spelunk through Konva internals to get the canvas itself. As the
+      <code style="white-space: pre-wrap;">_</code> prefix indicates, Anton
+      Lavrenov did not intend this to be a public API.
+    </p>
+    <p>Thanks to JavaScript’s permissiveness, we can use it anyway. 🙌</p>
+    <p>
+      <code style="white-space: pre-wrap;">this.canvasContext</code> is a
+      reference to our canvas’s
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D"
+        >CanvasRenderingContext2D</a
+      >. It’s the interface we use to draw basic shapes, perform
+      transformations, and so on. Context is the only part of canvas you ever
+      interact with as a developer.
+    </p>
+    <p>Why it’s not just Canvas, I don’t know.</p>
+    <p>
+      <code style="white-space: pre-wrap;">this.sprite</code> is a cached
+      image. A small minion that we are going to copy-paste all over as our
+      particle. Creating a new image object with
+      <code style="white-space: pre-wrap;">new Image()</code> and setting the
+      <code style="white-space: pre-wrap;">src</code> property downloads our
+      sprite from the internet into browser memory.
+    </p>
+    <p>It looks like this:</p>
+    <figure>
+      <img src="http://i.imgur.com/m5l6lhr.png" alt="Our minion particle" />
+      <figcaption>Our minion particle</figcaption>
+    </figure>
+    <p>
+      You might think it’s unsafe to copy references to rendered elements into
+      component properties like that, but it’s okay. Our render function always
+      renders the same thing, so the reference never changes. It just makes our
+      code cleaner.
+    </p>
+    <p>
+      Should our component unmount and re-mount, React will call
+      <code style="white-space: pre-wrap;">componentDidMount</code> again and
+      update our reference.
+    </p>
+    <h4 id="drawparticle">drawParticle</h4>
+    <div
+      class="sourceCode"
+      id="cb161"
+      data-caption="drawParticle code"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb161-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
 <a class="sourceLine" id="cb161-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb161-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb161-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">drawParticle</span>(particle) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb161-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">let</span> <span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> particle<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb161-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb161-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">canvasContext</span>.<span class="at" style="color: #7d9029;">drawImage</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">sprite</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">128</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">128</span><span class="op" style="color: #666666;">,</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">15</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">15</span>)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb161-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p><code style="white-space: pre-wrap;">drawParticle</code> draws a single particle on the canvas. It gets coordinates from the <code style="white-space: pre-wrap;">particle</code> argument and uses <code style="white-space: pre-wrap;">drawImage</code> to copy our sprite into position.</p>
-<p>We use the whole sprite, corner <code style="white-space: pre-wrap;">(0, 0)</code> to corner <code style="white-space: pre-wrap;">(128, 128)</code>. That’s how big our sprite is. And we copy it to position <code style="white-space: pre-wrap;">(x, y)</code> with a width and height of <code style="white-space: pre-wrap;">15</code> pixels.</p>
-<p><code style="white-space: pre-wrap;">drawImage</code> is the fastest method I’ve found to put pixels on canvas. I don’t know why it’s so fast, but here’s a <a href="https://jsperf.com/canvas-drawimage-vs-putimagedata/3">helpful benchmark</a> so you can see for yourself.</p>
-<h4 id="componentdidupdate-1">componentDidUpdate</h4>
-<div class="sourceCode" id="cb162" data-caption="componentDidUpdate code" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb162-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
+<a class="sourceLine" id="cb161-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      <code style="white-space: pre-wrap;">drawParticle</code> draws a single
+      particle on the canvas. It gets coordinates from the
+      <code style="white-space: pre-wrap;">particle</code> argument and uses
+      <code style="white-space: pre-wrap;">drawImage</code> to copy our sprite
+      into position.
+    </p>
+    <p>
+      We use the whole sprite, corner
+      <code style="white-space: pre-wrap;">(0, 0)</code> to corner
+      <code style="white-space: pre-wrap;">(128, 128)</code>. That’s how big
+      our sprite is. And we copy it to position
+      <code style="white-space: pre-wrap;">(x, y)</code> with a width and
+      height of <code style="white-space: pre-wrap;">15</code> pixels.
+    </p>
+    <p>
+      <code style="white-space: pre-wrap;">drawImage</code> is the fastest
+      method I’ve found to put pixels on canvas. I don’t know why it’s so fast,
+      but here’s a
+      <a href="https://jsperf.com/canvas-drawimage-vs-putimagedata/3"
+        >helpful benchmark</a
+      >
+      so you can see for yourself.
+    </p>
+    <h4 id="componentdidupdate-1">componentDidUpdate</h4>
+    <div
+      class="sourceCode"
+      id="cb162"
+      data-caption="componentDidUpdate code"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb162-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
 <a class="sourceLine" id="cb162-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb162-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb162-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">componentDidUpdate</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -101,27 +223,98 @@
 <a class="sourceLine" id="cb162-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">drawParticle</span>(particles[i])<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb162-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb162-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="va" style="color: #19177c;">console</span>.<span class="at" style="color: #7d9029;">timeEnd</span>(<span class="st" style="color: #4070a0;">&#39;drawing&#39;</span>)<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb162-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p><code style="white-space: pre-wrap;">componentDidUpdate</code> is where the magic happens. React calls this lifecycle method every time our list of particles changes. <em>After</em> the <code style="white-space: pre-wrap;">render</code> method.</p>
-<p>Just like the D3 blackbox approach, we move rendering out of the <code style="white-space: pre-wrap;">render</code> method and into <code style="white-space: pre-wrap;">componentDidUpdate</code>.</p>
-<p>Here’s how it works:</p>
-<ol type="1">
-<li><code style="white-space: pre-wrap;">this.canvasContext.clearRect</code> clears the entire canvas from coordinate <code style="white-space: pre-wrap;">(0, 0)</code> to coordinate <code style="white-space: pre-wrap;">(width, height)</code>. We delete everything and make the canvas transparent.</li>
-<li>We iterate our <code style="white-space: pre-wrap;">particles</code> list with a <code style="white-space: pre-wrap;">for</code> loop and call <code style="white-space: pre-wrap;">drawParticle</code> on each element.</li>
-</ol>
-<p>Clearing and redrawing the canvas is faster than moving individual particles. For loops are faster than <code style="white-space: pre-wrap;">.map</code> or any other form of iteration. I tested. A lot.</p>
-<p>Open your browser console and see how long each frame takes to draw. The <code style="white-space: pre-wrap;">console.time</code> - <code style="white-space: pre-wrap;">console.timeEnd</code> pair measures how long it takes your code to get from <code style="white-space: pre-wrap;">time</code> to <code style="white-space: pre-wrap;">timeEnd</code>. You can have as many of these timers running as you want as long as you give them different names.</p>
-<h4 id="render-4">render</h4>
-<div class="sourceCode" id="cb163" data-caption="render code" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb163-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
+<a class="sourceLine" id="cb162-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      <code style="white-space: pre-wrap;">componentDidUpdate</code> is where
+      the magic happens. React calls this lifecycle method every time our list
+      of particles changes. <em>After</em> the
+      <code style="white-space: pre-wrap;">render</code> method.
+    </p>
+    <p>
+      Just like the D3 blackbox approach, we move rendering out of the
+      <code style="white-space: pre-wrap;">render</code> method and into
+      <code style="white-space: pre-wrap;">componentDidUpdate</code>.
+    </p>
+    <p>Here’s how it works:</p>
+    <ol type="1">
+      <li>
+        <code style="white-space: pre-wrap;"
+          >this.canvasContext.clearRect</code
+        >
+        clears the entire canvas from coordinate
+        <code style="white-space: pre-wrap;">(0, 0)</code> to coordinate
+        <code style="white-space: pre-wrap;">(width, height)</code>. We delete
+        everything and make the canvas transparent.
+      </li>
+      <li>
+        We iterate our
+        <code style="white-space: pre-wrap;">particles</code> list with a
+        <code style="white-space: pre-wrap;">for</code> loop and call
+        <code style="white-space: pre-wrap;">drawParticle</code> on each
+        element.
+      </li>
+    </ol>
+    <p>
+      Clearing and redrawing the canvas is faster than moving individual
+      particles. For loops are faster than
+      <code style="white-space: pre-wrap;">.map</code> or any other form of
+      iteration. I tested. A lot.
+    </p>
+    <p>
+      Open your browser console and see how long each frame takes to draw. The
+      <code style="white-space: pre-wrap;">console.time</code> -
+      <code style="white-space: pre-wrap;">console.timeEnd</code> pair measures
+      how long it takes your code to get from
+      <code style="white-space: pre-wrap;">time</code> to
+      <code style="white-space: pre-wrap;">timeEnd</code>. You can have as many
+      of these timers running as you want as long as you give them different
+      names.
+    </p>
+    <h4 id="render-4">render</h4>
+    <div
+      class="sourceCode"
+      id="cb163"
+      data-caption="render code"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb163-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles.jsx</span></a>
 <a class="sourceLine" id="cb163-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb163-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb163-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb163-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> (</a>
 <a class="sourceLine" id="cb163-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">&lt;</span>FastLayer ref<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">layerRef</span><span class="op" style="color: #666666;">}</span> listening<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;false&quot;</span> /&gt;</a>
 <a class="sourceLine" id="cb163-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
-<a class="sourceLine" id="cb163-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>After all that work, our <code style="white-space: pre-wrap;">render</code> method is quite short.</p>
-<p>We render a Konva <code style="white-space: pre-wrap;">FastLayer</code>, give it a <code style="white-space: pre-wrap;">ref</code> and turn off <code style="white-space: pre-wrap;">listening</code> for mouse events. That makes the fast layer even faster.</p>
-<p>Ideas for this combination of settings came from Konva’s official <a href="https://konvajs.github.io/docs/performance/All_Performance_Tips.html">performance tips</a> documentation. This makes sense when you think about it.</p>
-<p>A <code style="white-space: pre-wrap;">FastLayer</code> is faster than a <code style="white-space: pre-wrap;">Layer</code>. It’s in the name. Ignoring mouse events means you don’t have to keep track of elements. It reduces computation.</p>
-<p>This was empirically the fastest solution with the most particles on screen.</p>
+<a class="sourceLine" id="cb163-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      After all that work, our
+      <code style="white-space: pre-wrap;">render</code> method is quite short.
+    </p>
+    <p>
+      We render a Konva <code style="white-space: pre-wrap;">FastLayer</code>,
+      give it a <code style="white-space: pre-wrap;">ref</code> and turn off
+      <code style="white-space: pre-wrap;">listening</code> for mouse events.
+      That makes the fast layer even faster.
+    </p>
+    <p>
+      Ideas for this combination of settings came from Konva’s official
+      <a
+        href="https://konvajs.github.io/docs/performance/All_Performance_Tips.html"
+        >performance tips</a
+      >
+      documentation. This makes sense when you think about it.
+    </p>
+    <p>
+      A <code style="white-space: pre-wrap;">FastLayer</code> is faster than a
+      <code style="white-space: pre-wrap;">Layer</code>. It’s in the name.
+      Ignoring mouse events means you don’t have to keep track of elements. It
+      reduces computation.
+    </p>
+    <p>
+      This was empirically the fastest solution with the most particles on
+      screen.
+    </p>

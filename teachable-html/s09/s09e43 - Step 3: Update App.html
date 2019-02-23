@@ -1,6 +1,21 @@
-<h2 id="step-3-update-app">Step 3: Update App</h2>
-<p>We use our new Preloader component in App – <code style="white-space: pre-wrap;">src/App.js</code>. Let’s remove the <code style="white-space: pre-wrap;">create-react-app</code> defaults and import our <code style="white-space: pre-wrap;">Preloader</code> component.</p>
-<div class="sourceCode" id="cb56" data-caption="Revamp App.js" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb56-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+    <h2 id="step-3-update-app">Step 3: Update App</h2>
+    <p>
+      We use our new Preloader component in App –
+      <code style="white-space: pre-wrap;">src/App.js</code>. Let’s remove the
+      <code style="white-space: pre-wrap;">create-react-app</code> defaults and
+      import our
+      <code style="white-space: pre-wrap;">Preloader</code> component.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb56"
+      data-caption="Revamp App.js"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb56-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb56-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb56-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb56-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Delete the line(s) between here...</span></a>
@@ -30,10 +45,31 @@
 <a class="sourceLine" id="cb56-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a>
 <a class="sourceLine" id="cb56-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb56-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
-<a class="sourceLine" id="cb56-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> App<span class="op" style="color: #666666;">;</span></a></code></pre></div>
-<p>We removed the logo and style imports, added an import for <code style="white-space: pre-wrap;">Preloader</code>, and gutted the <code style="white-space: pre-wrap;">App</code> class. It’s great for a default app, but we don’t need that anymore.</p>
-<p>Let’s define a default <code style="white-space: pre-wrap;">state</code> and a <code style="white-space: pre-wrap;">render</code> method that uses our <code style="white-space: pre-wrap;">Preloader</code> component when there’s no data.</p>
-<div class="sourceCode" id="cb57" data-caption="Render our preloader" style="overflow: visible; margin: 1em 0;"><pre class="sourceCode javascript" style="overflow: visible; margin: 0;"><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb57-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+<a class="sourceLine" id="cb56-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> App<span class="op" style="color: #666666;">;</span></a></code></pre>
+    </div>
+    <p>
+      We removed the logo and style imports, added an import for
+      <code style="white-space: pre-wrap;">Preloader</code>, and gutted the
+      <code style="white-space: pre-wrap;">App</code> class. It’s great for a
+      default app, but we don’t need that anymore.
+    </p>
+    <p>
+      Let’s define a default
+      <code style="white-space: pre-wrap;">state</code> and a
+      <code style="white-space: pre-wrap;">render</code> method that uses our
+      <code style="white-space: pre-wrap;">Preloader</code> component when
+      there’s no data.
+    </p>
+    <div
+      class="sourceCode"
+      id="cb57"
+      data-caption="Render our preloader"
+      style="overflow: visible; margin: 1em 0;"
+    >
+      <pre
+        class="sourceCode javascript"
+        style="overflow: visible; margin: 0;"
+      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb57-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb57-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb57-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb57-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
@@ -57,12 +93,39 @@
 <a class="sourceLine" id="cb57-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb57-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb57-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a>
-<a class="sourceLine" id="cb57-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre></div>
-<p>Nowadays we can define properties directly in the class body without a constructor method. It’s not part of the official JavaScript standard yet, but most React codebases use this pattern.</p>
-<p>Properties defined this way are bound to each instance of our components so they have the correct <code style="white-space: pre-wrap;">this</code> value. Late you’ll see we can use this shorthand to neatly define event handlers.</p>
-<p>We set <code style="white-space: pre-wrap;">techSalaries</code> to an empty array by default. In <code style="white-space: pre-wrap;">render</code> we use object destructuring to take <code style="white-space: pre-wrap;">techSalaries</code> out of component state, <code style="white-space: pre-wrap;">this.state</code>, and check whether it’s empty. When <code style="white-space: pre-wrap;">techSalaries</code> is empty our component renders the preloader, otherwise an empty div.</p>
-<p>If your <code style="white-space: pre-wrap;">npm start</code> is running, the preloader should show up on your screen.</p>
-<figure>
-<img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-without-styles-screenshot.png" alt="Preloader without Bootstrap styles"><figcaption>Preloader without Bootstrap styles</figcaption>
-</figure>
-<p>Hmm… that’s not very pretty. Let’s fix it.</p>
+<a class="sourceLine" id="cb57-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
+    </div>
+    <p>
+      Nowadays we can define properties directly in the class body without a
+      constructor method. It’s not part of the official JavaScript standard
+      yet, but most React codebases use this pattern.
+    </p>
+    <p>
+      Properties defined this way are bound to each instance of our components
+      so they have the correct
+      <code style="white-space: pre-wrap;">this</code> value. Late you’ll see
+      we can use this shorthand to neatly define event handlers.
+    </p>
+    <p>
+      We set <code style="white-space: pre-wrap;">techSalaries</code> to an
+      empty array by default. In
+      <code style="white-space: pre-wrap;">render</code> we use object
+      destructuring to take
+      <code style="white-space: pre-wrap;">techSalaries</code> out of component
+      state, <code style="white-space: pre-wrap;">this.state</code>, and check
+      whether it’s empty. When
+      <code style="white-space: pre-wrap;">techSalaries</code> is empty our
+      component renders the preloader, otherwise an empty div.
+    </p>
+    <p>
+      If your <code style="white-space: pre-wrap;">npm start</code> is running,
+      the preloader should show up on your screen.
+    </p>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-without-styles-screenshot.png"
+        alt="Preloader without Bootstrap styles"
+      />
+      <figcaption>Preloader without Bootstrap styles</figcaption>
+    </figure>
+    <p>Hmm… that’s not very pretty. Let’s fix it.</p>

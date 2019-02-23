@@ -1,13 +1,54 @@
-<h1 id="using-canvas">Using canvas</h1>
-<p>So far we’ve been rendering our visualizations with SVG. SVG is great because it follows a familiar structure, offers infinitely scalable vector graphics, and works everywhere. There are <em>some</em> advanced SVG features you can’t use everywhere, but the core is solid.</p>
-<p>However, SVG has a big flaw: it’s slow.</p>
-<p>Anything more than a few hundred SVG nodes and your browser starts to struggle. Especially if those thousands of elements move around.</p>
-<p>A web animation panel moderator at ForwardJS once asked me, <em>“But why would you want thousands of SVG elements?”</em>.</p>
-<p>It was my first time participating in a panel, stage lights shining upon me, a mildly disinterested audience staring into their phones … I bombed: <em>“Errr … because you can?”</em>.</p>
-<p><img src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/stage_lights.jpg"></p>
-<p>What I <em>should</em> have said was: <em>“Because there have been thousands of UFO sightings, there are thousands of counties in the US, millions of taxi rides, hundreds of millions of people having this or that datapoint. And you want to show change over time.”</em></p>
-<p>That’s the real answer.</p>
-<p>Sometimes, when you’re visualizing data, you have a lot of data. The data changes over time. Animation is the best way to show change over time.</p>
-<p>Once upon a time, I worked on a <a href="https://www.packtpub.com/web-development/mastering-d3js-video">D3 video course</a> for Packt and used UFO sightings as an example. At peak UFO sighting, right before smartphones become a thing, the animation takes up to 2 seconds to redraw a single frame.</p>
-<p>Terrible.</p>
-<p>So if SVG is slow and you need to animate thousands of elements, what are you to do? HTML5 Canvas.</p>
+    <h1 id="using-canvas">Using canvas</h1>
+    <p>
+      So far we’ve been rendering our visualizations with SVG. SVG is great
+      because it follows a familiar structure, offers infinitely scalable
+      vector graphics, and works everywhere. There are <em>some</em> advanced
+      SVG features you can’t use everywhere, but the core is solid.
+    </p>
+    <p>However, SVG has a big flaw: it’s slow.</p>
+    <p>
+      Anything more than a few hundred SVG nodes and your browser starts to
+      struggle. Especially if those thousands of elements move around.
+    </p>
+    <p>
+      A web animation panel moderator at ForwardJS once asked me,
+      <em>“But why would you want thousands of SVG elements?”</em>.
+    </p>
+    <p>
+      It was my first time participating in a panel, stage lights shining upon
+      me, a mildly disinterested audience staring into their phones … I bombed:
+      <em>“Errr … because you can?”</em>.
+    </p>
+    <p>
+      <img
+        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/stage_lights.jpg"
+      />
+    </p>
+    <p>
+      What I <em>should</em> have said was:
+      <em
+        >“Because there have been thousands of UFO sightings, there are
+        thousands of counties in the US, millions of taxi rides, hundreds of
+        millions of people having this or that datapoint. And you want to show
+        change over time.”</em
+      >
+    </p>
+    <p>That’s the real answer.</p>
+    <p>
+      Sometimes, when you’re visualizing data, you have a lot of data. The data
+      changes over time. Animation is the best way to show change over time.
+    </p>
+    <p>
+      Once upon a time, I worked on a
+      <a href="https://www.packtpub.com/web-development/mastering-d3js-video"
+        >D3 video course</a
+      >
+      for Packt and used UFO sightings as an example. At peak UFO sighting,
+      right before smartphones become a thing, the animation takes up to 2
+      seconds to redraw a single frame.
+    </p>
+    <p>Terrible.</p>
+    <p>
+      So if SVG is slow and you need to animate thousands of elements, what are
+      you to do? HTML5 Canvas.
+    </p>
