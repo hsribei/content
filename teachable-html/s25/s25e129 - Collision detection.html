@@ -1,24 +1,24 @@
-    <h4 id="simulationstep-where-collisions-collision">
-      simulationStep – where collisions collision
-    </h4>
-    <p>Here comes the fun part. The one with our game loop.</p>
-    <p>
-      There’s also a video explaining how this works 👉
-      <a href="https://www.youtube.com/watch?v=H84fmXjTElM"
-        >Watch it on YouTube</a
-      >. With hand-drawn sketches that explain the math, and I think that’s
-      neat.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb178"
-      data-caption="Full simulationStep function"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb178-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
+<h4 id="simulationstep-where-collisions-collision">
+  simulationStep – where collisions collision
+</h4>
+<p>Here comes the fun part. The one with our game loop.</p>
+<p>
+  There’s also a video explaining how this works 👉
+  <a href="https://www.youtube.com/watch?v=H84fmXjTElM"
+    >Watch it on YouTube</a
+  >. With hand-drawn sketches that explain the math, and I think that’s
+  neat.
+</p>
+<div
+  class="sourceCode"
+  id="cb178"
+  data-caption="Full simulationStep function"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb178-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb178-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">@action <span class="at" style="color: #7d9029;">simulationStep</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb178-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> width<span class="op" style="color: #666666;">,</span> height<span class="op" style="color: #666666;">,</span> MarbleR <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb178-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -73,26 +73,26 @@
 <a class="sourceLine" id="cb178-53" title="53" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span>[i].<span class="at" style="color: #7d9029;">vy</span> <span class="op" style="color: #666666;">=</span> vy<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb178-54" title="54" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb178-55" title="55" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>That’s a lot of code 😅. Let’s break it down.</p>
-    <p>
-      You can think of
-      <code style="white-space: pre-wrap;">simulationStep</code> as a function
-      and a loop. At the bottom, there is a
-      <code style="white-space: pre-wrap;">.forEach</code> that applies a
-      <code style="white-space: pre-wrap;">moveMarble</code> function to each
-      marble.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb179"
-      data-caption="Loop through marbles"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb179-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">marbles</span>.<span class="at" style="color: #7d9029;">forEach</span>((marble<span class="op" style="color: #666666;">,</span> i) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
+</div>
+<p>That’s a lot of code 😅. Let’s break it down.</p>
+<p>
+  You can think of
+  <code style="white-space: pre-wrap;">simulationStep</code> as a function
+  and a loop. At the bottom, there is a
+  <code style="white-space: pre-wrap;">.forEach</code> that applies a
+  <code style="white-space: pre-wrap;">moveMarble</code> function to each
+  marble.
+</p>
+<div
+  class="sourceCode"
+  id="cb179"
+  data-caption="Loop through marbles"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb179-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">marbles</span>.<span class="at" style="color: #7d9029;">forEach</span>((marble<span class="op" style="color: #666666;">,</span> i) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb179-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> vx<span class="op" style="color: #666666;">,</span> vy <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">moveMarble</span>(marble)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb179-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb179-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span>[i].<span class="at" style="color: #7d9029;">x</span> <span class="op" style="color: #666666;">=</span> x<span class="op" style="color: #666666;">;</span></a>
@@ -100,73 +100,73 @@
 <a class="sourceLine" id="cb179-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span>[i].<span class="at" style="color: #7d9029;">vx</span> <span class="op" style="color: #666666;">=</span> vx<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb179-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span>[i].<span class="at" style="color: #7d9029;">vy</span> <span class="op" style="color: #666666;">=</span> vy<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb179-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We iterate over the list of marbles, feed them into
-      <code style="white-space: pre-wrap;">moveMarble</code>, get new
-      properties, and save them in the main marbles array. MobX
-      <em>should</em> allows us to change these values inside
-      <code style="white-space: pre-wrap;">moveMarble</code> and let MobX
-      observables do the heavy lifting, but more explicit code is easier to
-      read.
-    </p>
-    <h5 id="movemarble">moveMarble</h5>
-    <p>
-      <code style="white-space: pre-wrap;">moveMarble</code> is itself a hairy
-      function. Stuff happens in 3 steps:
-    </p>
-    <ol type="1">
-      <li>Handle collisions with walls</li>
-      <li>Find collision with closest other marble</li>
-      <li>Handle collision with marble</li>
-    </ol>
-    <p>
-      <strong>Handling collisions with walls</strong> happens in two lines of
-      code. One per axis.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb180"
-      data-caption="Detecting wall collisions"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb180-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> _vx <span class="op" style="color: #666666;">=</span> ((x<span class="op" style="color: #666666;">+</span>vx <span class="op" style="color: #666666;">&lt;</span> MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vx : (x<span class="op" style="color: #666666;">+</span>vx <span class="op" style="color: #666666;">&gt;</span> width<span class="op" style="color: #666666;">-</span>MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vx : vx)<span class="op" style="color: #666666;">*</span>.<span class="dv" style="color: #40a070;">99</span><span class="op" style="color: #666666;">,</span></a>
+</div>
+<p>
+  We iterate over the list of marbles, feed them into
+  <code style="white-space: pre-wrap;">moveMarble</code>, get new
+  properties, and save them in the main marbles array. MobX
+  <em>should</em> allows us to change these values inside
+  <code style="white-space: pre-wrap;">moveMarble</code> and let MobX
+  observables do the heavy lifting, but more explicit code is easier to
+  read.
+</p>
+<h5 id="movemarble">moveMarble</h5>
+<p>
+  <code style="white-space: pre-wrap;">moveMarble</code> is itself a hairy
+  function. Stuff happens in 3 steps:
+</p>
+<ol type="1">
+  <li>Handle collisions with walls</li>
+  <li>Find collision with closest other marble</li>
+  <li>Handle collision with marble</li>
+</ol>
+<p>
+  <strong>Handling collisions with walls</strong> happens in two lines of
+  code. One per axis.
+</p>
+<div
+  class="sourceCode"
+  id="cb180"
+  data-caption="Detecting wall collisions"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb180-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> _vx <span class="op" style="color: #666666;">=</span> ((x<span class="op" style="color: #666666;">+</span>vx <span class="op" style="color: #666666;">&lt;</span> MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vx : (x<span class="op" style="color: #666666;">+</span>vx <span class="op" style="color: #666666;">&gt;</span> width<span class="op" style="color: #666666;">-</span>MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vx : vx)<span class="op" style="color: #666666;">*</span>.<span class="dv" style="color: #40a070;">99</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb180-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    _vy <span class="op" style="color: #666666;">=</span> ((y<span class="op" style="color: #666666;">+</span>vy <span class="op" style="color: #666666;">&lt;</span> MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vy : (y<span class="op" style="color: #666666;">+</span>vy <span class="op" style="color: #666666;">&gt;</span> height<span class="op" style="color: #666666;">-</span>MarbleR) <span class="op" style="color: #666666;">?</span> <span class="op" style="color: #666666;">-</span>vy : vy)<span class="op" style="color: #666666;">*</span>.<span class="dv" style="color: #40a070;">99</span><span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      Nested ternary expressions are kinda messy, but good enough. If a marble
-      is beyond any boundary, we reverse its direction. We
-      <em>always</em> apply a
-      <code style="white-space: pre-wrap;">.99</code> friction coefficient so
-      that marbles slow down.
-    </p>
-    <p>
-      <strong>Finding collisions</strong> with the next closest marble happens
-      using a quadtree. Since we don’t have too many marbles, we can build a
-      new quadtree every time.
-    </p>
-    <p>
-      {aside} A quadtree is a way to subdivide space into areas. It lets us
-      answer the question of “What’s close enough to me to possibly touch me?”
-      without making too many position comparisons.
-    </p>
-    <p>
-      Checking every marble with every other marble produces 81 comparisons.
-      Versus 2 comparisons using a quadtree. {/aside}
-    </p>
-    <div
-      class="sourceCode"
-      id="cb181"
-      data-caption="Finding collision candidates"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb181-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// nearest marble is a collision candidate</span></a>
+</div>
+<p>
+  Nested ternary expressions are kinda messy, but good enough. If a marble
+  is beyond any boundary, we reverse its direction. We
+  <em>always</em> apply a
+  <code style="white-space: pre-wrap;">.99</code> friction coefficient so
+  that marbles slow down.
+</p>
+<p>
+  <strong>Finding collisions</strong> with the next closest marble happens
+  using a quadtree. Since we don’t have too many marbles, we can build a
+  new quadtree every time.
+</p>
+<p>
+  {aside} A quadtree is a way to subdivide space into areas. It lets us
+  answer the question of “What’s close enough to me to possibly touch me?”
+  without making too many position comparisons.
+</p>
+<p>
+  Checking every marble with every other marble produces 81 comparisons.
+  Versus 2 comparisons using a quadtree. {/aside}
+</p>
+<div
+  class="sourceCode"
+  id="cb181"
+  data-caption="Finding collision candidates"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb181-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// nearest marble is a collision candidate</span></a>
 <a class="sourceLine" id="cb181-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> subdividedSpace <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">quadtree</span>().<span class="at" style="color: #7d9029;">extent</span>([[<span class="op" style="color: #666666;">-</span><span class="dv" style="color: #40a070;">1</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">-1</span>]<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb181-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                                           [<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">width</span><span class="op" style="color: #666666;">+</span><span class="dv" style="color: #40a070;">1</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">height</span><span class="op" style="color: #666666;">+</span><span class="dv" style="color: #40a070;">1</span>]])</a>
 <a class="sourceLine" id="cb181-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                                  .<span class="at" style="color: #7d9029;">x</span>(d <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="op" style="color: #666666;">:</span>satisfied<span class="op" style="color: #666666;">:</span></a>
@@ -174,47 +174,47 @@
 <a class="sourceLine" id="cb181-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                                  .<span class="at" style="color: #7d9029;">addAll</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span></a>
 <a class="sourceLine" id="cb181-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                                              .<span class="at" style="color: #7d9029;">filter</span>(m <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> id <span class="op" style="color: #666666;">!==</span> <span class="va" style="color: #19177c;">m</span>.<span class="at" style="color: #7d9029;">id</span>))<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb181-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      candidate <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">subdividedSpace</span>.<span class="at" style="color: #7d9029;">find</span>(x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> MarbleR<span class="op" style="color: #666666;">*</span><span class="dv" style="color: #40a070;">2</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We’re using
-      <a href="https://github.com/d3/d3-quadtree"
-        ><code style="white-space: pre-wrap;">d3-quadtree</code></a
-      >
-      for the quadtree implementation. It takes an
-      <code style="white-space: pre-wrap;">extent</code>, which tells it how
-      big our space is. An <code style="white-space: pre-wrap;">x</code> and
-      <code style="white-space: pre-wrap;">y</code> accessor tells it how to
-      get coordinates out of our marble objects, and we use
-      <code style="white-space: pre-wrap;">addAll</code> to fill the quadtree
-      with marbles.
-    </p>
-    <p>
-      To avoid detecting each marble as colliding with itself, we take each
-      marble out of our list before feeding the quadtree.
-    </p>
-    <p>
-      Once we have a quadtree, we use
-      <code style="white-space: pre-wrap;">.find</code> to look for the nearest
-      marble within two radiuses –
-      <code style="white-space: pre-wrap;">MarbleR*2</code> – of the current
-      marble. That’s exactly the one we’re colliding with! 😄
-    </p>
-    <p>
-      <strong>Handling collisions with marbles</strong> involves math. The sort
-      of thing you think you remember from high school, and suddenly realize
-      you don’t when the time comes to use it.
-    </p>
-    <p>Code looks like this:</p>
-    <div
-      class="sourceCode"
-      id="cb182"
-      data-caption="Handling marble collisions"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb182-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="cf" style="color: #007020; font-weight: bold;">if</span> (candidate) <span class="op" style="color: #666666;">{</span></a>
+</div>
+<p>
+  We’re using
+  <a href="https://github.com/d3/d3-quadtree"
+    ><code style="white-space: pre-wrap;">d3-quadtree</code></a
+  >
+  for the quadtree implementation. It takes an
+  <code style="white-space: pre-wrap;">extent</code>, which tells it how
+  big our space is. An <code style="white-space: pre-wrap;">x</code> and
+  <code style="white-space: pre-wrap;">y</code> accessor tells it how to
+  get coordinates out of our marble objects, and we use
+  <code style="white-space: pre-wrap;">addAll</code> to fill the quadtree
+  with marbles.
+</p>
+<p>
+  To avoid detecting each marble as colliding with itself, we take each
+  marble out of our list before feeding the quadtree.
+</p>
+<p>
+  Once we have a quadtree, we use
+  <code style="white-space: pre-wrap;">.find</code> to look for the nearest
+  marble within two radiuses –
+  <code style="white-space: pre-wrap;">MarbleR*2</code> – of the current
+  marble. That’s exactly the one we’re colliding with! 😄
+</p>
+<p>
+  <strong>Handling collisions with marbles</strong> involves math. The sort
+  of thing you think you remember from high school, and suddenly realize
+  you don’t when the time comes to use it.
+</p>
+<p>Code looks like this:</p>
+<div
+  class="sourceCode"
+  id="cb182"
+  data-caption="Handling marble collisions"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb182-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="cf" style="color: #007020; font-weight: bold;">if</span> (candidate) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb182-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb182-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// borrowing @air_hadoken&#39;s implementation from here:</span></a>
 <a class="sourceLine" id="cb182-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// github.com/airhadoken/game_of_circles/</span></a>
@@ -241,61 +241,61 @@
 <a class="sourceLine" id="cb182-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">vx</span><span class="op" style="color: #666666;">:</span> _vx<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb182-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">vy</span><span class="op" style="color: #666666;">:</span> _vy</a>
 <a class="sourceLine" id="cb182-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      Ok, the <code style="white-space: pre-wrap;">return</code> statement
-      isn’t about handling collisions. It updates the current marble.
-    </p>
-    <p>
-      The rest looks like magic. I implemented it and it still looks like
-      magic.
-    </p>
-    <p>
-      You can think of
-      <code style="white-space: pre-wrap;">[normx, normy]</code> as a vector
-      that points from current marble to collision candidate. It gives us
-      bounce direction. We use the
-      <a href="https://en.wikipedia.org/wiki/Euclidean_distance"
-        >euclidean distance</a
-      >
-      formula to calculate the length of this vector. The distance between the
-      centers of both marbles.
-    </p>
-    <p>
-      Then we calculate the
-      <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a>
-      between our marble’s speed vector and the collision direction vector. And
-      we normalize it by distance. Multiplying distance by
-      <code style="white-space: pre-wrap;">2</code> accounts for there being
-      two marbles in the collision. That extra
-      <code style="white-space: pre-wrap;">.3</code> made the simulation look
-      better.
-    </p>
-    <p>
-      Fiddling and experimentation are your best tools for magic values like
-      that 😉
-    </p>
-    <p>
-      Then we use the dot product scalar to adjust the marble’s speed vector.
-      Dividing by <code style="white-space: pre-wrap;">2</code> takes into
-      account that half the energy goes to the other marble. This is true
-      because we assume their masses are equal.
-    </p>
-    <p>
-      Finally, we update the
-      <code style="white-space: pre-wrap;">candidate</code> marble and make
-      sure it bounces off as well. We do it additively because that’s how it
-      happens in real life.
-    </p>
-    <p>
-      Two marbles traveling towards each other in exactly opposite directions
-      with exactly the same speed, will stop dead and stay there. As soon as
-      there’s any misalignment, deflection happens. If one is stationary, it
-      starts moving. If it’s moving in the same direction, it speeds up… etc.
-    </p>
-    <p>
-      The end result is
-      <a href="https://swizec.github.io/declarative-canvas-react-konva/"
-        >a decent-looking simulation of billiards</a
-      >.
-    </p>
+</div>
+<p>
+  Ok, the <code style="white-space: pre-wrap;">return</code> statement
+  isn’t about handling collisions. It updates the current marble.
+</p>
+<p>
+  The rest looks like magic. I implemented it and it still looks like
+  magic.
+</p>
+<p>
+  You can think of
+  <code style="white-space: pre-wrap;">[normx, normy]</code> as a vector
+  that points from current marble to collision candidate. It gives us
+  bounce direction. We use the
+  <a href="https://en.wikipedia.org/wiki/Euclidean_distance"
+    >euclidean distance</a
+  >
+  formula to calculate the length of this vector. The distance between the
+  centers of both marbles.
+</p>
+<p>
+  Then we calculate the
+  <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a>
+  between our marble’s speed vector and the collision direction vector. And
+  we normalize it by distance. Multiplying distance by
+  <code style="white-space: pre-wrap;">2</code> accounts for there being
+  two marbles in the collision. That extra
+  <code style="white-space: pre-wrap;">.3</code> made the simulation look
+  better.
+</p>
+<p>
+  Fiddling and experimentation are your best tools for magic values like
+  that 😉
+</p>
+<p>
+  Then we use the dot product scalar to adjust the marble’s speed vector.
+  Dividing by <code style="white-space: pre-wrap;">2</code> takes into
+  account that half the energy goes to the other marble. This is true
+  because we assume their masses are equal.
+</p>
+<p>
+  Finally, we update the
+  <code style="white-space: pre-wrap;">candidate</code> marble and make
+  sure it bounces off as well. We do it additively because that’s how it
+  happens in real life.
+</p>
+<p>
+  Two marbles traveling towards each other in exactly opposite directions
+  with exactly the same speed, will stop dead and stay there. As soon as
+  there’s any misalignment, deflection happens. If one is stationary, it
+  starts moving. If it’s moving in the same direction, it speeds up… etc.
+</p>
+<p>
+  The end result is
+  <a href="https://swizec.github.io/declarative-canvas-react-konva/"
+    >a decent-looking simulation of billiards</a
+  >.
+</p>

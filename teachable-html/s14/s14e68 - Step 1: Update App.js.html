@@ -1,26 +1,26 @@
-    <h2 id="step-1-update-app.js">Step 1: Update App.js</h2>
-    <p>
-      All right, you know the drill. Add imports, tweak some things, add to
-      render. We have to import
-      <code style="white-space: pre-wrap;">Controls</code>, set up filtering,
-      update the map’s <code style="white-space: pre-wrap;">zoom</code> prop,
-      and render a white rectangle and
-      <code style="white-space: pre-wrap;">Controls</code>.
-    </p>
-    <p>
-      The white rectangle makes it so the zoomed-in map doesn’t cover up the
-      histogram. I’ll explain when we get there.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb102"
-      data-caption="Imports and filter updates in App.js"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb102-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+<h2 id="step-1-update-app.js">Step 1: Update App.js</h2>
+<p>
+  All right, you know the drill. Add imports, tweak some things, add to
+  render. We have to import
+  <code style="white-space: pre-wrap;">Controls</code>, set up filtering,
+  update the map’s <code style="white-space: pre-wrap;">zoom</code> prop,
+  and render a white rectangle and
+  <code style="white-space: pre-wrap;">Controls</code>.
+</p>
+<p>
+  The white rectangle makes it so the zoomed-in map doesn’t cover up the
+  histogram. I’ll explain when we get there.
+</p>
+<div
+  class="sourceCode"
+  id="cb102"
+  data-caption="Imports and filter updates in App.js"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb102-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb102-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> MedianLine <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./components/MedianLine&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb102-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb102-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
@@ -54,30 +54,30 @@
 <a class="sourceLine" id="cb102-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb102-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb102-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We import the
-      <code style="white-space: pre-wrap;">Controls</code> component and add a
-      default
-      <code style="white-space: pre-wrap;">salariesFilter</code> function to
-      <code style="white-space: pre-wrap;">this.state</code>. The
-      <code style="white-space: pre-wrap;">updateDataFilter</code> method
-      passes the filter function and
-      <code style="white-space: pre-wrap;">filteredBy</code> dictionary from
-      arguments to App state. We’ll use it as a callback in
-      <code style="white-space: pre-wrap;">Controls</code>.
-    </p>
-    <p>The rest of filtering setup happens in the render method.</p>
-    <div
-      class="sourceCode"
-      id="cb103"
-      data-caption="Filtering data and updating map zoom in App render"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb103-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+</div>
+<p>
+  We import the
+  <code style="white-space: pre-wrap;">Controls</code> component and add a
+  default
+  <code style="white-space: pre-wrap;">salariesFilter</code> function to
+  <code style="white-space: pre-wrap;">this.state</code>. The
+  <code style="white-space: pre-wrap;">updateDataFilter</code> method
+  passes the filter function and
+  <code style="white-space: pre-wrap;">filteredBy</code> dictionary from
+  arguments to App state. We’ll use it as a callback in
+  <code style="white-space: pre-wrap;">Controls</code>.
+</p>
+<p>The rest of filtering setup happens in the render method.</p>
+<div
+  class="sourceCode"
+  id="cb103"
+  data-caption="Filtering data and updating map zoom in App render"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb103-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb103-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb103-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb103-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -106,54 +106,54 @@
 <a class="sourceLine" id="cb103-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb103-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb103-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We add a <code style="white-space: pre-wrap;">.filter</code> call to
-      <code style="white-space: pre-wrap;">filteredSalaries</code>, which uses
-      our <code style="white-space: pre-wrap;">salariesFilter</code> method to
-      throw out anything that doesn’t fit. Then we set up
-      <code style="white-space: pre-wrap;">zoom</code>, if a US state was
-      selected.
-    </p>
-    <p>
-      We built the
-      <code style="white-space: pre-wrap;">CountyMap</code> component to focus
-      on a given US state. Finding the centroid of a polygon, re-centering the
-      map, and increasing the sizing factor. It creates a nice zoom effect.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-effect.png"
-        alt="Zoom effect"
-      />
-      <figcaption>Zoom effect</figcaption>
-    </figure>
-    <p>
-      And here’s the downside of this approach. SVG doesn’t know about element
-      boundaries. It just renders stuff.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-without-rectangle.png"
-        alt="Zoom without white rectangle"
-      />
-      <figcaption>Zoom without white rectangle</figcaption>
-    </figure>
-    <p>
-      See, it goes under the histogram. Let’s fix that and add the
-      <code style="white-space: pre-wrap;">Controls</code> render while we’re
-      at it.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb104"
-      data-caption="Add opaque background to histogram"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb104-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+</div>
+<p>
+  We add a <code style="white-space: pre-wrap;">.filter</code> call to
+  <code style="white-space: pre-wrap;">filteredSalaries</code>, which uses
+  our <code style="white-space: pre-wrap;">salariesFilter</code> method to
+  throw out anything that doesn’t fit. Then we set up
+  <code style="white-space: pre-wrap;">zoom</code>, if a US state was
+  selected.
+</p>
+<p>
+  We built the
+  <code style="white-space: pre-wrap;">CountyMap</code> component to focus
+  on a given US state. Finding the centroid of a polygon, re-centering the
+  map, and increasing the sizing factor. It creates a nice zoom effect.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-effect.png"
+    alt="Zoom effect"
+  />
+  <figcaption>Zoom effect</figcaption>
+</figure>
+<p>
+  And here’s the downside of this approach. SVG doesn’t know about element
+  boundaries. It just renders stuff.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-without-rectangle.png"
+    alt="Zoom without white rectangle"
+  />
+  <figcaption>Zoom without white rectangle</figcaption>
+</figure>
+<p>
+  See, it goes under the histogram. Let’s fix that and add the
+  <code style="white-space: pre-wrap;">Controls</code> render while we’re
+  at it.
+</p>
+<div
+  class="sourceCode"
+  id="cb104"
+  data-caption="Add opaque background to histogram"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb104-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb104-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb104-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb104-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -184,28 +184,28 @@
 <a class="sourceLine" id="cb104-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )</a>
 <a class="sourceLine" id="cb104-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb104-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      Rectangle, <code style="white-space: pre-wrap;">500</code> to the right,
-      <code style="white-space: pre-wrap;">0</code> from top,
-      <code style="white-space: pre-wrap;">600</code> wide and
-      <code style="white-space: pre-wrap;">500</code> tall, with a white
-      background. Gives the histogram an opaque background, so it doesn’t
-      matter what the map is doing.
-    </p>
-    <p>
-      We render the
-      <code style="white-space: pre-wrap;">Controls</code> component just after
-      <code style="white-space: pre-wrap;">&lt;/svg&gt;</code> because it’s not
-      an SVG component – it uses normal HTML. Unlike other components, it needs
-      our entire dataset as <code style="white-space: pre-wrap;">data</code>.
-      We use the
-      <code style="white-space: pre-wrap;">updateDataFilter</code> prop to say
-      which callback function it should call when a new filter is ready.
-    </p>
-    <p>
-      If this seems roundabout … I’ve seen worse. The callbacks approach makes
-      our app easier to componentize and keeps the code relatively unmessy.
-      Imagine putting everything we’ve done so far in
-      <code style="white-space: pre-wrap;">App</code>! 😆
-    </p>
+</div>
+<p>
+  Rectangle, <code style="white-space: pre-wrap;">500</code> to the right,
+  <code style="white-space: pre-wrap;">0</code> from top,
+  <code style="white-space: pre-wrap;">600</code> wide and
+  <code style="white-space: pre-wrap;">500</code> tall, with a white
+  background. Gives the histogram an opaque background, so it doesn’t
+  matter what the map is doing.
+</p>
+<p>
+  We render the
+  <code style="white-space: pre-wrap;">Controls</code> component just after
+  <code style="white-space: pre-wrap;">&lt;/svg&gt;</code> because it’s not
+  an SVG component – it uses normal HTML. Unlike other components, it needs
+  our entire dataset as <code style="white-space: pre-wrap;">data</code>.
+  We use the
+  <code style="white-space: pre-wrap;">updateDataFilter</code> prop to say
+  which callback function it should call when a new filter is ready.
+</p>
+<p>
+  If this seems roundabout … I’ve seen worse. The callbacks approach makes
+  our app easier to componentize and keeps the code relatively unmessy.
+  Imagine putting everything we’ve done so far in
+  <code style="white-space: pre-wrap;">App</code>! 😆
+</p>

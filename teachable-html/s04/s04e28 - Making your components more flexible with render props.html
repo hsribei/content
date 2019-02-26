@@ -1,77 +1,77 @@
-    <h2 id="making-your-components-more-flexible-with-render-props">
-      Making your components more flexible with render props
-    </h2>
-    <p>
-      Our scatterplot doesn’t look quite as nice as the earlier screenshot.
-      Regular SVG circles with no styling just can’t match up.
-    </p>
-    <p>
-      What if we wanted to render beautiful circles? Or stars? Or maybe
-      something else entirely?
-    </p>
-    <p>
-      We can use render props to give users of our scatterplot component the
-      power to define how they want datapoints to render. 😱
-    </p>
-    <p>
-      Think of it as a sort of inversion of control. Another common buzzword
-      are “slots”, or renderless components. The idea is that one of our props
-      accepts a React component.
-    </p>
-    <p>We then use that prop to render our datapoints.</p>
-    <p>It looks a little like this 👇</p>
-    <pre class="jsx"><code style="white-space: pre-wrap;">&lt;Scatterplot
+<h2 id="making-your-components-more-flexible-with-render-props">
+  Making your components more flexible with render props
+</h2>
+<p>
+  Our scatterplot doesn’t look quite as nice as the earlier screenshot.
+  Regular SVG circles with no styling just can’t match up.
+</p>
+<p>
+  What if we wanted to render beautiful circles? Or stars? Or maybe
+  something else entirely?
+</p>
+<p>
+  We can use render props to give users of our scatterplot component the
+  power to define how they want datapoints to render. 😱
+</p>
+<p>
+  Think of it as a sort of inversion of control. Another common buzzword
+  are “slots”, or renderless components. The idea is that one of our props
+  accepts a React component.
+</p>
+<p>We then use that prop to render our datapoints.</p>
+<p>It looks a little like this 👇</p>
+<pre class="jsx"><code style="white-space: pre-wrap;">&lt;Scatterplot
   x={10} y={10}
   data={data}
   datapoint={(props) =&gt; &lt;Datapoint {...props} /&gt;}
 &gt;</code></pre>
-    <p>
-      What’s more, we can add interactions and other useful stuff to our
-      <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code> and
-      <code style="white-space: pre-wrap;">&lt;Scatterplot&gt;</code> doesn’t
-      have to know anything about it. All the scatterplot cares about is
-      rendering two axes and a bunch of datapoints.
-    </p>
-    <p>
-      Let’s use the render prop approach to make our scatterplot more reusable.
-    </p>
-    <p>Steps 👇</p>
-    <ul>
-      <li>pass in a render prop</li>
-      <li>use it to render datapoints</li>
-      <li>make datapoint component look nice</li>
-    </ul>
-    <p>
-      You can see
-      <a href="https://codesandbox.io/s/j73xlyr8v5"
-        >my solution on CodeSandbox</a
-      >. I recommend you follow along with your existing code.
-    </p>
-    <iframe
-      src="https://codesandbox.io/embed/j73xlyr8v5?codemirror=1&amp;view=split"
-      style="width:100%; height:500px; border😮; border-radius: 4px; overflow:hidden;"
-      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-    >
-    </iframe>
-    <h3 id="pass-in-a-render-prop">Pass in a render prop</h3>
-    <p>
-      React components are Just JavaScript. Either a JSX function call or a
-      function that returns some JSX.
-    </p>
-    <p>
-      That means we can pass them into components via props. Let’s do that in
-      App.js
-    </p>
-    <div
-      class="sourceCode"
-      id="cb46"
-      data-caption="Pass render prop into Scatterplot"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb46-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
+<p>
+  What’s more, we can add interactions and other useful stuff to our
+  <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code> and
+  <code style="white-space: pre-wrap;">&lt;Scatterplot&gt;</code> doesn’t
+  have to know anything about it. All the scatterplot cares about is
+  rendering two axes and a bunch of datapoints.
+</p>
+<p>
+  Let’s use the render prop approach to make our scatterplot more reusable.
+</p>
+<p>Steps 👇</p>
+<ul>
+  <li>pass in a render prop</li>
+  <li>use it to render datapoints</li>
+  <li>make datapoint component look nice</li>
+</ul>
+<p>
+  You can see
+  <a href="https://codesandbox.io/s/j73xlyr8v5"
+    >my solution on CodeSandbox</a
+  >. I recommend you follow along with your existing code.
+</p>
+<iframe
+  src="https://codesandbox.io/embed/j73xlyr8v5?codemirror=1&amp;view=split"
+  style="width:100%; height:500px; border😮; border-radius: 4px; overflow:hidden;"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+>
+</iframe>
+<h3 id="pass-in-a-render-prop">Pass in a render prop</h3>
+<p>
+  React components are Just JavaScript. Either a JSX function call or a
+  function that returns some JSX.
+</p>
+<p>
+  That means we can pass them into components via props. Let’s do that in
+  App.js
+</p>
+<div
+  class="sourceCode"
+  id="cb46"
+  data-caption="Pass render prop into Scatterplot"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb46-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
 <a class="sourceLine" id="cb46-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb46-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> Datapoint <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;./Datapoint&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb46-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -86,50 +86,50 @@
 <a class="sourceLine" id="cb46-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    datapoint<span class="op" style="color: #666666;">={</span>(<span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">&lt;</span>Datapoint x<span class="op" style="color: #666666;">={</span>x<span class="op" style="color: #666666;">}</span> y<span class="op" style="color: #666666;">={</span>y<span class="op" style="color: #666666;">}</span> /&gt;<span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb46-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  /&gt;</a>
 <a class="sourceLine" id="cb46-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/svg<span class="op" style="color: #666666;">&gt;</span></a></code></pre>
-    </div>
-    <p>
-      For extra flexibility and readability we’re wrapping our
-      <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code> component
-      in another function that accepts
-      <code style="white-space: pre-wrap;">x</code> and
-      <code style="white-space: pre-wrap;">y</code> coordinates. This is a
-      common pattern you’ll see with render props 👉 it gives you the ability
-      to pass in props from both the rendering component and the component
-      that’s setting the render prop.
-    </p>
-    <p>
-      Say we wanted Datapoint to know something about our App <em>and</em> our
-      Scatterplot. The scatterplot calls this function with coordinates. We
-      pass those into
-      <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code>. And
-      because the method is defined inside App, we could pass-in anything
-      that’s defined in the App. Like perhaps
-      <code style="white-space: pre-wrap;">data</code>.
-    </p>
-    <p>
-      Your code will start throwing an error now. Datapoint isn’t defined.
-      Don’t worry, it’s coming soon.
-    </p>
-    <h3 id="use-render-prop-to-render-datapoints">
-      Use render prop to render datapoints
-    </h3>
-    <p>
-      To use our new
-      <code style="white-space: pre-wrap;">datapoint</code> render prop, we
-      have to change how we render the scatterplot. Instead of returning a
-      <code style="white-space: pre-wrap;">&lt;circle&gt;</code> for each
-      iteration of the dataset, we’re calling a function passed in from props.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb47"
-      data-caption="Accept a render prop"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb47-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
+</div>
+<p>
+  For extra flexibility and readability we’re wrapping our
+  <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code> component
+  in another function that accepts
+  <code style="white-space: pre-wrap;">x</code> and
+  <code style="white-space: pre-wrap;">y</code> coordinates. This is a
+  common pattern you’ll see with render props 👉 it gives you the ability
+  to pass in props from both the rendering component and the component
+  that’s setting the render prop.
+</p>
+<p>
+  Say we wanted Datapoint to know something about our App <em>and</em> our
+  Scatterplot. The scatterplot calls this function with coordinates. We
+  pass those into
+  <code style="white-space: pre-wrap;">&lt;Datapoint&gt;</code>. And
+  because the method is defined inside App, we could pass-in anything
+  that’s defined in the App. Like perhaps
+  <code style="white-space: pre-wrap;">data</code>.
+</p>
+<p>
+  Your code will start throwing an error now. Datapoint isn’t defined.
+  Don’t worry, it’s coming soon.
+</p>
+<h3 id="use-render-prop-to-render-datapoints">
+  Use render prop to render datapoints
+</h3>
+<p>
+  To use our new
+  <code style="white-space: pre-wrap;">datapoint</code> render prop, we
+  have to change how we render the scatterplot. Instead of returning a
+  <code style="white-space: pre-wrap;">&lt;circle&gt;</code> for each
+  iteration of the dataset, we’re calling a function passed in from props.
+</p>
+<div
+  class="sourceCode"
+  id="cb47"
+  data-caption="Accept a render prop"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb47-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Scatterplot.js</span></a>
 <a class="sourceLine" id="cb47-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb47-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> data<span class="op" style="color: #666666;">,</span> height<span class="op" style="color: #666666;">,</span> datapoint <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">props</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb47-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="op" style="color: #666666;">{</span> yScale<span class="op" style="color: #666666;">,</span> xScale <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">;</span></a>
@@ -140,36 +140,36 @@
 <a class="sourceLine" id="cb47-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="dt" style="color: #902000;">x</span><span class="op" style="color: #666666;">:</span> <span class="at" style="color: #7d9029;">xScale</span>(<span class="op" style="color: #666666;">:</span><span class="dt" style="color: #902000;">satisfied</span><span class="op" style="color: #666666;">:,</span></a>
 <a class="sourceLine" id="cb47-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="dt" style="color: #902000;">y</span><span class="op" style="color: #666666;">:</span> <span class="at" style="color: #7d9029;">yScale</span>(y)</a>
 <a class="sourceLine" id="cb47-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span>))<span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We take the
-      <code style="white-space: pre-wrap;">datapoint</code> function from props
-      and call it in
-      <code style="white-space: pre-wrap;">data.map</code> making sure to pass
-      in <code style="white-space: pre-wrap;">x</code> and
-      <code style="white-space: pre-wrap;">y</code> as an object. Calling
-      functions with objects like this is a common JavaScript pattern to fake
-      named arguments.
-    </p>
-    <h3 id="make-datapoint-component-look-nice">
-      Make datapoint component look nice
-    </h3>
-    <p>
-      We’ve got all the rendering, now all we need is the
-      <code style="white-space: pre-wrap;">&lt;Datapoint</code> component
-      itself. That goes in a new
-      <code style="white-space: pre-wrap;">Datapoint.js</code> file.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb48"
-      data-caption="Datapoint file"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb48-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
+</div>
+<p>
+  We take the
+  <code style="white-space: pre-wrap;">datapoint</code> function from props
+  and call it in
+  <code style="white-space: pre-wrap;">data.map</code> making sure to pass
+  in <code style="white-space: pre-wrap;">x</code> and
+  <code style="white-space: pre-wrap;">y</code> as an object. Calling
+  functions with objects like this is a common JavaScript pattern to fake
+  named arguments.
+</p>
+<h3 id="make-datapoint-component-look-nice">
+  Make datapoint component look nice
+</h3>
+<p>
+  We’ve got all the rendering, now all we need is the
+  <code style="white-space: pre-wrap;">&lt;Datapoint</code> component
+  itself. That goes in a new
+  <code style="white-space: pre-wrap;">Datapoint.js</code> file.
+</p>
+<div
+  class="sourceCode"
+  id="cb48"
+  data-caption="Datapoint file"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb48-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb48-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> styled <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;styled-components&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb48-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb48-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Circle <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">styled</span>.<span class="at" style="color: #7d9029;">circle</span><span class="vs" style="color: #4070a0;">`</span></a>
@@ -194,24 +194,24 @@
 <a class="sourceLine" id="cb48-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb48-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb48-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Datapoint<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      I’m using styled-components to define the CSS for my Datapoint. You can
-      use whatever you prefer. I like styled components because they’re a good
-      balance between CSS-in-JS and normal CSS syntax.
-    </p>
-    <p>
-      The component itself renders a styled circle using props for positioning
-      and a radius of 3 pixels.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/scatterplot-finished.png"
-        alt="Finished scatterplot"
-      />
-      <figcaption>Finished scatterplot</figcaption>
-    </figure>
-    <p>
-      For an extra challenge, try rendering circle radius from state and
-      changing datapoint size on mouse over. Make the scatterplot interactive.
-    </p>
+</div>
+<p>
+  I’m using styled-components to define the CSS for my Datapoint. You can
+  use whatever you prefer. I like styled components because they’re a good
+  balance between CSS-in-JS and normal CSS syntax.
+</p>
+<p>
+  The component itself renders a styled circle using props for positioning
+  and a radius of 3 pixels.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/scatterplot-finished.png"
+    alt="Finished scatterplot"
+  />
+  <figcaption>Finished scatterplot</figcaption>
+</figure>
+<p>
+  For an extra challenge, try rendering circle radius from state and
+  changing datapoint size on mouse over. Make the scatterplot interactive.
+</p>

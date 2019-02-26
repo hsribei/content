@@ -1,30 +1,30 @@
-    <h2 id="step-4-load-bootstrap-styles">Step 4: Load Bootstrap styles</h2>
-    <p>
-      We’re going to use Bootstrap styles to avoid reinventing the wheel. We’re
-      ignoring their JavaScript widgets and the amazing integration built by
-      the
-      <a href="https://react-bootstrap.github.io/">react-bootstrap</a> team.
-      Just the stylesheets please.
-    </p>
-    <p>
-      They’ll make our fonts look better, help with layouting, and make buttons
-      look like buttons. We <em>could</em> use styled components, but writing
-      our own styles detracts from this tutorial.
-    </p>
-    <p>
-      We load stylesheets in
-      <code style="white-space: pre-wrap;">src/index.js</code>.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb58"
-      data-caption="Add Bootstrap in index.js"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb58-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/index.js</span></a>
+<h2 id="step-4-load-bootstrap-styles">Step 4: Load Bootstrap styles</h2>
+<p>
+  We’re going to use Bootstrap styles to avoid reinventing the wheel. We’re
+  ignoring their JavaScript widgets and the amazing integration built by
+  the
+  <a href="https://react-bootstrap.github.io/">react-bootstrap</a> team.
+  Just the stylesheets please.
+</p>
+<p>
+  They’ll make our fonts look better, help with layouting, and make buttons
+  look like buttons. We <em>could</em> use styled components, but writing
+  our own styles detracts from this tutorial.
+</p>
+<p>
+  We load stylesheets in
+  <code style="white-space: pre-wrap;">src/index.js</code>.
+</p>
+<div
+  class="sourceCode"
+  id="cb58"
+  data-caption="Add Bootstrap in index.js"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb58-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/index.js</span></a>
 <a class="sourceLine" id="cb58-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb58-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb58-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react-dom&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -37,40 +37,40 @@
 <a class="sourceLine" id="cb58-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">&lt;</span>App /<span class="op" style="color: #666666;">&gt;,</span></a>
 <a class="sourceLine" id="cb58-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="va" style="color: #19177c;">document</span>.<span class="at" style="color: #7d9029;">getElementById</span>(<span class="st" style="color: #4070a0;">&#39;root&#39;</span>)</a>
 <a class="sourceLine" id="cb58-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      Another benefit of Webpack:
-      <code style="white-space: pre-wrap;">import</code>-ing stylesheets. These
-      imports turn into
-      <code style="white-space: pre-wrap;">&lt;style&gt;</code> tags with CSS
-      in their body at runtime.
-    </p>
-    <p>
-      This is also a good opportunity to see how
-      <code style="white-space: pre-wrap;">index.js</code> works to render our
-      app 👇
-    </p>
-    <ol type="1">
-      <li>loads <code style="white-space: pre-wrap;">App</code> and React</li>
-      <li>loads styles</li>
-      <li>
-        Uses <code style="white-space: pre-wrap;">ReactDOM</code> to render
-        <code style="white-space: pre-wrap;">&lt;App /&gt;</code> into the DOM
-      </li>
-    </ol>
-    <p>That’s it.</p>
-    <p>Your preloader screen should look better now.</p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-screenshot.png"
-        alt="Preloader screenshot"
-      />
-      <figcaption>Preloader screenshot</figcaption>
-    </figure>
-    <p>
-      If you don’t, try comparing your changes to this
-      <a
-        href="https://github.com/Swizec/react-d3js-step-by-step/commit/798ec9eca54333da63b91c66b93339565d6d582a"
-        >diff on Github</a
-      >.
-    </p>
+</div>
+<p>
+  Another benefit of Webpack:
+  <code style="white-space: pre-wrap;">import</code>-ing stylesheets. These
+  imports turn into
+  <code style="white-space: pre-wrap;">&lt;style&gt;</code> tags with CSS
+  in their body at runtime.
+</p>
+<p>
+  This is also a good opportunity to see how
+  <code style="white-space: pre-wrap;">index.js</code> works to render our
+  app 👇
+</p>
+<ol type="1">
+  <li>loads <code style="white-space: pre-wrap;">App</code> and React</li>
+  <li>loads styles</li>
+  <li>
+    Uses <code style="white-space: pre-wrap;">ReactDOM</code> to render
+    <code style="white-space: pre-wrap;">&lt;App /&gt;</code> into the DOM
+  </li>
+</ol>
+<p>That’s it.</p>
+<p>Your preloader screen should look better now.</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-screenshot.png"
+    alt="Preloader screenshot"
+  />
+  <figcaption>Preloader screenshot</figcaption>
+</figure>
+<p>
+  If you don’t, try comparing your changes to this
+  <a
+    href="https://github.com/Swizec/react-d3js-step-by-step/commit/798ec9eca54333da63b91c66b93339565d6d582a"
+    >diff on Github</a
+  >.
+</p>

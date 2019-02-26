@@ -1,24 +1,24 @@
-    <h3 id="the-letter-component">The Letter component</h3>
-    <p>
-      We’re ready for the component that can transition itself into and out of
-      a visualization. Without consumers having to worry about what’s going on
-      behind the scenes 👌
-    </p>
-    <p>
-      The skeleton for our
-      <code style="white-space: pre-wrap;">Letter</code> component looks like
-      this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb139"
-      data-caption="Letter component skeleton"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb139-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Letter.js</span></a>
+<h3 id="the-letter-component">The Letter component</h3>
+<p>
+  We’re ready for the component that can transition itself into and out of
+  a visualization. Without consumers having to worry about what’s going on
+  behind the scenes 👌
+</p>
+<p>
+  The skeleton for our
+  <code style="white-space: pre-wrap;">Letter</code> component looks like
+  this:
+</p>
+<div
+  class="sourceCode"
+  id="cb139"
+  data-caption="Letter component skeleton"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb139-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Letter.js</span></a>
 <a class="sourceLine" id="cb139-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb139-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb139-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
@@ -61,31 +61,31 @@
 <a class="sourceLine" id="cb139-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb139-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb139-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Letter<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We start with some imports and define a
-      <code style="white-space: pre-wrap;">Letter</code> component with a
-      default state. We keep
-      <code style="white-space: pre-wrap;">defaultState</code> in a separate
-      value because we’re going to manually reset state in some cases.
-    </p>
-    <p>
-      A <code style="white-space: pre-wrap;">letterRef</code> helps us hand
-      over control to D3 during transitions, the
-      <code style="white-space: pre-wrap;">onEnter</code> callback handles
-      enter transitions,
-      <code style="white-space: pre-wrap;">onExit</code> exit transitions, and
-      <code style="white-space: pre-wrap;">componentDidUpdate</code> update
-      transitions. Render is where it call comes together.
-    </p>
-    <p>
-      Each of these transition methods is going to follow the same approach you
-      learned about in the swipe transition example. Render from state,
-      transition with D3, update state to match.
-    </p>
-    <p>
-      You can make this component more flexible by moving the various magic
-      numbers we use into props. Default
-      <code style="white-space: pre-wrap;">y</code> offset, transition
-      duration, colors, stuff like that. The world is your oyster my friend.
-    </p>
+</div>
+<p>
+  We start with some imports and define a
+  <code style="white-space: pre-wrap;">Letter</code> component with a
+  default state. We keep
+  <code style="white-space: pre-wrap;">defaultState</code> in a separate
+  value because we’re going to manually reset state in some cases.
+</p>
+<p>
+  A <code style="white-space: pre-wrap;">letterRef</code> helps us hand
+  over control to D3 during transitions, the
+  <code style="white-space: pre-wrap;">onEnter</code> callback handles
+  enter transitions,
+  <code style="white-space: pre-wrap;">onExit</code> exit transitions, and
+  <code style="white-space: pre-wrap;">componentDidUpdate</code> update
+  transitions. Render is where it call comes together.
+</p>
+<p>
+  Each of these transition methods is going to follow the same approach you
+  learned about in the swipe transition example. Render from state,
+  transition with D3, update state to match.
+</p>
+<p>
+  You can make this component more flexible by moving the various magic
+  numbers we use into props. Default
+  <code style="white-space: pre-wrap;">y</code> offset, transition
+  duration, colors, stuff like that. The world is your oyster my friend.
+</p>

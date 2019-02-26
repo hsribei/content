@@ -1,50 +1,50 @@
-    <h3 id="data-manipulation-vs.-dom-manipulation">
-      1) Data manipulation vs. DOM manipulation
-    </h3>
-    <p>All D3 examples are split into two parts:</p>
-    <ol type="1">
-      <li>Data manipulation</li>
-      <li>DOM manipulation</li>
-    </ol>
-    <p>First you prep your values, then you render.</p>
-    <p>
-      You have to go through many examples to notice what’s going on. Inference
-      learning is hard. Most beginners miss this pattern and it makes D3 look
-      more confusing than it is.
-    </p>
-    <p>
-      Let’s take an example from
-      <a href="https://github.com/d3/d3/wiki/Gallery">D3’s docs</a>, a bar
-      chart with a hover effect.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/barchart-example.png"
-        alt="An example D3 barchart"
-      />
-      <figcaption>An example D3 barchart</figcaption>
-    </figure>
-    <p>
-      You can
-      <a
-        href="https://cdn.rawgit.com/mbostock/3885304/raw/a91f37f5f4b43269df3dbabcda0090310c05285d/index.html"
-        >try it online</a
-      >. When you hover on a bar, it changes color. Pretty neat.
-    </p>
-    <p>
-      Mike Bostock, the creator of D3, built this chart in 43 lines of code.
-      Here they are 👇
-    </p>
-    <div
-      class="sourceCode"
-      id="cb7"
-      data-caption="Example D3 barchart"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb7-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> svg <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(<span class="st" style="color: #4070a0;">&quot;svg&quot;</span>)<span class="op" style="color: #666666;">,</span></a>
+<h3 id="data-manipulation-vs.-dom-manipulation">
+  1) Data manipulation vs. DOM manipulation
+</h3>
+<p>All D3 examples are split into two parts:</p>
+<ol type="1">
+  <li>Data manipulation</li>
+  <li>DOM manipulation</li>
+</ol>
+<p>First you prep your values, then you render.</p>
+<p>
+  You have to go through many examples to notice what’s going on. Inference
+  learning is hard. Most beginners miss this pattern and it makes D3 look
+  more confusing than it is.
+</p>
+<p>
+  Let’s take an example from
+  <a href="https://github.com/d3/d3/wiki/Gallery">D3’s docs</a>, a bar
+  chart with a hover effect.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/barchart-example.png"
+    alt="An example D3 barchart"
+  />
+  <figcaption>An example D3 barchart</figcaption>
+</figure>
+<p>
+  You can
+  <a
+    href="https://cdn.rawgit.com/mbostock/3885304/raw/a91f37f5f4b43269df3dbabcda0090310c05285d/index.html"
+    >try it online</a
+  >. When you hover on a bar, it changes color. Pretty neat.
+</p>
+<p>
+  Mike Bostock, the creator of D3, built this chart in 43 lines of code.
+  Here they are 👇
+</p>
+<div
+  class="sourceCode"
+  id="cb7"
+  data-caption="Example D3 barchart"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb7-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> svg <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(<span class="st" style="color: #4070a0;">&quot;svg&quot;</span>)<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb7-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    margin <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span><span class="dt" style="color: #902000;">top</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">20</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">right</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">20</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">bottom</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">30</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">left</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">40</span><span class="op" style="color: #666666;">},</span></a>
 <a class="sourceLine" id="cb7-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    width <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">+</span><span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;width&quot;</span>) <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">left</span> <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">right</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb7-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    height <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">+</span><span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;height&quot;</span>) <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">top</span> <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">bottom</span><span class="op" style="color: #666666;">;</span></a>
@@ -88,20 +88,20 @@
 <a class="sourceLine" id="cb7-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;width&quot;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">x</span>.<span class="at" style="color: #7d9029;">bandwidth</span>())</a>
 <a class="sourceLine" id="cb7-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;height&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span> <span class="cf" style="color: #007020; font-weight: bold;">return</span> height <span class="op" style="color: #666666;">-</span> <span class="at" style="color: #7d9029;">y</span>(<span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span>)<span class="op" style="color: #666666;">;</span> <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb7-44" title="44" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      There are two parts to this code: Data manipulation and DOM manipulation.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb8"
-      data-caption="Data manipulation code"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb8-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> <span class="co" style="color: #60a0b0; font-style: italic;">// ..,</span></a>
+</div>
+<p>
+  There are two parts to this code: Data manipulation and DOM manipulation.
+</p>
+<div
+  class="sourceCode"
+  id="cb8"
+  data-caption="Data manipulation code"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb8-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> <span class="co" style="color: #60a0b0; font-style: italic;">// ..,</span></a>
 <a class="sourceLine" id="cb8-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    margin <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span><span class="dt" style="color: #902000;">top</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">20</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">right</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">20</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">bottom</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">30</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">left</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">40</span><span class="op" style="color: #666666;">},</span></a>
 <a class="sourceLine" id="cb8-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    width <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">+</span><span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;width&quot;</span>) <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">left</span> <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">right</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb8-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    height <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">+</span><span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;height&quot;</span>) <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">top</span> <span class="op" style="color: #666666;">-</span> <span class="va" style="color: #19177c;">margin</span>.<span class="at" style="color: #7d9029;">bottom</span><span class="op" style="color: #666666;">;</span></a>
@@ -122,40 +122,40 @@
 <a class="sourceLine" id="cb8-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb8-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb8-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>Bostock here first prepares his data:</p>
-    <ul>
-      <li>
-        some sizing variables (<code style="white-space: pre-wrap;"
-          >margin</code
-        >, <code style="white-space: pre-wrap;">width</code>,
-        <code style="white-space: pre-wrap;">height</code>)
-      </li>
-      <li>
-        two scales to help with data-to-coordinates conversion (<code
-          style="white-space: pre-wrap;"
-          >x, y</code
-        >)
-      </li>
-      <li>
-        loads his dataset (<code style="white-space: pre-wrap;">d3.tsv</code>)
-        and updates his scales’ domains
-      </li>
-    </ul>
-    <p>
-      In the DOM manipulation part, he puts shapes and objects into an SVG.
-      This is the part that shows up in your browser.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb9"
-      data-caption="DOM manipulation code"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb9-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> svg <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(<span class="st" style="color: #4070a0;">&quot;svg&quot;</span>)<span class="op" style="color: #666666;">,</span></a>
+</div>
+<p>Bostock here first prepares his data:</p>
+<ul>
+  <li>
+    some sizing variables (<code style="white-space: pre-wrap;"
+      >margin</code
+    >, <code style="white-space: pre-wrap;">width</code>,
+    <code style="white-space: pre-wrap;">height</code>)
+  </li>
+  <li>
+    two scales to help with data-to-coordinates conversion (<code
+      style="white-space: pre-wrap;"
+      >x, y</code
+    >)
+  </li>
+  <li>
+    loads his dataset (<code style="white-space: pre-wrap;">d3.tsv</code>)
+    and updates his scales’ domains
+  </li>
+</ul>
+<p>
+  In the DOM manipulation part, he puts shapes and objects into an SVG.
+  This is the part that shows up in your browser.
+</p>
+<div
+  class="sourceCode"
+  id="cb9"
+  data-caption="DOM manipulation code"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb9-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">var</span> svg <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">select</span>(<span class="st" style="color: #4070a0;">&quot;svg&quot;</span>)<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb9-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb9-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb9-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
@@ -188,65 +188,65 @@
 <a class="sourceLine" id="cb9-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;width&quot;</span><span class="op" style="color: #666666;">,</span> <span class="va" style="color: #19177c;">x</span>.<span class="at" style="color: #7d9029;">bandwidth</span>())</a>
 <a class="sourceLine" id="cb9-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      .<span class="at" style="color: #7d9029;">attr</span>(<span class="st" style="color: #4070a0;">&quot;height&quot;</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(d) <span class="op" style="color: #666666;">{</span> <span class="cf" style="color: #007020; font-weight: bold;">return</span> height <span class="op" style="color: #666666;">-</span> <span class="at" style="color: #7d9029;">y</span>(<span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">frequency</span>)<span class="op" style="color: #666666;">;</span> <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb9-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">})<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      DOM manipulation in D3 happens via D3 selections. They’re a lot like
-      jQuery <code style="white-space: pre-wrap;">$(something)</code>. This is
-      the part we’re doing with React later on.
-    </p>
-    <p>Here Bostock does a few things</p>
-    <ul>
-      <li>
-        selects the
-        <code style="white-space: pre-wrap;">&lt;svg&gt;</code> node (<code
-          style="white-space: pre-wrap;"
-          >d3.select</code
-        >)
-      </li>
-      <li>
-        appends a grouping
-        <code style="white-space: pre-wrap;">&lt;g&gt;</code> node (<code
-          style="white-space: pre-wrap;"
-          >.append</code
-        >) with an SVG positioning attribute (translate)
-      </li>
-      <li>
-        adds a bottom axis by appending a
-        <code style="white-space: pre-wrap;">&lt;g&gt;</code>, moving it, then
-        calling <code style="white-space: pre-wrap;">d3.axisBottom</code> on
-        it. D3 has built-in axis generators
-      </li>
-      <li>adds a left axis using the same approach but rotating the ticks</li>
-      <li>appends a text label “Frequency” to the left axis</li>
-      <li>
-        uses <code style="white-space: pre-wrap;">selectAll.data</code> to make
-        a virtual selection of
-        <code style="white-space: pre-wrap;">.bar</code> nodes and attach some
-        data, then for every new data value (.enter), appends a
-        <code style="white-space: pre-wrap;">&lt;rect&gt;</code> node and gives
-        it attributes
-      </li>
-    </ul>
-    <p>
-      That last part is where people get lost. It looks like magic. Even to me.
-    </p>
-    <p>
-      It’s a declarative approach to rendering data. Works great, hard to
-      understand. That’s why we’ll do it in React instead 😃
-    </p>
-    <p>
-      You can think of <code style="white-space: pre-wrap;">.enter</code> as a
-      loop over your data. Everything chained after
-      <code style="white-space: pre-wrap;">.enter</code> is your loop’s body.
-      Sort of like doing
-      <code style="white-space: pre-wrap;"
-        >data.map(d =&gt; append(rect).setManyAttributes())</code
-      >
-    </p>
-    <p>
-      That function executes for any <em>new</em> data “entering” your
-      visualization. There’s also
-      <code style="white-space: pre-wrap;">.exit</code> for anything that’s
-      dropping out, and <code style="white-space: pre-wrap;">.update</code> for
-      anything that’s changing.
-    </p>
+</div>
+<p>
+  DOM manipulation in D3 happens via D3 selections. They’re a lot like
+  jQuery <code style="white-space: pre-wrap;">$(something)</code>. This is
+  the part we’re doing with React later on.
+</p>
+<p>Here Bostock does a few things</p>
+<ul>
+  <li>
+    selects the
+    <code style="white-space: pre-wrap;">&lt;svg&gt;</code> node (<code
+      style="white-space: pre-wrap;"
+      >d3.select</code
+    >)
+  </li>
+  <li>
+    appends a grouping
+    <code style="white-space: pre-wrap;">&lt;g&gt;</code> node (<code
+      style="white-space: pre-wrap;"
+      >.append</code
+    >) with an SVG positioning attribute (translate)
+  </li>
+  <li>
+    adds a bottom axis by appending a
+    <code style="white-space: pre-wrap;">&lt;g&gt;</code>, moving it, then
+    calling <code style="white-space: pre-wrap;">d3.axisBottom</code> on
+    it. D3 has built-in axis generators
+  </li>
+  <li>adds a left axis using the same approach but rotating the ticks</li>
+  <li>appends a text label “Frequency” to the left axis</li>
+  <li>
+    uses <code style="white-space: pre-wrap;">selectAll.data</code> to make
+    a virtual selection of
+    <code style="white-space: pre-wrap;">.bar</code> nodes and attach some
+    data, then for every new data value (.enter), appends a
+    <code style="white-space: pre-wrap;">&lt;rect&gt;</code> node and gives
+    it attributes
+  </li>
+</ul>
+<p>
+  That last part is where people get lost. It looks like magic. Even to me.
+</p>
+<p>
+  It’s a declarative approach to rendering data. Works great, hard to
+  understand. That’s why we’ll do it in React instead 😃
+</p>
+<p>
+  You can think of <code style="white-space: pre-wrap;">.enter</code> as a
+  loop over your data. Everything chained after
+  <code style="white-space: pre-wrap;">.enter</code> is your loop’s body.
+  Sort of like doing
+  <code style="white-space: pre-wrap;"
+    >data.map(d =&gt; append(rect).setManyAttributes())</code
+  >
+</p>
+<p>
+  That function executes for any <em>new</em> data “entering” your
+  visualization. There’s also
+  <code style="white-space: pre-wrap;">.exit</code> for anything that’s
+  dropping out, and <code style="white-space: pre-wrap;">.update</code> for
+  anything that’s changing.
+</p>

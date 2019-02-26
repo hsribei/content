@@ -1,20 +1,20 @@
-    <h3 id="the-alphabet-component">The Alphabet component</h3>
-    <p>
-      The <code style="white-space: pre-wrap;">Alphabet</code> component holds
-      a list of letters in component state and renders a collection of
-      <code style="white-space: pre-wrap;">Letter</code> components in a loop.
-    </p>
-    <p>We start with a skeleton like this:</p>
-    <div
-      class="sourceCode"
-      id="cb136"
-      data-caption="Alphabet skeleton"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb136-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet.js</span></a>
+<h3 id="the-alphabet-component">The Alphabet component</h3>
+<p>
+  The <code style="white-space: pre-wrap;">Alphabet</code> component holds
+  a list of letters in component state and renders a collection of
+  <code style="white-space: pre-wrap;">Letter</code> components in a loop.
+</p>
+<p>We start with a skeleton like this:</p>
+<div
+  class="sourceCode"
+  id="cb136"
+  data-caption="Alphabet skeleton"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb136-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet.js</span></a>
 <a class="sourceLine" id="cb136-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb136-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb136-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> TransitionGroup <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react-transition-group&quot;</span><span class="op" style="color: #666666;">;</span></a>
@@ -43,36 +43,36 @@
 <a class="sourceLine" id="cb136-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb136-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb136-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Alphabet<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We import dependencies and define the
-      <code style="white-space: pre-wrap;">Alphabet</code> component. It keeps
-      a list of available letters in a static
-      <code style="white-space: pre-wrap;">letters</code> property and an empty
-      <code style="white-space: pre-wrap;">alphabet</code> in component state.
-    </p>
-    <p>
-      We’ll start a <code style="white-space: pre-wrap;">d3.interval</code> on
-      <code style="white-space: pre-wrap;">componentDidMount</code> and use
-      <code style="white-space: pre-wrap;">shuffleAlphabet</code> to generate
-      alphabet subsets.
-    </p>
-    <p>
-      To showcase enter-update-exit transitions, we create a new alphabet every
-      second and a half. Using
-      <code style="white-space: pre-wrap;">d3.interval</code> lets us do that
-      in a browser friendly way.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb137"
-      data-caption="Alphabet game loop"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb137-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/index.js</span></a>
+</div>
+<p>
+  We import dependencies and define the
+  <code style="white-space: pre-wrap;">Alphabet</code> component. It keeps
+  a list of available letters in a static
+  <code style="white-space: pre-wrap;">letters</code> property and an empty
+  <code style="white-space: pre-wrap;">alphabet</code> in component state.
+</p>
+<p>
+  We’ll start a <code style="white-space: pre-wrap;">d3.interval</code> on
+  <code style="white-space: pre-wrap;">componentDidMount</code> and use
+  <code style="white-space: pre-wrap;">shuffleAlphabet</code> to generate
+  alphabet subsets.
+</p>
+<p>
+  To showcase enter-update-exit transitions, we create a new alphabet every
+  second and a half. Using
+  <code style="white-space: pre-wrap;">d3.interval</code> lets us do that
+  in a browser friendly way.
+</p>
+<div
+  class="sourceCode"
+  id="cb137"
+  data-caption="Alphabet game loop"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb137-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/index.js</span></a>
 <a class="sourceLine" id="cb137-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">componentDidMount</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb137-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">interval</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">shuffleAlphabet</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">1500</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb137-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
@@ -87,35 +87,35 @@
 <a class="sourceLine" id="cb137-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            alphabet</a>
 <a class="sourceLine" id="cb137-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb137-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a></code></pre>
-    </div>
-    <p>
-      Think of this as our game loop: Change alphabet state in consistent time
-      intervals.
-    </p>
-    <p>
-      We use
-      <code style="white-space: pre-wrap;">d3.interval( //.., 1500)</code> to
-      call <code style="white-space: pre-wrap;">shuffleAlphabet</code> every
-      1.5 seconds. Same as
-      <code style="white-space: pre-wrap;">setInterval</code>, but friendlier
-      to batteries and CPUs because it pegs to
-      <code style="white-space: pre-wrap;">requestAnimationFrame</code>. On
-      each period, we use
-      <code style="white-space: pre-wrap;">shuffleAlphabet</code> to shuffle
-      available letters, slice out a random amount, sort them, and update
-      component state with
-      <code style="white-space: pre-wrap;">setState</code>.
-    </p>
-    <p>
-      This process ensures our alphabet is both random and in alphabetical
-      order.
-    </p>
-    <p>
-      Starting the interval in
-      <code style="white-space: pre-wrap;">componentDidMount</code> ensures it
-      only runs when our Alphabet is on the page. In real life you should stop
-      it on <code style="white-space: pre-wrap;">componentWillUnmount</code>.
-      Since this is a tiny experiment and we know
-      <code style="white-space: pre-wrap;">&lt;Alphabet&gt;</code> never
-      unmounts without a page refresh, it’s okay to skip that step.
-    </p>
+</div>
+<p>
+  Think of this as our game loop: Change alphabet state in consistent time
+  intervals.
+</p>
+<p>
+  We use
+  <code style="white-space: pre-wrap;">d3.interval( //.., 1500)</code> to
+  call <code style="white-space: pre-wrap;">shuffleAlphabet</code> every
+  1.5 seconds. Same as
+  <code style="white-space: pre-wrap;">setInterval</code>, but friendlier
+  to batteries and CPUs because it pegs to
+  <code style="white-space: pre-wrap;">requestAnimationFrame</code>. On
+  each period, we use
+  <code style="white-space: pre-wrap;">shuffleAlphabet</code> to shuffle
+  available letters, slice out a random amount, sort them, and update
+  component state with
+  <code style="white-space: pre-wrap;">setState</code>.
+</p>
+<p>
+  This process ensures our alphabet is both random and in alphabetical
+  order.
+</p>
+<p>
+  Starting the interval in
+  <code style="white-space: pre-wrap;">componentDidMount</code> ensures it
+  only runs when our Alphabet is on the page. In real life you should stop
+  it on <code style="white-space: pre-wrap;">componentWillUnmount</code>.
+  Since this is a tiny experiment and we know
+  <code style="white-space: pre-wrap;">&lt;Alphabet&gt;</code> never
+  unmounts without a page refresh, it’s okay to skip that step.
+</p>

@@ -1,20 +1,20 @@
-    <h3 id="step-2-stub-out-bouncingball">Step 2: Stub out BouncingBall</h3>
-    <p>
-      We encapsulate everything in this component so that
-      <code style="white-space: pre-wrap;">App</code> doesn’t have to know
-      about the details of our animation. App declaratively renders a bouncing
-      ball and that’s it.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb128"
-      data-caption="BouncingBall component stub"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb128-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
+<h3 id="step-2-stub-out-bouncingball">Step 2: Stub out BouncingBall</h3>
+<p>
+  We encapsulate everything in this component so that
+  <code style="white-space: pre-wrap;">App</code> doesn’t have to know
+  about the details of our animation. App declaratively renders a bouncing
+  ball and that’s it.
+</p>
+<div
+  class="sourceCode"
+  id="cb128"
+  data-caption="BouncingBall component stub"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb128-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb128-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb128-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb128-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> BouncingBall <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
@@ -49,36 +49,36 @@
 <a class="sourceLine" id="cb128-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb128-34" title="34" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb128-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> BouncingBall<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>Nothing renders yet and we’re set up to get started.</p>
-    <p>
-      We start with default state: vertical position
-      <code style="white-space: pre-wrap;">y=5</code>, vertical speed
-      <code style="white-space: pre-wrap;">vy😮</code>.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">componentDidMount</code> fires off a
-      d3 timer and
-      <code style="white-space: pre-wrap;">componentWillUnmount</code> stops it
-      so we don’t have unwanted code running in the background. The timer calls
-      <code style="white-space: pre-wrap;">this.gameLoop</code> every 16
-      milliseconds, which translates to about 60 frames per second.
-    </p>
-    <p>
-      D3 timers work like JavaScript’s own
-      <code style="white-space: pre-wrap;">setInterval</code>, but their
-      implementation is more robust. They use
-      <code style="white-space: pre-wrap;">requestAnimationFrame</code> to save
-      computer resources when possible, and default to
-      <code style="white-space: pre-wrap;">setInterval</code> otherwise.
-    </p>
-    <p>
-      Unlike <code style="white-space: pre-wrap;">setInterval</code> timers are
-      also synced so their frames match up, can be restarted, stopped, etc. You
-      should default to favoring
-      <code style="white-space: pre-wrap;">d3.timer</code> over
-      <code style="white-space: pre-wrap;">setInterval</code> or hacking your
-      own
-      <code style="white-space: pre-wrap;">requestAnimationFrame</code>
-      implementation.
-    </p>
+</div>
+<p>Nothing renders yet and we’re set up to get started.</p>
+<p>
+  We start with default state: vertical position
+  <code style="white-space: pre-wrap;">y=5</code>, vertical speed
+  <code style="white-space: pre-wrap;">vy😮</code>.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">componentDidMount</code> fires off a
+  d3 timer and
+  <code style="white-space: pre-wrap;">componentWillUnmount</code> stops it
+  so we don’t have unwanted code running in the background. The timer calls
+  <code style="white-space: pre-wrap;">this.gameLoop</code> every 16
+  milliseconds, which translates to about 60 frames per second.
+</p>
+<p>
+  D3 timers work like JavaScript’s own
+  <code style="white-space: pre-wrap;">setInterval</code>, but their
+  implementation is more robust. They use
+  <code style="white-space: pre-wrap;">requestAnimationFrame</code> to save
+  computer resources when possible, and default to
+  <code style="white-space: pre-wrap;">setInterval</code> otherwise.
+</p>
+<p>
+  Unlike <code style="white-space: pre-wrap;">setInterval</code> timers are
+  also synced so their frames match up, can be restarted, stopped, etc. You
+  should default to favoring
+  <code style="white-space: pre-wrap;">d3.timer</code> over
+  <code style="white-space: pre-wrap;">setInterval</code> or hacking your
+  own
+  <code style="white-space: pre-wrap;">requestAnimationFrame</code>
+  implementation.
+</p>

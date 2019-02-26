@@ -1,113 +1,113 @@
-    <h1 id="structuring-your-app">How to structure your app</h1>
-    <p>
-      Our app is built from components. You already know how components work.
-      Where it gets tricky is deciding where one component ends and another
-      beings.
-    </p>
-    <p>
-      One of the hardest problems in software engineering I’d say. Defining the
-      boundaries and interfaces between objects. Entire books have been written
-      on the subject.
-    </p>
-    <p>
-      You’ll learn most of it with experience. Just through trying different
-      approaches, seeing what works, and developing your taste. Like a chef
-      gets better at improvisation the more things they try. Or a musician.
-    </p>
-    <p>
-      To get you started, here’s a rule of thumb that I like to use: if you
-      have to use the word “and” to describe what your component does, then it
-      should become two components. If you build the same feature multiple
-      times, turn it into a component.
-    </p>
-    <p>
-      You can then remix components into larger components where it makes
-      sense, or you can keep them separate. It makes sense to combine when
-      multiple small components have to work together to build a big feature.
-    </p>
-    <p>This architecture often mimics the design of your UI.</p>
-    <p>
-      For example: our tech salary visualization is going to use 1 very top
-      level component, 5 major components, and a bunch of child components.
-    </p>
-    <ul>
-      <li>
-        <code style="white-space: pre-wrap;">App</code> is the very top level
-        component; it keeps everything together
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Title</code> renders the dynamic
-        title
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Description</code> renders the
-        dynamic description
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Histogram</code> renders the
-        histogram and has child components for the axis and histogram bars
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">CountyMap</code> renders the
-        choropleth map and uses child components for the counties
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Controls</code> renders the rows
-        of buttons that let users explore our dataset
-      </li>
-    </ul>
-    <p>
-      Most of these are specific to our use case, but
-      <code style="white-space: pre-wrap;">Histogram</code> and
-      <code style="white-space: pre-wrap;">CountyMap</code> have potential to
-      be used elsewhere. We’ll keep that in mind when we build them.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">Histogram</code>,
-      <code style="white-space: pre-wrap;">CountyMap</code>, and
-      <code style="white-space: pre-wrap;">Controls</code> are going to have
-      their own folder inside
-      <code style="white-space: pre-wrap;">src/components/</code> to help us
-      group major components with their children. An
-      <code style="white-space: pre-wrap;">index.js</code> file will help with
-      imports.
-    </p>
-    <p>
-      We’ll use a <code style="white-space: pre-wrap;">Meta</code> folder for
-      all our metadata components like
-      <code style="white-space: pre-wrap;">Title</code> and
-      <code style="white-space: pre-wrap;">Description</code>. We don’t
-      <em>have</em> to do this, but
-      <code style="white-space: pre-wrap;"
-        >import { Title, Description } from './Meta'</code
-      >
-      looks better than separate imports for related-but-different components.
-      Namespacing, if you will.
-    </p>
-    <p>
-      We want to access every component with
-      <code style="white-space: pre-wrap;"
-        >import My Component from './MyComponent'</code
-      >
-      and render as
-      <code style="white-space: pre-wrap;"
-        >&lt;MyComponent {...params} /&gt;</code
-      >. Something is wrong, if a parent component has to know details about
-      the implementation of a child component.
-    </p>
-    <p>
-      You can read more about these ideas by Googling
-      <a href="https://en.wikipedia.org/wiki/Leaky_abstraction"
-        >“leaky abstractions”</a
-      >,
-      <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle"
-        >“single responsibility principle”</a
-      >,
-      <a href="https://en.wikipedia.org/wiki/Separation_of_concerns"
-        >“separation of concerns”</a
-      >, and
-      <a href="https://en.wikipedia.org/wiki/Structured_programming"
-        >“structured programming”</a
-      >. Books from the late 90’s and early 2000’s (when object-oriented
-      programming was The Future™) have the best curated info in my experience.
-    </p>
+<h1 id="structuring-your-app">How to structure your app</h1>
+<p>
+  Our app is built from components. You already know how components work.
+  Where it gets tricky is deciding where one component ends and another
+  beings.
+</p>
+<p>
+  One of the hardest problems in software engineering I’d say. Defining the
+  boundaries and interfaces between objects. Entire books have been written
+  on the subject.
+</p>
+<p>
+  You’ll learn most of it with experience. Just through trying different
+  approaches, seeing what works, and developing your taste. Like a chef
+  gets better at improvisation the more things they try. Or a musician.
+</p>
+<p>
+  To get you started, here’s a rule of thumb that I like to use: if you
+  have to use the word “and” to describe what your component does, then it
+  should become two components. If you build the same feature multiple
+  times, turn it into a component.
+</p>
+<p>
+  You can then remix components into larger components where it makes
+  sense, or you can keep them separate. It makes sense to combine when
+  multiple small components have to work together to build a big feature.
+</p>
+<p>This architecture often mimics the design of your UI.</p>
+<p>
+  For example: our tech salary visualization is going to use 1 very top
+  level component, 5 major components, and a bunch of child components.
+</p>
+<ul>
+  <li>
+    <code style="white-space: pre-wrap;">App</code> is the very top level
+    component; it keeps everything together
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Title</code> renders the dynamic
+    title
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Description</code> renders the
+    dynamic description
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Histogram</code> renders the
+    histogram and has child components for the axis and histogram bars
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">CountyMap</code> renders the
+    choropleth map and uses child components for the counties
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Controls</code> renders the rows
+    of buttons that let users explore our dataset
+  </li>
+</ul>
+<p>
+  Most of these are specific to our use case, but
+  <code style="white-space: pre-wrap;">Histogram</code> and
+  <code style="white-space: pre-wrap;">CountyMap</code> have potential to
+  be used elsewhere. We’ll keep that in mind when we build them.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">Histogram</code>,
+  <code style="white-space: pre-wrap;">CountyMap</code>, and
+  <code style="white-space: pre-wrap;">Controls</code> are going to have
+  their own folder inside
+  <code style="white-space: pre-wrap;">src/components/</code> to help us
+  group major components with their children. An
+  <code style="white-space: pre-wrap;">index.js</code> file will help with
+  imports.
+</p>
+<p>
+  We’ll use a <code style="white-space: pre-wrap;">Meta</code> folder for
+  all our metadata components like
+  <code style="white-space: pre-wrap;">Title</code> and
+  <code style="white-space: pre-wrap;">Description</code>. We don’t
+  <em>have</em> to do this, but
+  <code style="white-space: pre-wrap;"
+    >import { Title, Description } from './Meta'</code
+  >
+  looks better than separate imports for related-but-different components.
+  Namespacing, if you will.
+</p>
+<p>
+  We want to access every component with
+  <code style="white-space: pre-wrap;"
+    >import My Component from './MyComponent'</code
+  >
+  and render as
+  <code style="white-space: pre-wrap;"
+    >&lt;MyComponent {...params} /&gt;</code
+  >. Something is wrong, if a parent component has to know details about
+  the implementation of a child component.
+</p>
+<p>
+  You can read more about these ideas by Googling
+  <a href="https://en.wikipedia.org/wiki/Leaky_abstraction"
+    >“leaky abstractions”</a
+  >,
+  <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle"
+    >“single responsibility principle”</a
+  >,
+  <a href="https://en.wikipedia.org/wiki/Separation_of_concerns"
+    >“separation of concerns”</a
+  >, and
+  <a href="https://en.wikipedia.org/wiki/Structured_programming"
+    >“structured programming”</a
+  >. Books from the late 90’s and early 2000’s (when object-oriented
+  programming was The Future™) have the best curated info in my experience.
+</p>

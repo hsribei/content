@@ -1,27 +1,27 @@
-    <h3 id="preparing-a-canvas-layer">Preparing a canvas layer</h3>
-    <p>
-      Our changes start in
-      <code style="white-space: pre-wrap;">src/components/index.jsx</code>. We
-      have to throw away the
-      <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element and
-      replace it with a Konva stage.
-    </p>
-    <p>
-      You can think of a Konva stage as a Canvas element with a bunch of helper
-      methods attached. Some of them Konva uses internally; others are exposed
-      as an API. Functions like exporting to an image file, detecting
-      intersections, etc.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb158"
-      data-caption="Import Konva and set the stage"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb158-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
+<h3 id="preparing-a-canvas-layer">Preparing a canvas layer</h3>
+<p>
+  Our changes start in
+  <code style="white-space: pre-wrap;">src/components/index.jsx</code>. We
+  have to throw away the
+  <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element and
+  replace it with a Konva stage.
+</p>
+<p>
+  You can think of a Konva stage as a Canvas element with a bunch of helper
+  methods attached. Some of them Konva uses internally; others are exposed
+  as an API. Functions like exporting to an image file, detecting
+  intersections, etc.
+</p>
+<div
+  class="sourceCode"
+  id="cb158"
+  data-caption="Import Konva and set the stage"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb158-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
 <a class="sourceLine" id="cb158-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb158-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb158-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> Stage <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react-konva&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -43,19 +43,19 @@
 <a class="sourceLine" id="cb158-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb158-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb158-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We import <code style="white-space: pre-wrap;">Stage</code> from
-      <code style="white-space: pre-wrap;">react-konva</code>, then use it
-      instead of the
-      <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element in the
-      <code style="white-space: pre-wrap;">render</code> method. It gets a
-      <code style="white-space: pre-wrap;">width</code> and a
-      <code style="white-space: pre-wrap;">height</code>.
-    </p>
-    <p>
-      Inside, we render the
-      <code style="white-space: pre-wrap;">Particles</code> component. It’s
-      going to create a Konva layer and use low-level Canvas methods to render
-      particles as sprites.
-    </p>
+</div>
+<p>
+  We import <code style="white-space: pre-wrap;">Stage</code> from
+  <code style="white-space: pre-wrap;">react-konva</code>, then use it
+  instead of the
+  <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element in the
+  <code style="white-space: pre-wrap;">render</code> method. It gets a
+  <code style="white-space: pre-wrap;">width</code> and a
+  <code style="white-space: pre-wrap;">height</code>.
+</p>
+<p>
+  Inside, we render the
+  <code style="white-space: pre-wrap;">Particles</code> component. It’s
+  going to create a Konva layer and use low-level Canvas methods to render
+  particles as sprites.
+</p>

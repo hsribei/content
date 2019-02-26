@@ -1,28 +1,28 @@
-    <h2 id="twitter-and-facebook-cards-and-seo">
-      Twitter and Facebook cards and SEO
-    </h2>
-    <p>
-      How your visualization looks on social media matters more than you’d
-      think. Does it have a nice picture, a great description, and a title, or
-      does it look like a random URL? Those things matter.
-    </p>
-    <p>And they’re easy to set up. No excuse.</p>
-    <p>
-      We’re going to poke around
-      <code style="white-space: pre-wrap;">public/index.html</code> for the
-      first time. Add titles, Twitter cards, Facebook Open Graph things, and so
-      on.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb122"
-      data-caption="Basic SEO"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode html"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode html" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb122-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">&lt;!-- public/index.html --&gt;</span></a>
+<h2 id="twitter-and-facebook-cards-and-seo">
+  Twitter and Facebook cards and SEO
+</h2>
+<p>
+  How your visualization looks on social media matters more than you’d
+  think. Does it have a nice picture, a great description, and a title, or
+  does it look like a random URL? Those things matter.
+</p>
+<p>And they’re easy to set up. No excuse.</p>
+<p>
+  We’re going to poke around
+  <code style="white-space: pre-wrap;">public/index.html</code> for the
+  first time. Add titles, Twitter cards, Facebook Open Graph things, and so
+  on.
+</p>
+<div
+  class="sourceCode"
+  id="cb122"
+  data-caption="Basic SEO"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode html"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode html" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb122-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">&lt;!-- public/index.html --&gt;</span></a>
 <a class="sourceLine" id="cb122-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">&lt;head&gt;</span></a>
 <a class="sourceLine" id="cb122-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">&lt;!-- //... --&gt;</span></a>
 <a class="sourceLine" id="cb122-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    // Insert the line(s) between here...</a>
@@ -50,48 +50,48 @@
 <a class="sourceLine" id="cb122-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        // ...and here.</a>
 <a class="sourceLine" id="cb122-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">&lt;/div&gt;</span></a>
 <a class="sourceLine" id="cb122-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">&lt;/body&gt;</span></a></code></pre>
-    </div>
-    <p>
-      We add a <code style="white-space: pre-wrap;">&lt;title&gt;</code> and a
-      <code style="white-space: pre-wrap;">canonical</code> URL. Titles
-      configure what shows up in browser tabs, and the canonical URL is there
-      to tell search engines that this is the main and most important URL for
-      this piece of content. This is especially important for when people
-      copy-paste your stuff and put it on other websites.
-    </p>
-    <p>
-      In the body root tag, we add some copy-pasted text from our dataviz.
-      You’ll recognize the default title and description.
-    </p>
-    <p>
-      As soon as React loads, these get overwritten with our preloader, but
-      it’s good to have them here for any search engines that aren’t running
-      JavaScript yet. I think both Google and Bing are capable of running our
-      React app and getting text from there, but you never know.
-    </p>
-    <p>
-      To make social media embeds look great, we’ll use
-      <a href="https://dev.twitter.com/cards/types/summary-large-image"
-        >Twitter card</a
-      >
-      and
-      <a href="https://developers.facebook.com/docs/sharing/webmasters"
-        >Facebook OpenGraph</a
-      >
-      meta tags. I think most other websites just rely on these since most
-      people use them. They go in the
-      <code style="white-space: pre-wrap;">&lt;head&gt;</code> of our HTML.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb123"
-      data-caption="Add FB and Twitter cards"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb123-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">&lt;!--</span> <span class="kw" style="color: #007020; font-weight: bold;">public</span><span class="ss" style="color: #bb6688;">/index.html --&gt;</span></a>
+</div>
+<p>
+  We add a <code style="white-space: pre-wrap;">&lt;title&gt;</code> and a
+  <code style="white-space: pre-wrap;">canonical</code> URL. Titles
+  configure what shows up in browser tabs, and the canonical URL is there
+  to tell search engines that this is the main and most important URL for
+  this piece of content. This is especially important for when people
+  copy-paste your stuff and put it on other websites.
+</p>
+<p>
+  In the body root tag, we add some copy-pasted text from our dataviz.
+  You’ll recognize the default title and description.
+</p>
+<p>
+  As soon as React loads, these get overwritten with our preloader, but
+  it’s good to have them here for any search engines that aren’t running
+  JavaScript yet. I think both Google and Bing are capable of running our
+  React app and getting text from there, but you never know.
+</p>
+<p>
+  To make social media embeds look great, we’ll use
+  <a href="https://dev.twitter.com/cards/types/summary-large-image"
+    >Twitter card</a
+  >
+  and
+  <a href="https://developers.facebook.com/docs/sharing/webmasters"
+    >Facebook OpenGraph</a
+  >
+  meta tags. I think most other websites just rely on these since most
+  people use them. They go in the
+  <code style="white-space: pre-wrap;">&lt;head&gt;</code> of our HTML.
+</p>
+<div
+  class="sourceCode"
+  id="cb123"
+  data-caption="Add FB and Twitter cards"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb123-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">&lt;!--</span> <span class="kw" style="color: #007020; font-weight: bold;">public</span><span class="ss" style="color: #bb6688;">/index.html --&gt;</span></a>
 <a class="sourceLine" id="cb123-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="ss" style="color: #bb6688;">&lt;head&gt;</span></a>
 <a class="sourceLine" id="cb123-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="ss" style="color: #bb6688;">    &lt;meta property=&quot;og:locale&quot; content=&quot;en_US&quot; /</span><span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb123-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">&lt;</span>meta property<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;og:type&quot;</span> content<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;article&quot;</span> /&gt;</a>
@@ -122,45 +122,45 @@
 <a class="sourceLine" id="cb123-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">          content<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;https://swizec.github.io/react-d3js-step-by-step/thumbnail.png&quot;</span> /&gt;</a>
 <a class="sourceLine" id="cb123-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">&lt;</span>meta name<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;twitter:creator&quot;</span> content<span class="op" style="color: #666666;">=</span><span class="st" style="color: #4070a0;">&quot;@swizec&quot;</span> /&gt;</a>
 <a class="sourceLine" id="cb123-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">&lt;/head<span class="op" style="color: #666666;">&gt;</span></a></code></pre>
-    </div>
-    <p>
-      Much of this code is repetitive. Both Twitter and Facebook want the same
-      info, but they’re stubborn and won’t read each other’s formats. You can
-      copy all of this, but make sure to change
-      <code style="white-space: pre-wrap;">og:url</code>,
-      <code style="white-space: pre-wrap;">og:site_name</code>,
-      <code style="white-space: pre-wrap;">article:publisher</code>,
-      <code style="white-space: pre-wrap;">fb:admins</code>,
-      <code style="white-space: pre-wrap;">og:image</code>,
-      <code style="white-space: pre-wrap;">twitter:site</code>,
-      <code style="white-space: pre-wrap;">twitter:image</code>, and
-      <code style="white-space: pre-wrap;">twitter:creator</code>. They’re
-      specific to you.
-    </p>
-    <p>
-      The URLs you should change to the
-      <code style="white-space: pre-wrap;">homepage</code> URL you used above.
-      The rest you should change to use your name and Twitter/Facebook handles.
-      I’m not sure <em>why</em> it matters, but I’m sure it does.
-    </p>
-    <p>
-      An important one is <code style="white-space: pre-wrap;">fb:admin</code>.
-      It enables admin features on your site if you add their social plugins.
-      If you don’t, it probably doesn’t matter.
-    </p>
-    <p>
-      You’re also going to need a thumbnail image. I made mine by taking a
-      screenshot of the final visualization, then I put it in
-      <code style="white-space: pre-wrap;">public/thumbnail.png</code>.
-    </p>
-    <p>
-      Now when somebody shares your dataviz on Twitter or Facebook, it’s going
-      to look something like this:
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/twitter-card.png"
-        alt="Dataviz Twitter card"
-      />
-      <figcaption>Dataviz Twitter card</figcaption>
-    </figure>
+</div>
+<p>
+  Much of this code is repetitive. Both Twitter and Facebook want the same
+  info, but they’re stubborn and won’t read each other’s formats. You can
+  copy all of this, but make sure to change
+  <code style="white-space: pre-wrap;">og:url</code>,
+  <code style="white-space: pre-wrap;">og:site_name</code>,
+  <code style="white-space: pre-wrap;">article:publisher</code>,
+  <code style="white-space: pre-wrap;">fb:admins</code>,
+  <code style="white-space: pre-wrap;">og:image</code>,
+  <code style="white-space: pre-wrap;">twitter:site</code>,
+  <code style="white-space: pre-wrap;">twitter:image</code>, and
+  <code style="white-space: pre-wrap;">twitter:creator</code>. They’re
+  specific to you.
+</p>
+<p>
+  The URLs you should change to the
+  <code style="white-space: pre-wrap;">homepage</code> URL you used above.
+  The rest you should change to use your name and Twitter/Facebook handles.
+  I’m not sure <em>why</em> it matters, but I’m sure it does.
+</p>
+<p>
+  An important one is <code style="white-space: pre-wrap;">fb:admin</code>.
+  It enables admin features on your site if you add their social plugins.
+  If you don’t, it probably doesn’t matter.
+</p>
+<p>
+  You’re also going to need a thumbnail image. I made mine by taking a
+  screenshot of the final visualization, then I put it in
+  <code style="white-space: pre-wrap;">public/thumbnail.png</code>.
+</p>
+<p>
+  Now when somebody shares your dataviz on Twitter or Facebook, it’s going
+  to look something like this:
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/twitter-card.png"
+    alt="Dataviz Twitter card"
+  />
+  <figcaption>Dataviz Twitter card</figcaption>
+</figure>

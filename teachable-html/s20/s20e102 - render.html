@@ -1,15 +1,15 @@
-    <h4 id="render-3">render</h4>
-    <p>Hard work is done. Here’s how you render:</p>
-    <div
-      class="sourceCode"
-      id="cb143"
-      data-caption="Letter render method"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb143-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/Letter.js</span></a>
+<h4 id="render-3">render</h4>
+<p>Hard work is done. Here’s how you render:</p>
+<div
+  class="sourceCode"
+  id="cb143"
+  data-caption="Letter render method"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb143-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/Letter.js</span></a>
 <a class="sourceLine" id="cb143-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb143-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> fillOpacity<span class="op" style="color: #666666;">,</span> color <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb143-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="op" style="color: #666666;">{</span> letter <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">props</span><span class="op" style="color: #666666;">;</span></a>
@@ -38,37 +38,37 @@
 <a class="sourceLine" id="cb143-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/Transition<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb143-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb143-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We render a
-      <code style="white-space: pre-wrap;">Transition</code> element, which
-      gives us the transition super powers we need to run enter/exit
-      transitions. Update transitions work on all React components.
-    </p>
-    <p>
-      The outside
-      <code style="white-space: pre-wrap;">TransitionGroup</code> gives us the
-      correct <code style="white-space: pre-wrap;">in</code> prop value, we
-      just have to pass it into
-      <code style="white-space: pre-wrap;">Transition</code>. We disable
-      <code style="white-space: pre-wrap;">unmountOnExit</code> to make
-      transitions smoother, define a
-      <code style="white-space: pre-wrap;">timeout</code> which has to match
-      what we’re using in our transitions, and define
-      <code style="white-space: pre-wrap;">onEnter</code> and
-      <code style="white-space: pre-wrap;">onExit</code> callbacks.
-    </p>
-    <p>
-      There’s a lot more to the API that we can use and you should check that
-      out in the docs. Docs don’t go into detail on everything, but if you
-      experiment I’m sure you’ll figure it out.
-    </p>
-    <p>
-      Inside the transition we render an SVG
-      <code style="white-space: pre-wrap;">&lt;text&gt;</code> element rendered
-      at an <code style="white-space: pre-wrap;">(x, y)</code> position with a
-      <code style="white-space: pre-wrap;">color</code> and
-      <code style="white-space: pre-wrap;">fillOpacity</code> style. It shows a
-      single letter taken from the
-      <code style="white-space: pre-wrap;">letter</code> prop.
-    </p>
+</div>
+<p>
+  We render a
+  <code style="white-space: pre-wrap;">Transition</code> element, which
+  gives us the transition super powers we need to run enter/exit
+  transitions. Update transitions work on all React components.
+</p>
+<p>
+  The outside
+  <code style="white-space: pre-wrap;">TransitionGroup</code> gives us the
+  correct <code style="white-space: pre-wrap;">in</code> prop value, we
+  just have to pass it into
+  <code style="white-space: pre-wrap;">Transition</code>. We disable
+  <code style="white-space: pre-wrap;">unmountOnExit</code> to make
+  transitions smoother, define a
+  <code style="white-space: pre-wrap;">timeout</code> which has to match
+  what we’re using in our transitions, and define
+  <code style="white-space: pre-wrap;">onEnter</code> and
+  <code style="white-space: pre-wrap;">onExit</code> callbacks.
+</p>
+<p>
+  There’s a lot more to the API that we can use and you should check that
+  out in the docs. Docs don’t go into detail on everything, but if you
+  experiment I’m sure you’ll figure it out.
+</p>
+<p>
+  Inside the transition we render an SVG
+  <code style="white-space: pre-wrap;">&lt;text&gt;</code> element rendered
+  at an <code style="white-space: pre-wrap;">(x, y)</code> position with a
+  <code style="white-space: pre-wrap;">color</code> and
+  <code style="white-space: pre-wrap;">fillOpacity</code> style. It shows a
+  single letter taken from the
+  <code style="white-space: pre-wrap;">letter</code> prop.
+</p>

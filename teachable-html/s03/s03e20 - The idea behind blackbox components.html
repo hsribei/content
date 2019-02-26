@@ -1,42 +1,42 @@
-    <h1 id="blackbox-components">
-      Quickly integrate any D3 code in your React project with Blackbox
-      Components
-    </h1>
-    <p>
-      Blackbox components are the quickest way to integrate D3 and React. You
-      can think of them as wrappers around D3 visualizations.
-    </p>
-    <p>
-      With the blackbox approach, you can take any D3 example from the
-      internets or your brain, wrap it in a React component, and it Just
-      Works™. This is great when you’re in a hurry, but comes with a big
-      caveat: You’re letting D3 control some of the DOM.
-    </p>
-    <p>
-      D3 controlling the DOM is <em>okay</em>, but it means React can’t help
-      you there. That’s why it’s called a Blackbox – React can’t see inside.
-    </p>
-    <p>
-      No render engine, no tree diffing, no dev tools to inspect what’s going.
-      Just a blob of DOM elements.
-    </p>
-    <p>
-      Okay for small components or when you’re prototyping, but I’ve had people
-      come to my workshops and say
-      <em
-        >“We built our whole app with the blackbox approach. It takes a few
-        seconds to re-render when you click something. Please help”</em
-      >
-    </p>
-    <p>🤔</p>
-    <p>Here’s how it works:</p>
-    <ul>
-      <li>React renders an anchor element</li>
-      <li>D3 hijacks it and puts stuff in</li>
-    </ul>
-    <p>
-      You manually re-render on props and state changes. Throwing away and
-      rebuilding the entire DOM subtree on each render. With complex
-      visualizations this becomes a huge hit on performance.
-    </p>
-    <p>Use this technique sparingly.</p>
+<h1 id="blackbox-components">
+  Quickly integrate any D3 code in your React project with Blackbox
+  Components
+</h1>
+<p>
+  Blackbox components are the quickest way to integrate D3 and React. You
+  can think of them as wrappers around D3 visualizations.
+</p>
+<p>
+  With the blackbox approach, you can take any D3 example from the
+  internets or your brain, wrap it in a React component, and it Just
+  Works™. This is great when you’re in a hurry, but comes with a big
+  caveat: You’re letting D3 control some of the DOM.
+</p>
+<p>
+  D3 controlling the DOM is <em>okay</em>, but it means React can’t help
+  you there. That’s why it’s called a Blackbox – React can’t see inside.
+</p>
+<p>
+  No render engine, no tree diffing, no dev tools to inspect what’s going.
+  Just a blob of DOM elements.
+</p>
+<p>
+  Okay for small components or when you’re prototyping, but I’ve had people
+  come to my workshops and say
+  <em
+    >“We built our whole app with the blackbox approach. It takes a few
+    seconds to re-render when you click something. Please help”</em
+  >
+</p>
+<p>🤔</p>
+<p>Here’s how it works:</p>
+<ul>
+  <li>React renders an anchor element</li>
+  <li>D3 hijacks it and puts stuff in</li>
+</ul>
+<p>
+  You manually re-render on props and state changes. Throwing away and
+  rebuilding the entire DOM subtree on each render. With complex
+  visualizations this becomes a huge hit on performance.
+</p>
+<p>Use this technique sparingly.</p>

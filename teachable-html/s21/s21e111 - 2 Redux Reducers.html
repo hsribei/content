@@ -1,53 +1,53 @@
-    <h2 id="redux-reducers">2 Redux Reducers</h2>
-    <p>
-      With the actions firing and the drawing done, it’s time to look at the
-      business logic of our particle generator. We’ll get it done in just 33
-      lines of code and some change.
-    </p>
-    <p>
-      Well, it’s a bunch of change. But the 33 lines that make up
-      <code style="white-space: pre-wrap;">CREATE_PARTICLES</code> and
-      <code style="white-space: pre-wrap;">TIME_TICK</code> changes are the
-      most interesting. The rest just flips various flags.
-    </p>
-    <p>
-      All our logic and physics goes in the reducer.
-      <a href="https://redux.js.org/docs/basics/Reducers.html"
-        >Dan Abramov says</a
-      >
-      to think of reducers as the function you’d put in
-      <code style="white-space: pre-wrap;">.reduce()</code>. Given a state and
-      a set of changes, how do I create the new state?
-    </p>
-    <p>A “sum numbers” example would look like this:</p>
-    <div
-      class="sourceCode"
-      id="cb152"
-      data-caption="Reducer concept"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb152-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> sum <span class="op" style="color: #666666;">=</span> [<span class="dv" style="color: #40a070;">1</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">2</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">3</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">4</span>].<span class="at" style="color: #7d9029;">reduce</span>((sum<span class="op" style="color: #666666;">,</span> n) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> sum<span class="op" style="color: #666666;">+</span>n<span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>For each number, take the previous sum and add the number.</p>
-    <p>
-      Our particle generator is a more advanced version of the same concept:
-      Takes current application state, incorporates an action, and returns new
-      application state.
-    </p>
-    <p>Start with a default state and some D3 random number helpers.</p>
-    <div
-      class="sourceCode"
-      id="cb153"
-      data-caption="Default state and constants"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb153-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> randomNormal <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
+<h2 id="redux-reducers">2 Redux Reducers</h2>
+<p>
+  With the actions firing and the drawing done, it’s time to look at the
+  business logic of our particle generator. We’ll get it done in just 33
+  lines of code and some change.
+</p>
+<p>
+  Well, it’s a bunch of change. But the 33 lines that make up
+  <code style="white-space: pre-wrap;">CREATE_PARTICLES</code> and
+  <code style="white-space: pre-wrap;">TIME_TICK</code> changes are the
+  most interesting. The rest just flips various flags.
+</p>
+<p>
+  All our logic and physics goes in the reducer.
+  <a href="https://redux.js.org/docs/basics/Reducers.html"
+    >Dan Abramov says</a
+  >
+  to think of reducers as the function you’d put in
+  <code style="white-space: pre-wrap;">.reduce()</code>. Given a state and
+  a set of changes, how do I create the new state?
+</p>
+<p>A “sum numbers” example would look like this:</p>
+<div
+  class="sourceCode"
+  id="cb152"
+  data-caption="Reducer concept"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb152-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">let</span> sum <span class="op" style="color: #666666;">=</span> [<span class="dv" style="color: #40a070;">1</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">2</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">3</span><span class="op" style="color: #666666;">,</span><span class="dv" style="color: #40a070;">4</span>].<span class="at" style="color: #7d9029;">reduce</span>((sum<span class="op" style="color: #666666;">,</span> n) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> sum<span class="op" style="color: #666666;">+</span>n<span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span>)<span class="op" style="color: #666666;">;</span></a></code></pre>
+</div>
+<p>For each number, take the previous sum and add the number.</p>
+<p>
+  Our particle generator is a more advanced version of the same concept:
+  Takes current application state, incorporates an action, and returns new
+  application state.
+</p>
+<p>Start with a default state and some D3 random number helpers.</p>
+<div
+  class="sourceCode"
+  id="cb153"
+  data-caption="Default state and constants"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb153-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> randomNormal <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb153-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb153-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Gravity <span class="op" style="color: #666666;">=</span> <span class="fl" style="color: #40a070;">0.5</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb153-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    randNormal <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">randomNormal</span>(<span class="fl" style="color: #40a070;">0.3</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">2</span>)<span class="op" style="color: #666666;">,</span></a>
@@ -64,69 +64,69 @@
 <a class="sourceLine" id="cb153-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">mousePos</span><span class="op" style="color: #666666;">:</span> [<span class="kw" style="color: #007020; font-weight: bold;">null</span><span class="op" style="color: #666666;">,</span> <span class="kw" style="color: #007020; font-weight: bold;">null</span>]<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb153-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">lastFrameTime</span><span class="op" style="color: #666666;">:</span> <span class="kw" style="color: #007020; font-weight: bold;">null</span></a>
 <a class="sourceLine" id="cb153-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
-    </div>
-    <p>
-      Using D3’s
-      <code style="white-space: pre-wrap;">randomNormal</code> random number
-      generator creates a better random distribution than using JavaScript’s
-      own <code style="white-space: pre-wrap;">Math.random</code>. The rest is
-      a bunch of default state 👇
-    </p>
-    <ul>
-      <li>
-        <code style="white-space: pre-wrap;">particles</code> holds an array of
-        particles to draw
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">particleIndex</code> defines the
-        ID of the next generated particle
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">particlesPerTick</code> defines
-        how many particles we create on each requestAnimationFrame
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">svgWidth</code> is the width of
-        our drawing area
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">svgHeigh</code> is the height
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">isTickerStarted</code> specifies
-        whether the animation is running
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">generateParticles</code> turns
-        particle generation on and off
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">mousePos</code> defines the
-        origination point for new particles
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">lastFrameTime</code> helps us
-        compensate for dropped frames
-      </li>
-    </ul>
-    <p>
-      To manipulate all this state, we use two reducers and manually combine
-      them. Redux does come with a
-      <code style="white-space: pre-wrap;">combineReducers</code> function, but
-      I wanted to keep our state flat and that doesn’t fit
-      <code style="white-space: pre-wrap;">combineReducers</code>’s view of how
-      life should work.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb154"
-      data-caption="Combining two reducers"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb154-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
+</div>
+<p>
+  Using D3’s
+  <code style="white-space: pre-wrap;">randomNormal</code> random number
+  generator creates a better random distribution than using JavaScript’s
+  own <code style="white-space: pre-wrap;">Math.random</code>. The rest is
+  a bunch of default state 👇
+</p>
+<ul>
+  <li>
+    <code style="white-space: pre-wrap;">particles</code> holds an array of
+    particles to draw
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">particleIndex</code> defines the
+    ID of the next generated particle
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">particlesPerTick</code> defines
+    how many particles we create on each requestAnimationFrame
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">svgWidth</code> is the width of
+    our drawing area
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">svgHeigh</code> is the height
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">isTickerStarted</code> specifies
+    whether the animation is running
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">generateParticles</code> turns
+    particle generation on and off
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">mousePos</code> defines the
+    origination point for new particles
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">lastFrameTime</code> helps us
+    compensate for dropped frames
+  </li>
+</ul>
+<p>
+  To manipulate all this state, we use two reducers and manually combine
+  them. Redux does come with a
+  <code style="white-space: pre-wrap;">combineReducers</code> function, but
+  I wanted to keep our state flat and that doesn’t fit
+  <code style="white-space: pre-wrap;">combineReducers</code>’s view of how
+  life should work.
+</p>
+<div
+  class="sourceCode"
+  id="cb154"
+  data-caption="Combining two reducers"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb154-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
 <a class="sourceLine" id="cb154-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb154-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Manually combineReducers</span></a>
 <a class="sourceLine" id="cb154-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span>(state <span class="op" style="color: #666666;">=</span> initialState<span class="op" style="color: #666666;">,</span> action) <span class="op" style="color: #666666;">{</span></a>
@@ -135,51 +135,51 @@
 <a class="sourceLine" id="cb154-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        ...<span class="at" style="color: #7d9029;">particlesReducer</span>(state<span class="op" style="color: #666666;">,</span> action)</a>
 <a class="sourceLine" id="cb154-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb154-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      This is our reducer. It takes current
-      <code style="white-space: pre-wrap;">state</code>, sets it to
-      <code style="white-space: pre-wrap;">initialState</code> if undefined,
-      and an action. To create new state, it spreads the object returned from
-      <code style="white-space: pre-wrap;">appReducer</code> and from
-      <code style="white-space: pre-wrap;">particlesReducer</code> into a new
-      object. You can combine as many reducers as you want in this way.
-    </p>
-    <p>
-      The usual
-      <code style="white-space: pre-wrap;">combineReducers</code> approach
-      leads to nested hierarchical state. That often works great, but I wanted
-      to keep our state flat.
-    </p>
-    <p>
-      Lesson here is that there are no rules. You can make your reducers
-      whatever you want. Combine them whichever way fits your use case. As long
-      as you take a state object and an action and return a new state object.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">appReducer</code> will handle the
-      constants and booleans and drive the metadata for our animation.
-      <code style="white-space: pre-wrap;">particlesReducer</code> will do the
-      hard work of generating and animating particles.
-    </p>
-    <h3 id="driving-the-basics-with-appreducer">
-      Driving the basics with appReducer
-    </h3>
-    <p>
-      Our <code style="white-space: pre-wrap;">appReducer</code> handles the
-      boring actions with a big switch statement. These are common in the Redux
-      world. They help us decide what to do based on action type.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb155"
-      data-caption="appReducer big switch"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb155-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
+</div>
+<p>
+  This is our reducer. It takes current
+  <code style="white-space: pre-wrap;">state</code>, sets it to
+  <code style="white-space: pre-wrap;">initialState</code> if undefined,
+  and an action. To create new state, it spreads the object returned from
+  <code style="white-space: pre-wrap;">appReducer</code> and from
+  <code style="white-space: pre-wrap;">particlesReducer</code> into a new
+  object. You can combine as many reducers as you want in this way.
+</p>
+<p>
+  The usual
+  <code style="white-space: pre-wrap;">combineReducers</code> approach
+  leads to nested hierarchical state. That often works great, but I wanted
+  to keep our state flat.
+</p>
+<p>
+  Lesson here is that there are no rules. You can make your reducers
+  whatever you want. Combine them whichever way fits your use case. As long
+  as you take a state object and an action and return a new state object.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">appReducer</code> will handle the
+  constants and booleans and drive the metadata for our animation.
+  <code style="white-space: pre-wrap;">particlesReducer</code> will do the
+  hard work of generating and animating particles.
+</p>
+<h3 id="driving-the-basics-with-appreducer">
+  Driving the basics with appReducer
+</h3>
+<p>
+  Our <code style="white-space: pre-wrap;">appReducer</code> handles the
+  boring actions with a big switch statement. These are common in the Redux
+  world. They help us decide what to do based on action type.
+</p>
+<div
+  class="sourceCode"
+  id="cb155"
+  data-caption="appReducer big switch"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb155-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
 <a class="sourceLine" id="cb155-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">appReducer</span>(state<span class="op" style="color: #666666;">,</span> action) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb155-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">switch</span> (<span class="va" style="color: #19177c;">action</span>.<span class="at" style="color: #7d9029;">type</span>) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb155-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">case</span> <span class="st" style="color: #4070a0;">&quot;TICKER_STARTED&quot;</span><span class="op" style="color: #666666;">:</span></a>
@@ -208,64 +208,64 @@
 <a class="sourceLine" id="cb155-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="cf" style="color: #007020; font-weight: bold;">return</span> state<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb155-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb155-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>Gotta love that boilerplate 😛</p>
-    <p>
-      Even though we’re only changing values of boolean flags and two-digit
-      arrays, <em>we have to create a new state</em>. Redux relies on
-      application state being immutable.
-    </p>
-    <p>
-      Well, JavaScript doesn’t have real immutability. We pretend and make sure
-      to never change state without making a new copy first. There are
-      libraries that give you proper immutable data structures, but that’s a
-      whole different course.
-    </p>
-    <p>
-      We use
-      <code style="white-space: pre-wrap;">Object.assign({}, ...</code> to
-      create a new empty object, fill it with the current state, then overwrite
-      specific values with new ones. This is fast enough even with large state
-      trees thanks to modern JavaScript engines.
-    </p>
-    <p>
-      Note that when a reducer doesn’t recognize an action, it has to return
-      the same state it received. Otherwise you end up wiping state. 😅
-    </p>
-    <p>
-      So that’s the boilerplatey state updates. Manages starting and stopping
-      the animation, flipping the particle generation switch, and resizing our
-      viewport.
-    </p>
-    <p>
-      The fun stuff happens in
-      <code style="white-space: pre-wrap;">particleReducer</code>.
-    </p>
-    <h3 id="driving-particles-with-particlereducer">
-      Driving particles with particleReducer
-    </h3>
-    <p>
-      Our particles live in an array. Each particle has an id, a position, and
-      a vector. That tells us where to draw the particle and how to move it to
-      its future position.
-    </p>
-    <p>On each tick of the animation we have to:</p>
-    <ol type="1">
-      <li>Generate new particles</li>
-      <li>Remove particles outside the viewport</li>
-      <li>Move every particle by its vector</li>
-    </ol>
-    <p>We can do all that in one big reducer, like this:</p>
-    <div
-      class="sourceCode"
-      id="cb156"
-      data-caption="The particles logic"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb156-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
+</div>
+<p>Gotta love that boilerplate 😛</p>
+<p>
+  Even though we’re only changing values of boolean flags and two-digit
+  arrays, <em>we have to create a new state</em>. Redux relies on
+  application state being immutable.
+</p>
+<p>
+  Well, JavaScript doesn’t have real immutability. We pretend and make sure
+  to never change state without making a new copy first. There are
+  libraries that give you proper immutable data structures, but that’s a
+  whole different course.
+</p>
+<p>
+  We use
+  <code style="white-space: pre-wrap;">Object.assign({}, ...</code> to
+  create a new empty object, fill it with the current state, then overwrite
+  specific values with new ones. This is fast enough even with large state
+  trees thanks to modern JavaScript engines.
+</p>
+<p>
+  Note that when a reducer doesn’t recognize an action, it has to return
+  the same state it received. Otherwise you end up wiping state. 😅
+</p>
+<p>
+  So that’s the boilerplatey state updates. Manages starting and stopping
+  the animation, flipping the particle generation switch, and resizing our
+  viewport.
+</p>
+<p>
+  The fun stuff happens in
+  <code style="white-space: pre-wrap;">particleReducer</code>.
+</p>
+<h3 id="driving-particles-with-particlereducer">
+  Driving particles with particleReducer
+</h3>
+<p>
+  Our particles live in an array. Each particle has an id, a position, and
+  a vector. That tells us where to draw the particle and how to move it to
+  its future position.
+</p>
+<p>On each tick of the animation we have to:</p>
+<ol type="1">
+  <li>Generate new particles</li>
+  <li>Remove particles outside the viewport</li>
+  <li>Move every particle by its vector</li>
+</ol>
+<p>We can do all that in one big reducer, like this:</p>
+<div
+  class="sourceCode"
+  id="cb156"
+  data-caption="The particles logic"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb156-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/reducers/index.js</span></a>
 <a class="sourceLine" id="cb156-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">particlesReducer</span>(state<span class="op" style="color: #666666;">,</span> action) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb156-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">switch</span> (<span class="va" style="color: #19177c;">action</span>.<span class="at" style="color: #7d9029;">type</span>) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb156-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">case</span> <span class="st" style="color: #4070a0;">&quot;TIME_TICK&quot;</span><span class="op" style="color: #666666;">:</span></a>
@@ -326,51 +326,51 @@
 <a class="sourceLine" id="cb156-59" title="59" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb156-60" title="60" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb156-61" title="61" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>That’s a lot of code, I know. Let me explain 😃</p>
-    <p>
-      The first part takes important values out of
-      <code style="white-space: pre-wrap;">state</code>, calculates the dropped
-      frame multiplier, and makes a new copy of the particles array with
-      <code style="white-space: pre-wrap;">.slice(0)</code>. That was the
-      fastest way I could find.
-    </p>
-    <p>Then we generate new particles.</p>
-    <p>
-      We loop through
-      <code style="white-space: pre-wrap;">particlesPerTick</code> particles,
-      create them at
-      <code style="white-space: pre-wrap;">mousePos</code> coordinates, and
-      insert at the beginning of the array. In my tests that performed best.
-      Particles get random movement vectors.
-    </p>
-    <p>
-      This randomness is a Redux faux pas. Reducers are supposed to be
-      functionally pure: produce the same result every time they are called
-      with the same argument values. Randomness is impure.
-    </p>
-    <p>
-      We don’t need our particle vectors to be deterministic, so I think this
-      is fine. Let’s say our universe is stochastic instead 😄
-    </p>
-    <p>
-      {aside} Stochastic means that our universe/physic simulation is governed
-      by probabilities. You can still model such a universe and reason about
-      its behavior. A lot of real world physics is stochastic in nature.
-      {/aside}
-    </p>
-    <p>
-      We now have an array full of old and new particles. We remove all
-      out-of-bounds particles with a
-      <code style="white-space: pre-wrap;">filter</code>, then walk through
-      what’s left to move each particle by its vector.
-    </p>
-    <p>
-      To simulate gravity, we update vectors’ vertical component using our
-      <code style="white-space: pre-wrap;">Gravity</code> constant. That makes
-      particles fall down faster and faster creating a nice parabola.
-    </p>
-    <p>
-      Our reducer is done. Our particle generator works. Our thing animates
-      smoothly. \o/
-    </p>
+</div>
+<p>That’s a lot of code, I know. Let me explain 😃</p>
+<p>
+  The first part takes important values out of
+  <code style="white-space: pre-wrap;">state</code>, calculates the dropped
+  frame multiplier, and makes a new copy of the particles array with
+  <code style="white-space: pre-wrap;">.slice(0)</code>. That was the
+  fastest way I could find.
+</p>
+<p>Then we generate new particles.</p>
+<p>
+  We loop through
+  <code style="white-space: pre-wrap;">particlesPerTick</code> particles,
+  create them at
+  <code style="white-space: pre-wrap;">mousePos</code> coordinates, and
+  insert at the beginning of the array. In my tests that performed best.
+  Particles get random movement vectors.
+</p>
+<p>
+  This randomness is a Redux faux pas. Reducers are supposed to be
+  functionally pure: produce the same result every time they are called
+  with the same argument values. Randomness is impure.
+</p>
+<p>
+  We don’t need our particle vectors to be deterministic, so I think this
+  is fine. Let’s say our universe is stochastic instead 😄
+</p>
+<p>
+  {aside} Stochastic means that our universe/physic simulation is governed
+  by probabilities. You can still model such a universe and reason about
+  its behavior. A lot of real world physics is stochastic in nature.
+  {/aside}
+</p>
+<p>
+  We now have an array full of old and new particles. We remove all
+  out-of-bounds particles with a
+  <code style="white-space: pre-wrap;">filter</code>, then walk through
+  what’s left to move each particle by its vector.
+</p>
+<p>
+  To simulate gravity, we update vectors’ vertical component using our
+  <code style="white-space: pre-wrap;">Gravity</code> constant. That makes
+  particles fall down faster and faster creating a nice parabola.
+</p>
+<p>
+  Our reducer is done. Our particle generator works. Our thing animates
+  smoothly. \o/
+</p>

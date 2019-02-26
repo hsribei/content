@@ -1,41 +1,41 @@
-    <h3 id="part-2-building-the-physics">Part 2: Building the physics</h3>
-    <p>
-      Our whole physics engine fits into a single MobX store. It contains the
-      collision detection, marble movement calculations, and drives the game
-      loop itself.
-    </p>
-    <p>The general approach goes like this:</p>
-    <ol type="1">
-      <li>Have an observable array of marbles</li>
-      <li>
-        Run a <code style="white-space: pre-wrap;">simulationStep</code> on
-        each
-        <code style="white-space: pre-wrap;">requestAnimationFrame</code> using
-        <code style="white-space: pre-wrap;">d3.timer</code>
-      </li>
-      <li>Change marble positions and speed</li>
-      <li>
-        MobX observables and observers trigger re-renders of marbles that move
-      </li>
-    </ol>
-    <p>
-      The
-      <a
-        href="https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js"
-        >whole Physics store</a
-      >
-      is some 120 lines of code. We’ll go slow. Here’s the skeleton:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb175"
-      data-caption="Physics skeleton"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb175-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
+<h3 id="part-2-building-the-physics">Part 2: Building the physics</h3>
+<p>
+  Our whole physics engine fits into a single MobX store. It contains the
+  collision detection, marble movement calculations, and drives the game
+  loop itself.
+</p>
+<p>The general approach goes like this:</p>
+<ol type="1">
+  <li>Have an observable array of marbles</li>
+  <li>
+    Run a <code style="white-space: pre-wrap;">simulationStep</code> on
+    each
+    <code style="white-space: pre-wrap;">requestAnimationFrame</code> using
+    <code style="white-space: pre-wrap;">d3.timer</code>
+  </li>
+  <li>Change marble positions and speed</li>
+  <li>
+    MobX observables and observers trigger re-renders of marbles that move
+  </li>
+</ol>
+<p>
+  The
+  <a
+    href="https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js"
+    >whole Physics store</a
+  >
+  is some 120 lines of code. We’ll go slow. Here’s the skeleton:
+</p>
+<div
+  class="sourceCode"
+  id="cb175"
+  data-caption="Physics skeleton"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb175-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
 <a class="sourceLine" id="cb175-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb175-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Physics <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb175-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    @observable MarbleR <span class="op" style="color: #666666;">=</span> <span class="dv" style="color: #40a070;">25</span><span class="op" style="color: #666666;">;</span></a>
@@ -60,30 +60,30 @@
 <a class="sourceLine" id="cb175-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb175-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb175-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We have four observable properties, a
-      <code style="white-space: pre-wrap;">timer</code>, a
-      <code style="white-space: pre-wrap;">@computed</code> property for
-      initial positions, and 3 actions.
-      <code style="white-space: pre-wrap;">startGameLoop</code> starts our
-      game, <code style="white-space: pre-wrap;">simulationStep</code> holds
-      the main logic, and
-      <code style="white-space: pre-wrap;">shoot</code> shoots a particular
-      marble.
-    </p>
-    <p>Let’s walk through.</p>
-    <h4 id="initialpositions">initialPositions</h4>
-    <div
-      class="sourceCode"
-      id="cb176"
-      data-caption="initialPositions function"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb176-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
+</div>
+<p>
+  We have four observable properties, a
+  <code style="white-space: pre-wrap;">timer</code>, a
+  <code style="white-space: pre-wrap;">@computed</code> property for
+  initial positions, and 3 actions.
+  <code style="white-space: pre-wrap;">startGameLoop</code> starts our
+  game, <code style="white-space: pre-wrap;">simulationStep</code> holds
+  the main logic, and
+  <code style="white-space: pre-wrap;">shoot</code> shoots a particular
+  marble.
+</p>
+<p>Let’s walk through.</p>
+<h4 id="initialpositions">initialPositions</h4>
+<div
+  class="sourceCode"
+  id="cb176"
+  data-caption="initialPositions function"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb176-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
 <a class="sourceLine" id="cb176-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Physics <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb176-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb176-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    @computed get <span class="at" style="color: #7d9029;">initialPositions</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -123,55 +123,55 @@
 <a class="sourceLine" id="cb176-38" title="38" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb176-39" title="39" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ..</span></a>
 <a class="sourceLine" id="cb176-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      Believe it or not, this is like one of those
-      <em>“Arrange things in a triangle”</em> puzzles you’d see in an old Learn
-      How To Program book. Or a whiteboard interview.
-    </p>
-    <p>It took me 3 hours to build. Easy to get wrong, fiddly to implement.</p>
-    <p>
-      We start with a <code style="white-space: pre-wrap;">range</code> of
-      numbers. From <code style="white-space: pre-wrap;">lines</code> to
-      <code style="white-space: pre-wrap;">0</code> in descending order. We
-      iterate through this list of rows and change each into a list of marbles.
-    </p>
-    <p>
-      4 marbles in the first row, 3 in the next, all the way down to 1 in last
-      row.
-    </p>
-    <p>
-      For each row, we calculate how much space we have on the
-      <code style="white-space: pre-wrap;">left</code> and
-      <code style="white-space: pre-wrap;">right</code> of the center and make
-      a <code style="white-space: pre-wrap;">range</code> of horizontal
-      positions from <code style="white-space: pre-wrap;">left</code> to
-      <code style="white-space: pre-wrap;">right</code> with a step of “1
-      marble size”. Using these positions and the known row, we create marbles
-      as needed.
-    </p>
-    <p>
-      We use a <code style="white-space: pre-wrap;">.reduce</code> to flatten
-      nested arrays and add the last marble. That’s a corner case I couldn’t
-      solve elegantly, but I’m sure it’s possible.
-    </p>
-    <p>
-      In the end, we add an <code style="white-space: pre-wrap;">id</code> to
-      each marble. We’re using index as the id, that’s true, but that still
-      ensures we use consistent values throughout our app. Positions in the
-      array may change.
-    </p>
-    <h4 id="shoot-and-startgameloop">shoot and startGameLoop</h4>
-    <div
-      class="sourceCode"
-      id="cb177"
-      data-caption="shoot and startGameLoop functions"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb177-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
+</div>
+<p>
+  Believe it or not, this is like one of those
+  <em>“Arrange things in a triangle”</em> puzzles you’d see in an old Learn
+  How To Program book. Or a whiteboard interview.
+</p>
+<p>It took me 3 hours to build. Easy to get wrong, fiddly to implement.</p>
+<p>
+  We start with a <code style="white-space: pre-wrap;">range</code> of
+  numbers. From <code style="white-space: pre-wrap;">lines</code> to
+  <code style="white-space: pre-wrap;">0</code> in descending order. We
+  iterate through this list of rows and change each into a list of marbles.
+</p>
+<p>
+  4 marbles in the first row, 3 in the next, all the way down to 1 in last
+  row.
+</p>
+<p>
+  For each row, we calculate how much space we have on the
+  <code style="white-space: pre-wrap;">left</code> and
+  <code style="white-space: pre-wrap;">right</code> of the center and make
+  a <code style="white-space: pre-wrap;">range</code> of horizontal
+  positions from <code style="white-space: pre-wrap;">left</code> to
+  <code style="white-space: pre-wrap;">right</code> with a step of “1
+  marble size”. Using these positions and the known row, we create marbles
+  as needed.
+</p>
+<p>
+  We use a <code style="white-space: pre-wrap;">.reduce</code> to flatten
+  nested arrays and add the last marble. That’s a corner case I couldn’t
+  solve elegantly, but I’m sure it’s possible.
+</p>
+<p>
+  In the end, we add an <code style="white-space: pre-wrap;">id</code> to
+  each marble. We’re using index as the id, that’s true, but that still
+  ensures we use consistent values throughout our app. Positions in the
+  array may change.
+</p>
+<h4 id="shoot-and-startgameloop">shoot and startGameLoop</h4>
+<div
+  class="sourceCode"
+  id="cb177"
+  data-caption="shoot and startGameLoop functions"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb177-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Physics.js</span></a>
 <a class="sourceLine" id="cb177-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Physics <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb177-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb177-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -192,15 +192,15 @@
 <a class="sourceLine" id="cb177-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">marbles</span>[i].<span class="at" style="color: #7d9029;">vy</span> <span class="op" style="color: #666666;">=</span> vy <span class="op" style="color: #666666;">&lt;</span> maxSpeed <span class="op" style="color: #666666;">?</span> vy : maxSpeed<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb177-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb177-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      <code style="white-space: pre-wrap;">shoot</code> and
-      <code style="white-space: pre-wrap;">startGameLoop</code> are the
-      simplest functions in our physics engine.
-      <code style="white-space: pre-wrap;">startGameLoop</code> gets the
-      initial <code style="white-space: pre-wrap;">marbles</code> array and
-      starts a D3 timer.
-      <code style="white-space: pre-wrap;">shoot</code> updates a specific
-      marble’s coordinates and speed vector.
-    </p>
-    <p>👌</p>
+</div>
+<p>
+  <code style="white-space: pre-wrap;">shoot</code> and
+  <code style="white-space: pre-wrap;">startGameLoop</code> are the
+  simplest functions in our physics engine.
+  <code style="white-space: pre-wrap;">startGameLoop</code> gets the
+  initial <code style="white-space: pre-wrap;">marbles</code> array and
+  starts a D3 timer.
+  <code style="white-space: pre-wrap;">shoot</code> updates a specific
+  marble’s coordinates and speed vector.
+</p>
+<p>👌</p>

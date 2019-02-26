@@ -1,29 +1,29 @@
-    <h2 id="step-5-axis-hoc">Step 5: Axis HOC</h2>
-    <p>
-      Our histogram is pretty, but it needs an axis to be useful. You’ve
-      already learned how to implement an axis when we talked about
-      <a
-        href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis"
-        >blackbox integration</a
-      >. We’re going to use the same approach and copy those concepts into the
-      real project.
-    </p>
-    <h3 id="d3blackbox">D3blackbox</h3>
-    <p>
-      We start with the D3blackbox higher order component. Same as before,
-      except we put it in
-      <code style="white-space: pre-wrap;">src/components</code>.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb86"
-      data-caption="D3blackbox HOC"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb86-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
+<h2 id="step-5-axis-hoc">Step 5: Axis HOC</h2>
+<p>
+  Our histogram is pretty, but it needs an axis to be useful. You’ve
+  already learned how to implement an axis when we talked about
+  <a
+    href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis"
+    >blackbox integration</a
+  >. We’re going to use the same approach and copy those concepts into the
+  real project.
+</p>
+<h3 id="d3blackbox">D3blackbox</h3>
+<p>
+  We start with the D3blackbox higher order component. Same as before,
+  except we put it in
+  <code style="white-space: pre-wrap;">src/components</code>.
+</p>
+<div
+  class="sourceCode"
+  id="cb86"
+  data-caption="D3blackbox HOC"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb86-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb86-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb86-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">D3blackbox</span>(D3render) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb86-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="kw" style="color: #007020; font-weight: bold;">class</span> Blackbox <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
@@ -44,32 +44,32 @@
 <a class="sourceLine" id="cb86-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb86-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb86-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      Take a <code style="white-space: pre-wrap;">D3render</code> function,
-      call it on
-      <code style="white-space: pre-wrap;">componentDidMount</code> and
-      <code style="white-space: pre-wrap;">componentDidUpdate</code>, and
-      render a positioned anchor element for
-      <code style="white-space: pre-wrap;">D3render</code> to hook into.
-    </p>
-    <h3 id="axis-component">Axis component</h3>
-    <p>
-      With <code style="white-space: pre-wrap;">D3blackbox</code>, we can
-      reduce the <code style="white-space: pre-wrap;">Axis</code> component to
-      a wrapped function. We’re implementing the
-      <code style="white-space: pre-wrap;">D3render</code> method.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb87"
-      data-caption="Axis component using D3blackbox"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb87-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
+</div>
+<p>
+  Take a <code style="white-space: pre-wrap;">D3render</code> function,
+  call it on
+  <code style="white-space: pre-wrap;">componentDidMount</code> and
+  <code style="white-space: pre-wrap;">componentDidUpdate</code>, and
+  render a positioned anchor element for
+  <code style="white-space: pre-wrap;">D3render</code> to hook into.
+</p>
+<h3 id="axis-component">Axis component</h3>
+<p>
+  With <code style="white-space: pre-wrap;">D3blackbox</code>, we can
+  reduce the <code style="white-space: pre-wrap;">Axis</code> component to
+  a wrapped function. We’re implementing the
+  <code style="white-space: pre-wrap;">D3render</code> method.
+</p>
+<div
+  class="sourceCode"
+  id="cb87"
+  data-caption="Axis component using D3blackbox"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb87-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;d3&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb87-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> D3blackbox <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;../D3blackbox&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb87-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb87-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Axis <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">D3blackbox</span>(<span class="kw" style="color: #007020; font-weight: bold;">function</span>() <span class="op" style="color: #666666;">{</span></a>
@@ -83,53 +83,53 @@
 <a class="sourceLine" id="cb87-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb87-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb87-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Axis<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We use D3’s
-      <code style="white-space: pre-wrap;">axisLeft</code> generator, configure
-      its <code style="white-space: pre-wrap;">tickFormat</code>, pass in a
-      <code style="white-space: pre-wrap;">scale</code> from our props, and
-      specify how many <code style="white-space: pre-wrap;">ticks</code> we
-      want. To render, we
-      <code style="white-space: pre-wrap;">select</code> the anchor element
-      from <code style="white-space: pre-wrap;">D3blackbox</code> and
-      <code style="white-space: pre-wrap;">call</code> the axis generator on
-      it.
-    </p>
-    <p>
-      Yes, this <code style="white-space: pre-wrap;">Axis</code> works just for
-      our specific use case and that’s okay. No need to generalize your code
-      until you know where else you’re using it.
-    </p>
-    <p>
-      Remember the
-      <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it"
-        >YAGNI principle</a
-      >.
-    </p>
-    <h3 id="add-axis-to-histogram">Add Axis to Histogram</h3>
-    <p>
-      To render our new <code style="white-space: pre-wrap;">Axis</code>, we
-      add it to the
-      <code style="white-space: pre-wrap;">Histogram</code> component. It’s a
-      two step process:
-    </p>
-    <ol type="1">
-      <li>
-        Import <code style="white-space: pre-wrap;">Axis</code> component
-      </li>
-      <li>Render it</li>
-    </ol>
-    <div
-      class="sourceCode"
-      id="cb88"
-      data-caption="Import and render Axis"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb88-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/Histogram.js</span></a>
+</div>
+<p>
+  We use D3’s
+  <code style="white-space: pre-wrap;">axisLeft</code> generator, configure
+  its <code style="white-space: pre-wrap;">tickFormat</code>, pass in a
+  <code style="white-space: pre-wrap;">scale</code> from our props, and
+  specify how many <code style="white-space: pre-wrap;">ticks</code> we
+  want. To render, we
+  <code style="white-space: pre-wrap;">select</code> the anchor element
+  from <code style="white-space: pre-wrap;">D3blackbox</code> and
+  <code style="white-space: pre-wrap;">call</code> the axis generator on
+  it.
+</p>
+<p>
+  Yes, this <code style="white-space: pre-wrap;">Axis</code> works just for
+  our specific use case and that’s okay. No need to generalize your code
+  until you know where else you’re using it.
+</p>
+<p>
+  Remember the
+  <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it"
+    >YAGNI principle</a
+  >.
+</p>
+<h3 id="add-axis-to-histogram">Add Axis to Histogram</h3>
+<p>
+  To render our new <code style="white-space: pre-wrap;">Axis</code>, we
+  add it to the
+  <code style="white-space: pre-wrap;">Histogram</code> component. It’s a
+  two step process:
+</p>
+<ol type="1">
+  <li>
+    Import <code style="white-space: pre-wrap;">Axis</code> component
+  </li>
+  <li>Render it</li>
+</ol>
+<div
+  class="sourceCode"
+  id="cb88"
+  data-caption="Import and render Axis"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb88-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Histogram/Histogram.js</span></a>
 <a class="sourceLine" id="cb88-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb88-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb88-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -160,27 +160,27 @@
 <a class="sourceLine" id="cb88-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            &lt;/g<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb88-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb88-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We import our <code style="white-space: pre-wrap;">Axis</code> and add it
-      to the <code style="white-space: pre-wrap;">render</code> method with
-      some props. It takes an <code style="white-space: pre-wrap;">x</code> and
-      <code style="white-space: pre-wrap;">y</code> coordinate, the
-      <code style="white-space: pre-wrap;">data</code>, and a
-      <code style="white-space: pre-wrap;">scale</code>.
-    </p>
-    <p>An axis appears.</p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/basic-histogram.png"
-        alt="Basic histogram with axis"
-      />
-      <figcaption>Basic histogram with axis</figcaption>
-    </figure>
-    <p>
-      If that didn’t work, try comparing your changes to this
-      <a
-        href="https://github.com/Swizec/react-d3js-step-by-step/commit/02a40899e348587a909e97e8f18ecf468e2fe218"
-        >diff on Github</a
-      >.
-    </p>
+</div>
+<p>
+  We import our <code style="white-space: pre-wrap;">Axis</code> and add it
+  to the <code style="white-space: pre-wrap;">render</code> method with
+  some props. It takes an <code style="white-space: pre-wrap;">x</code> and
+  <code style="white-space: pre-wrap;">y</code> coordinate, the
+  <code style="white-space: pre-wrap;">data</code>, and a
+  <code style="white-space: pre-wrap;">scale</code>.
+</p>
+<p>An axis appears.</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/basic-histogram.png"
+    alt="Basic histogram with axis"
+  />
+  <figcaption>Basic histogram with axis</figcaption>
+</figure>
+<p>
+  If that didn’t work, try comparing your changes to this
+  <a
+    href="https://github.com/Swizec/react-d3js-step-by-step/commit/02a40899e348587a909e97e8f18ecf468e2fe218"
+    >diff on Github</a
+  >.
+</p>

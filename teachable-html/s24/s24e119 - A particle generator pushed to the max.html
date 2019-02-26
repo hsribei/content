@@ -1,57 +1,57 @@
-    <h2 id="canvas-react-redux">
-      A particle generator pushed to 20,000 elements with Canvas
-    </h2>
-    <p>
-      Our
-      <a
-        href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906668#animating-react-redux"
-        >SVG-based particle generator</a
-      >
-      caps out at a few thousand elements. Animation becomes slow as times
-      between iterations of our game loop increase.
-    </p>
-    <p>
-      Old elements leave the screen and get pruned faster than we can create
-      new ones. This creates a natural upper limit to how many elements we can
-      push into the page.
-    </p>
-    <p>
-      We can render many more elements if we take out SVG and use HTML5 Canvas
-      instead. I was able to push the code up to almost 20,000 smoothly
-      animated elements. Then JavaScript became the bottleneck.
-    </p>
-    <p>
-      Well, I say JavaScript was the bottleneck, but monitor size plays a role
-      too. It goes up to 20,000 on my laptop screen, juuuust grazes 30,000 on
-      my large desktop monitor, and averages about 17,000 on my iPhone 5SE.
-    </p>
-    <p>Friends with newer laptops got it up to 35,000.</p>
-    <p>
-      You can see it in action hosted on
-      <a href="https://swizec.github.io/react-particles-experiment/"
-        >Github pages</a
-      >.
-    </p>
-    <p>
-      We’re keeping most of our existing code. The real changes happen in
-      <code style="white-space: pre-wrap;">src/components/index.jsx</code>,
-      where a Konva stage replaces the
-      <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element, and in
-      <code style="white-space: pre-wrap;">src/components/Particles.jsx</code>,
-      where we change what we render. There’s a small tweak in the reducer to
-      generate more particles per tick.
-    </p>
-    <p>
-      You should go into your particle generator directory, install Konva and
-      react-konva, and then make the changes below. Trying things out is better
-      than just reading my code 😉
-    </p>
-    <pre
-      data-caption="Install Konva"
-    ><code style="white-space: pre-wrap;">$ npm install --save konva react-konva</code></pre>
-    <p>
-      {aside} react-konva is a thin wrapper on Konva itself. There’s no need to
-      think about it as its own thing. For the most part, you can go into the
-      Konva docs, read about something, and it Just Works™ in react-konva.
-      {/aside}
-    </p>
+<h2 id="canvas-react-redux">
+  A particle generator pushed to 20,000 elements with Canvas
+</h2>
+<p>
+  Our
+  <a
+    href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6906668#animating-react-redux"
+    >SVG-based particle generator</a
+  >
+  caps out at a few thousand elements. Animation becomes slow as times
+  between iterations of our game loop increase.
+</p>
+<p>
+  Old elements leave the screen and get pruned faster than we can create
+  new ones. This creates a natural upper limit to how many elements we can
+  push into the page.
+</p>
+<p>
+  We can render many more elements if we take out SVG and use HTML5 Canvas
+  instead. I was able to push the code up to almost 20,000 smoothly
+  animated elements. Then JavaScript became the bottleneck.
+</p>
+<p>
+  Well, I say JavaScript was the bottleneck, but monitor size plays a role
+  too. It goes up to 20,000 on my laptop screen, juuuust grazes 30,000 on
+  my large desktop monitor, and averages about 17,000 on my iPhone 5SE.
+</p>
+<p>Friends with newer laptops got it up to 35,000.</p>
+<p>
+  You can see it in action hosted on
+  <a href="https://swizec.github.io/react-particles-experiment/"
+    >Github pages</a
+  >.
+</p>
+<p>
+  We’re keeping most of our existing code. The real changes happen in
+  <code style="white-space: pre-wrap;">src/components/index.jsx</code>,
+  where a Konva stage replaces the
+  <code style="white-space: pre-wrap;">&lt;svg&gt;</code> element, and in
+  <code style="white-space: pre-wrap;">src/components/Particles.jsx</code>,
+  where we change what we render. There’s a small tweak in the reducer to
+  generate more particles per tick.
+</p>
+<p>
+  You should go into your particle generator directory, install Konva and
+  react-konva, and then make the changes below. Trying things out is better
+  than just reading my code 😉
+</p>
+<pre
+  data-caption="Install Konva"
+><code style="white-space: pre-wrap;">$ npm install --save konva react-konva</code></pre>
+<p>
+  {aside} react-konva is a thin wrapper on Konva itself. There’s no need to
+  think about it as its own thing. For the most part, you can go into the
+  Konva docs, read about something, and it Just Works™ in react-konva.
+  {/aside}
+</p>

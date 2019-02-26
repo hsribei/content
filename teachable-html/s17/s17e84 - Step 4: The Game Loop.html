@@ -1,29 +1,29 @@
-    <h3 id="step-4-the-game-loop">Step 4: The Game Loop</h3>
-    <p>
-      Our game loop is already running. It’s that
-      <code style="white-space: pre-wrap;">d3.timer</code> we started on
-      component mount.
-    </p>
-    <p>
-      What do you think we should do every time
-      <code style="white-space: pre-wrap;">gameLoop</code> is called?
-    </p>
-    <p>Move the ball. Accelerate. Bounce it back. 🏀</p>
-    <p>
-      The physics is tricky to think about. Few students at my workshops figure
-      this one out and that’s the point: Game loop gives you control. All the
-      control.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb130"
-      data-caption="Bouncy ball at 60fps"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb130-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// BouncingBall.js</span></a>
+<h3 id="step-4-the-game-loop">Step 4: The Game Loop</h3>
+<p>
+  Our game loop is already running. It’s that
+  <code style="white-space: pre-wrap;">d3.timer</code> we started on
+  component mount.
+</p>
+<p>
+  What do you think we should do every time
+  <code style="white-space: pre-wrap;">gameLoop</code> is called?
+</p>
+<p>Move the ball. Accelerate. Bounce it back. 🏀</p>
+<p>
+  The physics is tricky to think about. Few students at my workshops figure
+  this one out and that’s the point: Game loop gives you control. All the
+  control.
+</p>
+<div
+  class="sourceCode"
+  id="cb130"
+  data-caption="Bouncy ball at 60fps"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb130-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// BouncingBall.js</span></a>
 <a class="sourceLine" id="cb130-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">componentDidMount</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb130-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="co" style="color: #60a0b0; font-style: italic;">// start game loop</span></a>
 <a class="sourceLine" id="cb130-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">timer</span> <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">d3</span>.<span class="at" style="color: #7d9029;">timer</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">gameLoop</span>)<span class="op" style="color: #666666;">;</span></a>
@@ -45,61 +45,61 @@
 <a class="sourceLine" id="cb130-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="dt" style="color: #902000;">vy</span><span class="op" style="color: #666666;">:</span> vy <span class="op" style="color: #666666;">+</span> <span class="fl" style="color: #40a070;">0.3</span></a>
 <a class="sourceLine" id="cb130-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span>)</a>
 <a class="sourceLine" id="cb130-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      Our <code style="white-space: pre-wrap;">gameLoop</code> method is called
-      every 16 milliseconds give or take. Sometimes more, if the computer is
-      busy, low on batter, or the tab is left inactive for too long
-    </p>
-    <p>Bounce physics go like this:</p>
-    <ul>
-      <li>
-        add vertical speed, <code style="white-space: pre-wrap;">vy</code>, to
-        position, <code style="white-space: pre-wrap;">y</code>
-      </li>
-      <li>
-        increased <code style="white-space: pre-wrap;">vy</code> by amount of
-        acceleration
-      </li>
-      <li>if position is more than max, bounce</li>
-      <li>bounce means invert speed</li>
-      <li>bounce means energy loss, reduce speed by 13%</li>
-    </ul>
-    <p>High school physics my friend. You might not remember.</p>
-    <p>
-      Speed tells you how much an object moves per unit of time. Our speed
-      starts at 5 pixels per frame.
-    </p>
-    <p>
-      Acceleration tells you how much speed increases per unit of time. Gravity
-      makes you fall 10 meters per second faster every second. Our gravity
-      looks best at 0.3 pixels per frame.
-    </p>
-    <p>Bounce is what really breaks people’s brains.</p>
-    <p>
-      I think it’s one of Newton’s laws? Or a derivation from there. Bouncing
-      means balls maintain the same speed, but change direction. Our wall is
-      perpendicular to the path of travel, so the speed inverts.
-    </p>
-    <p>We add some energy loss to make the bounce more realistic.</p>
-    <p>
-      Gravity acceleration points the same downwards direction as always.
-      Except now it’s slowing down the ball instead of speeding it up.
-    </p>
-    <p>Eventually speed reaches zero and the ball starts falling again.</p>
-    <figure>
-      <img
-        src="https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif"
-        alt="Magic"
-      />
-      <figcaption>Magic</figcaption>
-    </figure>
-    <p>
-      Here’s a CodeSandbox with the
-      <a href="https://codesandbox.io/s/o4vk8zkn96">final bouncy ball code</a>.
-    </p>
-    <p>
-      Experiment with multiple balls. Start them at different heights. Play
-      with different factors in those equations. It’s fun if you’re a nerd like
-      me.
-    </p>
+</div>
+<p>
+  Our <code style="white-space: pre-wrap;">gameLoop</code> method is called
+  every 16 milliseconds give or take. Sometimes more, if the computer is
+  busy, low on batter, or the tab is left inactive for too long
+</p>
+<p>Bounce physics go like this:</p>
+<ul>
+  <li>
+    add vertical speed, <code style="white-space: pre-wrap;">vy</code>, to
+    position, <code style="white-space: pre-wrap;">y</code>
+  </li>
+  <li>
+    increased <code style="white-space: pre-wrap;">vy</code> by amount of
+    acceleration
+  </li>
+  <li>if position is more than max, bounce</li>
+  <li>bounce means invert speed</li>
+  <li>bounce means energy loss, reduce speed by 13%</li>
+</ul>
+<p>High school physics my friend. You might not remember.</p>
+<p>
+  Speed tells you how much an object moves per unit of time. Our speed
+  starts at 5 pixels per frame.
+</p>
+<p>
+  Acceleration tells you how much speed increases per unit of time. Gravity
+  makes you fall 10 meters per second faster every second. Our gravity
+  looks best at 0.3 pixels per frame.
+</p>
+<p>Bounce is what really breaks people’s brains.</p>
+<p>
+  I think it’s one of Newton’s laws? Or a derivation from there. Bouncing
+  means balls maintain the same speed, but change direction. Our wall is
+  perpendicular to the path of travel, so the speed inverts.
+</p>
+<p>We add some energy loss to make the bounce more realistic.</p>
+<p>
+  Gravity acceleration points the same downwards direction as always.
+  Except now it’s slowing down the ball instead of speeding it up.
+</p>
+<p>Eventually speed reaches zero and the ball starts falling again.</p>
+<figure>
+  <img
+    src="https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif"
+    alt="Magic"
+  />
+  <figcaption>Magic</figcaption>
+</figure>
+<p>
+  Here’s a CodeSandbox with the
+  <a href="https://codesandbox.io/s/o4vk8zkn96">final bouncy ball code</a>.
+</p>
+<p>
+  Experiment with multiple balls. Start them at different heights. Play
+  with different factors in those equations. It’s fun if you’re a nerd like
+  me.
+</p>

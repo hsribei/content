@@ -1,50 +1,50 @@
-    <h2 id="what-we-learned">What we learned</h2>
-    <p>
-      Building a particle generator in React and Redux, we made three important
-      discoveries:
-    </p>
-    <ol type="1">
-      <li>
-        <strong>Redux is much faster than you’d think</strong>. Creating a new
-        copy of the state tree on each animation loop sounds crazy, but it
-        works. Most of our code creates shallow copies, which explains the
-        speed.
-      </li>
-      <li>
-        <strong>Adding to JavaScript arrays is slow</strong>. Once we hit about
-        300 particles, adding new ones becomes slow. Stop adding particles and
-        you get smooth animation. This indicates that something about creating
-        particles is slow: either adding to the array, or creating React
-        component instances, or creating SVG DOM nodes.
-      </li>
-      <li>
-        <strong>SVG is also slow</strong>. To test the above hypothesis, I made
-        the generator create 3000 particles on first click. The animation speed
-        is <em>terrible</em> at first and becomes okayish at around 1000
-        particles. This suggests that making shallow copies of big arrays and
-        moving existing SVG nodes around is faster than adding new DOM nodes
-        and array elements.
-        <a href="https://i.imgur.com/ug478Me.gif">Here’s a gif</a>
-      </li>
-    </ol>
-    <hr />
-    <p>
-      There you go: Animating with React, Redux, and D3. Kind of a new
-      superpower 😉
-    </p>
-    <p>Here’s the recap:</p>
-    <ul>
-      <li>React handles rendering</li>
-      <li>D3 calculates stuff, detects mouse positions</li>
-      <li>Redux handles state</li>
-      <li>element coordinates are state</li>
-      <li>
-        change coordinates on every
-        <code style="white-space: pre-wrap;">requestAnimationFrame</code>
-      </li>
-      <li>animation!</li>
-    </ul>
-    <p>
-      Now let’s render to canvas and push this sucker to 20,000 smoothly
-      animated elements. Even on a mobile phone.
-    </p>
+<h2 id="what-we-learned">What we learned</h2>
+<p>
+  Building a particle generator in React and Redux, we made three important
+  discoveries:
+</p>
+<ol type="1">
+  <li>
+    <strong>Redux is much faster than you’d think</strong>. Creating a new
+    copy of the state tree on each animation loop sounds crazy, but it
+    works. Most of our code creates shallow copies, which explains the
+    speed.
+  </li>
+  <li>
+    <strong>Adding to JavaScript arrays is slow</strong>. Once we hit about
+    300 particles, adding new ones becomes slow. Stop adding particles and
+    you get smooth animation. This indicates that something about creating
+    particles is slow: either adding to the array, or creating React
+    component instances, or creating SVG DOM nodes.
+  </li>
+  <li>
+    <strong>SVG is also slow</strong>. To test the above hypothesis, I made
+    the generator create 3000 particles on first click. The animation speed
+    is <em>terrible</em> at first and becomes okayish at around 1000
+    particles. This suggests that making shallow copies of big arrays and
+    moving existing SVG nodes around is faster than adding new DOM nodes
+    and array elements.
+    <a href="https://i.imgur.com/ug478Me.gif">Here’s a gif</a>
+  </li>
+</ol>
+<hr />
+<p>
+  There you go: Animating with React, Redux, and D3. Kind of a new
+  superpower 😉
+</p>
+<p>Here’s the recap:</p>
+<ul>
+  <li>React handles rendering</li>
+  <li>D3 calculates stuff, detects mouse positions</li>
+  <li>Redux handles state</li>
+  <li>element coordinates are state</li>
+  <li>
+    change coordinates on every
+    <code style="white-space: pre-wrap;">requestAnimationFrame</code>
+  </li>
+  <li>animation!</li>
+</ul>
+<p>
+  Now let’s render to canvas and push this sucker to 20,000 smoothly
+  animated elements. Even on a mobile phone.
+</p>

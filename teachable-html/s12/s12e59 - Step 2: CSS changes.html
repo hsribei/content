@@ -1,28 +1,28 @@
-    <h2 id="histogram-css">Step 2: CSS changes</h2>
-    <p>
-      As mentioned, opinions vary on the best approach to styling React apps.
-      Some say stylesheets per component, some say styling inside JavaScript,
-      others swear by global app styling.
-    </p>
-    <p>
-      The truth is somewhere in between. Do what fits your project and your
-      team. We’re using global stylesheets because it’s the simplest.
-    </p>
-    <p>
-      Create a new file
-      <code style="white-space: pre-wrap;">src/style.css</code> and add these
-      29 lines:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb78"
-      data-caption="style.css stylesheet"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode css"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode css" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb78-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="fu" style="color: #06287e;">.histogram</span> <span class="fu" style="color: #06287e;">.bar</span> rect {</a>
+<h2 id="histogram-css">Step 2: CSS changes</h2>
+<p>
+  As mentioned, opinions vary on the best approach to styling React apps.
+  Some say stylesheets per component, some say styling inside JavaScript,
+  others swear by global app styling.
+</p>
+<p>
+  The truth is somewhere in between. Do what fits your project and your
+  team. We’re using global stylesheets because it’s the simplest.
+</p>
+<p>
+  Create a new file
+  <code style="white-space: pre-wrap;">src/style.css</code> and add these
+  29 lines:
+</p>
+<div
+  class="sourceCode"
+  id="cb78"
+  data-caption="style.css stylesheet"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode css"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode css" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb78-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="fu" style="color: #06287e;">.histogram</span> <span class="fu" style="color: #06287e;">.bar</span> rect {</a>
 <a class="sourceLine" id="cb78-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">fill</span>: <span class="cn" style="color: #880000;">steelblue</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb78-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    shape-rendering: crispEdges<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb78-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">}</a>
@@ -51,35 +51,35 @@
 <a class="sourceLine" id="cb78-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    stroke: <span class="cn" style="color: #880000;">grey</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb78-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    stroke-width: <span class="dv" style="color: #40a070;">1</span><span class="dt" style="color: #902000;">px</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb78-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">}</a></code></pre>
-    </div>
-    <p>
-      We won’t go into details about the CSS here. Many better books have been
-      written about it.
-    </p>
-    <p>In broad strokes:</p>
-    <ul>
-      <li>
-        we’re making
-        <code style="white-space: pre-wrap;">.histogram</code> rectangles – the
-        bars – blue
-      </li>
-      <li>
-        labels white <code style="white-space: pre-wrap;">12px</code> font
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">button</code>s and
-        <code style="white-space: pre-wrap;">.row</code>s have some spacing
-      </li>
-      <li>
-        the <code style="white-space: pre-wrap;">.mean</code> line is a dotted
-        grey with gray <code style="white-space: pre-wrap;">11px</code> text.
-      </li>
-    </ul>
-    <p>
-      More CSS than we need for just the histogram, but we’re already here so
-      might as well write it now.
-    </p>
-    <p>
-      Adding our CSS before building the Histogram means it’s going to look
-      beautiful the first time around.
-    </p>
+</div>
+<p>
+  We won’t go into details about the CSS here. Many better books have been
+  written about it.
+</p>
+<p>In broad strokes:</p>
+<ul>
+  <li>
+    we’re making
+    <code style="white-space: pre-wrap;">.histogram</code> rectangles – the
+    bars – blue
+  </li>
+  <li>
+    labels white <code style="white-space: pre-wrap;">12px</code> font
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">button</code>s and
+    <code style="white-space: pre-wrap;">.row</code>s have some spacing
+  </li>
+  <li>
+    the <code style="white-space: pre-wrap;">.mean</code> line is a dotted
+    grey with gray <code style="white-space: pre-wrap;">11px</code> text.
+  </li>
+</ul>
+<p>
+  More CSS than we need for just the histogram, but we’re already here so
+  might as well write it now.
+</p>
+<p>
+  Adding our CSS before building the Histogram means it’s going to look
+  beautiful the first time around.
+</p>

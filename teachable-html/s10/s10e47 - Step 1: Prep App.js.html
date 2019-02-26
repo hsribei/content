@@ -1,24 +1,24 @@
-    <h2 id="step-1-prep-app.js">Step 1: Prep App.js</h2>
-    <p>
-      Let’s set up our
-      <code style="white-space: pre-wrap;">App</code> component first. That way
-      you’ll see results as soon data loading starts to work.
-    </p>
-    <p>
-      Start by importing our data loading method -
-      <code style="white-space: pre-wrap;">loadAllData</code> - and both D3 and
-      Lodash. We’ll need them later.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb59"
-      data-caption="Import D3"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb59-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+<h2 id="step-1-prep-app.js">Step 1: Prep App.js</h2>
+<p>
+  Let’s set up our
+  <code style="white-space: pre-wrap;">App</code> component first. That way
+  you’ll see results as soon data loading starts to work.
+</p>
+<p>
+  Start by importing our data loading method -
+  <code style="white-space: pre-wrap;">loadAllData</code> - and both D3 and
+  Lodash. We’ll need them later.
+</p>
+<div
+  class="sourceCode"
+  id="cb59"
+  data-caption="Import D3"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb59-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb59-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb59-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
 <a class="sourceLine" id="cb59-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -29,28 +29,28 @@
 <a class="sourceLine" id="cb59-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// Insert the line(s) between here...</span></a>
 <a class="sourceLine" id="cb59-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> loadAllData <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./DataHandling&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb59-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre>
-    </div>
-    <p>
-      You already know about default imports. Importing with
-      <code style="white-space: pre-wrap;">{}</code> is how we import named
-      exports. That lets us get multiple things from the same file. You’ll see
-      the export side in Step 2.
-    </p>
-    <p>
-      Don’t worry about the missing
-      <code style="white-space: pre-wrap;">DataHandling</code> file. It’s
-      coming soon.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb60"
-      data-caption="Initiate data loading in App.js"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb60-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+</div>
+<p>
+  You already know about default imports. Importing with
+  <code style="white-space: pre-wrap;">{}</code> is how we import named
+  exports. That lets us get multiple things from the same file. You’ll see
+  the export side in Step 2.
+</p>
+<p>
+  Don’t worry about the missing
+  <code style="white-space: pre-wrap;">DataHandling</code> file. It’s
+  coming soon.
+</p>
+<div
+  class="sourceCode"
+  id="cb60"
+  data-caption="Initiate data loading in App.js"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb60-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb60-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb60-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb60-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">techSalaries</span><span class="op" style="color: #666666;">:</span> []<span class="op" style="color: #666666;">,</span></a>
@@ -63,55 +63,55 @@
 <a class="sourceLine" id="cb60-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="at" style="color: #7d9029;">loadAllData</span>(data <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">setState</span>(data))<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb60-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb60-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...and here.</span></a></code></pre>
-    </div>
-    <p>
-      We initiate data loading inside the
-      <code style="white-space: pre-wrap;">componentDidMount</code> lifecycle
-      hook. It fires when React first mounts our component into the DOM.
-    </p>
-    <p>
-      I like to tie data loading to component mounts because it means you
-      aren’t making requests you’ll never use. In a bigger app, you’d use
-      Redux, MobX, or similar to decouple loading from rendering. Many reasons
-      why.
-    </p>
-    <p>
-      To load our data, we call the
-      <code style="white-space: pre-wrap;">loadAllData</code> function, then
-      use <code style="white-space: pre-wrap;">this.setState</code> in the
-      callback. This updates <code style="white-space: pre-wrap;">App</code>’s
-      state and triggers a re-render, which updates our entire visualization
-      via props.
-    </p>
-    <p>
-      Yes, it <em>would</em> be better to make
-      <code style="white-space: pre-wrap;">loadAllData</code> return a promise
-      instead of expecting a callback. That was giving me trouble for some
-      reason and it doesn’t matter right now anyway.
-    </p>
-    <p>
-      We also add two more entries to our
-      <code style="white-space: pre-wrap;">state</code>:
-      <code style="white-space: pre-wrap;">countyNames</code>, and
-      <code style="white-space: pre-wrap;">medianIncomes</code>. Defining
-      what’s in your component state in advance makes your code easier to read.
-      People, including you, know what to expect.
-    </p>
-    <p>
-      Let’s change the
-      <code style="white-space: pre-wrap;">render</code> method to show a
-      message when our data finishes loading.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb61"
-      data-caption="Show when data loads"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb61-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
+</div>
+<p>
+  We initiate data loading inside the
+  <code style="white-space: pre-wrap;">componentDidMount</code> lifecycle
+  hook. It fires when React first mounts our component into the DOM.
+</p>
+<p>
+  I like to tie data loading to component mounts because it means you
+  aren’t making requests you’ll never use. In a bigger app, you’d use
+  Redux, MobX, or similar to decouple loading from rendering. Many reasons
+  why.
+</p>
+<p>
+  To load our data, we call the
+  <code style="white-space: pre-wrap;">loadAllData</code> function, then
+  use <code style="white-space: pre-wrap;">this.setState</code> in the
+  callback. This updates <code style="white-space: pre-wrap;">App</code>’s
+  state and triggers a re-render, which updates our entire visualization
+  via props.
+</p>
+<p>
+  Yes, it <em>would</em> be better to make
+  <code style="white-space: pre-wrap;">loadAllData</code> return a promise
+  instead of expecting a callback. That was giving me trouble for some
+  reason and it doesn’t matter right now anyway.
+</p>
+<p>
+  We also add two more entries to our
+  <code style="white-space: pre-wrap;">state</code>:
+  <code style="white-space: pre-wrap;">countyNames</code>, and
+  <code style="white-space: pre-wrap;">medianIncomes</code>. Defining
+  what’s in your component state in advance makes your code easier to read.
+  People, including you, know what to expect.
+</p>
+<p>
+  Let’s change the
+  <code style="white-space: pre-wrap;">render</code> method to show a
+  message when our data finishes loading.
+</p>
+<div
+  class="sourceCode"
+  id="cb61"
+  data-caption="Show when data loads"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb61-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/App.js</span></a>
 <a class="sourceLine" id="cb61-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb61-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">     <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> techSalaries <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb61-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -132,28 +132,28 @@
 <a class="sourceLine" id="cb61-19" title="19" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        &lt;/div<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb61-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb61-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We added a <code style="white-space: pre-wrap;">container</code> class to
-      the main <code style="white-space: pre-wrap;">&lt;div&gt;</code> and an
-      <code style="white-space: pre-wrap;">&lt;h1&gt;</code> tag that shows how
-      many datapoints there are. You can use any valid JavaScript in curly
-      braces <code style="white-space: pre-wrap;">{}</code> and JSX will
-      evaluate it. By convention we only use that ability to calculate display
-      values.
-    </p>
-    <p>You should now get an error overlay.</p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/datahandling-error.png"
-        alt="DataHandling.js not found error overlay"
-      />
-      <figcaption>DataHandling.js not found error overlay</figcaption>
-    </figure>
-    <p>
-      These nice error overlays come with
-      <code style="white-space: pre-wrap;">create-react-app</code> and make
-      your code easier to debug. No hunting around in the terminal to see
-      compilation errors.
-    </p>
-    <p>Let’s build that file and fill it with our data loading logic.</p>
+</div>
+<p>
+  We added a <code style="white-space: pre-wrap;">container</code> class to
+  the main <code style="white-space: pre-wrap;">&lt;div&gt;</code> and an
+  <code style="white-space: pre-wrap;">&lt;h1&gt;</code> tag that shows how
+  many datapoints there are. You can use any valid JavaScript in curly
+  braces <code style="white-space: pre-wrap;">{}</code> and JSX will
+  evaluate it. By convention we only use that ability to calculate display
+  values.
+</p>
+<p>You should now get an error overlay.</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/datahandling-error.png"
+    alt="DataHandling.js not found error overlay"
+  />
+  <figcaption>DataHandling.js not found error overlay</figcaption>
+</figure>
+<p>
+  These nice error overlays come with
+  <code style="white-space: pre-wrap;">create-react-app</code> and make
+  your code easier to debug. No hunting around in the terminal to see
+  compilation errors.
+</p>
+<p>Let’s build that file and fill it with our data loading logic.</p>

@@ -1,21 +1,21 @@
-    <h2 id="step-4-countymapcounty.js">Step 4: CountyMap/County.js</h2>
-    <p>
-      The <code style="white-space: pre-wrap;">County</code> component is built
-      from two parts: imports and color constants, and a component that returns
-      a <code style="white-space: pre-wrap;">&lt;path&gt;</code>. All the hard
-      calculation happens in
-      <code style="white-space: pre-wrap;">CountyMap</code>.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb74"
-      data-caption="Imports and color constants"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb74-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/County.js</span></a>
+<h2 id="step-4-countymapcounty.js">Step 4: CountyMap/County.js</h2>
+<p>
+  The <code style="white-space: pre-wrap;">County</code> component is built
+  from two parts: imports and color constants, and a component that returns
+  a <code style="white-space: pre-wrap;">&lt;path&gt;</code>. All the hard
+  calculation happens in
+  <code style="white-space: pre-wrap;">CountyMap</code>.
+</p>
+<div
+  class="sourceCode"
+  id="cb74"
+  data-caption="Imports and color constants"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb74-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/County.js</span></a>
 <a class="sourceLine" id="cb74-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb74-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> _ <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;lodash&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb74-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -32,28 +32,28 @@
 <a class="sourceLine" id="cb74-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">])<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb74-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb74-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> BlankColor <span class="op" style="color: #666666;">=</span> <span class="st" style="color: #4070a0;">&#39;rgb(240,240,240)&#39;</span></a></code></pre>
-    </div>
-    <p>
-      We import React and Lodash, and define some color constants. I got the
-      <code style="white-space: pre-wrap;">ChoroplethColors</code> from some
-      example online, and
-      <code style="white-space: pre-wrap;">BlankColor</code> is a pleasant
-      gray.
-    </p>
-    <p>
-      Now we need the
-      <code style="white-space: pre-wrap;">County</code> component.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb75"
-      data-caption="County component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb75-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/County.js</span></a>
+</div>
+<p>
+  We import React and Lodash, and define some color constants. I got the
+  <code style="white-space: pre-wrap;">ChoroplethColors</code> from some
+  example online, and
+  <code style="white-space: pre-wrap;">BlankColor</code> is a pleasant
+  gray.
+</p>
+<p>
+  Now we need the
+  <code style="white-space: pre-wrap;">County</code> component.
+</p>
+<div
+  class="sourceCode"
+  id="cb75"
+  data-caption="County component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb75-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/County.js</span></a>
 <a class="sourceLine" id="cb75-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> County <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb75-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">shouldComponentUpdate</span>(nextProps<span class="op" style="color: #666666;">,</span> nextState) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb75-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> zoom<span class="op" style="color: #666666;">,</span> value <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">props</span><span class="op" style="color: #666666;">;</span></a>
@@ -80,38 +80,38 @@
 <a class="sourceLine" id="cb75-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb75-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb75-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> County<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      The <code style="white-space: pre-wrap;">render</code> method uses a
-      <code style="white-space: pre-wrap;">quantize</code> scale to pick the
-      right color and returns a
-      <code style="white-space: pre-wrap;">&lt;path&gt;</code> element.
-      <code style="white-space: pre-wrap;">geoPath</code> generates the
-      <code style="white-space: pre-wrap;">d</code> attribute, we set style to
-      <code style="white-space: pre-wrap;">fill</code> the color, and we give
-      our path a <code style="white-space: pre-wrap;">title</code>.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">shouldComponentUpdate</code> is more
-      interesting. It’s a React lifecycle method that lets you specify which
-      prop changes are relevant to component re-rendering.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">CountyMap</code> passes complex
-      props - <code style="white-space: pre-wrap;">quantize</code>,
-      <code style="white-space: pre-wrap;">geoPath</code>, and
-      <code style="white-space: pre-wrap;">feature</code>. They’re
-      pass-by-reference instead of pass-by-value. That means React can’t see
-      when their output changes unless you make completely new copies.
-    </p>
-    <p>
-      This can lead to all 3,220 counties re-rendering every time a user does
-      anything. But they only have to re-render if we change the map zoom or if
-      the county gets a new value.
-    </p>
-    <p>
-      Using
-      <code style="white-space: pre-wrap;">shouldComponentUpdate</code> like
-      this we can go from 3,220 DOM updates to a few hundred. Big speed
-      improvement
-    </p>
+</div>
+<p>
+  The <code style="white-space: pre-wrap;">render</code> method uses a
+  <code style="white-space: pre-wrap;">quantize</code> scale to pick the
+  right color and returns a
+  <code style="white-space: pre-wrap;">&lt;path&gt;</code> element.
+  <code style="white-space: pre-wrap;">geoPath</code> generates the
+  <code style="white-space: pre-wrap;">d</code> attribute, we set style to
+  <code style="white-space: pre-wrap;">fill</code> the color, and we give
+  our path a <code style="white-space: pre-wrap;">title</code>.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">shouldComponentUpdate</code> is more
+  interesting. It’s a React lifecycle method that lets you specify which
+  prop changes are relevant to component re-rendering.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">CountyMap</code> passes complex
+  props - <code style="white-space: pre-wrap;">quantize</code>,
+  <code style="white-space: pre-wrap;">geoPath</code>, and
+  <code style="white-space: pre-wrap;">feature</code>. They’re
+  pass-by-reference instead of pass-by-value. That means React can’t see
+  when their output changes unless you make completely new copies.
+</p>
+<p>
+  This can lead to all 3,220 counties re-rendering every time a user does
+  anything. But they only have to re-render if we change the map zoom or if
+  the county gets a new value.
+</p>
+<p>
+  Using
+  <code style="white-space: pre-wrap;">shouldComponentUpdate</code> like
+  this we can go from 3,220 DOM updates to a few hundred. Big speed
+  improvement
+</p>

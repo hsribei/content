@@ -1,18 +1,18 @@
-    <h2 id="step-4-build-toggle-component">Step 4: Build Toggle component</h2>
-    <p>
-      Last piece of the puzzle – the Toggle component. A button that turns on
-      and off.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb112"
-      data-caption="Toggle component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb112-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/Toggle.js</span></a>
+<h2 id="step-4-build-toggle-component">Step 4: Build Toggle component</h2>
+<p>
+  Last piece of the puzzle – the Toggle component. A button that turns on
+  and off.
+</p>
+<div
+  class="sourceCode"
+  id="cb112"
+  data-caption="Toggle component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb112-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Controls/Toggle.js</span></a>
 <a class="sourceLine" id="cb112-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&quot;react&quot;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb112-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb112-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Toggle <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> label<span class="op" style="color: #666666;">,</span> name<span class="op" style="color: #666666;">,</span> value<span class="op" style="color: #666666;">,</span> onClick <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
@@ -30,51 +30,51 @@
 <a class="sourceLine" id="cb112-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb112-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb112-18" title="18" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Toggle<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      Import React to enable JSX and make a functional
-      <code style="white-space: pre-wrap;">Toggle</code> component. It’s fully
-      controlled and takes event handlers as callbacks in props. No need for a
-      class.
-    </p>
-    <p>
-      We set up a Bootstrap classname:
-      <code style="white-space: pre-wrap;">btn</code> and
-      <code style="white-space: pre-wrap;">btn-default</code> make an element
-      look like a button, the conditional
-      <code style="white-space: pre-wrap;">btn-primary</code> makes it blue. If
-      you’re not familiar with Bootstrap classes, you should check
-      <a href="https://getbootstrap.com/">their documentation</a>.
-    </p>
-    <p>
-      Then we render a
-      <code style="white-space: pre-wrap;">&lt;button&gt;</code> tag and, well,
-      that’s it. A row of year filters appears in the browser.
-      <code style="white-space: pre-wrap;">onClick</code> passes
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/year-filter-row.png"
-        alt="A row of year filters"
-      />
-      <figcaption>A row of year filters</figcaption>
-    </figure>
-    <p>
-      Click on a button and the
-      <code style="white-space: pre-wrap;">onClick</code> handler passes a
-      toggle’d value to its parent via the
-      <code style="white-space: pre-wrap;">onClick</code> callback. This
-      triggers an update in
-      <code style="white-space: pre-wrap;">Controls</code>, which calls
-      <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code>, which
-      in turn updates state in
-      <code style="white-space: pre-wrap;">App</code> and re-renders our button
-      with the new value toggling its color on or off.
-    </p>
-    <p>
-      If that didn’t work, consult this
-      <a
-        href="https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f"
-        >diff on GitHub</a
-      >.
-    </p>
+</div>
+<p>
+  Import React to enable JSX and make a functional
+  <code style="white-space: pre-wrap;">Toggle</code> component. It’s fully
+  controlled and takes event handlers as callbacks in props. No need for a
+  class.
+</p>
+<p>
+  We set up a Bootstrap classname:
+  <code style="white-space: pre-wrap;">btn</code> and
+  <code style="white-space: pre-wrap;">btn-default</code> make an element
+  look like a button, the conditional
+  <code style="white-space: pre-wrap;">btn-primary</code> makes it blue. If
+  you’re not familiar with Bootstrap classes, you should check
+  <a href="https://getbootstrap.com/">their documentation</a>.
+</p>
+<p>
+  Then we render a
+  <code style="white-space: pre-wrap;">&lt;button&gt;</code> tag and, well,
+  that’s it. A row of year filters appears in the browser.
+  <code style="white-space: pre-wrap;">onClick</code> passes
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/year-filter-row.png"
+    alt="A row of year filters"
+  />
+  <figcaption>A row of year filters</figcaption>
+</figure>
+<p>
+  Click on a button and the
+  <code style="white-space: pre-wrap;">onClick</code> handler passes a
+  toggle’d value to its parent via the
+  <code style="white-space: pre-wrap;">onClick</code> callback. This
+  triggers an update in
+  <code style="white-space: pre-wrap;">Controls</code>, which calls
+  <code style="white-space: pre-wrap;">reportUpdateUpTheChain</code>, which
+  in turn updates state in
+  <code style="white-space: pre-wrap;">App</code> and re-renders our button
+  with the new value toggling its color on or off.
+</p>
+<p>
+  If that didn’t work, consult this
+  <a
+    href="https://github.com/Swizec/react-d3js-step-by-step/commit/a45c33e172297ca1bbcfdc76733eae75779ebd7f"
+    >diff on GitHub</a
+  >.
+</p>

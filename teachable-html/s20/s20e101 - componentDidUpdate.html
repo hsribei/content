@@ -1,29 +1,29 @@
-    <h4 id="componentdidupdate">componentDidUpdate</h4>
-    <p>
-      <code style="white-space: pre-wrap;">componentDidUpdate</code> is our
-      trickiest transition yet. It has two jobs:
-    </p>
-    <ul>
-      <li>
-        jump existing components to correct horizontal position when a new
-        <code style="white-space: pre-wrap;">enter</code> transition begins
-      </li>
-      <li>
-        transition components into new horizontal positions based on changing
-        indexes
-      </li>
-    </ul>
-    <p>It goes like this 👇</p>
-    <div
-      class="sourceCode"
-      id="cb142"
-      data-caption="Update transition"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb142-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/Letter.js</span></a>
+<h4 id="componentdidupdate">componentDidUpdate</h4>
+<p>
+  <code style="white-space: pre-wrap;">componentDidUpdate</code> is our
+  trickiest transition yet. It has two jobs:
+</p>
+<ul>
+  <li>
+    jump existing components to correct horizontal position when a new
+    <code style="white-space: pre-wrap;">enter</code> transition begins
+  </li>
+  <li>
+    transition components into new horizontal positions based on changing
+    indexes
+  </li>
+</ul>
+<p>It goes like this 👇</p>
+<div
+  class="sourceCode"
+  id="cb142"
+  data-caption="Update transition"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb142-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Alphabet/Letter.js</span></a>
 <a class="sourceLine" id="cb142-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">componentDidUpdate</span>(prevProps<span class="op" style="color: #666666;">,</span> prevState) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb142-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">if</span> (<span class="va" style="color: #19177c;">prevProps</span>.<span class="at" style="color: #7d9029;">in</span> <span class="op" style="color: #666666;">!==</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">in</span> <span class="op" style="color: #666666;">&amp;&amp;</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">in</span>) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb142-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="co" style="color: #60a0b0; font-style: italic;">// A new enter transition has begun</span></a>
@@ -48,35 +48,35 @@
 <a class="sourceLine" id="cb142-23" title="23" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb142-24" title="24" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb142-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      When the <code style="white-space: pre-wrap;">in</code> prop changes to
-      <code style="white-space: pre-wrap;">true</code>, we’re starting a new
-      enter transition on an existing component. We already moved it to the top
-      of the visualization after exiting, but we couldn’t have known its future
-      index.
-    </p>
-    <p>
-      A quick <code style="white-space: pre-wrap;">setState</code> makes sure
-      our letter is in the right place and
-      <code style="white-space: pre-wrap;">onEnter</code> takes care of the
-      rest.
-    </p>
-    <p>
-      Otherwise we check if index changed and if it has, we run a transition in
-      much the same way as we have so far:
-    </p>
-    <ul>
-      <li>
-        calculate new <code style="white-space: pre-wrap;">targetX</code>
-      </li>
-      <li>update letter color</li>
-      <li>start a transition with the usual parameters</li>
-      <li>update <code style="white-space: pre-wrap;">x</code> coordinate</li>
-      <li>update state when transition ends</li>
-    </ul>
-    <p>
-      You now have a component that knows how to run its own enter/update/exit
-      transitions. Time to wire it all up in the
-      <code style="white-space: pre-wrap;">render</code> method.
-    </p>
+</div>
+<p>
+  When the <code style="white-space: pre-wrap;">in</code> prop changes to
+  <code style="white-space: pre-wrap;">true</code>, we’re starting a new
+  enter transition on an existing component. We already moved it to the top
+  of the visualization after exiting, but we couldn’t have known its future
+  index.
+</p>
+<p>
+  A quick <code style="white-space: pre-wrap;">setState</code> makes sure
+  our letter is in the right place and
+  <code style="white-space: pre-wrap;">onEnter</code> takes care of the
+  rest.
+</p>
+<p>
+  Otherwise we check if index changed and if it has, we run a transition in
+  much the same way as we have so far:
+</p>
+<ul>
+  <li>
+    calculate new <code style="white-space: pre-wrap;">targetX</code>
+  </li>
+  <li>update letter color</li>
+  <li>start a transition with the usual parameters</li>
+  <li>update <code style="white-space: pre-wrap;">x</code> coordinate</li>
+  <li>update state when transition ends</li>
+</ul>
+<p>
+  You now have a component that knows how to run its own enter/update/exit
+  transitions. Time to wire it all up in the
+  <code style="white-space: pre-wrap;">render</code> method.
+</p>

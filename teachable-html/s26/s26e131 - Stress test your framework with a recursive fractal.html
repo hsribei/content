@@ -1,73 +1,73 @@
-    <h2 id="stress-test-your-framework-with-a-recursive-fractal">
-      Stress test your framework with a recursive fractal
-    </h2>
-    <p>
-      To show you how these speed improvements look in real life, I’ve devised
-      a stress test. A
-      <a href="https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)"
-        >pythagorean fractal tree</a
-      >
-      that moves around when you move your mouse.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagorean-tree.png"
-        alt="Pythagorean tree"
-      />
-      <figcaption>Pythagorean tree</figcaption>
-    </figure>
-    <p>
-      It’s a great stress test because a render like this is the worst case
-      scenario for tree-based rendering. You have 2048 SVG nodes, deeply
-      nested, that all change props and re-render with every change.
-    </p>
-    <p>
-      You can see
-      <a href="https://github.com/Swizec/react-fractals"
-        >the full code on Github</a
-      >. We’re going to focus on the recursive
-      <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component.
-    </p>
-    <h3 id="how-you-too-can-build-a-dancing-tree-fractal">
-      How you too can build a dancing tree fractal
-    </h3>
-    <p>
-      Equipped with basic trigonometry, you need 3 ingredients to build a
-      dancing tree:
-    </p>
-    <ul>
-      <li>
-        a recursive
-        <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code>
-        component
-      </li>
-      <li>a mousemove listener</li>
-      <li>a memoized next-step-props calculation function</li>
-    </ul>
-    <p>
-      We’re using a
-      <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component
-      for each square and its two children, a D3 mouse listener, and some math
-      that a reader helped me with. We need D3 because its mouse listeners
-      automatically calculate mouse position relative to SVG coordinates.
-      <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a> in
-      the math function helps us keep our code faster.
-    </p>
-    <p>
-      The
-      <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component
-      looks like this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb183"
-      data-caption="Recursive &lt;Pythagoras&gt; component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb183-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Pythagoras <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> w<span class="op" style="color: #666666;">,</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> heightFactor<span class="op" style="color: #666666;">,</span> lean<span class="op" style="color: #666666;">,</span> left<span class="op" style="color: #666666;">,</span> right<span class="op" style="color: #666666;">,</span> lvl<span class="op" style="color: #666666;">,</span> maxlvl <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
+<h2 id="stress-test-your-framework-with-a-recursive-fractal">
+  Stress test your framework with a recursive fractal
+</h2>
+<p>
+  To show you how these speed improvements look in real life, I’ve devised
+  a stress test. A
+  <a href="https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)"
+    >pythagorean fractal tree</a
+  >
+  that moves around when you move your mouse.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagorean-tree.png"
+    alt="Pythagorean tree"
+  />
+  <figcaption>Pythagorean tree</figcaption>
+</figure>
+<p>
+  It’s a great stress test because a render like this is the worst case
+  scenario for tree-based rendering. You have 2048 SVG nodes, deeply
+  nested, that all change props and re-render with every change.
+</p>
+<p>
+  You can see
+  <a href="https://github.com/Swizec/react-fractals"
+    >the full code on Github</a
+  >. We’re going to focus on the recursive
+  <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component.
+</p>
+<h3 id="how-you-too-can-build-a-dancing-tree-fractal">
+  How you too can build a dancing tree fractal
+</h3>
+<p>
+  Equipped with basic trigonometry, you need 3 ingredients to build a
+  dancing tree:
+</p>
+<ul>
+  <li>
+    a recursive
+    <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code>
+    component
+  </li>
+  <li>a mousemove listener</li>
+  <li>a memoized next-step-props calculation function</li>
+</ul>
+<p>
+  We’re using a
+  <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component
+  for each square and its two children, a D3 mouse listener, and some math
+  that a reader helped me with. We need D3 because its mouse listeners
+  automatically calculate mouse position relative to SVG coordinates.
+  <a href="https://en.wikipedia.org/wiki/Memoization">Memoization</a> in
+  the math function helps us keep our code faster.
+</p>
+<p>
+  The
+  <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> component
+  looks like this:
+</p>
+<div
+  class="sourceCode"
+  id="cb183"
+  data-caption="Recursive &lt;Pythagoras&gt; component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb183-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Pythagoras <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> w<span class="op" style="color: #666666;">,</span> x<span class="op" style="color: #666666;">,</span> y<span class="op" style="color: #666666;">,</span> heightFactor<span class="op" style="color: #666666;">,</span> lean<span class="op" style="color: #666666;">,</span> left<span class="op" style="color: #666666;">,</span> right<span class="op" style="color: #666666;">,</span> lvl<span class="op" style="color: #666666;">,</span> maxlvl <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb183-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">if</span> (lvl <span class="op" style="color: #666666;">&gt;=</span> maxlvl <span class="op" style="color: #666666;">||</span> w <span class="op" style="color: #666666;">&lt;</span> <span class="dv" style="color: #40a070;">1</span>) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb183-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="kw" style="color: #007020; font-weight: bold;">null</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb183-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
@@ -109,63 +109,63 @@
 <a class="sourceLine" id="cb183-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        &lt;/g<span class="op" style="color: #666666;">&gt;</span></a>
 <a class="sourceLine" id="cb183-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb183-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a></code></pre>
-    </div>
-    <p>
-      We break out of recursion when we get too deep or try to draw an
-      invisible square. Otherwise we:
-    </p>
-    <ul>
-      <li>
-        use <code style="white-space: pre-wrap;">memoizedCalc</code> to do the
-        mathematics
-      </li>
-      <li>
-        define different
-        <code style="white-space: pre-wrap;">rotate()</code> transforms for the
-        <code style="white-space: pre-wrap;">left</code> and
-        <code style="white-space: pre-wrap;">right</code> branches
-      </li>
-      <li>
-        return an SVG
-        <code style="white-space: pre-wrap;">&lt;rect&gt;</code> for the
-        current rectangle, and two
-        <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> elements
-        for each branch.
-      </li>
-    </ul>
-    <p>
-      Most of this code deals with passing props to children, which isn’t the
-      most elegant approach, but it works. The rest is about positioning
-      branches so corners match up.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagoras-corners-match-up.png"
-        alt="Corners matching up"
-      />
-      <figcaption>Corners matching up</figcaption>
-    </figure>
-    <h4 id="the-math">The math</h4>
-    <p>
-      I don’t <em>really</em> understand this math, but I sort of know where
-      it’s coming from. It’s the
-      <a href="https://en.wikipedia.org/wiki/Law_of_sines">sine law</a> applied
-      correctly. The part I failed at
-      <a href="https://swizec.com/blog/fractals-react/swizec/7233"
-        >when I tried</a
-      >
-      to do it myself.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb184"
-      data-caption="Trigonometry that moves our fractal"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb184-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> memoizedCalc <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span> () <span class="op" style="color: #666666;">{</span></a>
+</div>
+<p>
+  We break out of recursion when we get too deep or try to draw an
+  invisible square. Otherwise we:
+</p>
+<ul>
+  <li>
+    use <code style="white-space: pre-wrap;">memoizedCalc</code> to do the
+    mathematics
+  </li>
+  <li>
+    define different
+    <code style="white-space: pre-wrap;">rotate()</code> transforms for the
+    <code style="white-space: pre-wrap;">left</code> and
+    <code style="white-space: pre-wrap;">right</code> branches
+  </li>
+  <li>
+    return an SVG
+    <code style="white-space: pre-wrap;">&lt;rect&gt;</code> for the
+    current rectangle, and two
+    <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> elements
+    for each branch.
+  </li>
+</ul>
+<p>
+  Most of this code deals with passing props to children, which isn’t the
+  most elegant approach, but it works. The rest is about positioning
+  branches so corners match up.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagoras-corners-match-up.png"
+    alt="Corners matching up"
+  />
+  <figcaption>Corners matching up</figcaption>
+</figure>
+<h4 id="the-math">The math</h4>
+<p>
+  I don’t <em>really</em> understand this math, but I sort of know where
+  it’s coming from. It’s the
+  <a href="https://en.wikipedia.org/wiki/Law_of_sines">sine law</a> applied
+  correctly. The part I failed at
+  <a href="https://swizec.com/blog/fractals-react/swizec/7233"
+    >when I tried</a
+  >
+  to do it myself.
+</p>
+<div
+  class="sourceCode"
+  id="cb184"
+  data-caption="Trigonometry that moves our fractal"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb184-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> memoizedCalc <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span> () <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb184-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> memo <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{};</span></a>
 <a class="sourceLine" id="cb184-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb184-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">const</span> key <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> w<span class="op" style="color: #666666;">,</span> heightFactor<span class="op" style="color: #666666;">,</span> lean <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> [w<span class="op" style="color: #666666;">,</span>heightFactor<span class="op" style="color: #666666;">,</span> lean].<span class="at" style="color: #7d9029;">join</span>(<span class="st" style="color: #4070a0;">&#39;-&#39;</span>)<span class="op" style="color: #666666;">;</span></a>
@@ -192,61 +192,61 @@
 <a class="sourceLine" id="cb184-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb184-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb184-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>()<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We expanded the basic law of sines with a dynamic
-      <code style="white-space: pre-wrap;">heightFactor</code> and
-      <code style="white-space: pre-wrap;">lean</code> adjustment. We’ll
-      control those with mouse movement.
-    </p>
-    <p>
-      To improve performance our
-      <code style="white-space: pre-wrap;">memoizedCalc</code> function has an
-      internal data store that maintains a hash of every argument tuple and its
-      result. So when we call
-      <code style="white-space: pre-wrap;">memoizedCalc</code> with the same
-      arguments multiple times, it reads from cache instead of recalculating.
-    </p>
-    <p>
-      At 11 levels of recursion,
-      <code style="white-space: pre-wrap;">memoizedCalc</code> is called 2,048
-      times and only returns 11 different results. Great candidate for
-      memoization if I ever saw one.
-    </p>
-    <p>
-      Of course, a benchmark would be great here. Maybe
-      <code style="white-space: pre-wrap;">sqrt</code>,
-      <code style="white-space: pre-wrap;">atan</code>, and
-      <code style="white-space: pre-wrap;">**</code> aren’t <em>that</em> slow,
-      and our real bottleneck is redrawing all those nodes on every mouse move.
-      Hint: it totally is.
-    </p>
-    <p>
-      Our ability to memoize calculation also means that we could, in theory,
-      flatten our rendering. Instead of recursion, we could use iteration and
-      render in layers. Squares at each level are the same, just at different
-      <code style="white-space: pre-wrap;">(x, y)</code> coordinates.
-    </p>
-    <p>This, however, would be far too tricky to implement.</p>
-    <h4 id="the-mouse-listener">The mouse listener</h4>
-    <p>
-      Inside
-      <a href="https://github.com/Swizec/react-fractals/blob/master/src/App.js"
-        ><code style="white-space: pre-wrap;">App.js</code></a
-      >, we add a mouse event listener. We use D3’s because it gives us
-      SVG-relative position calculation out of the box. With React’s, we’d have
-      to do the hard work ourselves.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb185"
-      data-caption="Reacting to mouse movement"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb185-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
+</div>
+<p>
+  We expanded the basic law of sines with a dynamic
+  <code style="white-space: pre-wrap;">heightFactor</code> and
+  <code style="white-space: pre-wrap;">lean</code> adjustment. We’ll
+  control those with mouse movement.
+</p>
+<p>
+  To improve performance our
+  <code style="white-space: pre-wrap;">memoizedCalc</code> function has an
+  internal data store that maintains a hash of every argument tuple and its
+  result. So when we call
+  <code style="white-space: pre-wrap;">memoizedCalc</code> with the same
+  arguments multiple times, it reads from cache instead of recalculating.
+</p>
+<p>
+  At 11 levels of recursion,
+  <code style="white-space: pre-wrap;">memoizedCalc</code> is called 2,048
+  times and only returns 11 different results. Great candidate for
+  memoization if I ever saw one.
+</p>
+<p>
+  Of course, a benchmark would be great here. Maybe
+  <code style="white-space: pre-wrap;">sqrt</code>,
+  <code style="white-space: pre-wrap;">atan</code>, and
+  <code style="white-space: pre-wrap;">**</code> aren’t <em>that</em> slow,
+  and our real bottleneck is redrawing all those nodes on every mouse move.
+  Hint: it totally is.
+</p>
+<p>
+  Our ability to memoize calculation also means that we could, in theory,
+  flatten our rendering. Instead of recursion, we could use iteration and
+  render in layers. Squares at each level are the same, just at different
+  <code style="white-space: pre-wrap;">(x, y)</code> coordinates.
+</p>
+<p>This, however, would be far too tricky to implement.</p>
+<h4 id="the-mouse-listener">The mouse listener</h4>
+<p>
+  Inside
+  <a href="https://github.com/Swizec/react-fractals/blob/master/src/App.js"
+    ><code style="white-space: pre-wrap;">App.js</code></a
+  >, we add a mouse event listener. We use D3’s because it gives us
+  SVG-relative position calculation out of the box. With React’s, we’d have
+  to do the hard work ourselves.
+</p>
+<div
+  class="sourceCode"
+  id="cb185"
+  data-caption="Reacting to mouse movement"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb185-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// App.js</span></a>
 <a class="sourceLine" id="cb185-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb185-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">currentMax</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">0</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb185-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">baseW</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">80</span><span class="op" style="color: #666666;">,</span></a>
@@ -288,49 +288,49 @@
 <a class="sourceLine" id="cb185-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">             lvl<span class="op" style="color: #666666;">={</span><span class="dv" style="color: #40a070;">0</span><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb185-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">             maxlvl<span class="op" style="color: #666666;">={</span><span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">state</span>.<span class="at" style="color: #7d9029;">currentMax</span><span class="op" style="color: #666666;">}</span>/&gt;</a>
 <a class="sourceLine" id="cb185-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>A few things happen here:</p>
-    <ul>
-      <li>
-        we set initial <code style="white-space: pre-wrap;">lean</code> and
-        <code style="white-space: pre-wrap;">heightFactor</code> to
-        <code style="white-space: pre-wrap;">0</code>
-      </li>
-      <li>
-        in <code style="white-space: pre-wrap;">componentDidMount</code>, we
-        use <code style="white-space: pre-wrap;">d3.select</code> and
-        <code style="white-space: pre-wrap;">.on</code> to add a mouse listener
-      </li>
-      <li>
-        we define an
-        <code style="white-space: pre-wrap;">onMouseMove</code> method as the
-        listener
-      </li>
-      <li>
-        render the first
-        <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> using
-        values from <code style="white-space: pre-wrap;">state</code>
-      </li>
-    </ul>
-    <p>
-      The <code style="white-space: pre-wrap;">lean</code> parameter tells us
-      which way the tree is leaning and how much, the
-      <code style="white-space: pre-wrap;">heightFactor</code> tells us how
-      high those triangles should be. We control both with the mouse position.
-    </p>
-    <p>
-      That happens in <code style="white-space: pre-wrap;">onMouseMove</code>:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb186"
-      data-caption="Moving the fractal as user moves mouse"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb186-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">onMouseMove</span>(event) <span class="op" style="color: #666666;">{</span></a>
+</div>
+<p>A few things happen here:</p>
+<ul>
+  <li>
+    we set initial <code style="white-space: pre-wrap;">lean</code> and
+    <code style="white-space: pre-wrap;">heightFactor</code> to
+    <code style="white-space: pre-wrap;">0</code>
+  </li>
+  <li>
+    in <code style="white-space: pre-wrap;">componentDidMount</code>, we
+    use <code style="white-space: pre-wrap;">d3.select</code> and
+    <code style="white-space: pre-wrap;">.on</code> to add a mouse listener
+  </li>
+  <li>
+    we define an
+    <code style="white-space: pre-wrap;">onMouseMove</code> method as the
+    listener
+  </li>
+  <li>
+    render the first
+    <code style="white-space: pre-wrap;">&lt;Pythagoras&gt;</code> using
+    values from <code style="white-space: pre-wrap;">state</code>
+  </li>
+</ul>
+<p>
+  The <code style="white-space: pre-wrap;">lean</code> parameter tells us
+  which way the tree is leaning and how much, the
+  <code style="white-space: pre-wrap;">heightFactor</code> tells us how
+  high those triangles should be. We control both with the mouse position.
+</p>
+<p>
+  That happens in <code style="white-space: pre-wrap;">onMouseMove</code>:
+</p>
+<div
+  class="sourceCode"
+  id="cb186"
+  data-caption="Moving the fractal as user moves mouse"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb186-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="at" style="color: #7d9029;">onMouseMove</span>(event) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb186-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">const</span> [x<span class="op" style="color: #666666;">,</span> y] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">d3mouse</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">refs</span>.<span class="at" style="color: #7d9029;">svg</span>)<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb186-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb186-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  scaleFactor <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">scaleLinear</span>().<span class="at" style="color: #7d9029;">domain</span>([<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">svg</span>.<span class="at" style="color: #7d9029;">height</span><span class="op" style="color: #666666;">,</span> <span class="dv" style="color: #40a070;">0</span>])</a>
@@ -344,28 +344,28 @@
 <a class="sourceLine" id="cb186-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">lean</span><span class="op" style="color: #666666;">:</span> <span class="at" style="color: #7d9029;">scaleLean</span>(<span class="op" style="color: #666666;">:</span><span class="dt" style="color: #902000;">satisfied</span><span class="op" style="color: #666666;">:</span></a>
 <a class="sourceLine" id="cb186-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb186-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      <code style="white-space: pre-wrap;">d3mouse</code> - an imported
-      <code style="white-space: pre-wrap;">mouse</code> function from
-      <code style="white-space: pre-wrap;">d3-selection</code> - gives us
-      cursor position relative to the SVG element. Two linear scales give us
-      <code style="white-space: pre-wrap;">scaleFactor</code> and
-      <code style="white-space: pre-wrap;">scaleLean</code> values, which we
-      put into component state.
-    </p>
-    <p>
-      When we feed a change to
-      <code style="white-space: pre-wrap;">this.setState</code>, it triggers a
-      re-render of the entire tree, our
-      <code style="white-space: pre-wrap;">memoizedCalc</code> function returns
-      new values, and the final result is a dancing tree.
-    </p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagoras-dancing.gif"
-        alt="Dancing Pythagoras tree"
-      />
-      <figcaption>Dancing Pythagoras tree</figcaption>
-    </figure>
-    <p>Beautious. 😍</p>
+</div>
+<p>
+  <code style="white-space: pre-wrap;">d3mouse</code> - an imported
+  <code style="white-space: pre-wrap;">mouse</code> function from
+  <code style="white-space: pre-wrap;">d3-selection</code> - gives us
+  cursor position relative to the SVG element. Two linear scales give us
+  <code style="white-space: pre-wrap;">scaleFactor</code> and
+  <code style="white-space: pre-wrap;">scaleLean</code> values, which we
+  put into component state.
+</p>
+<p>
+  When we feed a change to
+  <code style="white-space: pre-wrap;">this.setState</code>, it triggers a
+  re-render of the entire tree, our
+  <code style="white-space: pre-wrap;">memoizedCalc</code> function returns
+  new values, and the final result is a dancing tree.
+</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/pythagoras-dancing.gif"
+    alt="Dancing Pythagoras tree"
+  />
+  <figcaption>Dancing Pythagoras tree</figcaption>
+</figure>
+<p>Beautious. 😍</p>

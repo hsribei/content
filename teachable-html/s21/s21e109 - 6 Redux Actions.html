@@ -1,73 +1,73 @@
-    <h2 id="redux-actions">6 Redux Actions</h2>
-    <p>
-      Redux actions are a fancy way of saying <em>“Yo, a thing happened!”</em>.
-      They’re functions you call to get structured metadata that’s passed into
-      Redux reducers.
-    </p>
-    <p>Our particle generator uses 6 actions:</p>
-    <ol type="1">
-      <li>
-        <code style="white-space: pre-wrap;">tickTime</code> steps our
-        animation to the next frame
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">tickerStarted</code> fires when
-        everything begins
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">startParticles</code> fires when
-        we hold down the mouse
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">stopParticles</code> fires when we
-        release
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">updateMousePos</code> keeps mouse
-        position saved in state
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">resizeScreen</code> saves new
-        screen size so we know where edges lie
-      </li>
-    </ol>
-    <p>Our actions look something like this:</p>
-    <div
-      class="sourceCode"
-      id="cb148"
-      data-caption="A Redux action"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb148-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">updateMousePos</span>(x<span class="op" style="color: #666666;">,</span> y) <span class="op" style="color: #666666;">{</span></a>
+<h2 id="redux-actions">6 Redux Actions</h2>
+<p>
+  Redux actions are a fancy way of saying <em>“Yo, a thing happened!”</em>.
+  They’re functions you call to get structured metadata that’s passed into
+  Redux reducers.
+</p>
+<p>Our particle generator uses 6 actions:</p>
+<ol type="1">
+  <li>
+    <code style="white-space: pre-wrap;">tickTime</code> steps our
+    animation to the next frame
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">tickerStarted</code> fires when
+    everything begins
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">startParticles</code> fires when
+    we hold down the mouse
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">stopParticles</code> fires when we
+    release
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">updateMousePos</code> keeps mouse
+    position saved in state
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">resizeScreen</code> saves new
+    screen size so we know where edges lie
+  </li>
+</ol>
+<p>Our actions look something like this:</p>
+<div
+  class="sourceCode"
+  id="cb148"
+  data-caption="A Redux action"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb148-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="kw" style="color: #007020; font-weight: bold;">function</span> <span class="at" style="color: #7d9029;">updateMousePos</span>(x<span class="op" style="color: #666666;">,</span> y) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb148-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="cf" style="color: #007020; font-weight: bold;">return</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb148-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">type</span><span class="op" style="color: #666666;">:</span> UPDATE_MOUSE_POS<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb148-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">x</span><span class="op" style="color: #666666;">:</span> x<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb148-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="dt" style="color: #902000;">y</span><span class="op" style="color: #666666;">:</span> y</a>
 <a class="sourceLine" id="cb148-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb148-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      A function that accepts params and returns an object with a type and meta
-      data. Technically this is an action generator and the object is an
-      action, but that distinction has long since been lost in the community.
-    </p>
-    <p>
-      Actions <em>must</em> have a
-      <code style="white-space: pre-wrap;">type</code>. Reducers use the type
-      to decide what to do. The rest is optional.
-    </p>
-    <p>
-      You can see
-      <a
-        href="https://github.com/Swizec/react-particles-experiment/blob/master/src/actions/index.js"
-        >all the actions on GitHub</a
-      >.
-    </p>
-    <p>
-      I find this to be the least elegant part of Redux. Makes sense in large
-      applications, but way too convoluted for small apps. Simpler alternatives
-      exist like doing it yourself with React Context.
-    </p>
+</div>
+<p>
+  A function that accepts params and returns an object with a type and meta
+  data. Technically this is an action generator and the object is an
+  action, but that distinction has long since been lost in the community.
+</p>
+<p>
+  Actions <em>must</em> have a
+  <code style="white-space: pre-wrap;">type</code>. Reducers use the type
+  to decide what to do. The rest is optional.
+</p>
+<p>
+  You can see
+  <a
+    href="https://github.com/Swizec/react-particles-experiment/blob/master/src/actions/index.js"
+    >all the actions on GitHub</a
+  >.
+</p>
+<p>
+  I find this to be the least elegant part of Redux. Makes sense in large
+  applications, but way too convoluted for small apps. Simpler alternatives
+  exist like doing it yourself with React Context.
+</p>

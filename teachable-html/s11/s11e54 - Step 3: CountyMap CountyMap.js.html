@@ -1,72 +1,72 @@
-    <h2 id="step-3-countymapcountymap.js">Step 3: CountyMap/CountyMap.js</h2>
-    <p>
-      Here comes the fun part - declaratively drawing a map. You’ll see why I
-      love using React for dataviz.
-    </p>
-    <p>
-      We’re using the
-      <a
-        href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration"
-        >full-feature integration</a
-      >
-      approach and a lot of D3 maps magic. Drawing a map with D3 I’m always
-      surprised how little code it takes.
-    </p>
-    <p>
-      Start with the imports: React, D3, lodash, topojson, County component.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb69"
-      data-caption="Import CountyMap dependencies"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb69-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
+<h2 id="step-3-countymapcountymap.js">Step 3: CountyMap/CountyMap.js</h2>
+<p>
+  Here comes the fun part - declaratively drawing a map. You’ll see why I
+  love using React for dataviz.
+</p>
+<p>
+  We’re using the
+  <a
+    href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration"
+    >full-feature integration</a
+  >
+  approach and a lot of D3 maps magic. Drawing a map with D3 I’m always
+  surprised how little code it takes.
+</p>
+<p>
+  Start with the imports: React, D3, lodash, topojson, County component.
+</p>
+<div
+  class="sourceCode"
+  id="cb69"
+  data-caption="Import CountyMap dependencies"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb69-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
 <a class="sourceLine" id="cb69-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb69-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> d3 <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb69-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">*</span> <span class="im">as</span> topojson <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;topojson&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb69-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> _ <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;lodash&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb69-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb69-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> County <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./County&#39;</span><span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      Out of these, we haven’t built
-      <code style="white-space: pre-wrap;">County</code> yet, and you haven’t
-      seen <code style="white-space: pre-wrap;">topojson</code> before.
-    </p>
-    <p>
-      TopoJSON is a geographical data format based on JSON. We’re using the
-      <code style="white-space: pre-wrap;">topojson</code> library to translate
-      our geographical datasets into GeoJSON, which is another way of defining
-      geo data with JSON.
-    </p>
-    <p>
-      I don’t know why there are two, but TopoJSON produces smaller files, and
-      GeoJSON can be fed directly into D3’s geo functions. ¯\<em>(ツ)</em>/¯
-    </p>
-    <p>
-      Maybe it’s a case of
-      <a href="https://xkcd.com/927/">competing standards</a>.
-    </p>
-    <h3 id="constructor">Constructor</h3>
-    <p>
-      We stub out the
-      <code style="white-space: pre-wrap;">CountyMap</code> component then fill
-      it in with logic.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb70"
-      data-caption="CountyMap stub"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb70-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
+</div>
+<p>
+  Out of these, we haven’t built
+  <code style="white-space: pre-wrap;">County</code> yet, and you haven’t
+  seen <code style="white-space: pre-wrap;">topojson</code> before.
+</p>
+<p>
+  TopoJSON is a geographical data format based on JSON. We’re using the
+  <code style="white-space: pre-wrap;">topojson</code> library to translate
+  our geographical datasets into GeoJSON, which is another way of defining
+  geo data with JSON.
+</p>
+<p>
+  I don’t know why there are two, but TopoJSON produces smaller files, and
+  GeoJSON can be fed directly into D3’s geo functions. ¯\<em>(ツ)</em>/¯
+</p>
+<p>
+  Maybe it’s a case of
+  <a href="https://xkcd.com/927/">competing standards</a>.
+</p>
+<h3 id="constructor">Constructor</h3>
+<p>
+  We stub out the
+  <code style="white-space: pre-wrap;">CountyMap</code> component then fill
+  it in with logic.
+</p>
+<div
+  class="sourceCode"
+  id="cb70"
+  data-caption="CountyMap stub"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb70-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
 <a class="sourceLine" id="cb70-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> CountyMap <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb70-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">constructor</span>(props) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb70-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">super</span>(props)<span class="op" style="color: #666666;">;</span></a>
@@ -93,27 +93,27 @@
 <a class="sourceLine" id="cb70-25" title="25" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb70-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb70-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> CountyMap<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We’ll set up default D3 state in
-      <code style="white-space: pre-wrap;">constructor</code> and keep it up to
-      date with
-      <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>.
-    </p>
-    <p>
-      We need three D3 objects to build a choropleth map: a geographical
-      projection, a path generator, and a quantize scale for colors.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb71"
-      data-caption="D3 objects for a map"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb71-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
+</div>
+<p>
+  We’ll set up default D3 state in
+  <code style="white-space: pre-wrap;">constructor</code> and keep it up to
+  date with
+  <code style="white-space: pre-wrap;">getDerivedStateFromProps</code>.
+</p>
+<p>
+  We need three D3 objects to build a choropleth map: a geographical
+  projection, a path generator, and a quantize scale for colors.
+</p>
+<div
+  class="sourceCode"
+  id="cb71"
+  data-caption="D3 objects for a map"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb71-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
 <a class="sourceLine" id="cb71-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> CountyMap <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb71-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">constructor</span>(props) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb71-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">super</span>(props)<span class="op" style="color: #666666;">;</span></a>
@@ -126,61 +126,61 @@
 <a class="sourceLine" id="cb71-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            projection</a>
 <a class="sourceLine" id="cb71-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb71-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      You might remember geographical projections from high school. They map a
-      sphere to a flat surface. We use
-      <code style="white-space: pre-wrap;">geoAlbersUsa</code> because it’s
-      made specifically for maps of the USA.
-    </p>
-    <p>
-      D3 offers many other projections. You can see them on
-      <a href="https://github.com/d3/d3-geo#projections"
-        >d3-geo’s Github page</a
-      >.
-    </p>
-    <p>
-      A <code style="white-space: pre-wrap;">geoPath</code> generator takes a
-      projection and returns a function that generates the
-      <code style="white-space: pre-wrap;">d</code> attribute of
-      <code style="white-space: pre-wrap;">&lt;path&gt;</code> elements. This
-      is the most general way to specify SVG shapes. I won’t go into explaining
-      the <code style="white-space: pre-wrap;">d</code> here, but it’s
-      <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d"
-        >an entire language</a
-      >
-      for describing shapes.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">quantize</code> is a D3 scale. We’ve
-      talked about the basics of scales in the
-      <a
-        href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis"
-        >D3 Axis example</a
-      >. This one splits a domain into 9 quantiles and assigns them specific
-      values from the <code style="white-space: pre-wrap;">range</code>.
-    </p>
-    <p>
-      Let’s say our domain goes from 0 to 90. Calling the scale with any number
-      between 0 and 9 would return 1. 10 to 19 returns 2 and so on. We’ll use
-      it to pick colors from an array.
-    </p>
-    <h3 id="getderivedstatefromprops">getDerivedStateFromProps</h3>
-    <p>
-      Keeping our geo path and quantize scale up to date is simple, but we’ll
-      make it harder by adding a zoom feature. It won’t work until we build the
-      filtering, but hey, we’ll already have it by then! 😄
-    </p>
-    <div
-      class="sourceCode"
-      id="cb72"
-      data-caption="CountyMap getDerivedStateFromProps"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb72-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
+</div>
+<p>
+  You might remember geographical projections from high school. They map a
+  sphere to a flat surface. We use
+  <code style="white-space: pre-wrap;">geoAlbersUsa</code> because it’s
+  made specifically for maps of the USA.
+</p>
+<p>
+  D3 offers many other projections. You can see them on
+  <a href="https://github.com/d3/d3-geo#projections"
+    >d3-geo’s Github page</a
+  >.
+</p>
+<p>
+  A <code style="white-space: pre-wrap;">geoPath</code> generator takes a
+  projection and returns a function that generates the
+  <code style="white-space: pre-wrap;">d</code> attribute of
+  <code style="white-space: pre-wrap;">&lt;path&gt;</code> elements. This
+  is the most general way to specify SVG shapes. I won’t go into explaining
+  the <code style="white-space: pre-wrap;">d</code> here, but it’s
+  <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d"
+    >an entire language</a
+  >
+  for describing shapes.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">quantize</code> is a D3 scale. We’ve
+  talked about the basics of scales in the
+  <a
+    href="https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887732#blackbox-axis"
+    >D3 Axis example</a
+  >. This one splits a domain into 9 quantiles and assigns them specific
+  values from the <code style="white-space: pre-wrap;">range</code>.
+</p>
+<p>
+  Let’s say our domain goes from 0 to 90. Calling the scale with any number
+  between 0 and 9 would return 1. 10 to 19 returns 2 and so on. We’ll use
+  it to pick colors from an array.
+</p>
+<h3 id="getderivedstatefromprops">getDerivedStateFromProps</h3>
+<p>
+  Keeping our geo path and quantize scale up to date is simple, but we’ll
+  make it harder by adding a zoom feature. It won’t work until we build the
+  filtering, but hey, we’ll already have it by then! 😄
+</p>
+<div
+  class="sourceCode"
+  id="cb72"
+  data-caption="CountyMap getDerivedStateFromProps"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb72-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// src/components/CountyMap/CountyMap.js</span></a>
 <a class="sourceLine" id="cb72-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="kw" style="color: #007020; font-weight: bold;">static</span> <span class="at" style="color: #7d9029;">getDerivedStateFromProps</span>(props<span class="op" style="color: #666666;">,</span> state) <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb72-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">let</span> <span class="op" style="color: #666666;">{</span> projection<span class="op" style="color: #666666;">,</span> quantize<span class="op" style="color: #666666;">,</span> geoPath <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> state<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb72-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -217,81 +217,81 @@
 <a class="sourceLine" id="cb72-35" title="35" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            quantize</a>
 <a class="sourceLine" id="cb72-36" title="36" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb72-37" title="37" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>There’s a lot going on here.</p>
-    <p>
-      We destructure <code style="white-space: pre-wrap;">projection</code>,
-      <code style="white-space: pre-wrap;">quantize</code>, and
-      <code style="white-space: pre-wrap;">geoPath</code> out of component
-      state. These are the D3 object we’re about to update.
-    </p>
-    <p>
-      First up is the projection. We translate (move) it to the center of our
-      drawing area and set the scale property. You have to play around with
-      this value until you get a nice result because it’s different for every
-      projection.
-    </p>
-    <p>
-      Then we do some weird stuff if
-      <code style="white-space: pre-wrap;">zoom</code> is defined.
-    </p>
-    <p>
-      We get the list of all US state features in our geo data, find the one
-      we’re <code style="white-space: pre-wrap;">zoom</code>-ing on, and use
-      the <code style="white-space: pre-wrap;">geoPath.centroid</code> method
-      to calculate its center point. This gives us a new coordinate to
-      <code style="white-space: pre-wrap;">translate</code> our projection
-      onto.
-    </p>
-    <p>
-      The calculation in
-      <code style="white-space: pre-wrap;">.translate()</code> helps us align
-      the center point of our
-      <code style="white-space: pre-wrap;">zoom</code> US state with the center
-      of the drawing area.
-    </p>
-    <p>
-      While all of this is going on, we also tweak the
-      <code style="white-space: pre-wrap;">.scale</code> property to make the
-      map bigger. This creates a zooming effect.
-    </p>
-    <p>
-      After all that, we update the quantize scale’s domain with new values.
-      Using <code style="white-space: pre-wrap;">d3.quantile</code> lets us
-      offset the scale to produce a more interesting map. Again, I discovered
-      these values through experiment - they cut off the top and bottom of the
-      range because there isn’t much there. This brings higher contrast to the
-      richer middle of the range.
-    </p>
-    <p>
-      With our D3 objects updated, we return a new derived state.
-      <em>Technically</em> you don’t have to do this but you should. Due to how
-      JavaScript works, you already updated D3 objects in place, but you should
-      pretend <code style="white-space: pre-wrap;">this.state</code> is
-      immutable and return a new copy.
-    </p>
-    <p>
-      Overall that makes your code easier to understand and closer to React
-      principles.
-    </p>
-    <h3 id="render">render</h3>
-    <p>
-      After all that hard work, the
-      <code style="white-space: pre-wrap;">render</code> method is a breeze. We
-      prep our data then loop through it and render a
-      <code style="white-space: pre-wrap;">County</code> element for each
-      entry.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb73"
-      data-caption="CountyMap render"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb73-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
+</div>
+<p>There’s a lot going on here.</p>
+<p>
+  We destructure <code style="white-space: pre-wrap;">projection</code>,
+  <code style="white-space: pre-wrap;">quantize</code>, and
+  <code style="white-space: pre-wrap;">geoPath</code> out of component
+  state. These are the D3 object we’re about to update.
+</p>
+<p>
+  First up is the projection. We translate (move) it to the center of our
+  drawing area and set the scale property. You have to play around with
+  this value until you get a nice result because it’s different for every
+  projection.
+</p>
+<p>
+  Then we do some weird stuff if
+  <code style="white-space: pre-wrap;">zoom</code> is defined.
+</p>
+<p>
+  We get the list of all US state features in our geo data, find the one
+  we’re <code style="white-space: pre-wrap;">zoom</code>-ing on, and use
+  the <code style="white-space: pre-wrap;">geoPath.centroid</code> method
+  to calculate its center point. This gives us a new coordinate to
+  <code style="white-space: pre-wrap;">translate</code> our projection
+  onto.
+</p>
+<p>
+  The calculation in
+  <code style="white-space: pre-wrap;">.translate()</code> helps us align
+  the center point of our
+  <code style="white-space: pre-wrap;">zoom</code> US state with the center
+  of the drawing area.
+</p>
+<p>
+  While all of this is going on, we also tweak the
+  <code style="white-space: pre-wrap;">.scale</code> property to make the
+  map bigger. This creates a zooming effect.
+</p>
+<p>
+  After all that, we update the quantize scale’s domain with new values.
+  Using <code style="white-space: pre-wrap;">d3.quantile</code> lets us
+  offset the scale to produce a more interesting map. Again, I discovered
+  these values through experiment - they cut off the top and bottom of the
+  range because there isn’t much there. This brings higher contrast to the
+  richer middle of the range.
+</p>
+<p>
+  With our D3 objects updated, we return a new derived state.
+  <em>Technically</em> you don’t have to do this but you should. Due to how
+  JavaScript works, you already updated D3 objects in place, but you should
+  pretend <code style="white-space: pre-wrap;">this.state</code> is
+  immutable and return a new copy.
+</p>
+<p>
+  Overall that makes your code easier to understand and closer to React
+  principles.
+</p>
+<h3 id="render">render</h3>
+<p>
+  After all that hard work, the
+  <code style="white-space: pre-wrap;">render</code> method is a breeze. We
+  prep our data then loop through it and render a
+  <code style="white-space: pre-wrap;">County</code> element for each
+  entry.
+</p>
+<div
+  class="sourceCode"
+  id="cb73"
+  data-caption="CountyMap render"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb73-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="at" style="color: #7d9029;">render</span>() <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb73-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">const</span> <span class="op" style="color: #666666;">{</span> geoPath<span class="op" style="color: #666666;">,</span> quantize <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">state</span><span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb73-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            <span class="op" style="color: #666666;">{</span> usTopoJson<span class="op" style="color: #666666;">,</span> values<span class="op" style="color: #666666;">,</span> zoom <span class="op" style="color: #666666;">}</span> <span class="op" style="color: #666666;">=</span> <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="at" style="color: #7d9029;">props</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb73-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -335,47 +335,47 @@
 <a class="sourceLine" id="cb73-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">            )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb73-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb73-44" title="44" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      We use destructuring to save all relevant props and state in constants,
-      then use the TopoJSON library to grab data out of the
-      <code style="white-space: pre-wrap;">usTopoJson</code> dataset.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">.mesh</code> calculates a mesh for
-      US states – a thin line around the edges.
-      <code style="white-space: pre-wrap;">.feature</code> calculates feature
-      for each count – fill in with color.
-    </p>
-    <p>
-      Mesh and feature aren’t tied to US states or counties by the way. It’s
-      just a matter of what you get back: borders or flat areas. What you need
-      depends on what you’re building.
-    </p>
-    <p>
-      We use Lodash’s
-      <code style="white-space: pre-wrap;">_.fromPairs</code> to build a
-      dictionary that maps county identifiers to their values. Building it
-      beforehand makes our code faster. You can read some details about the
-      speed optimizations
-      <a
-        href="https://swizec.com/blog/optimizing-react-choropleth-map-rendering/swizec/7302"
-        >here</a
-      >.
-    </p>
-    <p>
-      As promised, the
-      <code style="white-space: pre-wrap;">return</code> statement loops
-      through the list of
-      <code style="white-space: pre-wrap;">counties</code> and renders
-      <code style="white-space: pre-wrap;">County</code> components. Each gets
-      a bunch of attributes and returns a
-      <code style="white-space: pre-wrap;">&lt;path&gt;</code> element that
-      looks like a specific county.
-    </p>
-    <p>
-      For US state borders, we render a single
-      <code style="white-space: pre-wrap;">&lt;path&gt;</code> element and use
-      <code style="white-space: pre-wrap;">geoPath</code> to generate the
-      <code style="white-space: pre-wrap;">d</code> attribute.
-    </p>
+</div>
+<p>
+  We use destructuring to save all relevant props and state in constants,
+  then use the TopoJSON library to grab data out of the
+  <code style="white-space: pre-wrap;">usTopoJson</code> dataset.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">.mesh</code> calculates a mesh for
+  US states – a thin line around the edges.
+  <code style="white-space: pre-wrap;">.feature</code> calculates feature
+  for each count – fill in with color.
+</p>
+<p>
+  Mesh and feature aren’t tied to US states or counties by the way. It’s
+  just a matter of what you get back: borders or flat areas. What you need
+  depends on what you’re building.
+</p>
+<p>
+  We use Lodash’s
+  <code style="white-space: pre-wrap;">_.fromPairs</code> to build a
+  dictionary that maps county identifiers to their values. Building it
+  beforehand makes our code faster. You can read some details about the
+  speed optimizations
+  <a
+    href="https://swizec.com/blog/optimizing-react-choropleth-map-rendering/swizec/7302"
+    >here</a
+  >.
+</p>
+<p>
+  As promised, the
+  <code style="white-space: pre-wrap;">return</code> statement loops
+  through the list of
+  <code style="white-space: pre-wrap;">counties</code> and renders
+  <code style="white-space: pre-wrap;">County</code> components. Each gets
+  a bunch of attributes and returns a
+  <code style="white-space: pre-wrap;">&lt;path&gt;</code> element that
+  looks like a specific county.
+</p>
+<p>
+  For US state borders, we render a single
+  <code style="white-space: pre-wrap;">&lt;path&gt;</code> element and use
+  <code style="white-space: pre-wrap;">geoPath</code> to generate the
+  <code style="white-space: pre-wrap;">d</code> attribute.
+</p>

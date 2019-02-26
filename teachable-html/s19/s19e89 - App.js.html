@@ -1,20 +1,20 @@
-    <h3 id="app.js">App.js</h3>
-    <p>
-      Like we said: the hard stuff happens inside our Ball component. That
-      means App has render our Ball and implement a mechanism to toggle the
-      <code style="white-space: pre-wrap;">x</code> coordinate between two
-      states: Left and right.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb132"
-      data-caption="Rendering a declarative transitionable component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb132-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
+<h3 id="app.js">App.js</h3>
+<p>
+  Like we said: the hard stuff happens inside our Ball component. That
+  means App has render our Ball and implement a mechanism to toggle the
+  <code style="white-space: pre-wrap;">x</code> coordinate between two
+  states: Left and right.
+</p>
+<div
+  class="sourceCode"
+  id="cb132"
+  data-caption="Rendering a declarative transitionable component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb132-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">Component</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb132-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  state <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb132-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">ballLeft</span><span class="op" style="color: #666666;">:</span> <span class="kw" style="color: #007020; font-weight: bold;">true</span></a>
 <a class="sourceLine" id="cb132-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">};</span></a>
@@ -36,22 +36,22 @@
 <a class="sourceLine" id="cb132-20" title="20" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    )<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb132-21" title="21" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb132-22" title="22" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>Typical class based component:</p>
-    <ol type="1">
-      <li>
-        State holding a
-        <code style="white-space: pre-wrap;">ballLeft</code> boolean
-      </li>
-      <li>A method to toggle said boolean</li>
-      <li>
-        A render method that renders an SVG with an
-        <code style="white-space: pre-wrap;">onClick</code> event
-      </li>
-    </ol>
-    <p>
-      When <code style="white-space: pre-wrap;">state.ballLeft</code> is true,
-      ball renders on the left. When it’s false, on the right. Left and right
-      are hardcoded <code style="white-space: pre-wrap;">x</code> coordinates.
-    </p>
-    <p>Ball component handles the rest.</p>
+</div>
+<p>Typical class based component:</p>
+<ol type="1">
+  <li>
+    State holding a
+    <code style="white-space: pre-wrap;">ballLeft</code> boolean
+  </li>
+  <li>A method to toggle said boolean</li>
+  <li>
+    A render method that renders an SVG with an
+    <code style="white-space: pre-wrap;">onClick</code> event
+  </li>
+</ol>
+<p>
+  When <code style="white-space: pre-wrap;">state.ballLeft</code> is true,
+  ball renders on the left. When it’s false, on the right. Left and right
+  are hardcoded <code style="white-space: pre-wrap;">x</code> coordinates.
+</p>
+<p>Ball component handles the rest.</p>

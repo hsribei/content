@@ -1,63 +1,63 @@
-    <h3 id="part-1-rendering-our-marbles">Part 1: Rendering our marbles</h3>
-    <p>
-      Our marbles render on Canvas using Konva. Each marble is its own sprite
-      rendered as a Konva element. This makes it easier to implement user and
-      marble interactions.
-    </p>
-    <p>Rendering happens in 3 components:</p>
-    <ul>
-      <li>
-        <code style="white-space: pre-wrap;">App</code> holds everything
-        together
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">MarbleList</code> renders a list
-        of marbles
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Marble</code> renders an
-        individual marble
-      </li>
-    </ul>
-    <p>We’re also using 2 MobX stores:</p>
-    <ul>
-      <li>
-        <code style="white-space: pre-wrap;">Sprite</code> to load the marble
-        sprite and define coordinates within
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">Physics</code> as our physics
-        engine
-      </li>
-    </ul>
-    <p>
-      <code style="white-space: pre-wrap;">Sprite</code> and
-      <code style="white-space: pre-wrap;">Physics</code> are hold almost all
-      of our game logic. A bit of drag &amp; drop logic goes in the
-      <code style="white-space: pre-wrap;">Marble</code> component. Other than
-      that, all our components are presentational. They get props and render
-      stuff.
-    </p>
-    <p>
-      Let’s start with <code style="white-space: pre-wrap;">App</code> and work
-      our way down.
-    </p>
-    <h4 id="app-1">App</h4>
-    <p>
-      Our <code style="white-space: pre-wrap;">App</code> component doesn’t do
-      much. It imports MobX stores, triggers sprite loading, and starts the
-      game loop.
-    </p>
-    <div
-      class="sourceCode"
-      id="cb169"
-      data-caption="The App component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb169-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/App.js</span></a>
+<h3 id="part-1-rendering-our-marbles">Part 1: Rendering our marbles</h3>
+<p>
+  Our marbles render on Canvas using Konva. Each marble is its own sprite
+  rendered as a Konva element. This makes it easier to implement user and
+  marble interactions.
+</p>
+<p>Rendering happens in 3 components:</p>
+<ul>
+  <li>
+    <code style="white-space: pre-wrap;">App</code> holds everything
+    together
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">MarbleList</code> renders a list
+    of marbles
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Marble</code> renders an
+    individual marble
+  </li>
+</ul>
+<p>We’re also using 2 MobX stores:</p>
+<ul>
+  <li>
+    <code style="white-space: pre-wrap;">Sprite</code> to load the marble
+    sprite and define coordinates within
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">Physics</code> as our physics
+    engine
+  </li>
+</ul>
+<p>
+  <code style="white-space: pre-wrap;">Sprite</code> and
+  <code style="white-space: pre-wrap;">Physics</code> are hold almost all
+  of our game logic. A bit of drag &amp; drop logic goes in the
+  <code style="white-space: pre-wrap;">Marble</code> component. Other than
+  that, all our components are presentational. They get props and render
+  stuff.
+</p>
+<p>
+  Let’s start with <code style="white-space: pre-wrap;">App</code> and work
+  our way down.
+</p>
+<h4 id="app-1">App</h4>
+<p>
+  Our <code style="white-space: pre-wrap;">App</code> component doesn’t do
+  much. It imports MobX stores, triggers sprite loading, and starts the
+  game loop.
+</p>
+<div
+  class="sourceCode"
+  id="cb169"
+  data-caption="The App component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb169-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/App.js</span></a>
 <a class="sourceLine" id="cb169-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb169-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb169-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> Provider <span class="im">as</span> MobXProvider<span class="op" style="color: #666666;">,</span> observer <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;mobx-react&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -90,52 +90,52 @@
 <a class="sourceLine" id="cb169-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb169-32" title="32" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb169-33" title="33" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> App<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We import our dependencies: React itself, a
-      <code style="white-space: pre-wrap;">MobXProvider</code> that’s similar
-      to the Redux provider (puts stuff in react context), both of our MobX
-      stores which export singleton instances, and the main
-      <code style="white-space: pre-wrap;">MarbleList</code> component.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">App</code> itself is a full featured
-      component that initiates sprite loading in
-      <code style="white-space: pre-wrap;">componentDidMount</code> and calls
-      <code style="white-space: pre-wrap;">startGameLoop</code> when the sprite
-      is ready. We know the sprite is ready because it calls a callback. You’ll
-      see how that works in a bit.
-    </p>
-    <p>
-      The <code style="white-space: pre-wrap;">render</code> method outputs
-      some descriptive text and the
-      <code style="white-space: pre-wrap;">MarbleList</code> component wrapped
-      in a <code style="white-space: pre-wrap;">MobXProvider</code>. The
-      provider puts instances of our stores –
-      <code style="white-space: pre-wrap;">sprite</code> and
-      <code style="white-space: pre-wrap;">physics</code> – in React context.
-    </p>
-    <p>
-      This makes them available to all child components via the
-      <code style="white-space: pre-wrap;">inject</code> decorator.
-    </p>
-    <h4 id="marblelist">MarbleList</h4>
-    <p>
-      <code style="white-space: pre-wrap;">MarbleList</code> is an important
-      component that renders the whole game, yet it can still be small and
-      functional. Every prop it needs comes from our two stores.
-    </p>
-    <p>Like this:</p>
-    <div
-      class="sourceCode"
-      id="cb170"
-      data-caption="MarbleList component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb170-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/MarbleList.js</span></a>
+</div>
+<p>
+  We import our dependencies: React itself, a
+  <code style="white-space: pre-wrap;">MobXProvider</code> that’s similar
+  to the Redux provider (puts stuff in react context), both of our MobX
+  stores which export singleton instances, and the main
+  <code style="white-space: pre-wrap;">MarbleList</code> component.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">App</code> itself is a full featured
+  component that initiates sprite loading in
+  <code style="white-space: pre-wrap;">componentDidMount</code> and calls
+  <code style="white-space: pre-wrap;">startGameLoop</code> when the sprite
+  is ready. We know the sprite is ready because it calls a callback. You’ll
+  see how that works in a bit.
+</p>
+<p>
+  The <code style="white-space: pre-wrap;">render</code> method outputs
+  some descriptive text and the
+  <code style="white-space: pre-wrap;">MarbleList</code> component wrapped
+  in a <code style="white-space: pre-wrap;">MobXProvider</code>. The
+  provider puts instances of our stores –
+  <code style="white-space: pre-wrap;">sprite</code> and
+  <code style="white-space: pre-wrap;">physics</code> – in React context.
+</p>
+<p>
+  This makes them available to all child components via the
+  <code style="white-space: pre-wrap;">inject</code> decorator.
+</p>
+<h4 id="marblelist">MarbleList</h4>
+<p>
+  <code style="white-space: pre-wrap;">MarbleList</code> is an important
+  component that renders the whole game, yet it can still be small and
+  functional. Every prop it needs comes from our two stores.
+</p>
+<p>Like this:</p>
+<div
+  class="sourceCode"
+  id="cb170"
+  data-caption="MarbleList component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb170-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/MarbleList.js</span></a>
 <a class="sourceLine" id="cb170-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb170-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb170-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> inject<span class="op" style="color: #666666;">,</span> observer <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;mobx-react&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -166,73 +166,73 @@
 <a class="sourceLine" id="cb170-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span>))<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb170-30" title="30" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb170-31" title="31" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> MarbleList<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We import dependencies and create a
-      <code style="white-space: pre-wrap;">MarbleList</code> component. Instead
-      of decorators, we’re using with functional composition.
-    </p>
-    <p>
-      This shows you that MobX <em>can</em> work without decorators, but
-      there’s no deep reason behind this choice. Over time, I’ve developed a
-      preference for composition for functional components and decorators for
-      class-based components.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">inject</code> takes values out of
-      context and puts them in component props.
-      <code style="white-space: pre-wrap;">observer</code> declares that our
-      component observes those props and reacts to them.
-    </p>
-    <p>
-      It’s generally a good idea to use both
-      <code style="white-space: pre-wrap;">inject</code> and
-      <code style="white-space: pre-wrap;">observer</code> together. I have yet
-      to find a case where you need just one or the other.
-    </p>
-    <p>
-      The rendering itself takes values out of our stores and returns a Konva
-      <code style="white-space: pre-wrap;">Stage</code> with a single
-      <code style="white-space: pre-wrap;">Layer</code>, which contains a
-      <code style="white-space: pre-wrap;">Group</code>. Inside this group is
-      our list of marbles.
-    </p>
-    <p>
-      Each marble gets a position, a
-      <code style="white-space: pre-wrap;">type</code> that defines how it
-      looks, an <code style="white-space: pre-wrap;">id</code>, and a
-      <code style="white-space: pre-wrap;">key</code>. We set
-      <code style="white-space: pre-wrap;">draggable</code> to
-      <code style="white-space: pre-wrap;">true</code> so Konva knows that this
-      element is draggable.
-    </p>
-    <p>
-      Yes, that means we get draggability on an HTML5 Canvas without any extra
-      effort. I like that.
-    </p>
-    <h4 id="marble">Marble</h4>
-    <p>
-      Each <code style="white-space: pre-wrap;">Marble</code> component renders
-      a single marble and handles dragging and dropping. That’s how you “shoot”
-      marbles.
-    </p>
-    <p>
-      Dragging and dropping creates a vector that accelerates, or shoots, the
-      marble in a certain direction with a certain speed. Putting this logic in
-      the component itself makes sense because the rest of our game only cares
-      about that final vector.
-    </p>
-    <p>The Marble component looks like this:</p>
-    <div
-      class="sourceCode"
-      id="cb171"
-      data-caption="Marble component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb171-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Marble.js</span></a>
+</div>
+<p>
+  We import dependencies and create a
+  <code style="white-space: pre-wrap;">MarbleList</code> component. Instead
+  of decorators, we’re using with functional composition.
+</p>
+<p>
+  This shows you that MobX <em>can</em> work without decorators, but
+  there’s no deep reason behind this choice. Over time, I’ve developed a
+  preference for composition for functional components and decorators for
+  class-based components.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">inject</code> takes values out of
+  context and puts them in component props.
+  <code style="white-space: pre-wrap;">observer</code> declares that our
+  component observes those props and reacts to them.
+</p>
+<p>
+  It’s generally a good idea to use both
+  <code style="white-space: pre-wrap;">inject</code> and
+  <code style="white-space: pre-wrap;">observer</code> together. I have yet
+  to find a case where you need just one or the other.
+</p>
+<p>
+  The rendering itself takes values out of our stores and returns a Konva
+  <code style="white-space: pre-wrap;">Stage</code> with a single
+  <code style="white-space: pre-wrap;">Layer</code>, which contains a
+  <code style="white-space: pre-wrap;">Group</code>. Inside this group is
+  our list of marbles.
+</p>
+<p>
+  Each marble gets a position, a
+  <code style="white-space: pre-wrap;">type</code> that defines how it
+  looks, an <code style="white-space: pre-wrap;">id</code>, and a
+  <code style="white-space: pre-wrap;">key</code>. We set
+  <code style="white-space: pre-wrap;">draggable</code> to
+  <code style="white-space: pre-wrap;">true</code> so Konva knows that this
+  element is draggable.
+</p>
+<p>
+  Yes, that means we get draggability on an HTML5 Canvas without any extra
+  effort. I like that.
+</p>
+<h4 id="marble">Marble</h4>
+<p>
+  Each <code style="white-space: pre-wrap;">Marble</code> component renders
+  a single marble and handles dragging and dropping. That’s how you “shoot”
+  marbles.
+</p>
+<p>
+  Dragging and dropping creates a vector that accelerates, or shoots, the
+  marble in a certain direction with a certain speed. Putting this logic in
+  the component itself makes sense because the rest of our game only cares
+  about that final vector.
+</p>
+<p>The Marble component looks like this:</p>
+<div
+  class="sourceCode"
+  id="cb171"
+  data-caption="Marble component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb171-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Marble.js</span></a>
 <a class="sourceLine" id="cb171-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb171-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb171-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> Circle <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react-konva&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -276,52 +276,52 @@
 <a class="sourceLine" id="cb171-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb171-43" title="43" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb171-44" title="44" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Marble<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      We <code style="white-space: pre-wrap;">@inject</code> both stores into
-      our component and make it an
-      <code style="white-space: pre-wrap;">@observer</code>. The
-      <code style="white-space: pre-wrap;">render</code> method takes values
-      out of our stores and renders a Konva
-      <code style="white-space: pre-wrap;">Circle</code>. The circle uses a
-      chunk of our sprite as its background, has a colorful shadow, and has a
-      bunch of drag callbacks.
-    </p>
-    <p>Those callbacks make our game playable.</p>
-    <p>
-      In <code style="white-space: pre-wrap;">onDragStart</code>, we store the
-      starting position of the dragged marble. In
-      <code style="white-space: pre-wrap;">onDragMove</code>, we update the
-      marble’s position in the store, which makes it possible for other marbles
-      to bounce off of ours while it’s moving, and in
-      <code style="white-space: pre-wrap;">onDragEnd</code>, we shoot the
-      marble.
-    </p>
-    <p>
-      Shoot direction depends on how we dragged. That’s why we need the
-      starting positions.
-    </p>
-    <p>
-      Drag callbacks double as MobX actions. Makes our code simpler. Instead of
-      specifying an extra
-      <code style="white-space: pre-wrap;">@action</code> in the MobX store, we
-      manipulate the values directly.
-    </p>
-    <p>
-      MobX makes this okay. It keeps everything in sync and our state easy to
-      understand. MobX even batches value changes before triggering re-renders.
-    </p>
-    <p>The code inside those callbacks is pretty mathsy.</p>
-    <div
-      class="sourceCode"
-      id="cb172"
-      data-caption="Dragging callbacks"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb172-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Marble.js</span></a>
+</div>
+<p>
+  We <code style="white-space: pre-wrap;">@inject</code> both stores into
+  our component and make it an
+  <code style="white-space: pre-wrap;">@observer</code>. The
+  <code style="white-space: pre-wrap;">render</code> method takes values
+  out of our stores and renders a Konva
+  <code style="white-space: pre-wrap;">Circle</code>. The circle uses a
+  chunk of our sprite as its background, has a colorful shadow, and has a
+  bunch of drag callbacks.
+</p>
+<p>Those callbacks make our game playable.</p>
+<p>
+  In <code style="white-space: pre-wrap;">onDragStart</code>, we store the
+  starting position of the dragged marble. In
+  <code style="white-space: pre-wrap;">onDragMove</code>, we update the
+  marble’s position in the store, which makes it possible for other marbles
+  to bounce off of ours while it’s moving, and in
+  <code style="white-space: pre-wrap;">onDragEnd</code>, we shoot the
+  marble.
+</p>
+<p>
+  Shoot direction depends on how we dragged. That’s why we need the
+  starting positions.
+</p>
+<p>
+  Drag callbacks double as MobX actions. Makes our code simpler. Instead of
+  specifying an extra
+  <code style="white-space: pre-wrap;">@action</code> in the MobX store, we
+  manipulate the values directly.
+</p>
+<p>
+  MobX makes this okay. It keeps everything in sync and our state easy to
+  understand. MobX even batches value changes before triggering re-renders.
+</p>
+<p>The code inside those callbacks is pretty mathsy.</p>
+<div
+  class="sourceCode"
+  id="cb172"
+  data-caption="Dragging callbacks"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb172-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Marble.js</span></a>
 <a class="sourceLine" id="cb172-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb172-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> Marble <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb172-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    onDragStart <span class="op" style="color: #666666;">=</span> () <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="op" style="color: #666666;">{</span></a>
@@ -363,71 +363,71 @@
 <a class="sourceLine" id="cb172-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb172-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="co" style="color: #60a0b0; font-style: italic;">// ...</span></a>
 <a class="sourceLine" id="cb172-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>
-      In <code style="white-space: pre-wrap;">onDragStart</code>, we store
-      original coordinates and start time in local state. These are temporary
-      values that nothing outside this user action cares about. Local state
-      makes sense.
-    </p>
-    <p>We’ll use them to determine how far the user dragged our marble.</p>
-    <p>
-      In <code style="white-space: pre-wrap;">onDragMove</code> we update the
-      MobX store with new coordinates for this particular marble. You might
-      think we’re messing with mutable state here, and we <em>might</em> be,
-      but these are MobX observables. They’re wrapped in setters that ensure
-      everything is kept in sync, changes logged, observers notified, etc.
-    </p>
-    <p>
-      <code style="white-space: pre-wrap;">onDragEnd</code> shoots the marble.
-      We calculate drag speed and direction, then we call the
-      <code style="white-space: pre-wrap;">shoot()</code> action on the
-      <code style="white-space: pre-wrap;">physics</code> store.
-    </p>
-    <p>
-      The math we’re doing is called
-      <a href="https://en.wikipedia.org/wiki/Euclidean_distance"
-        >euclidean distance</a
-      >
-      by the way. Distance between two points is the root of the sum of squares
-      of distance on each axis.
-    </p>
-    <h4 id="sprite-store">Sprite store</h4>
-    <p>
-      Now that we know how rendering works, we need to load our sprite. It’s an
-      icon set I bought online. Can’t remember where or who from.
-    </p>
-    <p>Here’s what it looks like:</p>
-    <figure>
-      <img
-        src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/monster-marbles-sprite-sheets.jpg"
-        alt="Marbles sprite"
-      />
-      <figcaption>Marbles sprite</figcaption>
-    </figure>
-    <p>To use this sprite, we need two things:</p>
-    <ol type="1">
-      <li>A way to tell where on the image each marble lies</li>
-      <li>A MobX store that loads the image into memory</li>
-    </ol>
-    <p>
-      The first is a
-      <code style="white-space: pre-wrap;">MarbleDefinitions</code> dictionary.
-      We used it in
-      <code style="white-space: pre-wrap;">Marble</code> component’s render
-      method. If you’re playing along, you should copy paste this. Too much
-      typing 😃
-    </p>
-    <div
-      class="sourceCode"
-      id="cb173"
-      data-caption="MarbleDefinitions dictionary"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb173-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Sprite.js</span></a>
+</div>
+<p>
+  In <code style="white-space: pre-wrap;">onDragStart</code>, we store
+  original coordinates and start time in local state. These are temporary
+  values that nothing outside this user action cares about. Local state
+  makes sense.
+</p>
+<p>We’ll use them to determine how far the user dragged our marble.</p>
+<p>
+  In <code style="white-space: pre-wrap;">onDragMove</code> we update the
+  MobX store with new coordinates for this particular marble. You might
+  think we’re messing with mutable state here, and we <em>might</em> be,
+  but these are MobX observables. They’re wrapped in setters that ensure
+  everything is kept in sync, changes logged, observers notified, etc.
+</p>
+<p>
+  <code style="white-space: pre-wrap;">onDragEnd</code> shoots the marble.
+  We calculate drag speed and direction, then we call the
+  <code style="white-space: pre-wrap;">shoot()</code> action on the
+  <code style="white-space: pre-wrap;">physics</code> store.
+</p>
+<p>
+  The math we’re doing is called
+  <a href="https://en.wikipedia.org/wiki/Euclidean_distance"
+    >euclidean distance</a
+  >
+  by the way. Distance between two points is the root of the sum of squares
+  of distance on each axis.
+</p>
+<h4 id="sprite-store">Sprite store</h4>
+<p>
+  Now that we know how rendering works, we need to load our sprite. It’s an
+  icon set I bought online. Can’t remember where or who from.
+</p>
+<p>Here’s what it looks like:</p>
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/monster-marbles-sprite-sheets.jpg"
+    alt="Marbles sprite"
+  />
+  <figcaption>Marbles sprite</figcaption>
+</figure>
+<p>To use this sprite, we need two things:</p>
+<ol type="1">
+  <li>A way to tell where on the image each marble lies</li>
+  <li>A MobX store that loads the image into memory</li>
+</ol>
+<p>
+  The first is a
+  <code style="white-space: pre-wrap;">MarbleDefinitions</code> dictionary.
+  We used it in
+  <code style="white-space: pre-wrap;">Marble</code> component’s render
+  method. If you’re playing along, you should copy paste this. Too much
+  typing 😃
+</p>
+<div
+  class="sourceCode"
+  id="cb173"
+  data-caption="MarbleDefinitions dictionary"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb173-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Sprite.js</span></a>
 <a class="sourceLine" id="cb173-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb173-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> MarbleDefinitions <span class="op" style="color: #666666;">=</span> <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb173-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="dt" style="color: #902000;">dino</span><span class="op" style="color: #666666;">:</span> <span class="op" style="color: #666666;">{</span> <span class="dt" style="color: #902000;">x</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">-222</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">y</span><span class="op" style="color: #666666;">:</span> <span class="dv" style="color: #40a070;">-177</span><span class="op" style="color: #666666;">,</span> <span class="dt" style="color: #902000;">c</span><span class="op" style="color: #666666;">:</span> <span class="st" style="color: #4070a0;">&#39;#8664d5&#39;</span> <span class="op" style="color: #666666;">},</span></a>
@@ -444,27 +444,27 @@
 <a class="sourceLine" id="cb173-15" title="15" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">};</span></a>
 <a class="sourceLine" id="cb173-16" title="16" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb173-17" title="17" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="op" style="color: #666666;">{</span> MarbleDefinitions <span class="op" style="color: #666666;">};</span></a></code></pre>
-    </div>
-    <p>
-      Each type of marble has a name, a coordinate, and a color. The coordinate
-      tells us where on the sprite image it is, and the color helps us create a
-      nice shadow.
-    </p>
-    <p>All values painstakingly assembled by hand. You’re welcome. 😌</p>
-    <p>
-      The MobX store that loads our sprite into memory and helps us use it
-      looks like this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb174"
-      data-caption="Sprite store"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb174-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Sprite.js</span></a>
+</div>
+<p>
+  Each type of marble has a name, a coordinate, and a color. The coordinate
+  tells us where on the sprite image it is, and the color helps us create a
+  nice shadow.
+</p>
+<p>All values painstakingly assembled by hand. You’re welcome. 😌</p>
+<p>
+  The MobX store that loads our sprite into memory and helps us use it
+  looks like this:
+</p>
+<div
+  class="sourceCode"
+  id="cb174"
+  data-caption="Sprite store"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb174-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/logic/Sprite.js</span></a>
 <a class="sourceLine" id="cb174-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb174-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> observable<span class="op" style="color: #666666;">,</span> action<span class="op" style="color: #666666;">,</span> computed <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;mobx&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb174-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> MarbleSprite <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;../monster-marbles-sprite-sheets.jpg&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -493,44 +493,44 @@
 <a class="sourceLine" id="cb174-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb174-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb174-29" title="29" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> <span class="kw" style="color: #007020; font-weight: bold;">new</span> <span class="at" style="color: #7d9029;">Sprite</span>()<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      A MobX store is a JavaScript object. It has
-      <code style="white-space: pre-wrap;">@observable</code> values,
-      <code style="white-space: pre-wrap;">@actions</code>, and
-      <code style="white-space: pre-wrap;">@computed</code> getters. That’s all
-      there is to it.
-    </p>
-    <p>
-      No complicated reducers and action generators. Just JavaScript functions
-      and properties. There’s plenty going on behind the scenes, but we don’t
-      have to think about it.
-    </p>
-    <p>That’s why I like MobX more than Redux. Feels easier to use 🤫</p>
-    <p>
-      In the <code style="white-space: pre-wrap;">Sprite</code> store, we have
-      an <code style="white-space: pre-wrap;">@observable sprite</code>.
-      Changing this value triggers a re-render in al
-      <code style="white-space: pre-wrap;">@observer</code> components that
-      rely on it. In our case that’s every marble.
-    </p>
-    <p>
-      Then we have a
-      <code style="white-space: pre-wrap;">loadSprite</code> action. It creates
-      a new <code style="white-space: pre-wrap;">Image</code> object and loads
-      the sprite. After the image loads, we set
-      <code style="white-space: pre-wrap;">this.sprite</code>.
-    </p>
-    <p>
-      The <code style="white-space: pre-wrap;">@computed</code> getters make it
-      easier to access
-      <code style="white-space: pre-wrap;">MarbleDefinitions</code>.
-      <code style="white-space: pre-wrap;">marbleTypes</code> gives us a list
-      of available types of marbles and
-      <code style="white-space: pre-wrap;">marbleDefinitions</code> returns the
-      definitions object.
-    </p>
-    <p>
-      Running your code won’t work just yet. We need the physics store first
-      because it defines marble positions.
-    </p>
+</div>
+<p>
+  A MobX store is a JavaScript object. It has
+  <code style="white-space: pre-wrap;">@observable</code> values,
+  <code style="white-space: pre-wrap;">@actions</code>, and
+  <code style="white-space: pre-wrap;">@computed</code> getters. That’s all
+  there is to it.
+</p>
+<p>
+  No complicated reducers and action generators. Just JavaScript functions
+  and properties. There’s plenty going on behind the scenes, but we don’t
+  have to think about it.
+</p>
+<p>That’s why I like MobX more than Redux. Feels easier to use 🤫</p>
+<p>
+  In the <code style="white-space: pre-wrap;">Sprite</code> store, we have
+  an <code style="white-space: pre-wrap;">@observable sprite</code>.
+  Changing this value triggers a re-render in al
+  <code style="white-space: pre-wrap;">@observer</code> components that
+  rely on it. In our case that’s every marble.
+</p>
+<p>
+  Then we have a
+  <code style="white-space: pre-wrap;">loadSprite</code> action. It creates
+  a new <code style="white-space: pre-wrap;">Image</code> object and loads
+  the sprite. After the image loads, we set
+  <code style="white-space: pre-wrap;">this.sprite</code>.
+</p>
+<p>
+  The <code style="white-space: pre-wrap;">@computed</code> getters make it
+  easier to access
+  <code style="white-space: pre-wrap;">MarbleDefinitions</code>.
+  <code style="white-space: pre-wrap;">marbleTypes</code> gives us a list
+  of available types of marbles and
+  <code style="white-space: pre-wrap;">marbleDefinitions</code> returns the
+  definitions object.
+</p>
+<p>
+  Running your code won’t work just yet. We need the physics store first
+  because it defines marble positions.
+</p>

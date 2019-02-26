@@ -1,37 +1,37 @@
-    <h2 id="presentation-components">3 presentation components</h2>
-    <p>
-      We start with the presentation components because they’re the simplest.
-      To render a collection of particles, we need:
-    </p>
-    <ul>
-      <li>a stateless <code style="white-space: pre-wrap;">Particle</code></li>
-      <li>
-        a stateless <code style="white-space: pre-wrap;">Particles</code>
-      </li>
-      <li>a class-based <code style="white-space: pre-wrap;">App</code></li>
-    </ul>
-    <p>
-      None of them contain state, but
-      <code style="white-space: pre-wrap;">App</code> has to be a class-based
-      component so that we can use
-      <code style="white-space: pre-wrap;">componentDidMount</code>. We need it
-      to attach D3 event listeners.
-    </p>
-    <h3 id="particle">Particle</h3>
-    <p>
-      The <code style="white-space: pre-wrap;">Particle</code> component is a
-      circle. It looks like this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb144"
-      data-caption="Particle component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb144-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles/Particle.jsx</span></a>
+<h2 id="presentation-components">3 presentation components</h2>
+<p>
+  We start with the presentation components because they’re the simplest.
+  To render a collection of particles, we need:
+</p>
+<ul>
+  <li>a stateless <code style="white-space: pre-wrap;">Particle</code></li>
+  <li>
+    a stateless <code style="white-space: pre-wrap;">Particles</code>
+  </li>
+  <li>a class-based <code style="white-space: pre-wrap;">App</code></li>
+</ul>
+<p>
+  None of them contain state, but
+  <code style="white-space: pre-wrap;">App</code> has to be a class-based
+  component so that we can use
+  <code style="white-space: pre-wrap;">componentDidMount</code>. We need it
+  to attach D3 event listeners.
+</p>
+<h3 id="particle">Particle</h3>
+<p>
+  The <code style="white-space: pre-wrap;">Particle</code> component is a
+  circle. It looks like this:
+</p>
+<div
+  class="sourceCode"
+  id="cb144"
+  data-caption="Particle component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb144-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles/Particle.jsx</span></a>
 <a class="sourceLine" id="cb144-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb144-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb144-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">const</span> Particle <span class="op" style="color: #666666;">=</span> (<span class="op" style="color: #666666;">{</span> x<span class="op" style="color: #666666;">,</span> y <span class="op" style="color: #666666;">}</span>) <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> (</a>
@@ -39,28 +39,28 @@
 <a class="sourceLine" id="cb144-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb144-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb144-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Particle<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      It takes <code style="white-space: pre-wrap;">x</code> and
-      <code style="white-space: pre-wrap;">y</code> coordinates and returns an
-      SVG circle.
-    </p>
-    <h3 id="svg-particles">Particles</h3>
-    <p>
-      The <code style="white-space: pre-wrap;">Particles</code> component isn’t
-      much smarter – it returns a list of circles wrapped in a grouping
-      element, like this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb145"
-      data-caption="Particles list"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb145-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles/index.jsx</span></a>
+</div>
+<p>
+  It takes <code style="white-space: pre-wrap;">x</code> and
+  <code style="white-space: pre-wrap;">y</code> coordinates and returns an
+  SVG circle.
+</p>
+<h3 id="svg-particles">Particles</h3>
+<p>
+  The <code style="white-space: pre-wrap;">Particles</code> component isn’t
+  much smarter – it returns a list of circles wrapped in a grouping
+  element, like this:
+</p>
+<div
+  class="sourceCode"
+  id="cb145"
+  data-caption="Particles list"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb145-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/Particles/index.jsx</span></a>
 <a class="sourceLine" id="cb145-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb145-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> Particle <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;./Particle&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb145-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
@@ -72,36 +72,36 @@
 <a class="sourceLine" id="cb145-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb145-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb145-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> Particles<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      Walk through the array of particles, render a Particle component for
-      each. Declarative rendering that you’ve seen before 😃
-    </p>
-    <p>
-      We can take an array of
-      <code style="white-space: pre-wrap;">{id, x, y}</code> objects and render
-      SVG circles. Now comes our first fun component: the
-      <code style="white-space: pre-wrap;">App</code>.
-    </p>
-    <h3 id="app">App</h3>
-    <p>
-      <code style="white-space: pre-wrap;">App</code> takes care of rendering
-      the scene and attaching d3 event listeners. It gets actions via props and
-      ties them to mouse events. You can think of actions as callbacks that
-      work on the global data store directly. No need to pass them through many
-      levels of props.
-    </p>
-    <p>The rendering part looks like this:</p>
-    <div
-      class="sourceCode"
-      id="cb146"
-      data-caption="App component"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb146-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
+</div>
+<p>
+  Walk through the array of particles, render a Particle component for
+  each. Declarative rendering that you’ve seen before 😃
+</p>
+<p>
+  We can take an array of
+  <code style="white-space: pre-wrap;">{id, x, y}</code> objects and render
+  SVG circles. Now comes our first fun component: the
+  <code style="white-space: pre-wrap;">App</code>.
+</p>
+<h3 id="app">App</h3>
+<p>
+  <code style="white-space: pre-wrap;">App</code> takes care of rendering
+  the scene and attaching d3 event listeners. It gets actions via props and
+  ties them to mouse events. You can think of actions as callbacks that
+  work on the global data store directly. No need to pass them through many
+  levels of props.
+</p>
+<p>The rendering part looks like this:</p>
+<div
+  class="sourceCode"
+  id="cb146"
+  data-caption="App component"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb146-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
 <a class="sourceLine" id="cb146-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb146-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> React<span class="op" style="color: #666666;">,</span> <span class="op" style="color: #666666;">{</span> Component <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;react&#39;</span><span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb146-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">import</span> <span class="op" style="color: #666666;">{</span> select <span class="im">as</span> d3Select<span class="op" style="color: #666666;">,</span> mouse <span class="im">as</span> d3Mouse<span class="op" style="color: #666666;">,</span> touches <span class="im">as</span> d3Touches <span class="op" style="color: #666666;">}</span> <span class="im">from</span> <span class="st" style="color: #4070a0;">&#39;d3&#39;</span><span class="op" style="color: #666666;">;</span></a>
@@ -129,49 +129,49 @@
 <a class="sourceLine" id="cb146-26" title="26" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="op" style="color: #666666;">}</span></a>
 <a class="sourceLine" id="cb146-27" title="27" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb146-28" title="28" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="im">export</span> <span class="im">default</span> App<span class="op" style="color: #666666;">;</span></a></code></pre>
-    </div>
-    <p>
-      There’s more going on, but the gist is that we return a
-      <code style="white-space: pre-wrap;">&lt;div&gt;</code> with a
-      <code style="white-space: pre-wrap;">Header</code>, a
-      <code style="white-space: pre-wrap;">Footer</code>, and an
-      <code style="white-space: pre-wrap;">&lt;svg&gt;</code>. Inside
-      <code style="white-space: pre-wrap;">&lt;svg&gt;</code>, we use
-      <code style="white-space: pre-wrap;">Particles</code> to render many
-      circles. The Header and Footer components are just some helpful text.
-    </p>
-    <p>
-      Notice that the core of our rendering function only says
-      <em>“Put all Particles here, please”</em>. There’s nothing about what’s
-      moved, what’s new, or what’s no longer needed. We don’t have to worry
-      about that.
-    </p>
-    <p>
-      We get a list of coordinates and naively render some circles. React takes
-      care of the rest.
-    </p>
-    <p>
-      Oh, and we call
-      <code style="white-space: pre-wrap;">startTicker()</code> when a user
-      clicks on our scene. No reason to have the clock running
-      <em>before</em> any particles exist.
-    </p>
-    <h4 id="d3-event-listeners">D3 event listeners</h4>
-    <p>
-      To let users generate particles, we have to wire up some functions in
-      <code style="white-space: pre-wrap;">componentDidMount</code>. That looks
-      like this:
-    </p>
-    <div
-      class="sourceCode"
-      id="cb147"
-      data-caption="Event listeners"
-      style="overflow: visible; margin: 1em 0;"
-    >
-      <pre
-        class="sourceCode javascript"
-        style="overflow: visible; margin: 0;"
-      ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb147-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
+</div>
+<p>
+  There’s more going on, but the gist is that we return a
+  <code style="white-space: pre-wrap;">&lt;div&gt;</code> with a
+  <code style="white-space: pre-wrap;">Header</code>, a
+  <code style="white-space: pre-wrap;">Footer</code>, and an
+  <code style="white-space: pre-wrap;">&lt;svg&gt;</code>. Inside
+  <code style="white-space: pre-wrap;">&lt;svg&gt;</code>, we use
+  <code style="white-space: pre-wrap;">Particles</code> to render many
+  circles. The Header and Footer components are just some helpful text.
+</p>
+<p>
+  Notice that the core of our rendering function only says
+  <em>“Put all Particles here, please”</em>. There’s nothing about what’s
+  moved, what’s new, or what’s no longer needed. We don’t have to worry
+  about that.
+</p>
+<p>
+  We get a list of coordinates and naively render some circles. React takes
+  care of the rest.
+</p>
+<p>
+  Oh, and we call
+  <code style="white-space: pre-wrap;">startTicker()</code> when a user
+  clicks on our scene. No reason to have the clock running
+  <em>before</em> any particles exist.
+</p>
+<h4 id="d3-event-listeners">D3 event listeners</h4>
+<p>
+  To let users generate particles, we have to wire up some functions in
+  <code style="white-space: pre-wrap;">componentDidMount</code>. That looks
+  like this:
+</p>
+<div
+  class="sourceCode"
+  id="cb147"
+  data-caption="Event listeners"
+  style="overflow: visible; margin: 1em 0;"
+>
+  <pre
+    class="sourceCode javascript"
+    style="overflow: visible; margin: 0;"
+  ><code class="sourceCode javascript" style="overflow: visible; white-space: pre; position: relative;"><a class="sourceLine" id="cb147-1" title="1" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="co" style="color: #60a0b0; font-style: italic;">// src/components/index.jsx</span></a>
 <a class="sourceLine" id="cb147-2" title="2" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb147-3" title="3" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;"><span class="kw" style="color: #007020; font-weight: bold;">class</span> App <span class="kw" style="color: #007020; font-weight: bold;">extends</span> Component <span class="op" style="color: #666666;">{</span></a>
 <a class="sourceLine" id="cb147-4" title="4" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    svgWrap <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">React</span>.<span class="at" style="color: #7d9029;">createRef</span>()<span class="op" style="color: #666666;">;</span></a>
@@ -213,61 +213,61 @@
 <a class="sourceLine" id="cb147-40" title="40" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">let</span> [x<span class="op" style="color: #666666;">,</span> y] <span class="op" style="color: #666666;">=</span> <span class="at" style="color: #7d9029;">d3Touches</span>(<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">svgWrap</span>.<span class="at" style="color: #7d9029;">current</span>)[<span class="dv" style="color: #40a070;">0</span>]<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb147-41" title="41" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">        <span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="at" style="color: #7d9029;">updateMousePos</span>(x<span class="op" style="color: #666666;">,</span> y)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb147-42" title="42" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">    <span class="op" style="color: #666666;">}</span></a></code></pre>
-    </div>
-    <p>There are several events we take into account:</p>
-    <ul>
-      <li>
-        <code style="white-space: pre-wrap;">mousedown</code> and
-        <code style="white-space: pre-wrap;">touchstart</code> turn on particle
-        generation
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">mousemove</code> and
-        <code style="white-space: pre-wrap;">touchmove</code> update the mouse
-        location
-      </li>
-      <li>
-        <code style="white-space: pre-wrap;">mouseup</code>,
-        <code style="white-space: pre-wrap;">touchend</code>, and
-        <code style="white-space: pre-wrap;">mouseleave</code> turn off
-        particle generation
-      </li>
-    </ul>
-    <p>
-      Inside our event callbacks, we use
-      <code style="white-space: pre-wrap;">updateMousePos</code> and
-      <code style="white-space: pre-wrap;">updateTouchPos</code> to update
-      Redux state. They use
-      <code style="white-space: pre-wrap;">d3Mouse</code> and
-      <code style="white-space: pre-wrap;">d3Touches</code> to get
-      <code style="white-space: pre-wrap;">(x, y)</code> coordinates for new
-      particles relative to our SVG element and call Redux actions passed-in
-      via props. The particle generation step uses this data as each particle’s
-      initial position.
-    </p>
-    <p>
-      You’ll see that in the next section. I agree, it smells kind of
-      convoluted, but it’s for good reason: We need a reference to a mouse
-      event to get the cursor position, and we want to decouple particle
-      generation from event handling.
-    </p>
-    <p>
-      Remember, React isn’t smart enough to figure out mouse position relative
-      to our drawing area. React knows that we clicked a DOM node.
-      <a href="https://github.com/d3/d3-selection/blob/master/src/mouse.js"
-        >D3 does some magic</a
-      >
-      to find exact coordinates.
-    </p>
-    <p>
-      Touch events return lists of coordinates. One for each finger. We use
-      only the first coordinate because shooting particles out of multiple
-      fingers would make this example too hard.
-    </p>
-    <p>
-      That’s it for rendering and user events.
-      <a
-        href="https://github.com/Swizec/react-particles-experiment/blob/svg-based-branch/src/components/index.jsx"
-        >107 lines of code</a
-      >.
-    </p>
+</div>
+<p>There are several events we take into account:</p>
+<ul>
+  <li>
+    <code style="white-space: pre-wrap;">mousedown</code> and
+    <code style="white-space: pre-wrap;">touchstart</code> turn on particle
+    generation
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">mousemove</code> and
+    <code style="white-space: pre-wrap;">touchmove</code> update the mouse
+    location
+  </li>
+  <li>
+    <code style="white-space: pre-wrap;">mouseup</code>,
+    <code style="white-space: pre-wrap;">touchend</code>, and
+    <code style="white-space: pre-wrap;">mouseleave</code> turn off
+    particle generation
+  </li>
+</ul>
+<p>
+  Inside our event callbacks, we use
+  <code style="white-space: pre-wrap;">updateMousePos</code> and
+  <code style="white-space: pre-wrap;">updateTouchPos</code> to update
+  Redux state. They use
+  <code style="white-space: pre-wrap;">d3Mouse</code> and
+  <code style="white-space: pre-wrap;">d3Touches</code> to get
+  <code style="white-space: pre-wrap;">(x, y)</code> coordinates for new
+  particles relative to our SVG element and call Redux actions passed-in
+  via props. The particle generation step uses this data as each particle’s
+  initial position.
+</p>
+<p>
+  You’ll see that in the next section. I agree, it smells kind of
+  convoluted, but it’s for good reason: We need a reference to a mouse
+  event to get the cursor position, and we want to decouple particle
+  generation from event handling.
+</p>
+<p>
+  Remember, React isn’t smart enough to figure out mouse position relative
+  to our drawing area. React knows that we clicked a DOM node.
+  <a href="https://github.com/d3/d3-selection/blob/master/src/mouse.js"
+    >D3 does some magic</a
+  >
+  to find exact coordinates.
+</p>
+<p>
+  Touch events return lists of coordinates. One for each finger. We use
+  only the first coordinate because shooting particles out of multiple
+  fingers would make this example too hard.
+</p>
+<p>
+  That’s it for rendering and user events.
+  <a
+    href="https://github.com/Swizec/react-particles-experiment/blob/svg-based-branch/src/components/index.jsx"
+    >107 lines of code</a
+  >.
+</p>
