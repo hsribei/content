@@ -7,7 +7,7 @@
 <p>
   So rather than explain it all here, I’m going to give you a link to the
   <a
-    href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f"
+    href="https://github.com/Swizec/react-d3-walkthrough-livecode/commit/3b1052fe3f70ab12142e5aac684b95ed430b12b2"
     >diff on Github</a
   >
 </p>
@@ -53,10 +53,10 @@
 <a class="sourceLine" id="cb95-5" title="5" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb95-6" title="6" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">let</span> ordered <span class="op" style="color: #666666;">=</span> <span class="va" style="color: #19177c;">_</span>.<span class="at" style="color: #7d9029;">sortBy</span>(</a>
 <a class="sourceLine" id="cb95-7" title="7" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      <span class="va" style="color: #19177c;">_</span>.<span class="at" style="color: #7d9029;">keys</span>(byCounty)</a>
-<a class="sourceLine" id="cb95-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">       .<span class="at" style="color: #7d9029;">map</span>(county <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> byCounty[county])</a>
-<a class="sourceLine" id="cb95-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">       .<span class="at" style="color: #7d9029;">filter</span>(d <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">length</span>/<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="va" style="color: #19177c;">data</span>.<span class="at" style="color: #7d9029;">length</span> <span class="op" style="color: #666666;">&gt;</span> <span class="fl" style="color: #40a070;">0.01</span>)<span class="op" style="color: #666666;">,</span></a>
-<a class="sourceLine" id="cb95-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      items <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="at" style="color: #7d9029;">d3mean</span>(items<span class="op" style="color: #666666;">,</span></a>
-<a class="sourceLine" id="cb95-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                      d <span class="kw" style="color: #007020; font-weight: bold;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">base_salary</span>) <span class="op" style="color: #666666;">-</span> medians[items[<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">countyID</span>][<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">medianIncome</span>)<span class="op" style="color: #666666;">;</span></a>
+<a class="sourceLine" id="cb95-8" title="8" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">       .<span class="at" style="color: #7d9029;">map</span>(county <span class="op" style="color: #666666;">=&gt;</span> byCounty[county])</a>
+<a class="sourceLine" id="cb95-9" title="9" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">       .<span class="at" style="color: #7d9029;">filter</span>(d <span class="op" style="color: #666666;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">length</span>/<span class="kw" style="color: #007020; font-weight: bold;">this</span>.<span class="va" style="color: #19177c;">props</span>.<span class="va" style="color: #19177c;">data</span>.<span class="at" style="color: #7d9029;">length</span> <span class="op" style="color: #666666;">&gt;</span> <span class="fl" style="color: #40a070;">0.01</span>)<span class="op" style="color: #666666;">,</span></a>
+<a class="sourceLine" id="cb95-10" title="10" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      items <span class="op" style="color: #666666;">=&gt;</span> <span class="at" style="color: #7d9029;">d3mean</span>(items<span class="op" style="color: #666666;">,</span></a>
+<a class="sourceLine" id="cb95-11" title="11" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">                      d <span class="op" style="color: #666666;">=&gt;</span> <span class="va" style="color: #19177c;">d</span>.<span class="at" style="color: #7d9029;">base_salary</span>) <span class="op" style="color: #666666;">-</span> medians[items[<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">countyID</span>][<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">medianIncome</span>)<span class="op" style="color: #666666;">;</span></a>
 <a class="sourceLine" id="cb95-12" title="12" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit; height: 1.2em;"></a>
 <a class="sourceLine" id="cb95-13" title="13" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">  <span class="kw" style="color: #007020; font-weight: bold;">let</span> best <span class="op" style="color: #666666;">=</span> ordered[<span class="va" style="color: #19177c;">ordered</span>.<span class="at" style="color: #7d9029;">length</span><span class="dv" style="color: #40a070;">-1</span>]<span class="op" style="color: #666666;">,</span></a>
 <a class="sourceLine" id="cb95-14" title="14" style="display: inline-block; line-height: 1.25; pointer-events: none; color: inherit; text-decoration: inherit;">      countyMedian <span class="op" style="color: #666666;">=</span> medians[best[<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">countyID</span>][<span class="dv" style="color: #40a070;">0</span>].<span class="at" style="color: #7d9029;">medianIncome</span><span class="op" style="color: #666666;">;</span></a>
@@ -75,11 +75,11 @@
   optimize by just looking for the max value, for example.
 </p>
 <p>Similar code handles finding the best city.</p>
-<h3 id="render-the-description">render the description</h3>
+<h3 id="render-the-description">Render the description</h3>
 <p>
   I recommend copying the
   <a
-    href="https://github.com/Swizec/react-d3js-step-by-step/commit/032fe6e988b903b6d86a60d2f0404456785e180f"
+    href="https://github.com/Swizec/react-d3-walkthrough-livecode/commit/3b1052fe3f70ab12142e5aac684b95ed430b12b2"
     ><code style="white-space: pre-wrap;">Description</code> component from
     GitHub</a
   >. Most of it has little to do with React and data visualization. It’s
@@ -114,27 +114,4 @@
     alt="Dataviz with Title and Description"
   />
   <figcaption>Dataviz with Title and Description</figcaption>
-</figure>
-<p>
-  Another similar component is the
-  <code style="white-space: pre-wrap;">GraphDescription</code>. It shows a
-  small description on top of each chart that explains how to read the
-  picture. Less “Here’s a key takeaway”, more “color means X”.
-</p>
-<p>
-  You can follow this
-  <a
-    href="https://github.com/Swizec/react-d3js-step-by-step/commit/37b5222546c3f8f58f3147ce0bef6a3c1afe1b47"
-    >diff on Github</a
-  >
-  to implement it. Same approach as
-  <code style="white-space: pre-wrap;">Title</code> and
-  <code style="white-space: pre-wrap;">Description</code>.
-</p>
-<figure>
-  <img
-    src="https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/dataviz-with-all-descriptions.png"
-    alt="Dataviz with all descriptions"
-  />
-  <figcaption>Dataviz with all descriptions</figcaption>
 </figure>
